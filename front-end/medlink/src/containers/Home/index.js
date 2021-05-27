@@ -1,4 +1,7 @@
 import React from 'react'
+import Navbar from '../../components/AppBar/AppAppBar'
+import AppFooter from '../../components/Footer/AppFooter'
+
 
 /**
 * @author
@@ -7,7 +10,11 @@ import React from 'react'
 
 const Home = (props) => {
   return(
-    <div>Home</div>
+    <div>
+          <Navbar></Navbar>
+
+          <AppFooter />
+    </div>
    )
 
  }
