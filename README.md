@@ -1,6 +1,6 @@
-# medMinder
+# medLink
 
-MediCare is an online platform which connects both customers and
+MedLink is an online platform which connects both customers and
 pharmacies together designed as a solution for the above-mentioned
 problems.
 In this project there will be a web application and two mobile applications.
