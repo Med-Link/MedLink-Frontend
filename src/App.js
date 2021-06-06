@@ -5,6 +5,7 @@ import './App.css';
 import Home from './containers/Home'
 import Signin from './containers/Signin'
 import Signup from './containers/Signup'
+import Button from '@material-ui/core/Button'
 
 
 
@@ -12,6 +13,7 @@ import Signup from './containers/Signup'
 function App() {
   return (
     <div className="App">
+      
       <Router>
         <Switch>
           <Route path="/" exact component={Home} />
@@ -20,6 +22,8 @@ function App() {
 
         </Switch>
       </Router>
+
+      
       
     </div>
   );
