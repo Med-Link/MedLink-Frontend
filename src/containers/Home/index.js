@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../../components/AppBar/AppAppBar'
 import AppFooter from '../../components/Footer/AppFooter'
 import Button from '@material-ui/core/Button'
+import SignUpCustomer from '../../components/Body/Signup'
 
 
 /**
@@ -16,9 +17,11 @@ const Home = (props) => {
           <Navbar>
 
           </Navbar>
+          
           <Button onClick={()=>alert('Hello')} variant="contained" color="primary">
         Hello World
       </Button>
+      <SignUpCustomer/>
           <AppFooter/>
     </div>
    )

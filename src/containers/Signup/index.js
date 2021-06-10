@@ -5,11 +5,15 @@ import React from 'react'
 * @function Signup
 **/
 
-const Signup = (props) => {
+<Route exact path="../Signup">
+  <Signup />
+</Route>
+
+const SignUpCustomer = (props) => {
   return(
-    <div>Signup </div>
+    <div>SignUpCustomer </div>
    )
 
  }
 
-export default Signup
+export default SignUpCustomer
