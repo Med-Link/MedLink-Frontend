@@ -21,7 +21,6 @@ const Home = (props) => {
           <Button onClick={()=>alert('Hello')} variant="contained" color="primary">
         Hello World
       </Button>
-      <SignUpCustomer/>
           <AppFooter/>
     </div>
    )
