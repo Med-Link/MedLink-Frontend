@@ -10,11 +10,13 @@ const styles = (theme) => ({
 });
 
 function AppBar(props) {
-  return <MuiAppBar elevation={0} position="static" {...props}  />;
-}
 
+  return <MuiAppBar elevation={0} position="static" {...props}  />;
+
+}
 AppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
 export default withStyles(styles)(AppBar);
+
+
