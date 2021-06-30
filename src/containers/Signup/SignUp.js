@@ -53,7 +53,10 @@ const useStyles = makeStyles((theme) => ({
   back:{
     backgroundColor: "#eee",
     marginTop:theme.spacing(1),
-  }
+  },
+  input: {
+    display: 'none',
+  },
 
 }));
 
@@ -64,14 +67,19 @@ export default function SignUp() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+        
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
+        
         <Typography component="h1" variant="h5">
           Pharmacy Sign up
         </Typography>
+        
         <form className={classes.form} noValidate>
+          
           <Grid container spacing={2}>
+            
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="pname"
@@ -84,6 +92,7 @@ export default function SignUp() {
                 autoFocus
               />
             </Grid>
+            
             <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
@@ -95,6 +104,7 @@ export default function SignUp() {
                 autoComplete="pnumber"
               />
             </Grid>
+            
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -106,6 +116,7 @@ export default function SignUp() {
                 autoComplete="email"
               />
             </Grid>
+            
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -118,6 +129,7 @@ export default function SignUp() {
                 autoComplete="current-password"
               />
             </Grid>
+            
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -129,58 +141,88 @@ export default function SignUp() {
                 autoComplete="location"
               />
             </Grid>
+            
             <Grid item xs={12} sm={8} className={classes.back}>
               <Typography variant="body2" display="block" className={classes.label}>
                 Medical Council Certificate *
               </Typography>                
             </Grid>
             <Grid item xs={12} sm={4}className={classes.back}>
-              <Button
-                variant="contained"
+            <input
+              accept="image/*"
+              className={classes.input}
+              id="contained-button-file"
+              multiple
+              type="file"
+            />
+            <label htmlFor="contained-button-file">
+              <Button 
+                variant="contained" 
+                component="span" 
                 color="default"
-                className={classes.button}
-                startIcon={<CloudUploadIcon />}
-              >
-                Upload
-              </Button>              
+                startIcon={<CloudUploadIcon />}>
+              Upload
+              </Button>
+            </label>             
             </Grid>
+            
             <Grid item xs={12} sm={8} className={classes.back}>
               <Typography variant="body2" display="block" className={classes.label} >
                 Pharmaciest Licence *
               </Typography>                
             </Grid>
             <Grid item xs={12} sm={4} className={classes.back}>
-              <Button
-                variant="contained"
-                color="default"
-                className={classes.button}
-                startIcon={<CloudUploadIcon />}
-              >
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="contained-button-file"
+                multiple
+                type="file"
+              />
+              <label htmlFor="contained-button-file">
+                <Button 
+                  variant="contained" 
+                  component="span" 
+                  color="default"
+                  startIcon={<CloudUploadIcon />}>
                 Upload
-              </Button>              
+                </Button>
+              </label>                 
             </Grid>
+
             <Grid item xs={12} sm={8} className={classes.back}>
               <Typography variant="body2" display="block"  className={classes.label}>
                 Business Registration Certificate *
               </Typography>                
             </Grid>
             <Grid item xs={12} sm={4} className={classes.back}>
-              <Button
-                variant="contained"
-                color="default"
-                className={classes.button}
-                startIcon={<CloudUploadIcon />}
-              >
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="contained-button-file"
+                multiple
+                type="file"
+              />
+              <label htmlFor="contained-button-file">
+                <Button 
+                  variant="contained" 
+                  component="span" 
+                  color="default"
+                  startIcon={<CloudUploadIcon />}>
                 Upload
-              </Button>              
+                </Button>
+              </label>                
             </Grid>
+            
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I agree to the Terms and Conditions"
               />
             </Grid>
+
           </Grid>
+
           <Button
             type="submit"
             fullWidth
