@@ -1,125 +1,60 @@
-import withRoot from '../../modules/withRoot';
-// --- Post bootstrap -----
 import React from 'react';
-import { Field, Form, FormSpy } from 'react-final-form';
-import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
+import Avatar from '@material-ui/core/Avatar';
+//import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import { TextField } from '@material-ui/core';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
-import Typography from '../../components/Typography';
-import AppFooter from '../../modules/views/AppFooter';
-import AppAppBar from '../../modules/views/AppAppBar';
-import AppForm from '../../modules/views/AppForm';
-import { email, required } from '../../modules/form/validation';
-import RFTextField from '../../modules/form/RFTextField';
-import FormButton from '../../modules/form/FormButton';
-import FormFeedback from '../../modules/form/FormFeedback';
+import Typography from '@material-ui/core/Typography';
 
 
-const useStyles = makeStyles((theme) => ({
-  form: {
-    marginTop: theme.spacing(6),
-  },
-  button: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(2),
-  },
-  feedback: {
-    marginTop: theme.spacing(2),
-  },
-}));
 
-function SignIn() {
-  const classes = useStyles();
-  const [sent, setSent] = React.useState(false);
+const Signin=()=>{
 
-  const validate = (values) => {
-    const errors = required(['email', 'password'], values);
+    const paperStyle={padding :20,height:'450px',width:'300px', margin:"20px auto"}
+    const avatarStyle={backgroundColor: '#2ab5b5'}
+    const gridStyle={padding: 20}
+    const buttonStyle={backgroundColor: '#2ab5b5', margin: '8px 0'}
+     
+    return(
+        <Grid style={gridStyle}>
+            <Paper elevation={10} style={paperStyle}>
+                <Grid align='center' style={gridStyle}>
+                    <Avatar style={avatarStyle}><LockOpenIcon/></Avatar>
+                    <h1>Sign in</h1>
+                </Grid>
+                    <TextField id="userName" label="UserName" placeholder="Enter Username" fullWidth required/>
+                    <TextField id="password" label="Password" placeholder="Enter Password" type='password' fullWidth required/>
+                    <FormControlLabel  
+                        control={
+                            <Checkbox 
+                            name="checkedB"
+                            color="Primary"
+                            />
+                        }
+                        label="Remember me"
+                    />
+                
+                <Button type='submit' variant="contained" style={buttonStyle} href="#" fullWidth>Sign in</Button>
+                <Typography>
+                    <Link href="#">
+                        Forgot Password ?
+                    </Link>
+                </Typography>
 
-    if (!errors.email) {
-      const emailError = email(values.email, values);
-      if (emailError) {
-        errors.email = email(values.email, values);
-      }
-    }
-
-    return errors;
-  };
-
-  const handleSubmit = () => {
-    setSent(true);
-  };
-
-  return (
-    <React.Fragment>
-      <AppAppBar />
-      <AppForm>
-        <React.Fragment>
-          <Typography variant="h3" gutterBottom marked="center" align="center">
-            Sign In
-          </Typography>
-          <Typography variant="body2" align="center">
-            {'Not a member yet? '}
-            <Link href="/premium-themes/onepirate/sign-up/" align="center" underline="always">
-              Sign Up here
-            </Link>
-          </Typography>
-        </React.Fragment>
-        <Form onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
-          {({ handleSubmit2, submitting }) => (
-            <form onSubmit={handleSubmit2} className={classes.form} noValidate>
-              <Field
-                autoComplete="email"
-                autoFocus
-                component={RFTextField}
-                disabled={submitting || sent}
-                fullWidth
-                label="Email"
-                margin="normal"
-                name="email"
-                required
-                size="large"
-              />
-              <Field
-                fullWidth
-                size="large"
-                component={RFTextField}
-                disabled={submitting || sent}
-                required
-                name="password"
-                autoComplete="current-password"
-                label="Password"
-                type="password"
-                margin="normal"
-              />
-              <FormSpy subscription={{ submitError: true }}>
-                {({ submitError }) =>
-                  submitError ? (
-                    <FormFeedback className={classes.feedback} error>
-                      {submitError}
-                    </FormFeedback>
-                  ) : null
-                }
-              </FormSpy>
-              <FormButton
-                className={classes.button}
-                disabled={submitting || sent}
-                size="large"
-                color="secondary"
-                fullWidth
-              >
-                {submitting || sent ? 'In progress…' : 'Sign In'}
-              </FormButton>
-            </form>
-          )}
-        </Form>
-        <Typography align="center">
-          <Link underline="always" href="/premium-themes/onepirate/forgot-password/">
-            Forgot password?
-          </Link>
-        </Typography>
-      </AppForm>
-      <AppFooter />
-    </React.Fragment>
-  );
+                <Typography>Do you have an account ? 
+                    <Link href="#">
+                        Sign Up
+                    </Link>
+                </Typography>
+                
+            </Paper>
+        </Grid>
+    )
 }
 
-export default withRoot(SignIn);
+export default Signin
