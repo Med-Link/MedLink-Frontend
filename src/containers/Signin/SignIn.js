@@ -27,7 +27,7 @@ const Signin=()=>{
                     <Avatar style={avatarStyle}><LockOpenIcon/></Avatar>
                     <h1>Sign in</h1>
                 </Grid>
-                    <TextField id="userName" label="UserName" placeholder="Enter Username" fullWidth required/>
+                    <TextField id="email" label="Email" placeholder="Enter Your Email" fullWidth required/>
                     <TextField id="password" label="Password" placeholder="Enter Password" type='password' fullWidth required/>
                     <FormControlLabel  
                         control={
@@ -47,7 +47,7 @@ const Signin=()=>{
                 </Typography>
 
                 <Typography>Do you have an account ? 
-                    <Link href="#">
+                    <Link href="/Signup/">
                         Sign Up
                     </Link>
                 </Typography>
