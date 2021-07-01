@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 
 
 
-const Signin=()=>{
+const SignIn=()=>{
 
     const paperStyle={padding :20,height:'450px',width:'300px', margin:"20px auto"}
     const avatarStyle={backgroundColor: '#2ab5b5'}
@@ -57,4 +57,4 @@ const Signin=()=>{
     )
 }
 
-export default Signin
+export default SignIn

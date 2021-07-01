@@ -242,9 +242,9 @@ export default function SignUp() {
           </Grid>
         </form>
       </div>
+      
     </Container>
-  <AppFooter/>
-  </div>
+   </div>
   );
 }
 
