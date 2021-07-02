@@ -5,8 +5,7 @@ export const styles = (theme) => ({
   root: {
     height: 64,
     [theme.breakpoints.up('sm')]: {
-      height: 10,
-      color: theme.palette.secondary.dark,
+      height: 70,
     },
   },
 });

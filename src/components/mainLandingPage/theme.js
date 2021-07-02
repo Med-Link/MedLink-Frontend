@@ -50,7 +50,7 @@ const theme = {
   palette: {
     ...rawTheme.palette,
     background: {
-      ...rawTheme.palette.background,
+      ...rawTheme.palette.background.default,
       default: rawTheme.palette.primary.main,
       placeholder: grey[200],
     },

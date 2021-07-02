@@ -3,15 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
-import Typography from '../../components/Typography';
-import TextField from '../../components/TextField';
+import Typography from '../../mainLandingPage/Typography';
+import TextField from '../../mainLandingPage/TextField';
 
 function Copyright() {
   return (
     <React.Fragment>
       {'© '}
-      <Link color="inherit" href="/">
-        MedLink
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
       </Link>{' '}
       {new Date().getFullYear()}
     </React.Fragment>
@@ -21,7 +21,7 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: theme.palette.secondary.light,
   },
   container: {
     marginTop: theme.spacing(8),

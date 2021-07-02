@@ -1,30 +1,39 @@
-import withRoot from '../../modules/withRoot';
-// --- Post bootstrap -----
+import withRoot from '../../components/mainLandingPage/withRoot';
+// import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
 import React from 'react';
-import ProductCategories from '../../modules/views/ProductCategories'; 
-import ProductSmokingHero from '../../modules/views/ProductSmokingHero';
-import AppFooter from '../../modules/views/AppFooter';
-import ProductHero from '../../modules/views/ProductHero';
-import ProductValues from '../../modules/views/ProductValues';
-import ProductHowItWorks from '../../modules/views/ProductHowItWorks';
-import ProductCTA from '../../modules/views/ProductCTA';
-import AppAppBar from '../../modules/views/AppAppBar';
+import ProductCategories from '../../components/mainLandingPage/views/ProductCategories'; 
+import ProductSmokingHero from '../../components/mainLandingPage/views/ProductSmokingHero';
+import AppFooter from '../../components/mainLandingPage/views/AppFooter';
+import ProductHero from '../../components/mainLandingPage/views/ProductHero';
+import ProductValues from '../../components/mainLandingPage/views/ProductValues';
+import ProductHowItWorks from '../../components/mainLandingPage/views/ProductHowItWorks';
+import ProductCTA from '../../components/mainLandingPage/views/ProductCTA';
+import AppAppBar from '../../components/mainLandingPage/views/AppAppBar';
 
 function Index() {
   return (
-    <div>
-      <React.Fragment>
-      <AppAppBar />
-        {/* <ProductHero /> */}
-        {/* <ProductValues /> */}
-        {/* <ProductCategories /> */}
-        {/* <ProductHowItWorks /> */}
-        {/* <ProductCTA /> */}
-        {/* <ProductSmokingHero /> */}
-        <AppFooter /> 
-      </React.Fragment>
+    // <div>
 
-    </div>
+    // <ScopedCssBaseline>
+
+    <React.Fragment>
+    <AppAppBar />
+      <ProductHero />
+      <ProductValues />
+      <ProductCategories />
+      <ProductHowItWorks />
+      <ProductCTA />
+      <ProductSmokingHero />
+      <AppFooter />
+    </React.Fragment>
+    
+    //  </ScopedCssBaseline>
+      
+    
+
+    // </div>
+    
+      
     
   );
 }
