@@ -6,6 +6,7 @@ import Index from './containers/mainLandingPage/Home'
 
 import Signin from './containers/signin/SignIn'
 import Signup from './containers/signup/SignUp'
+import SignUpUser from './containers/signup/SignUpUser'
 
 
 
@@ -18,7 +19,7 @@ function App() {
           <Route path="/" exact component={Index} />
           <Route path="/Signin" component={Signin} />
           <Route path="/Signup" component={Signup} />
-        
+          <Route path="/SignupUser" component={SignUpUser} />
 
         </Switch>
       </Router>
