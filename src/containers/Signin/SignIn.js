@@ -10,8 +10,20 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
-
+function Copyright() {
+    return (
+      <Typography variant="body2" color="textSecondary" align="center">
+        {'Copyright © '}
+        <Link color="inherit" href="/">
+          Medlink
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
 
 const SignIn=()=>{
 
@@ -53,6 +65,9 @@ const SignIn=()=>{
                 </Typography>
                 
             </Paper>
+            <Box mt={5}>
+                <Copyright />
+            </Box>
         </Grid>
     )
 }

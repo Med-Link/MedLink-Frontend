@@ -10,12 +10,24 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
-
+function Copyright() {
+    return (
+      <Typography variant="body2" color="textSecondary" align="center">
+        {'Copyright © '}
+        <Link color="inherit" href="/">
+          Medlink
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
 
 const SignUpUser=()=>{
 
-    const paperStyle={padding :20,height:'620px',width:'400px', margin:"20px "}
+    const paperStyle={padding :20,height:'620px',width:'400px', margin:"20px auto "}
     const avatarStyle={backgroundColor: '#2ab5b5'}
     const gridStyle={padding: 20}
     const buttonStyle={backgroundColor: '#2ab5b5', margin: '8px 0'}
@@ -74,6 +86,9 @@ const SignUpUser=()=>{
                 </Grid>
 
             </Paper>
+            <Box mt={5}>
+                <Copyright />
+            </Box>
         </Grid>
     )
 }
