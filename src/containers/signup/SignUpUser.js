@@ -33,6 +33,7 @@ const SignUpUser=()=>{
     const buttonStyle={backgroundColor: '#2ab5b5', margin: '8px 0'}
      
     return(
+        
         <Grid style={gridStyle}>
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center' style={gridStyle}>

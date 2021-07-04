@@ -50,7 +50,7 @@ function AppAppBar(props) {
           <div className={classes.left} />
           <div className={classes.imageDots} />
             <img
-              src='../../assets/Images/logo.jpg'
+              src='../../Assets/Images/logo.jpg'
               alt="logo"
               className={classes.image}
             />
