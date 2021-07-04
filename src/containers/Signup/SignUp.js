@@ -13,7 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import AppFooter from '../../components/mainLandingPage/views/AppFooter';
 
 
 function Copyright() {
