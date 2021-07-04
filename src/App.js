@@ -10,6 +10,9 @@ import SignUpUser from './containers/signup/SignUpUser'
 import ResponsiveDrawer from './containers/customerHome/CustomerHome'
 
 
+//import AdminDashboard from './containers/admin/AdminDashboard';
+import Admin from './containers/admin/layouts/Admin.js'
+
 
 
 function App() {
@@ -23,6 +26,7 @@ function App() {
           <Route path="/SignupUser" component={SignUpUser} />
           <Route path="/CustomerHome" component={ResponsiveDrawer} />
 
+          <Route path="/Admin" component={Admin} />
         </Switch>
       </Router>
       
