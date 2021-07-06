@@ -11,9 +11,7 @@ Users and the functionalities of this system are defined under the scope of the
 project.
 
 
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Getting Started with MedLink
 
 ## Available Scripts
 
