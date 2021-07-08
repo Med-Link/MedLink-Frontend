@@ -12,6 +12,9 @@ import Header from './containers/demo/Demo'
 import ButtonBases from './containers/buttons/Buttons'
 
 
+//import AdminDashboard from './containers/admin/AdminDashboard';
+import Admin from './containers/admin/layouts/Admin.js'
+
 
 
 function App() {
@@ -29,6 +32,7 @@ function App() {
           
 
 
+          <Route path="/Admin" component={Admin} />
         </Switch>
       </Router>
       
