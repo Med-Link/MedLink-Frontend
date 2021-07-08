@@ -8,6 +8,8 @@ import Signin from './containers/signin/SignIn'
 import Signup from './containers/signup/SignUp'
 import SignUpUser from './containers/signup/SignUpUser'
 import ResponsiveDrawer from './containers/customerHome/CustomerHome'
+import Header from './containers/demo/Demo'
+import ButtonBases from './containers/buttons/Buttons'
 
 
 
@@ -22,6 +24,10 @@ function App() {
           <Route path="/Signup" component={Signup} />
           <Route path="/SignupUser" component={SignUpUser} />
           <Route path="/CustomerHome" component={ResponsiveDrawer} />
+          <Route path="/Demo" component={Header} />
+          <Route path="/Buttons" component={ButtonBases} />
+          
+
 
         </Switch>
       </Router>
