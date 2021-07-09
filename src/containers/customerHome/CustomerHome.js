@@ -18,10 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AlarmIcon from '@material-ui/icons/Alarm';
-import Header from '../../containers/demo/Demo';
-import Home from '../../containers/homeImage/HomeImage';
-import ButtonBases from '../../containers/buttons/Buttons'
-import '../../Assets/Styles/customerHome.css'
+//import '../../assets/Styles/customerHome.css'
 import DeleteIcon from '@material-ui/icons/Delete';
 import Icon from '@material-ui/core/Icon'; 
 import Button from '@material-ui/core/Button';
@@ -129,9 +126,7 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography>
-           <Header/>
-          </Typography>
+          
           
         </Toolbar>
           
