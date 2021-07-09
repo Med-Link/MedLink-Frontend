@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Index from './containers/mainLandingPage/Home'
 
 import Signin from './containers/signin/SignIn'
-import Signup from './containers/signup/SignUp'
+import Signup from './containers/signup/SignUpPharmacy'
 import SignUpUser from './containers/signup/SignUpUser'
 import ResponsiveDrawer from './containers/customerHome/CustomerHome'
 import Profile from './containers/customer/profile/Profile'
