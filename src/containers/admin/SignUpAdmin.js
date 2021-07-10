@@ -38,7 +38,7 @@ const SignUpAdmin=()=>{
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center' style={gridStyle}>
                     <Avatar style={avatarStyle}><LockOpenIcon/></Avatar>
-                    <h1>User Sign Up</h1>
+                    <h1>Admin Sign Up</h1>
                 </Grid>
                 <Grid container spacing={2}> 
                     <Grid item xs={12}>
@@ -57,9 +57,9 @@ const SignUpAdmin=()=>{
                         <TextField id="password" variant="outlined" label="Password" placeholder="Enter Password" type='password' fullWidth required/>
                     </Grid>
 
-                    <Grid item xs={12}> 
+                    {/* <Grid item xs={12}> 
                         <TextField id="confirmPassword" variant="outlined" label="Confirm Password" placeholder="Re Enter Your Password" type='password' fullWidth required/>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
 
                 <Grid item xs={12}> 
@@ -79,7 +79,7 @@ const SignUpAdmin=()=>{
                 <Grid container justify="center">
                     <Grid item> 
                         <Typography>Already have an account? 
-                            <Link href="/Signin/">
+                            <Link href="/adminsignin">
                                 Sign In
                             </Link>
                         </Typography>
