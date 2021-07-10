@@ -9,12 +9,11 @@ import Signup from './containers/signup/SignUpPharmacy'
 import SignUpUser from './containers/signup/SignUpUser'
 import ResponsiveDrawer from './containers/customerHome/CustomerHome'
 import Profile from './containers/customer/profile/Profile'
-<<<<<<< HEAD
 import Form from './containers/customer/form/Form'
 
-=======
-import SignUpAdmin from './containers/admin/SignUpAdmin'
->>>>>>> 2bd93050b4e9d3a6cfe288d2582b2c50455e6de0
+
+ 
+ 
 
 //import AdminDashboard from './containers/admin/AdminDashboard';
 import Admin from './containers/admin/layouts/Admin.js'
