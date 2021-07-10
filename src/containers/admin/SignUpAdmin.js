@@ -16,7 +16,7 @@ import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import axios from 'axios';
-import { AST_SymbolBlockDeclaration } from 'terser';
+//import { AST_SymbolBlockDeclaration } from 'terser';
 
 function Copyright() {
     return (
