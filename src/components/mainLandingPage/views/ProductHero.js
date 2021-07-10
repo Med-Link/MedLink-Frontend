@@ -4,6 +4,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '../../mainLandingPage/Button';
 import Typography from '../../mainLandingPage/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
+import PharmacyCard from '../Card1';
+import CustomerCard from '../Card2';
+import { minHeight } from '@material-ui/system';
 
 const backgroundImage =
   'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
@@ -11,7 +14,7 @@ const backgroundImage =
 const styles = (theme) => ({
   background: {
     backgroundImage: `url(${backgroundImage})`,
-    backgroundColor: '#7fc7d9', // Average color of the background image.
+    // backgroundColor: '#7fc7d9', // Average color of the background image.
     backgroundPosition: 'center',
   },
   button: {
@@ -27,35 +30,46 @@ const styles = (theme) => ({
   more: {
     marginTop: theme.spacing(2),
   },
+
+  mainGrid: {
+    marginTop: theme.spacing(2),
+  },
+
+  subGrid: {
+    marginTop: theme.spacing(2),
+  },
+  
+  photo:{
+    width:350,
+    height:350,
+  },
+
+  right: {
+    flex: 100,
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+
 });
+
+
+
 
 function ProductHero(props) {
   const { classes } = props;
 
   return (
     <ProductHeroLayout backgroundClassName={classes.background}>
-      {/* Increase the network loading priority of the background image. */}
+     
       <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
-      <Typography color="inherit" align="center" variant="h2" marked="center">
-        Upgrade your Sundays
-      </Typography>
-      <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-        Enjoy secret offers up to -70% off the best luxury hotels every Sunday.
-      </Typography>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        className={classes.button}
-        component="a"
-        href="/premium-themes/onepirate/sign-up/"
-      >
-        Register
-      </Button>
-      <Typography variant="body2" color="inherit" className={classes.more}>
-        Discover the experience
-      </Typography>
+      <PharmacyCard />
+      <CustomerCard />
+         
+      
     </ProductHeroLayout>
+    
+      
+      
   );
 }
 

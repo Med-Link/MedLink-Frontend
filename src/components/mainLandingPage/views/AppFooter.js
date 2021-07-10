@@ -5,13 +5,16 @@ import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
 import Typography from '../../mainLandingPage/Typography';
 import TextField from '../../mainLandingPage/TextField';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import InstagramIcon from '@material-ui/icons/Instagram';
 
 function Copyright() {
   return (
     <React.Fragment>
       {'© '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        MedLink
       </Link>{' '}
       {new Date().getFullYear()}
     </React.Fragment>
@@ -88,12 +91,9 @@ export default function AppFooter() {
               spacing={2}
             >
               <Grid item className={classes.icons}>
-                <a href="https://material-ui.com/" className={classes.icon}>
-                  <img src="/static/themes/onepirate/appFooterFacebook.png" alt="Facebook" />
-                </a>
-                <a href="https://twitter.com/MaterialUI" className={classes.icon}>
-                  <img src="/static/themes/onepirate/appFooterTwitter.png" alt="Twitter" />
-                </a>
+                <FacebookIcon />
+                <InstagramIcon />
+                <TwitterIcon />
               </Grid>
               <Grid item>
                 <Copyright />
@@ -131,7 +131,7 @@ export default function AppFooter() {
               ))}
             </TextField>
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <Typography variant="caption">
               {'Icons made by '}
               <Link href="https://www.freepik.com" rel="sponsored" title="Freepik">
@@ -151,7 +151,7 @@ export default function AppFooter() {
                 CC 3.0 BY
               </Link>
             </Typography>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Typography>
