@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import signupadmin from '../../apis/signupadmin';
 
 
 
