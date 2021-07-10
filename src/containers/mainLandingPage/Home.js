@@ -12,9 +12,7 @@ import AppAppBar from '../../components/mainLandingPage/views/AppAppBar';
 
 function Index() {
   return (
-    // <div>
-
-    // <ScopedCssBaseline>
+  
 
     <React.Fragment>
     <AppAppBar />
@@ -27,11 +25,7 @@ function Index() {
       <AppFooter />
     </React.Fragment>
     
-    //  </ScopedCssBaseline>
-      
-    
-
-    // </div>
+   
     
       
     
