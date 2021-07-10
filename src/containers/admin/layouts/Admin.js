@@ -16,7 +16,7 @@ import routes from "../../../containers/admin/routes/routes"
 import styles from "../../../assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
 import bgImage from "../../../assets/images/pharmacy.png";
-import logo from "../../../assets/images/logo.jpg";
+import logo from "../../../assets/images/medLink.jpg";
 
 let ps;
 

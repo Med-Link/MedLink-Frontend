@@ -196,6 +196,7 @@ export default function AdminNavbarLinks() {
                     <MenuItem
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
+                      linkText="/UserProfile"
                     >
                       Profile
                     </MenuItem>
