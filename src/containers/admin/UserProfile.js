@@ -13,7 +13,7 @@ import CardAvatar from "../../components/Dashboard/Card/CardAvatar.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 
-import avatar from "../../assets/images/logo.jpg";
+import avatar from "../../assets/images/person.jpg";
 
 const styles = {
   cardCategoryWhite: {
@@ -161,14 +161,12 @@ export default function UserProfile() {
             <CardBody profile>
               <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
               <h4 className={classes.cardTitle}>Alec Thompson</h4>
-              <p className={classes.description}>
+              {/* <p className={classes.description}>
                 Don{"'"}t be scared of the truth because we need to restart the
                 human foundation in truth And I love you like Kanye loves Kanye
                 I love Rick Owens’ bed design but the back is...
               </p>
-              <Button color="primary" round>
-                Follow
-              </Button>
+               */}
             </CardBody>
           </Card>
         </GridItem>
