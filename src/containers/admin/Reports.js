@@ -91,11 +91,10 @@ export default function UpgradeToPro() {
         <Card>
           <CardHeader color="info">
             <h4 className={classes.cardTitleWhite}>
-              Material Dashboard PRO React
+              Monthly Income of MedLink
             </h4>
             <p className={classes.cardCategoryWhite}>
-              Are you looking for more components? Please check our Premium
-              Version of Material Dashboard Angular.
+              June
             </p>
           </CardHeader>
           <CardBody>
@@ -104,37 +103,31 @@ export default function UpgradeToPro() {
                 <thead>
                   <tr>
                     <th />
-                    <th className={classes.center}>Free</th>
-                    <th className={classes.center}>PRO</th>
+                    <th className={classes.center}>Expences</th>
+                    <th className={classes.center}>Income</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Components</td>
-                    <td className={classes.center}>30</td>
-                    <td className={classes.center}>200</td>
+                    <td>Subscriptions</td>
+                    <td className={classes.center}>-</td>
+                    <td className={classes.center}>568200</td>
                   </tr>
                   <tr>
-                    <td>Plugins</td>
-                    <td className={classes.center}>2</td>
-                    <td className={classes.center}>10</td>
+                    <td>Advertiesments</td>
+                    <td className={classes.center}>200000</td>
+                    <td className={classes.center}>-</td>
                   </tr>
                   <tr>
-                    <td>Example Pages</td>
-                    <td className={classes.center}>7</td>
-                    <td className={classes.center}>28</td>
+                    <td>Hosting Fee</td>
+                    <td className={classes.center}>7578.23</td>
+                    <td className={classes.center}>-</td>
                   </tr>
                   <tr>
                     <td>Login, Register, Pricing, Lock Pages</td>
                     <td className={classes.center}>
-                      <Danger>
-                        <Close />
-                      </Danger>
                     </td>
                     <td className={classes.center}>
-                      <Success>
-                        <Check />
-                      </Success>
                     </td>
                   </tr>
                   <tr>
@@ -143,61 +136,40 @@ export default function UpgradeToPro() {
                       Validation, ReactBigCalendar etc...
                     </td>
                     <td className={classes.center}>
-                      <Danger>
-                        <Close />
-                      </Danger>
                     </td>
                     <td className={classes.center}>
-                      <Success>
-                        <Check />
-                      </Success>
                     </td>
                   </tr>
                   <tr>
                     <td>Mini Sidebar</td>
                     <td className={classes.center}>
-                      <Danger>
-                        <Close />
-                      </Danger>
                     </td>
                     <td className={classes.center}>
-                      <Success>
-                        <Check />
-                      </Success>
                     </td>
                   </tr>
                   <tr>
                     <td>Premium Support</td>
-                    <td className={classes.center}>
-                      <Danger>
-                        <Close />
-                      </Danger>
-                    </td>
-                    <td className={classes.center}>
-                      <Success>
-                        <Check />
-                      </Success>
-                    </td>
+                    <td className={classes.center}>90000</td>
+                    <td className={classes.center}>-</td>
                   </tr>
                   <tr>
-                    <td />
-                    <td className={classes.center}>Free</td>
-                    <td className={classes.center}>Just $59</td>
+                    <td>Electricity</td>
+                    <td className={classes.center}>7853</td>
+                    <td className={classes.center}>-</td>
                   </tr>
                   <tr>
                     <td />
                     <td className={classes.center}>
                       <Button round disabled>
-                        Current Version
+                        View Full Report
                       </Button>
                     </td>
                     <td className={classes.center}>
                       <Button
                         round
                         color="danger"
-                        href="https://www.creative-tim.com/product/material-dashboard-pro-react?ref=mdr-upgrade-live"
                       >
-                        Upgrade to Pro
+                        Download
                       </Button>
                     </td>
                   </tr>

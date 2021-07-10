@@ -50,7 +50,7 @@ const dashboardRoutes = [
   },
   {
     path: "/report",
-    name: "Report",
+    name: "Income Report",
     icon: Unarchive,
     component: Report,
     layout: "/admin",

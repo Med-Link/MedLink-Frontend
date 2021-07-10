@@ -10,6 +10,8 @@ import SignUpUser from './containers/signup/SignUpUser'
 import ResponsiveDrawer from './containers/customerHome/CustomerHome'
 import Profile from './containers/customer/profile/Profile'
 import SignUpAdmin from './containers/admin/SignUpAdmin'
+import SignInAdmin from './containers/admin/SignInAdmin'
+
 
 //import AdminDashboard from './containers/admin/AdminDashboard';
 import Admin from './containers/admin/layouts/Admin.js'
@@ -31,7 +33,9 @@ function App() {
 
 
           <Route path="/Admin" component={Admin} />
-          <Route path="/register" component={SignUpAdmin} />
+          <Route path="/adminsignup" component={SignUpAdmin} />
+          <Route path="/adminsignin" component={SignInAdmin} />
+
         </Switch>
       </Router>
       

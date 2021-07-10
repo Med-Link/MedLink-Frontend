@@ -24,32 +24,33 @@ export default function Footer(props) {
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="#company" className={classes.block}>
-                Company
+                Login
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="#portfolio" className={classes.block}>
-                Portfolio
+                Subscriptions
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="#blog" className={classes.block}>
-                Blog
+                Dashboard
               </a>
             </ListItem>
           </List>
         </div>
         <p className={classes.right}>
           <span>
-            &copy; {1900 + new Date().getYear()}{" "}
             <a
               href="https://www.creative-tim.com?ref=mdr-footer"
               target="_blank"
               className={classes.a}
             >
-              Creative Tim
+             
+             MedLink &copy; pvt.Ltd
+             {" "}
+             {1900 + new Date().getYear()}{" "}
             </a>
-            , made with love for a better web
           </span>
         </p>
       </div>
