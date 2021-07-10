@@ -7,9 +7,11 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Hidden from '@material-ui/core/Hidden';
+// import Hidden from '../../containers/pharmacyLandingPage/PharmacyLandingPage';
 import Button from '@material-ui/core/Button';  
-// import pharmacy from '../assets/images/pharmacy.jpg'; 
+// import pharmacy from '../assets/images/pharmacy.jpg' @material-ui/core/Hidden; 
+
+import Link from '@material-ui/core/Link';
 
 
 // import CardActions from '@material-ui/core/CardAction';
@@ -25,18 +27,21 @@ const useStyles = makeStyles((theme) => ({
     height:200,
     // width:50, 
     
-    
   },
   cardMedia: {
     width: 200,
-    height:100,
+    height:200,
     
   },
   root: {
-    maxWidth: 300,
+    maxWidth: 350,
    // maxHeight: 600,
     backgroundColor : theme.palette.secondary.light,
     color: theme.palette.common.white,
+    marginRight: theme.spacing(100),
+    // flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
   },
 
   description: {
@@ -59,7 +64,7 @@ export default function PharmacyCard(props) {
     <Grid item xs={0} md={0}>
 
       
-        <Card className={classes.root}>
+        <Card className={classes.root} xs={12}>
         <CardActionArea component="a" href="#">
           {/* <div className={classes.cardDetails}> */}
           
@@ -73,19 +78,21 @@ export default function PharmacyCard(props) {
                 {"For Pharmacies"}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                {"'We make it easy for you to reach your customers.Join us to provide a better service',"}
+                {"We make it easy for you to reach your customers.Join us to provide a better service"}
               </Typography>
               <Typography variant="h5" paragraph className={classes.description}>
                 {}
               </Typography>
+              <Link href="../../containers/pharmacyLandingPage/PharmacyLandingPage">                    
               <Button  color="secondary"
                     variant="contained"
                     size="large"
                     className={classes.button}
                     component="a"
-                    href="">
-                Learn More 
+                    // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
+               > Learn More 
               </Button>
+              </Link>
             </CardContent>
           {/* </div> */}
           </CardActionArea>
