@@ -16,6 +16,8 @@ import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+
 //import { AST_SymbolBlockDeclaration } from 'terser';
 
 function Copyright() {
@@ -36,12 +38,13 @@ const SignUpAdmin=()=>{
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const handleSubmit=(e)=>{
-        e.preventDefault();
-    }
+    const [checked, setChecked] = useState(false);
+    const [error, setError] = useState("");
+    const [signedUp, setSignedUp] = useState(false);
     
-    const signup =()=>{
+    const signup =(e)=>{
+        e.preventDefault();
+        if(checked){
         axios.post('http://localhost:4000/api/admin/signup', {
             firstName: firstName,
             lastName:lastName,
@@ -49,9 +52,20 @@ const SignUpAdmin=()=>{
             password:password
         }).then((response)=>{
             console.log(response);
+            setSignedUp(true);
+
         }).catch((err)=>{
             console.log(err);
+            setError("Password must be atleast 6 characters long");
         });
+        
+    }else{
+        console.log("Unchecked");
+    }
+    }
+
+    if(signedUp){
+        return <Redirect to={'/adminsignin'} />
     }
 
     const paperStyle={padding :20,height:'620px',width:'400px', margin:"20px auto "}
@@ -95,14 +109,15 @@ const SignUpAdmin=()=>{
                             <Checkbox 
                             name="checkedB"
                             color="Primary"
+                            onChange={(e) => setChecked(e.target.checked)}
                             />
                         }
                         label="I agree to the Terms and Conditions"
                     />
                 </Grid>
                 
-                <Button type='submit' onSubmit= {handleSubmit} variant="contained" style={buttonStyle} onClick={signup} fullWidth>Sign Up</Button>
-
+                <Button type='submit' variant="contained" style={buttonStyle} onClick={signup} fullWidth>Sign Up</Button>
+                <p>{error}</p>
                 <Grid container justify="center">
                     <Grid item> 
                         <Typography>Already have an account? 

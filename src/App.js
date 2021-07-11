@@ -18,6 +18,8 @@ import customerSignin from './containers/customer/customersignin'
 
 //import AdminDashboard from './containers/admin/AdminDashboard';
 import Admin from './containers/admin/layouts/Admin.js'
+import PrivateRoute from './components/HOC/privateRoute';
+// import privateRoute from './components/HOC/privateRoute'
 
 
 
@@ -35,7 +37,7 @@ function App() {
            
 
 
-          <Route path="/Admin" component={Admin} />
+          <PrivateRoute path="/admin" component={Admin} />
           <Route path="/adminsignup" component={SignUpAdmin} />
           <Route path="/adminsignin" component={SignInAdmin} />
 
