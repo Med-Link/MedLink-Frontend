@@ -11,6 +11,7 @@ import Hidden from "@material-ui/core/Hidden";
 import Menu from "@material-ui/icons/Menu";
 // core components
 import AdminNavbarLinks from "./AdminNavbarLinks.js";
+import RTLNavbarLinks from "./RTLNavbarLinks.js";
 import Button from "../CustomButtons/Button.js";
 
 //hooks
@@ -39,7 +40,7 @@ export default function Header(props) {
           </Button>
         </div>
         <Hidden smDown implementation="css">
-          <AdminNavbarLinks />
+          {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
         </Hidden>
         <Hidden mdUp implementation="css">
           <IconButton

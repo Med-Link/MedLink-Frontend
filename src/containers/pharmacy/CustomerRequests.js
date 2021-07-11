@@ -8,8 +8,6 @@ import Table from "../../components/Dashboard/Table/Table.js";
 import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
-import Switch from "../../components/Dashboard/CustomButtons/Switch";
-import Button from "../../components/Dashboard//CustomButtons/Button";
 
 const styles = {
   cardCategoryWhite: {
@@ -56,14 +54,16 @@ export default function TableList() {
             </p> */}
           </CardHeader>
           <CardBody>
-          <Table
+            <Table
               tableHeaderColor="primary"
-              tableHead={["Pharmacy Name", "District", "City","Action" ,"Activate/ Deacticate"]}
+              tableHead={["Pharmacy Name", "District", "City", "View"]}
               tableData={[
-                ["HelaOsu", "Colombo", "Fort",<Button color="primary" round>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
-                ["HelaOsu", "Colombo", "Fort",<Button color="primary" round>View</Button> , <Switch inputProps={{ 'aria-label': 'primary checkbox' }} />],
-                ["HelaOsu", "Colombo", "Fort",<Button color="primary" round>View</Button> , <Switch inputProps={{ 'aria-label': 'primary checkbox' }} />],
-                ["HelaOsu", "Colombo", "Fort",<Button color="primary" round>View</Button> , <Switch inputProps={{ 'aria-label': 'primary checkbox' }} />],
+                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
+                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
+                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
+                ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
+                ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
+                ["Mason Porter", "Chile", "Gloucester", "$78,615"],
               ]}
             />
           </CardBody>

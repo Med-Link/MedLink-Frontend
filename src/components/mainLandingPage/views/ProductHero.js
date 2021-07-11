@@ -6,7 +6,8 @@ import Typography from '../../mainLandingPage/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
 import PharmacyCard from '../Card1';
 import CustomerCard from '../Card2';
-import { minHeight } from '@material-ui/system';
+// import { minHeight } from '@material-ui/system';
+import GridContainer from '../../Dashboard/Grid/GridContainer';
 
 const backgroundImage =
   'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
@@ -62,7 +63,7 @@ function ProductHero(props) {
     <ProductHeroLayout backgroundClassName={classes.background}>
      
       <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
-      <PharmacyCard />
+      <PharmacyCard className={classes.GridContainer} />
       <CustomerCard />
          
       

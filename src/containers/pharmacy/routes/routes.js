@@ -7,7 +7,7 @@ import Unarchive from "@material-ui/icons/Unarchive";
 // core components/views for Admin layout
 import DashboardPage from "../Dashboard.js";
 import UserProfile from "../UserProfile.js";
-import PharmacyRequests from "../PharmacyRequests.js";
+import CustomerRequests from "../CustomerRequests.js";
 import AdminRequests from "../AdminRequests.js";
 import NotificationsPage from "../Notifications.js";
 import Report from "../Reports.js";
@@ -18,42 +18,42 @@ const dashboardRoutes = [
     name: "Dashboard",
     icon: Dashboard,
     component: DashboardPage,
-    layout: "/admin",
+    layout: "/pharmacy",
   },
   {
     path: "/user",
     name: "User Profile",
     icon: Person,
     component: UserProfile,
-    layout: "/admin",
+    layout: "/pharmacy",
   },
   {
     path: "/pharmacyrequests",
-    name: "Pharmacy Requests",
+    name: "Customer Requests",
     icon: LibraryBooks,
-    component: PharmacyRequests,
-    layout: "/admin",
+    component: CustomerRequests,
+    layout: "/pharmacy",
   },
   {
     path: "/adminrequests",
     name: "Admin Requests",
     icon: LibraryBooks,
     component: AdminRequests,
-    layout: "/admin",
+    layout: "/pharmacy",
   },
   {
     path: "/notifications",
     name: "Notifications",
     icon: Notifications,
     component: NotificationsPage,
-    layout: "/admin",
+    layout: "/pharmacy",
   },
   {
     path: "/report",
-    name: "Income Report",
+    name: "Report",
     icon: Unarchive,
     component: Report,
-    layout: "/admin",
+    layout: "/pharmacy",
   },
 ];
 

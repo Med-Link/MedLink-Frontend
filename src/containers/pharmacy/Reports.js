@@ -1,9 +1,14 @@
 import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+// @material-ui/icons
+import Close from "@material-ui/icons/Close";
+import Check from "@material-ui/icons/Check";
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
+import Danger from "../../components/Dashboard/Typography/Danger.js";
+import Success from "../../components/Dashboard/Typography/Success.js";
 import Button from "../../components/Dashboard/CustomButtons/Button.js";
 import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
@@ -86,10 +91,11 @@ export default function UpgradeToPro() {
         <Card>
           <CardHeader color="info">
             <h4 className={classes.cardTitleWhite}>
-              Monthly Income of MedLink
+              Material Dashboard PRO React
             </h4>
             <p className={classes.cardCategoryWhite}>
-              June
+              Are you looking for more components? Please check our Premium
+              Version of Material Dashboard Angular.
             </p>
           </CardHeader>
           <CardBody>
@@ -98,31 +104,37 @@ export default function UpgradeToPro() {
                 <thead>
                   <tr>
                     <th />
-                    <th className={classes.center}>Expences</th>
-                    <th className={classes.center}>Income</th>
+                    <th className={classes.center}>Free</th>
+                    <th className={classes.center}>PRO</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Subscriptions</td>
-                    <td className={classes.center}>-</td>
-                    <td className={classes.center}>568200</td>
+                    <td>Components</td>
+                    <td className={classes.center}>30</td>
+                    <td className={classes.center}>200</td>
                   </tr>
                   <tr>
-                    <td>Advertiesments</td>
-                    <td className={classes.center}>200000</td>
-                    <td className={classes.center}>-</td>
+                    <td>Plugins</td>
+                    <td className={classes.center}>2</td>
+                    <td className={classes.center}>10</td>
                   </tr>
                   <tr>
-                    <td>Hosting Fee</td>
-                    <td className={classes.center}>7578.23</td>
-                    <td className={classes.center}>-</td>
+                    <td>Example Pages</td>
+                    <td className={classes.center}>7</td>
+                    <td className={classes.center}>28</td>
                   </tr>
                   <tr>
                     <td>Login, Register, Pricing, Lock Pages</td>
                     <td className={classes.center}>
+                      <Danger>
+                        <Close />
+                      </Danger>
                     </td>
                     <td className={classes.center}>
+                      <Success>
+                        <Check />
+                      </Success>
                     </td>
                   </tr>
                   <tr>
@@ -131,40 +143,61 @@ export default function UpgradeToPro() {
                       Validation, ReactBigCalendar etc...
                     </td>
                     <td className={classes.center}>
+                      <Danger>
+                        <Close />
+                      </Danger>
                     </td>
                     <td className={classes.center}>
+                      <Success>
+                        <Check />
+                      </Success>
                     </td>
                   </tr>
                   <tr>
                     <td>Mini Sidebar</td>
                     <td className={classes.center}>
+                      <Danger>
+                        <Close />
+                      </Danger>
                     </td>
                     <td className={classes.center}>
+                      <Success>
+                        <Check />
+                      </Success>
                     </td>
                   </tr>
                   <tr>
                     <td>Premium Support</td>
-                    <td className={classes.center}>90000</td>
-                    <td className={classes.center}>-</td>
+                    <td className={classes.center}>
+                      <Danger>
+                        <Close />
+                      </Danger>
+                    </td>
+                    <td className={classes.center}>
+                      <Success>
+                        <Check />
+                      </Success>
+                    </td>
                   </tr>
                   <tr>
-                    <td>Electricity</td>
-                    <td className={classes.center}>7853</td>
-                    <td className={classes.center}>-</td>
+                    <td />
+                    <td className={classes.center}>Free</td>
+                    <td className={classes.center}>Just $59</td>
                   </tr>
                   <tr>
                     <td />
                     <td className={classes.center}>
-                      <Button round color="info">
-                        View Full Report
+                      <Button round disabled>
+                        Current Version
                       </Button>
                     </td>
                     <td className={classes.center}>
                       <Button
                         round
-                        color="primary"
+                        color="danger"
+                        href="https://www.creative-tim.com/product/material-dashboard-pro-react?ref=mdr-upgrade-live"
                       >
-                        Download
+                        Upgrade to Pro
                       </Button>
                     </td>
                   </tr>

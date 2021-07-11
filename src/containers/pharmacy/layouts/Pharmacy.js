@@ -11,19 +11,19 @@ import Footer from "../../../components/Dashboard/Footer/Footer.js";
 import Sidebar from "../../../components/Dashboard/Sidebar/Sidebar.js";
 //import FixedPlugin from "../../../components/Dashboard/FixedPlugin/FixedPlugin.js";
 
-import routes from "../../../containers/admin/routes/routes"
+import routes from "../../pharmacy/routes/routes"
 
 import styles from "../../../assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
 import bgImage from "../../../assets/images/pharmacy.png";
-import logo from "../../../assets/images/medLink.jpg";
+import logo from "../../../assets/images/logo.jpg";
 
 let ps;
 
 const switchRoutes = (
   <Switch>
     {routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/pharmacy") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -34,13 +34,13 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect from="/admin" to="/admin/dashboard" />
+    <Redirect from="/pharmacy" to="/pharmacy/dashboard" />
   </Switch>
 );
 
 const useStyles = makeStyles(styles);
 
-export default function Admin({ ...rest }) {
+export default function Pharmacy({ ...rest }) {
   // styles
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
@@ -67,7 +67,7 @@ export default function Admin({ ...rest }) {
     setMobileOpen(!mobileOpen);
   };
   const getRoute = () => {
-    return window.location.pathname !== "/admin/maps";
+    return window.location.pathname !== "/pharmacy/maps";
   };
   const resizeFunction = () => {
     if (window.innerWidth >= 960) {
@@ -96,7 +96,7 @@ export default function Admin({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={"MedLink- Admin"}
+        logoText={"MedLink- Pharmacy"}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}

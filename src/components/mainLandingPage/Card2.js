@@ -26,15 +26,26 @@ const useStyles = makeStyles((theme) => ({
   },
   cardMedia: {
     width: 200,
-    height:100,
+    height:200,
     
   },
   root: {
-    maxWidth: 300,
+    maxWidth: 350,
    // maxHeight: 600,
     backgroundColor : theme.palette.secondary.light,
     color: theme.palette.common.white,
+    // marginRight: theme.spacing(100),
+    // marginBlockStart : theme.spacing(10),
+    marginTop: theme.spacing(-52),
+    marginLeft: theme.spacing(5),
+    display: 'flex',
+    flexDirection: 'column',
+    
   },
+gap:{
+  
+},
+  
 
   description: {
     fontSize : 15,
@@ -56,7 +67,7 @@ export default function CustomerCard(props) {
     <Grid item xs={0} md={0}>
 
       
-        <Card className={classes.root}>
+        <Card className={classes.root} xs={12}>
         <CardActionArea component="a" href="#">
           {/* <div className={classes.cardDetails}> */}
           
@@ -95,3 +106,4 @@ export default function CustomerCard(props) {
 CustomerCard.propTypes = {
   post: PropTypes.object,
 };
+
