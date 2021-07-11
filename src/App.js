@@ -7,8 +7,10 @@ import Index from './containers/mainLandingPage/Home'
 import Signin from './containers/signin/SignIn'
 import Signup from './containers/signup/SignUpPharmacy'
 import SignUpUser from './containers/signup/SignUpUser'
-import ResponsiveDrawer from './containers/customerHome/CustomerHome'
 import Profile from './containers/customer/profile/Profile'
+import Form from './containers/customer/form/Form'
+import Checkout from './containers/customer/payment/Checkout'
+import Customer from './containers/customer/layouts/Customer.js'
 
 import SignUpAdmin from './containers/admin/SignUpAdmin'
 import SignInAdmin from './containers/admin/SignInAdmin'
@@ -32,8 +34,10 @@ function App() {
           <Route path="/Signin" component={Signin} />
           <Route path="/Signup" component={Signup} />
           <Route path="/SignupUser" component={SignUpUser} />
-          <Route path="/CustomerHome" component={ResponsiveDrawer} />
+          <Route path="/Customer" component={Customer} />
           <Route path="/Profile" component={Profile} />
+          <Route path="/Form" component={Form} />
+          <Route path="/Checkout" component={Checkout} />
            
 
 
@@ -51,7 +55,7 @@ function App() {
       
       
     </div>
-  );
+  ); 
 }
 
 export default App;
