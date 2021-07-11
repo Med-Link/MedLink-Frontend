@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -12,45 +13,49 @@ import Button from '@material-ui/core/Button';
 // import pharmacy from '../assets/images/pharmacy.jpg' @material-ui/core/Hidden; 
 
 import Link from '@material-ui/core/Link';
+import pharmacist from '../../assets/images/pharmacist.png';
 
 
 // import CardActions from '@material-ui/core/CardAction';
 
 const useStyles = makeStyles((theme) => ({
-  card: {
-    display: 'flex',
-    width :200,
-    
-  },
-  cardDetails: {
-    flex: 1,
-    height:200,
-    // width:50, 
-    
-  },
+  
+ 
   cardMedia: {
-    width: 200,
-    height:200,
+    // width: 200,
+    // height:200,
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
     
   },
   root: {
-    maxWidth: 350,
-   // maxHeight: 600,
+ 
     backgroundColor : theme.palette.secondary.light,
-    color: theme.palette.common.white,
-    marginRight: theme.spacing(100),
-    // flexGrow: 1,
-    display: 'flex',
-    flexDirection: 'column',
+ 
+  },
+
+  color1:{
+    color:theme.palette.primary.main,
   },
 
   description: {
     fontSize : 15,
   },
 
-  // media: {
-  //   height: 140,
-  // },
+  image: {
+    height: 270,
+    width:270,
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding:25,
+    
+  },
 }));
 
 
@@ -61,23 +66,25 @@ export default function PharmacyCard(props) {
   const { post } = props;
 
   return (
-    <Grid item xs={0} md={0}>
+    <Container xs={30} md={50}>
+    
+          <Grid item xs={30} md={50}>
 
       
         <Card className={classes.root} xs={12} xs={12} >
         <CardActionArea component="a" href="#">
           {/* <div className={classes.cardDetails}> */}
           
-            <CardMedia 
-            className={classes.cardMedia} 
+            <CardMedia className={classes.cardMedia} >
             
-            />
 
+            <img src={pharmacist} className={classes.image} />
+            </CardMedia>
             <CardContent>
-              <Typography component="h2" variant="h7">
+              <Typography component="h1" variant="h7"  className={classes.color1}>
                 {"For Pharmacies"}
               </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
+              <Typography variant="subtitle1">
                 {"We make it easy for you to reach your customers.Join us to provide a better service"}
               </Typography>
               <Typography variant="h5" paragraph className={classes.description}>
@@ -97,10 +104,13 @@ export default function PharmacyCard(props) {
           {/* </div> */}
           </CardActionArea>
         </Card>
-      
-    </Grid>
+      </Grid>
+    
+    </Container>
   );
 }
+
+// {"We bring your medicine to your doorstep. Join us to find all the medicines you need"}
 
 PharmacyCard.propTypes = {
   post: PropTypes.object,

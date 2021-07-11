@@ -16,7 +16,7 @@ import routes from "../../pharmacy/routes/routes"
 import styles from "../../../assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
 import bgImage from "../../../assets/images/pharmacy.png";
-import logo from "../../../assets/images/logo.jpg";
+import logo from "../../../assets/images/medLink.jpg";
 
 let ps;
 
@@ -96,7 +96,8 @@ export default function Pharmacy({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={"MedLink- Pharmacy"}
+        logoText={"Pharmacy"}
+        // logoText={"ABC Pharmacy"}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}

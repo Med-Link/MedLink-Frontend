@@ -48,7 +48,7 @@ export default function TableList() {
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Pharmacy Registration Requests</h4>
+            <h4 className={classes.cardTitleWhite}>Confirmed Orders</h4>
             {/* <p className={classes.cardCategoryWhite}>
               Here is a subtitle for this table
             </p> */}
@@ -56,14 +56,14 @@ export default function TableList() {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Pharmacy Name", "District", "City", "View"]}
+              tableHead={["Order ID", "Prescription", "Packed For Delivery"]}
               tableData={[
-                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
-                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
-                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
-                ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
-                ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
-                ["Mason Porter", "Chile", "Gloucester", "$78,615"],
+                ["MO2001", "Niger", "Button called Done. Then the row disappears. Row goes to another table with one clickable button "],
+                ["MO2002", "Curaçao", "Sinaai-Waas"],
+                ["MO2003", "Netherlands", "Baileux"],
+                ["MO2004", "Korea, South", "Overland Park"],
+                ["MO2005", "Malawi", "Feldkirchen in Kärnten"],
+                ["MO2006", "Chile", "Gloucester"],
               ]}
             />
           </CardBody>

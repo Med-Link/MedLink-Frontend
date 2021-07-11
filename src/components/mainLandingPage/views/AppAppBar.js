@@ -5,11 +5,14 @@ import { withStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import AppBar from '../../mainLandingPage/AppBar';
 import Toolbar, { styles as toolbarStyles } from '../../mainLandingPage/Toolbar';
+import medLink from '../../../assets/images/medLink.jpg';
+
 
 
 const styles = (theme) => ({
   title: {
-    fontSize: 28,
+    
+    fontSize: 45,
     color:theme.palette.primary.dark,
     
   },
@@ -30,13 +33,21 @@ const styles = (theme) => ({
   },
   //signin
   rightLink: {
-    fontSize: 16,
+    fontSize: 18,
     color: theme.palette.primary.dark,
     marginLeft: theme.spacing(3),
   },
   //signup
   linkSecondary: {
     color: theme.palette.primary.light,
+  },
+  image:{
+    height:45,
+    width:45,
+  },
+  link:{
+    fontSize: 45,
+    color: theme.palette.secondary.main,
   },
 });
 
@@ -49,11 +60,8 @@ function AppAppBar(props) {
         <Toolbar className={classes.toolbar}>
           <div className={classes.left} />
           <div className={classes.imageDots} />
-            <img
-              src='../../Assets/Images/logo.jpg'
-              alt="logo"
-              className={classes.image}
-            />
+            
+            <img src={medLink} className={classes.image} />
           <Link
             variant="h6"
             underline="none"
@@ -61,8 +69,19 @@ function AppAppBar(props) {
             className={classes.title}
             href="/"
           >
-            {'MedLink'}
-          </Link>
+            {'Med'}
+            </Link>
+
+            <Link
+            variant="h6"
+            underline="none"
+            color="inherit"
+            className={classes.link}
+            href="/"
+          >
+            {'Link'}
+            </Link>
+          
           
           <div className={classes.right}>
             <Link
@@ -77,16 +96,17 @@ function AppAppBar(props) {
             <Link
               variant="h6"
               underline="none"
-              className={clsx(classes.rightLink, classes.linkSecondary)}
+              className={clsx(classes.rightLink)}
+              
               href="Signup/"
             >
-              {'Sign Up'}
+              {'Pharmacy Sign Up'}
             </Link>
 
             <Link
               variant="h6"
               underline="none"
-              className={clsx(classes.rightLink, classes.linkSecondary)}
+              className={clsx(classes.rightLink)}
               href="SignupUser/"
             >
               {'Sign Up'}

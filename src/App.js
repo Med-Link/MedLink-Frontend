@@ -18,6 +18,7 @@ import customerSignin from './containers/customer/customersignin'
 
 //import AdminDashboard from './containers/admin/AdminDashboard';
 import Admin from './containers/admin/layouts/Admin.js'
+import Pharmacy from './containers/pharmacy/layouts/Pharmacy'
 
 
 
@@ -42,6 +43,8 @@ function App() {
 
           <Route path="/customersignup" component={customerSignup} />
           <Route path="/customersignin" component={customerSignin} />
+
+          <Route path="/pharmacy" component={Pharmacy} />
 
         </Switch>
       </Router>

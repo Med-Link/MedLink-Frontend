@@ -13,7 +13,7 @@ import CardAvatar from "../../components/Dashboard/Card/CardAvatar.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 
-import avatar from "../../assets/images/logo.jpg";
+import avatar from "../../assets/images/medLink.jpg";
 
 const styles = {
   cardCategoryWhite: {

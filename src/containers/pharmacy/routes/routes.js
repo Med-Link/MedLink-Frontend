@@ -7,10 +7,10 @@ import Unarchive from "@material-ui/icons/Unarchive";
 // core components/views for Admin layout
 import DashboardPage from "../Dashboard.js";
 import UserProfile from "../UserProfile.js";
-import CustomerRequests from "../CustomerRequests.js";
-import AdminRequests from "../AdminRequests.js";
-import NotificationsPage from "../Notifications.js";
-import Report from "../Reports.js";
+import CustomerRequests from "../Orders.js";
+import AdminRequests from "../ConfirmedOrders.js";
+import NotificationsPage from "../ClosedDeals.js";
+import Report from "../UpdateStock.js";
 
 const dashboardRoutes = [
   {
@@ -20,41 +20,43 @@ const dashboardRoutes = [
     component: DashboardPage,
     layout: "/pharmacy",
   },
+  
   {
-    path: "/user",
-    name: "User Profile",
-    icon: Person,
-    component: UserProfile,
-    layout: "/pharmacy",
-  },
-  {
-    path: "/pharmacyrequests",
-    name: "Customer Requests",
+    path: "/orderrequests",
+    name: "Order Requests",
     icon: LibraryBooks,
     component: CustomerRequests,
     layout: "/pharmacy",
   },
   {
-    path: "/adminrequests",
-    name: "Admin Requests",
+    path: "/confirmedorders",
+    name: "Confirmed Orders",
     icon: LibraryBooks,
     component: AdminRequests,
     layout: "/pharmacy",
   },
   {
-    path: "/notifications",
-    name: "Notifications",
+    path: "/closeddeals",
+    name: "Closed Deals",
     icon: Notifications,
     component: NotificationsPage,
     layout: "/pharmacy",
   },
   {
-    path: "/report",
-    name: "Report",
+    path: "/updatestock",
+    name: "Update Stock",
     icon: Unarchive,
     component: Report,
     layout: "/pharmacy",
   },
+  {
+    path: "/user",
+    name: "Profile",
+    icon: Person,
+    component: UserProfile,
+    layout: "/pharmacy",
+  },
+
 ];
 
 export default dashboardRoutes;

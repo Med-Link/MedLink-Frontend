@@ -8,6 +8,10 @@ import PharmacyCard from '../Card1';
 import CustomerCard from '../Card2';
 // import { minHeight } from '@material-ui/system';
 import GridContainer from '../../Dashboard/Grid/GridContainer';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import land from '../../../assets/images/land.jpg';
+
 
 const backgroundImage =
   'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
@@ -17,6 +21,15 @@ const styles = (theme) => ({
     backgroundImage: `url(${backgroundImage})`,
     // backgroundColor: '#7fc7d9', // Average color of the background image.
     backgroundPosition: 'center',
+  },
+  container: {
+    marginTop: theme.spacing(10),
+    marginBottom: theme.spacing(15),
+    marginLeft:theme.spacing(6),
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   button: {
     minWidth: 200,
@@ -41,14 +54,26 @@ const styles = (theme) => ({
   },
   
   photo:{
-    width:350,
-    height:350,
+    width:300,
+    height:300,
   },
 
   right: {
     flex: 100,
     display: 'flex',
     justifyContent: 'flex-end',
+  },
+
+  color:{
+    color: theme.palette.secondary.main,
+    fontSize:25,
+    fontFamily: 'sans-serif',
+    padding: 10,
+  },
+
+  image:{
+    height:450,
+    width:450,
   },
 
 });
@@ -60,14 +85,41 @@ function ProductHero(props) {
   const { classes } = props;
 
   return (
-    <ProductHeroLayout backgroundClassName={classes.background}>
-     
-      <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
-      <PharmacyCard className={classes.GridContainer} />
-      <CustomerCard />
-         
-      
-    </ProductHeroLayout>
+
+    <Container className={classes.container}>
+        
+        
+        <div>
+          <Grid container spacing={6}>
+            <Grid item xs={12} md={4}>
+              <div className={classes.item}>
+                
+                
+                <PharmacyCard />
+
+              </div>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <div className={classes.item}>
+               
+                <CustomerCard />
+              </div>
+            </Grid>
+            <Grid item xs={12} md={4}> 
+            {/* /2 and x3 */}
+              <div className={classes.item}>
+
+                <img src={land} className={classes.image} />
+                <Typography className={classes.color} >
+                  {'Sri Lanka\'s first ever largest pharmacy-customer link'}
+                  {/* {'Your Sundays will no longer be alike.'} */}
+                </Typography>
+              </div>
+            </Grid>
+          </Grid>
+        </div>
+        
+      </Container>
     
       
       

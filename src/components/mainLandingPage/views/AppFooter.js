@@ -8,6 +8,7 @@ import TextField from '../../mainLandingPage/TextField';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
+import Button from '../../mainLandingPage/Button';
 
 function Copyright() {
   return (
@@ -62,6 +63,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     width: 150,
   },
+  textField: {
+    width: '100%',
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(2),
+  },
+  
 }));
 
 const LANGUAGES = [
@@ -77,6 +84,17 @@ const LANGUAGES = [
 
 export default function AppFooter() {
   const classes = useStyles();
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Typography component="footer" className={classes.root}>
@@ -130,6 +148,22 @@ export default function AppFooter() {
                 </option>
               ))}
             </TextField>
+          </Grid>
+          <Grid item xs={12} md={6} className={classes.cardWrapper}>
+          <div className={classes.card}>
+            <form onSubmit={handleSubmit} className={classes.cardContent}>
+              <Typography variant="h2" component="h2" gutterBottom>
+                Receive offers
+              </Typography>
+              <Typography variant="h5">
+                Taste the holidays of the everyday close to home.
+              </Typography>
+              <TextField noBorder className={classes.textField} placeholder="Your email" />
+              <Button type="submit" color="primary" variant="contained" className={classes.button}>
+                Keep me updated
+              </Button>
+            </form>
+          </div>
           </Grid>
           {/* <Grid item>
             <Typography variant="caption">
