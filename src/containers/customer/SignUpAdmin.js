@@ -1,8 +1,4 @@
-import React, {useState} from 'react';
-
-
-
-//material ui imports
+import React from 'react';
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
@@ -15,10 +11,6 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import axios from 'axios';
-import { Redirect } from 'react-router-dom';
-
-//import { AST_SymbolBlockDeclaration } from 'terser';
 
 function Copyright() {
     return (
@@ -34,39 +26,6 @@ function Copyright() {
   }
 
 const SignUpAdmin=()=>{
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [checked, setChecked] = useState(false);
-    const [error, setError] = useState("");
-    const [signedUp, setSignedUp] = useState(false);
-    
-    const signup =(e)=>{
-        e.preventDefault();
-        if(checked){
-        axios.post('http://localhost:4000/api/admin/signup', {
-            firstName: firstName,
-            lastName:lastName,
-            email:email,
-            password:password
-        }).then((response)=>{
-            console.log(response);
-            setSignedUp(true);
-
-        }).catch((err)=>{
-            console.log(err);
-            setError("Password must be atleast 6 characters long");
-        });
-        
-    }else{
-        console.log("Unchecked");
-    }
-    }
-
-    if(signedUp){
-        return <Redirect to={'/adminsignin'} />
-    }
 
     const paperStyle={padding :20,height:'620px',width:'400px', margin:"20px auto "}
     const avatarStyle={backgroundColor: '#2ab5b5'}
@@ -79,28 +38,28 @@ const SignUpAdmin=()=>{
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center' style={gridStyle}>
                     <Avatar style={avatarStyle}><LockOpenIcon/></Avatar>
-                    <h1>Admin Sign Up</h1>
+                    <h1>User Sign Up</h1>
                 </Grid>
                 <Grid container spacing={2}> 
                     <Grid item xs={12}>
-                        <TextField value ={firstName} onChange={(e) => setFirstName(e.target.value)} type="text" className="form-control" TextField id="firstName" variant="outlined"  placeholder="Enter Your First Name" fullWidth required/>
+                        <TextField id="firstName" variant="outlined" label="First Name" placeholder="Enter Your First Name" fullWidth required/>
                     </Grid>
 
                     <Grid item xs={12}>
-                    <TextField value ={lastName} onChange={(e) => setLastName(e.target.value)} id="lastName" variant="outlined" label="Last Name" placeholder="Enter Your Last Name" fullWidth required/>
+                    <TextField id="lastName" variant="outlined" label="Last Name" placeholder="Enter Your Last Name" fullWidth required/>
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField value ={email} onChange={(e) => setEmail(e.target.value)} id="email" variant="outlined" label="Email" placeholder="Enter Your Email" fullWidth required/>
+                        <TextField id="email" variant="outlined" label="Email" placeholder="Enter Your Email" fullWidth required/>
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField value ={password} onChange={(e) => setPassword(e.target.value)}id="password" variant="outlined" label="Password" placeholder="Enter Password" type='password' fullWidth required/>
+                        <TextField id="password" variant="outlined" label="Password" placeholder="Enter Password" type='password' fullWidth required/>
                     </Grid>
 
-                    {/* <Grid item xs={12}> 
+                    <Grid item xs={12}> 
                         <TextField id="confirmPassword" variant="outlined" label="Confirm Password" placeholder="Re Enter Your Password" type='password' fullWidth required/>
-                    </Grid> */}
+                    </Grid>
                 </Grid>
 
                 <Grid item xs={12}> 
@@ -109,19 +68,18 @@ const SignUpAdmin=()=>{
                             <Checkbox 
                             name="checkedB"
                             color="Primary"
-                            onChange={(e) => setChecked(e.target.checked)}
                             />
                         }
                         label="I agree to the Terms and Conditions"
                     />
                 </Grid>
                 
-                <Button type='submit' variant="contained" style={buttonStyle} onClick={signup} fullWidth>Sign Up</Button>
-                <p>{error}</p>
+                <Button type='submit' variant="contained" style={buttonStyle} href="#" fullWidth>Sign Up</Button>
+
                 <Grid container justify="center">
                     <Grid item> 
                         <Typography>Already have an account? 
-                            <Link href="/adminsignin">
+                            <Link href="/Signin/">
                                 Sign In
                             </Link>
                         </Typography>
