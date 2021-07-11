@@ -42,7 +42,7 @@ export default function Footer(props) {
         <p className={classes.right}>
           <span>
             <a
-              href="https://www.creative-tim.com?ref=mdr-footer"
+              href="/"
               target="_blank"
               className={classes.a}
             >

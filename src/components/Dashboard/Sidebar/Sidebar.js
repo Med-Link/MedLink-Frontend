@@ -13,7 +13,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Icon from "@material-ui/core/Icon";
 // core components
 import AdminNavbarLinks from "../Navbars/AdminNavbarLinks.js";
-//*import RTLNavbarLinks from "../Navbars/RTLNavbarLinks.js";
 
 import styles from "../../../assets/jss/material-dashboard-react/components/sidebarStyle.js";
 
