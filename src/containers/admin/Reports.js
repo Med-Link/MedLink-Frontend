@@ -1,14 +1,9 @@
 import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-// @material-ui/icons
-import Close from "@material-ui/icons/Close";
-import Check from "@material-ui/icons/Check";
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
-import Danger from "../../components/Dashboard/Typography/Danger.js";
-import Success from "../../components/Dashboard/Typography/Success.js";
 import Button from "../../components/Dashboard/CustomButtons/Button.js";
 import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
@@ -160,14 +155,14 @@ export default function UpgradeToPro() {
                   <tr>
                     <td />
                     <td className={classes.center}>
-                      <Button round disabled>
+                      <Button round color="info">
                         View Full Report
                       </Button>
                     </td>
                     <td className={classes.center}>
                       <Button
                         round
-                        color="danger"
+                        color="primary"
                       >
                         Download
                       </Button>
