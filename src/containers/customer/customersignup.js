@@ -16,7 +16,7 @@ import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import axios from 'axios';
-//import { AST_SymbolBlockDeclaration } from 'terser';
+import { AST_SymbolBlockDeclaration } from 'terser';
 
 function Copyright() {
     return (
@@ -31,7 +31,7 @@ function Copyright() {
     );
   }
 
-const SignUpAdmin=()=>{
+const Customersignup=()=>{
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -42,7 +42,7 @@ const SignUpAdmin=()=>{
     }
     
     const signup =()=>{
-        axios.post('http://localhost:4000/api/admin/signup', {
+        axios.post('http://localhost:4000/api/signup', {
             firstName: firstName,
             lastName:lastName,
             email:email,
@@ -65,7 +65,7 @@ const SignUpAdmin=()=>{
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center' style={gridStyle}>
                     <Avatar style={avatarStyle}><LockOpenIcon/></Avatar>
-                    <h1>Admin Sign Up</h1>
+                    <h1>Sign Up</h1>
                 </Grid>
                 <Grid container spacing={2}> 
                     <Grid item xs={12}>
@@ -106,7 +106,7 @@ const SignUpAdmin=()=>{
                 <Grid container justify="center">
                     <Grid item> 
                         <Typography>Already have an account? 
-                            <Link href="/adminsignin">
+                            <Link href="/customersignin">
                                 Sign In
                             </Link>
                         </Typography>
@@ -121,4 +121,4 @@ const SignUpAdmin=()=>{
     )
 }
 
-export default SignUpAdmin
+export default Customersignup
