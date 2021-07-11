@@ -64,7 +64,7 @@ export default function PharmacyCard(props) {
     <Grid item xs={0} md={0}>
 
       
-        <Card className={classes.root} xs={12}>
+        <Card className={classes.root} xs={12} xs={12} >
         <CardActionArea component="a" href="#">
           {/* <div className={classes.cardDetails}> */}
           

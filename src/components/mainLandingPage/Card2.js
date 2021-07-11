@@ -106,3 +106,4 @@ export default function CustomerCard(props) {
 CustomerCard.propTypes = {
   post: PropTypes.object,
 };
+
