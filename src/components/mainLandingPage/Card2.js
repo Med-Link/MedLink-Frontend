@@ -82,7 +82,7 @@ export default function PharmacyCard(props) {
               <Typography component="h1" variant="h7"  className={classes.color1}>
                 {"For Customers"}
               </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
+              <Typography variant="subtitle1" >
                {"We bring your medicine to your doorstep. Join us to find all the medicines you need"}
               </Typography>
               <Typography variant="h5" paragraph className={classes.description}>
