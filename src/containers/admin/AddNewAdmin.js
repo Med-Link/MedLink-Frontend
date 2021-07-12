@@ -47,21 +47,7 @@ export default function UserProfile() {
               <p className={classes.cardCategoryWhite}>Complete New Admin profile</p>
             </CardHeader>
             <CardBody>
-              <GridContainer>
-                
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Email address"
-                    id="email-address"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
+              
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
@@ -83,19 +69,23 @@ export default function UserProfile() {
                 </GridItem>
               </GridContainer>
               <GridContainer>
+                
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="City"
-                    id="city"
+                    labelText="Email address"
+                    id="email-address"
                     formControlProps={{
                       fullWidth: true,
+                    }}
+                    inputProps={{
+                      disabled: true,
                     }}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="Telephone Number"
-                    id="telephone-number"
+                    labelText="Password"
+                    id="password"
                     formControlProps={{
                       fullWidth: true,
                     }}

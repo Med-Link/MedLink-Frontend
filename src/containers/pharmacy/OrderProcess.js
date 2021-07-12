@@ -71,7 +71,7 @@ export default function OrderProcess() {
             headerColor="primary"
             tabs={[
               {
-                tabName: "Find Med",
+                tabName: "Find Medicine from Stock",
                 // tabIcon: <AddShoppingCartIcon/>,
                 tabContent: (
                   <Card>          
