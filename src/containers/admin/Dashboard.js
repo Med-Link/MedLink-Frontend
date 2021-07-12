@@ -20,6 +20,10 @@ import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardIcon from "../../components/Dashboard/Card/CardIcon.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
+import Button from "../../components/Dashboard//CustomButtons/Button";
+import Switch from "../../components/Dashboard/CustomButtons/Switch";
+
+
 
 import { bugs, website, server } from "../../variables/general.js";
 
@@ -85,79 +89,48 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={4}>
-          
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-        </GridItem>
-        
-        <GridItem xs={12} sm={12} md={4}>
-        </GridItem>
-      </GridContainer>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={6}>
-          <CustomTabs
-            title="Tasks:"
-            headerColor="primary"
-            tabs={[
-              {
-                tabName: "Bugs",
-                tabIcon: BugReport,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[0, 3]}
-                    tasksIndexes={[0, 1, 2, 3]}
-                    tasks={bugs}
-                  />
-                ),
-              },
-              {
-                tabName: "Website",
-                tabIcon: Code,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[0]}
-                    tasksIndexes={[0, 1]}
-                    tasks={website}
-                  />
-                ),
-              },
-              {
-                tabName: "Server",
-                tabIcon: Cloud,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[1]}
-                    tasksIndexes={[0, 1, 2]}
-                    tasks={server}
-                  />
-                ),
-              },
-            ]}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
+      <GridItem xs={12} sm={12} md={6}>
           <Card>
-            <CardHeader color="info">
-              <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>Pharmacy Registration Requests</h4>
               <p className={classes.cardCategoryWhite}>
-                New employees on 15th September, 2016
+                on July 2021
               </p>
             </CardHeader>
             <CardBody>
               <Table
                 tableHeaderColor="warning"
-                tableHead={["ID", "Name", "Salary", "Country"]}
+                tableHead={["ID", "Name", "District", "Action"]}
                 tableData={[
-                  ["1", "Dakota Rice", "$36,738", "Niger"],
-                  ["2", "Minerva Hooper", "$23,789", "Curaçao"],
-                  ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
-                  ["4", "Philip Chaney", "$38,735", "Korea, South"],
+                  ["1", "Micael Medcare", "Colombo", <Button color="primary" round>View</Button>],
+                  ["2", "Minerva Pharmacy", "Puttalam", <Button color="primary" round>View</Button>],
                 ]}
               />
             </CardBody>
           </Card>
         </GridItem>
+          <GridItem xs={12} sm={12} md={6}>
+          <Card>
+            <CardHeader color="info">
+              <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
+              <p className={classes.cardCategoryWhite}>
+                on July 2021
+              </p>
+            </CardHeader>
+            <CardBody>
+              <Table
+                tableHeaderColor="warning"
+                tableHead={["ID", "Name","Activate"]}
+                tableData={[
+                  ["Admin2", "Sandali Perera",<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
+                  ["Admin3", "Akila De Silva",<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
+                  ["Admin4", "Piyumi Senarath",<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
+                ]}
+              />
+            </CardBody>
+          </Card>
+        </GridItem>
+        
       </GridContainer>
     </div>
   );
