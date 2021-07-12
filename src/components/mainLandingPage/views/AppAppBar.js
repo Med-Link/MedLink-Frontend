@@ -6,6 +6,7 @@ import Link from '@material-ui/core/Link';
 import AppBar from '../../mainLandingPage/AppBar';
 import Toolbar, { styles as toolbarStyles } from '../../mainLandingPage/Toolbar';
 import medLink from '../../../assets/images/medLink.jpg';
+import Button from '@material-ui/core/Button';  
 
 
 
@@ -92,9 +93,17 @@ function AppAppBar(props) {
               className={classes.rightLink}
               href="Signin/"
             >
-              {'Sign In'}
+            <Button
+            color="secondary"
+                        variant="contained"
+                        size="large"
+                        className={classes.button}
+                        component="a">
+              {'Admin Sign In'}
+              </Button>
             </Link>
-            <Link
+
+            {/* <Link
               variant="h6"
               underline="none"
               className={clsx(classes.rightLink)}
@@ -111,7 +120,7 @@ function AppAppBar(props) {
               href="SignupUser/"
             >
               {'Sign Up'}
-            </Link>
+            </Link> */}
           </div>
         </Toolbar>
       </AppBar>

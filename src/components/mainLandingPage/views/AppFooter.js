@@ -71,6 +71,8 @@ const useStyles = makeStyles((theme) => ({
   subButton: {
     padding: theme.spacing(1, 3),
     fontSize: theme.typography.pxToRem(13),
+    backgroundColor: theme.palette.secondary.main,
+
   },
   
 }));
@@ -103,7 +105,10 @@ export default function AppFooter() {
   return (
     <Typography component="footer" className={classes.root}>
       <Container className={classes.container}>
+
         <Grid container spacing={5}>
+       
+
           <Grid item xs={6} sm={4} md={3}>
             <Grid
               container
@@ -163,7 +168,7 @@ export default function AppFooter() {
                 Subscribe to get in touch with us
               </Typography>
               <TextField noBorder className={classes.textField} placeholder="Your email" />
-              <Button type="submit" color="primary" variant="contained" className={classes.button}>
+              <Button type="submit" color="primary" variant="contained" className={classes.subButton}>
                 Keep me updated
               </Button>
             </form>

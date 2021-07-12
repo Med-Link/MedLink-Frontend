@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 // import pharmacy from '../assets/images/pharmacy.jpg' @material-ui/core/Hidden; 
 
 import Link from '@material-ui/core/Link';
-import sick from '../../assets/images/sick2.png';
+import cst from '../../assets/images/cst.jpg';
 
 
 // import CardActions from '@material-ui/core/CardAction';
@@ -32,7 +32,9 @@ const useStyles = makeStyles((theme) => ({
     
   },
   root: {
+ 
     backgroundColor : theme.palette.secondary.light,
+ 
   },
 
   color1:{
@@ -76,7 +78,7 @@ export default function PharmacyCard(props) {
             <CardMedia className={classes.cardMedia} >
             
 
-            <img src={sick} className={classes.image} />
+            <img src={cst} className={classes.image} />
             </CardMedia>
             <CardContent>
               <Typography component="h1" variant="h7"  className={classes.color1}>
@@ -88,7 +90,7 @@ export default function PharmacyCard(props) {
               <Typography variant="h5" paragraph className={classes.description}>
                 {}
               </Typography>
-              <Link href="../../containers/pharmacyLandingPage/PharmacyLandingPage">                    
+              <Link href="/customersignup">                    
               <Button  color="secondary"
                     variant="contained"
                     size="large"
@@ -97,7 +99,8 @@ export default function PharmacyCard(props) {
                     // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
                > Sign Up 
               </Button>
-              
+              </Link>
+              <Link href="/customersignin">
               <Button  color="secondary"
                     variant="contained"
                     size="large"

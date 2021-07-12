@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 // import pharmacy from '../assets/images/pharmacy.jpg' @material-ui/core/Hidden; 
 
 import Link from '@material-ui/core/Link';
-import pharmacist from '../../assets/images/pharmacist.png';
+import pharmacy2 from '../../assets/images/pharmacy2.jpg';
 
 
 // import CardActions from '@material-ui/core/CardAction';
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
   image: {
     height: 270,
-    width:270,
+    width:330,
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
@@ -78,7 +78,7 @@ export default function PharmacyCard(props) {
             <CardMedia className={classes.cardMedia} >
             
 
-            <img src={pharmacist} className={classes.image} />
+            <img src={pharmacy2} className={classes.image} />
             </CardMedia>
             <CardContent>
               <Typography component="h1" variant="h7"  className={classes.color1}>
@@ -90,24 +90,30 @@ export default function PharmacyCard(props) {
               <Typography variant="h5" paragraph className={classes.description}>
                 {}
               </Typography>
-              <Link href="../../containers/pharmacyLandingPage/PharmacyLandingPage" >                    
-              <Button  color="secondary"
-                    variant="contained"
-                    size="large"
-                    className={classes.button}
-                    component="a"
-                    // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
-               > Sign Up
-              </Button>
-              <Button  color="secondary"
-                    variant="contained"
-                    size="large"
-                    className={classes.button}
-                    component="a"
-                    // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
-               > Sign In 
-              </Button>
-              </Link>
+              
+                  <Link href="/pharmacysignup">                    
+                    <Button  color="secondary"
+                          variant="contained"
+                          size="large"
+                          className={classes.button}
+                          component="a"
+                          // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
+                    > Sign Up
+                    </Button>
+                    </Link>
+                 
+                  <Link href="/pharmacysignin">                    
+                  <Button  color="secondary"
+                        variant="contained"
+                        size="large"
+                        className={classes.button}
+                        component="a"
+                        // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
+                  > Sign In 
+                  </Button>
+                  </Link>
+
+               
             </CardContent>
           {/* </div> */}
           </CardActionArea>

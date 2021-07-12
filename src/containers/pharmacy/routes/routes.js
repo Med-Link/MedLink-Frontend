@@ -5,6 +5,7 @@ import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import Notifications from "@material-ui/icons/Notifications";
 import Unarchive from "@material-ui/icons/Unarchive";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import CheckIcon from '@material-ui/icons/Check';
 // core components/views for Admin layout
 import DashboardPage from "../Dashboard.js";
 import UserProfile from "../UserProfile.js";
@@ -33,7 +34,7 @@ const dashboardRoutes = [
   {
     path: "/confirmedorders",
     name: "Confirmed Orders",
-    icon: LibraryBooks,
+    icon: CheckIcon,
     component: AdminRequests,
     layout: "/pharmacy",
   },
@@ -57,7 +58,7 @@ const dashboardRoutes = [
     icon: Person,
     component: UserProfile,
     layout: "/pharmacy",
-  },
+   },
   {
     path: "/orderprocess",
     name: "Order Process",
