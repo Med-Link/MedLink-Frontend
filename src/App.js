@@ -24,6 +24,8 @@ import SignInPharmacy from './containers/pharmacy/SignInPharmacy'
 
 import PrivateRoute from './components/HOC/privateRoute';
 import PrivateRoute1 from './components/HOC/privateRoute1';
+import PrivateRoute2 from './components/HOC/privateRoute2';
+
 
 
 function App() {
@@ -48,7 +50,7 @@ function App() {
           <Route path="/customersignup" component={CustomerSignup} />
           <Route path="/customersignin" component={CustomerSignin} />
 
-          <Route path="/pharmacy" component={Pharmacy} />
+          <PrivateRoute2 path="/pharmacy" component={Pharmacy} />
           <Route path="/pharmacysignup" component={SignUpPharmacy} />
           <Route path="/pharmacysignin" component={SignInPharmacy} />
 

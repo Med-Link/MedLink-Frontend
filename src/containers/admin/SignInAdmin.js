@@ -95,8 +95,8 @@ const SignIn=(props)=>{
                     <Avatar style={avatarStyle}><LockOpenIcon/></Avatar>
                     <h1>Sign in</h1>
                 </Grid>
-                    <TextField value ={email} onChange={(e) => setEmail(e.target.value)} id="lastName" id="email" label="Email" placeholder="Enter Your Email" fullWidth required/>
-                    <TextField value ={password} onChange={(e) => setPassword(e.target.value)} id="lastName" id="password" label="Password" placeholder="Enter Password" type='password' fullWidth required/>
+                    <TextField value ={email} onChange={(e) => setEmail(e.target.value)} id="email" label="Email" placeholder="Enter Your Email" fullWidth required/>
+                    <TextField value ={password} onChange={(e) => setPassword(e.target.value)} id="password" label="Password" placeholder="Enter Password" type='password' fullWidth required/>
                     <FormControlLabel  
                         control={
                             <Checkbox 
@@ -114,7 +114,7 @@ const SignIn=(props)=>{
                     </Link>
                 </Typography>
 
-                <Typography>Do you have an account ? 
+                <Typography>Do not have an account ? 
                     <Link href="/adminsignup">
                         Sign Up
                     </Link>
