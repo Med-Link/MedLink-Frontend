@@ -90,14 +90,22 @@ export default function PharmacyCard(props) {
               <Typography variant="h5" paragraph className={classes.description}>
                 {}
               </Typography>
-              <Link href="../../containers/pharmacyLandingPage/PharmacyLandingPage">                    
+              <Link href="../../containers/pharmacyLandingPage/PharmacyLandingPage" >                    
               <Button  color="secondary"
                     variant="contained"
                     size="large"
                     className={classes.button}
                     component="a"
                     // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
-               > Learn More 
+               > Sign Up
+              </Button>
+              <Button  color="secondary"
+                    variant="contained"
+                    size="large"
+                    className={classes.button}
+                    component="a"
+                    // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
+               > Sign In 
               </Button>
               </Link>
             </CardContent>

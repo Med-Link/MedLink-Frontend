@@ -68,6 +68,7 @@ function AppAppBar(props) {
             color="inherit"
             className={classes.title}
             href="/"
+            
           >
             {'Med'}
             </Link>

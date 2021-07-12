@@ -20,12 +20,12 @@ import customerSignin from './containers/customer/customersignin'
 
 //import AdminDashboard from './containers/admin/AdminDashboard';
 import Admin from './containers/admin/layouts/Admin.js'
-<<<<<<< HEAD
+
 import Pharmacy from './containers/pharmacy/layouts/Pharmacy'
-=======
+
 import PrivateRoute from './components/HOC/privateRoute';
 // import privateRoute from './components/HOC/privateRoute'
->>>>>>> 45f9871a095c21fc285493694318eecdff24bc55
+
 
 
 
