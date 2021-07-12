@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding:theme.spacing(3),
+    padding:theme.spacing(4),
     borderRadius: '25px',
     boxShadow: `2px 2px 2px 2px #ccc`,
   },
@@ -52,20 +52,21 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(2),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 0, 1),
+    width:'70%',
   },
   /*label:{
     marginLeft:theme.spacing(0),
-  },*/
-  back:{
-    backgroundColor: "#eee",
-    marginTop:theme.spacing(1),
-    margin:theme.spacing(1,1,1),
-    height:'small',
-  },
+  // },*/
+  // back:{
+  //   backgroundColor: "#eee",
+  //   marginTop:theme.spacing(1),
+  //   margin:theme.spacing(1,1,1),
+  //   height:'small',
+  // },
   input: {
     display: 'none',
   },
@@ -75,6 +76,8 @@ const useStyles = makeStyles((theme) => ({
     height:'100%',
     // height:'auto',
     // maxHeight:'400px',
+    
+    padding:theme.spacing(4),
     maxWidth:'900px',
   },
   
@@ -86,7 +89,7 @@ export default function SignUp() {
 
   return (
     <div>
-    <GridContainer>
+    <GridContainer spacing={0} >
     <Hidden smDown>
       <GridItem xs={12} sm={12} md={7}>
         <img src={pharmacist} className={classes.image} />
@@ -255,16 +258,23 @@ export default function SignUp() {
             </Grid>
 
           </Grid>
-
-          <Button
+          <Box xs={12} sm={12} md={12}
+          alignItems="center" 
+          display="flex" 
+          justifyContent="center"
+          direction="column"
+          justify="center">
+            <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+
           >
             Sign Up
           </Button>
+          </Box>
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="/signin" variant="body2">
@@ -272,6 +282,7 @@ export default function SignUp() {
               </Link>
             </Grid>
           </Grid>
+          
         </form>
       </div>
       
@@ -279,12 +290,7 @@ export default function SignUp() {
       </GridItem>
       
       </GridContainer>
-      <Box xs={12} sm={12} md={12} 
-      alignItems="center" 
-      display="flex" 
-      justifyContent="center"
-      direction="column"
-      justify="center">
+      <Box xs={12} sm={12} md={12} >
         <Copyright />
       </Box>
       </div>
