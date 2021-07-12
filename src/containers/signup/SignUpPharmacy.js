@@ -13,7 +13,12 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import GridContainer from '../../components/Dashboard/Grid/GridContainer';
+import GridItem from '../../components/Dashboard/Grid/GridItem';
 
+import Hidden from '@material-ui/core/Hidden';
+
+import pharmacist from '../../assets/images/pharmacist2.jpg';
 
 function Copyright() {
   return (
@@ -29,11 +34,17 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor : '#eee',
+  },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(1),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    padding:theme.spacing(3),
+    borderRadius: '25px',
+    boxShadow: `2px 2px 2px 2px #ccc`,
   },
   avatar: {
     margin: theme.spacing(1),
@@ -52,10 +63,21 @@ const useStyles = makeStyles((theme) => ({
   back:{
     backgroundColor: "#eee",
     marginTop:theme.spacing(1),
+    margin:theme.spacing(1,1,1),
+    height:'small',
   },
   input: {
     display: 'none',
   },
+  image: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    height:'100%',
+    // height:'auto',
+    // maxHeight:'400px',
+    maxWidth:'900px',
+  },
+  
 
 }));
 
@@ -63,8 +85,15 @@ export default function SignUp() {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
+    <div>
+    <GridContainer>
+    <Hidden smDown>
+      <GridItem xs={12} sm={12} md={7}>
+        <img src={pharmacist} className={classes.image} />
+      </GridItem>
+      </Hidden>
+      <GridItem xs={12} sm={12} md={5} spacing={3}  borderRadius={10}>
+
       <div className={classes.paper}>
         
         <Avatar className={classes.avatar}>
@@ -89,6 +118,7 @@ export default function SignUp() {
                 id="pharmacyName"
                 label="Pharmacy Name"
                 autoFocus
+                size="small"
               />
             </Grid>
             
@@ -101,6 +131,7 @@ export default function SignUp() {
                 label="Mobile Number"
                 name="pNumber"
                 autoComplete="pnumber"
+                size="small"
               />
             </Grid>
             
@@ -113,6 +144,7 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                size="small"
               />
             </Grid>
             
@@ -126,6 +158,7 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                size="small"
               />
             </Grid>
             
@@ -135,18 +168,19 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="location"
-                label="Location"
+                label="Location URL"
                 name="location"
                 autoComplete="location"
+                size="small"
               />
             </Grid>
             
-            <Grid item xs={12} sm={8} className={classes.back}>
-              <Typography variant="body2" display="block" className={classes.label}>
+            <Grid item xs={12} sm={12} md={8} >
+              <Typography variant="body2" display="block">
                 Medical Council Certificate *
               </Typography>                
             </Grid>
-            <Grid item xs={12} sm={4}className={classes.back}>
+            <Grid item xs={12}  sm={12} md={4}>
             <input
               accept="image/*"
               className={classes.input}
@@ -165,12 +199,12 @@ export default function SignUp() {
             </label>             
             </Grid>
             
-            <Grid item xs={12} sm={8} className={classes.back}>
-              <Typography variant="body2" display="block" className={classes.label} >
+            <Grid item xs={12} sm={12} md={8}>
+              <Typography variant="body2" display="block" >
                 Pharmaciest Licence *
               </Typography>                
             </Grid>
-            <Grid item xs={12} sm={4} className={classes.back}>
+            <Grid item xs={12} sm={12} md={4}>
               <input
                 accept="image/*"
                 className={classes.input}
@@ -189,12 +223,12 @@ export default function SignUp() {
               </label>                 
             </Grid>
 
-            <Grid item xs={12} sm={8} className={classes.back}>
-              <Typography variant="body2" display="block"  className={classes.label}>
+            <Grid item xs={12} sm={12} md={8}>
+              <Typography variant="body2" display="block">
                 Business Registration Certificate *
               </Typography>                
             </Grid>
-            <Grid item xs={12} sm={4} className={classes.back}>
+            <Grid item xs={12} sm={12} md={4}>
               <input
                 accept="image/*"
                 className={classes.input}
@@ -240,15 +274,19 @@ export default function SignUp() {
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
+      
+      
+      </GridItem>
+      
+      </GridContainer>
+      <Box xs={12} sm={12} md={12} 
+      alignItems="center" 
+      display="flex" 
+      justifyContent="center"
+      direction="column"
+      justify="center">
         <Copyright />
       </Box>
-    </Container>
-    
+      </div>
   );
 }
-
-
-
-
-
