@@ -88,7 +88,7 @@ export default function PharmacyCard(props) {
               <Typography variant="h5" paragraph className={classes.description}>
                 {}
               </Typography>
-              <Link href="../../containers/pharmacyLandingPage/PharmacyLandingPage">                    
+              <Link href="/customersignup">                    
               <Button  color="secondary"
                     variant="contained"
                     size="large"
@@ -97,7 +97,8 @@ export default function PharmacyCard(props) {
                     // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
                > Sign Up 
               </Button>
-              
+              </Link>
+              <Link href="/customersignin">
               <Button  color="secondary"
                     variant="contained"
                     size="large"
