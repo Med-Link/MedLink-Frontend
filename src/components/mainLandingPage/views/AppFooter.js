@@ -68,6 +68,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(2),
   },
+  subButton: {
+    padding: theme.spacing(1, 3),
+    fontSize: theme.typography.pxToRem(13),
+  },
   
 }));
 
@@ -152,11 +156,11 @@ export default function AppFooter() {
           <Grid item xs={12} md={6} className={classes.cardWrapper}>
           <div className={classes.card}>
             <form onSubmit={handleSubmit} className={classes.cardContent}>
-              <Typography variant="h2" component="h2" gutterBottom>
-                Receive offers
+              <Typography variant="h4" component="h2" gutterBottom>
+                Subscribe
               </Typography>
               <Typography variant="h5">
-                Taste the holidays of the everyday close to home.
+                Subscribe to get in touch with us
               </Typography>
               <TextField noBorder className={classes.textField} placeholder="Your email" />
               <Button type="submit" color="primary" variant="contained" className={classes.button}>

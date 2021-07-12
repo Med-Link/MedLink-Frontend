@@ -95,7 +95,16 @@ export default function PharmacyCard(props) {
                     className={classes.button}
                     component="a"
                     // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
-               > Learn More 
+               > Sign Up 
+              </Button>
+              
+              <Button  color="secondary"
+                    variant="contained"
+                    size="large"
+                    className={classes.button}
+                    component="a"
+                    // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
+               > Sign In 
               </Button>
               </Link>
             </CardContent>
