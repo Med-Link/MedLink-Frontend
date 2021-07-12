@@ -98,7 +98,7 @@ function AppAppBar(props) {
               underline="none"
               className={clsx(classes.rightLink)}
               
-              href="Signup/"
+              href="pharmacysignup/"
             >
               {'Pharmacy Sign Up'}
             </Link>
