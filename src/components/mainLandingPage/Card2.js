@@ -32,7 +32,9 @@ const useStyles = makeStyles((theme) => ({
     
   },
   root: {
+ 
     backgroundColor : theme.palette.secondary.light,
+ 
   },
 
   color1:{
@@ -76,7 +78,7 @@ export default function PharmacyCard(props) {
             <CardMedia className={classes.cardMedia} >
             
 
-            <img src={cst}} className={classes.image} />
+            <img src={cst} className={classes.image} />
             </CardMedia>
             <CardContent>
               <Typography component="h1" variant="h7"  className={classes.color1}>
