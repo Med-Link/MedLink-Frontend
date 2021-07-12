@@ -11,31 +11,19 @@ import Form from './containers/customer/form/Form'
 import Checkout from './containers/customer/payment/Checkout'
 import Customer from './containers/customer/layouts/Customer.js'
 
+import Admin from './containers/admin/layouts/Admin.js'
 import SignUpAdmin from './containers/admin/SignUpAdmin'
 import SignInAdmin from './containers/admin/SignInAdmin'
-import Admin from './containers/admin/layouts/Admin.js'
 
 import CustomerSignup from './containers/customer/SignUpCustomer'
 import CustomerSignin from './containers/customer/SignInCustomer'
 
-
-//import AdminDashboard from './containers/admin/AdminDashboard';
-import Admin from './containers/admin/layouts/Admin.js'
-
 import Pharmacy from './containers/pharmacy/layouts/Pharmacy'
-
-import PrivateRoute from './components/HOC/privateRoute';
-// import privateRoute from './components/HOC/privateRoute'
-
-
 import SignUpPharmacy from './containers/pharmacy/SignUpPharmacy'
 import SignInPharmacy from './containers/pharmacy/SignInPharmacy'
-import Pharmacy from './containers/pharmacy/layouts/Pharmacy'
+
 import PrivateRoute from './components/HOC/privateRoute';
 import PrivateRoute1 from './components/HOC/privateRoute1';
-
-
-
 
 
 function App() {
