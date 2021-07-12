@@ -10,6 +10,7 @@ import UserProfile from "../UserProfile.js";
 import PharmacyRequests from "../PharmacyRequests.js";
 import AdminRequests from "../AdminRequests.js";
 import NotificationsPage from "../Notifications.js";
+import AddNewAdmin from "../AddNewAdmin";
 import Report from "../Reports.js";
 
 const dashboardRoutes = [
@@ -53,6 +54,13 @@ const dashboardRoutes = [
     name: "Income Report",
     icon: Unarchive,
     component: Report,
+    layout: "/admin",
+  },
+  {
+    path: "/addnewadmin",
+    name: "Add New Admin",
+    icon: Person,
+    component: AddNewAdmin,
     layout: "/admin",
   },
 ];
