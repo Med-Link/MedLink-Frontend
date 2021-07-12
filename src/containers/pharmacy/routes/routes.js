@@ -4,6 +4,7 @@ import Person from "@material-ui/icons/Person";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import Notifications from "@material-ui/icons/Notifications";
 import Unarchive from "@material-ui/icons/Unarchive";
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 // core components/views for Admin layout
 import DashboardPage from "../Dashboard.js";
 import UserProfile from "../UserProfile.js";
@@ -11,6 +12,7 @@ import CustomerRequests from "../Orders.js";
 import AdminRequests from "../ConfirmedOrders.js";
 import NotificationsPage from "../ClosedDeals.js";
 import Report from "../UpdateStock.js";
+import OrderProcess from"../OrderProcess";
 
 const dashboardRoutes = [
   {
@@ -54,6 +56,13 @@ const dashboardRoutes = [
     name: "Profile",
     icon: Person,
     component: UserProfile,
+    layout: "/pharmacy",
+  },
+  {
+    path: "/orderprocess",
+    name: "Order Process",
+    icon: AddShoppingCartIcon,
+    component: OrderProcess,
     layout: "/pharmacy",
   },
 
