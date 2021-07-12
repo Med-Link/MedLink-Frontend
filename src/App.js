@@ -9,21 +9,22 @@ import Profile from './containers/customer/profile/Profile'
 import Form from './containers/customer/form/Form'
 import Checkout from './containers/customer/payment/Checkout'
 import Customer from './containers/customer/layouts/Customer.js'
+
+
+import Admin from './containers/admin/layouts/Admin.js'
 import SignUpAdmin from './containers/admin/SignUpAdmin'
 import SignInAdmin from './containers/admin/SignInAdmin'
-import Admin from './containers/admin/layouts/Admin.js'
-import customerSignup from './containers/customer/customersignup'
-import customerSignin from './containers/customer/customersignin'
-//import AdminDashboard from './containers/admin/AdminDashboard';
+
+import CustomerSignup from './containers/customer/SignUpCustomer'
+import CustomerSignin from './containers/customer/SignInCustomer'
+
 import Pharmacy from './containers/pharmacy/layouts/Pharmacy'
-import PrivateRoute from './components/HOC/privateRoute';
-// import privateRoute from './components/HOC/privateRoute'
 import SignUpPharmacy from './containers/pharmacy/SignUpPharmacy'
 import SignInPharmacy from './containers/pharmacy/SignInPharmacy'
 
 
-
-
+import PrivateRoute from './components/HOC/privateRoute';
+import PrivateRoute1 from './components/HOC/privateRoute1';
 
 
 function App() {
@@ -34,7 +35,6 @@ function App() {
           <Route path="/" exact component={Index} />
           <Route path="/Signin" component={Signin} />
           <Route path="/SignupUser" component={SignUpUser} />
-          <Route path="/Customer" component={Customer} />
           <Route path="/Profile" component={Profile} />
           <Route path="/Form" component={Form} />
           <Route path="/Checkout" component={Checkout} />
@@ -45,9 +45,9 @@ function App() {
           <Route path="/adminsignup" component={SignUpAdmin} />
           <Route path="/adminsignin" component={SignInAdmin} />
 
-
-          <Route path="/customersignup" component={customerSignup} />
-          <Route path="/customersignin" component={customerSignin} />
+          <PrivateRoute1 path="/Customer" component={Customer} />
+          <Route path="/customersignup" component={CustomerSignup} />
+          <Route path="/customersignin" component={CustomerSignin} />
 
           <Route path="/pharmacy" component={Pharmacy} />
           <Route path="/pharmacysignup" component={SignUpPharmacy} />

@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 // import pharmacy from '../assets/images/pharmacy.jpg' @material-ui/core/Hidden; 
 
 import Link from '@material-ui/core/Link';
-import sick from '../../assets/images/sick2.png';
+import cst from '../../assets/images/cst.jpg';
 
 
 // import CardActions from '@material-ui/core/CardAction';
@@ -76,7 +76,7 @@ export default function PharmacyCard(props) {
             <CardMedia className={classes.cardMedia} >
             
 
-            <img src={sick} className={classes.image} />
+            <img src={cst}} className={classes.image} />
             </CardMedia>
             <CardContent>
               <Typography component="h1" variant="h7"  className={classes.color1}>

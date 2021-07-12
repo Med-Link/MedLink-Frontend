@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+
 
 
 
@@ -16,6 +17,9 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 import axios from 'axios';
+import {isuserLoggedIn, login} from '../../actions/auth.actionscustomer';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 
 function Copyright() {
@@ -31,25 +35,36 @@ function Copyright() {
     );
   }
 
-const Customersignin=()=>{
-      const [email, setEmail] = useState("");
-      const [password, setPassword] = useState("");
-  
-      const handleSubmit=(e)=>{
-          e.preventDefault();
-      }
+const SignInCustomer=()=>{
+    const [email,setEmail] = useState ('');
+    const [password,setPassword] = useState ('');
+    const [error,setError] = useState ('');
+    const auth = useSelector(state => state.auth);
+
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(!auth.authenticate){
+            dispatch(isuserLoggedIn());
+        }
+    }, []);
       
-      const signin =()=>{
-          axios.post('http://localhost:4000/api/signin', {
-              email:email,
-              password:password
-          }).then((response)=>{
-              console.log(response);
-          }).catch((err)=>{
-              console.log(err);
-          });
+      const userLogin =(e) =>{
+
+       e.preventDefault();
+
+
+          const user ={
+              email,password
+            }
+            console.log(user);
+            dispatch(login(user));
+      }   
+      
+      if (auth.authenticate){
+          return <Redirect to={'/customer'} />
       }
-  
 
     const paperStyle={padding :20,height:'450px',width:'300px', margin:"20px auto"}
     const avatarStyle={backgroundColor: '#2ab5b5'}
@@ -76,7 +91,7 @@ const Customersignin=()=>{
                         label="Remember me"
                     />
                 
-                <Button type='submit' onSubmit= {handleSubmit} variant="contained" style={buttonStyle} href="" fullWidth>Sign in</Button>
+                <Button type='submit' onClick= {userLogin} variant="contained" style={buttonStyle} href="" fullWidth>Sign in</Button>
                 <Typography>
                     <Link href="#">
                         Forgot Password ?
@@ -97,4 +112,4 @@ const Customersignin=()=>{
     )
 }
 
-export default Customersignin;
+export default SignInCustomer;
