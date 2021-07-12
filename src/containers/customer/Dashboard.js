@@ -23,6 +23,7 @@ import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardIcon from "../../components/Dashboard/Card/CardIcon.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
+import { Grid, Typography } from '@material-ui/core';
 import Search from "@material-ui/icons/Search";
 import CustomInput from "../../components/Dashboard/CustomInput/CustomInput.js";
 import Button from "../../components/Dashboard/CustomButtons/Button.js";
@@ -34,7 +35,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
- 
+import ForwardIcon from '@material-ui/icons/Forward';
+import Link from '@material-ui/core/Link';
+import IconButton from '@material-ui/core/IconButton';
+import ForwardRoundedIcon from '@material-ui/icons/ForwardRounded';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 
 import { bugs, website, server } from "../../variables/general.js";
 
@@ -45,11 +52,14 @@ import { bugs, website, server } from "../../variables/general.js";
 // } from "../../variables/charts.js";
 
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
+import buttonStyle from "../../assets/jss/material-dashboard-react/components/buttonStyle.js";
+
 
 const useStyles = makeStyles(styles);
 const fontStyle = {fontSize: '20px'};
 const titleStyle = {fontSize: '30px'};
-const dropDownStyle = {width: '260px'}
+const dropDownStyle = {width: '200px'};
+const btStyle = {width: '10px',backgroundColor: '#126e82',color: '#efe3e3'}
 
 export default function Dashboard() {
   const classes = useStyles();
@@ -169,7 +179,7 @@ export default function Dashboard() {
           </Card>
         </GridItem>
 
-        <GridItem xs={12} sm={4}  >
+        <GridItem xs={12} sm={4}>
           <Card >
             <CardHeader color="success" stats icon>
               <CardIcon color="success">
@@ -181,6 +191,9 @@ export default function Dashboard() {
             <CardFooter stats>
               <div> 
               <FormControl className={classes.formControl}>
+              
+              <Grid container spacing={4}> 
+              <Grid item xs={8}> 
               <InputLabel htmlFor="grouped-native-select">Select Location</InputLabel>
               <Select style={dropDownStyle} native defaultValue="" id="grouped-native-select">
                 <option aria-label="None" value="" />
@@ -195,8 +208,24 @@ export default function Dashboard() {
                 <option value={4}>Hakmana</option>
                 <option value={4}>Dikwella</option>
                 </optgroup>
+                
               </Select>
-               
+              
+              </Grid>
+
+              <Grid item xs={4}>
+              {/*<Button
+                variant="contained"
+                style={{top: '30%',backgroundColor: '#126e82',color: '#efe3e3',width: '1px',height: '30px'}}
+                size="sm"
+              >
+        <CheckCircleIcon style={{ fontSize: 'large' }} />
+              </Button>*/}
+              <IconButton aria-label="delete" style={{top: '30%',color: '#126e82'}}>
+          <CheckCircleIcon fontSize="large" />
+        </IconButton>
+              </Grid>
+              </Grid>
               </FormControl>
               </div>
               
@@ -206,7 +235,25 @@ export default function Dashboard() {
          
       </GridContainer>
       
-         
+      <GridContainer>
+        <Grid item xs={12}>
+          <Typography>
+            Result
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+        <Typography>
+          <Link href="/Form/">
+            Pharma, Nugegoda, Colombo
+          </Link>
+        </Typography>
+        <Typography>
+          <Link href="/Form/">
+            Aruna Pharmacy, Nugegoda, Colombo
+          </Link>
+        </Typography>
+        </Grid>
+      </GridContainer>
              
          
        
