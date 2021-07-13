@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
   description: {
     fontSize : 15,
   },
+  font:{
+    color:theme.palette.secondary.dark,
+  },
 
   image: {
     height: 270,
@@ -80,7 +83,7 @@ export default function PharmacyCard(props) {
 
             <img src={cst} className={classes.image} />
             </CardMedia>
-            <CardContent>
+            <CardContent className={classes.font}>
               <Typography component="h1" variant="h7"  className={classes.color1}>
                 {"For Customers"}
               </Typography>

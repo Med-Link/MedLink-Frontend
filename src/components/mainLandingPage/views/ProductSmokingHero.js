@@ -12,6 +12,7 @@ const styles = (theme) => ({
     alignItems: 'center',
     marginTop: theme.spacing(9),
     marginBottom: theme.spacing(9),
+    // backgroundColor: theme.palette.secondary.light,
   },
   button: {
     border: '4px solid currentColor',

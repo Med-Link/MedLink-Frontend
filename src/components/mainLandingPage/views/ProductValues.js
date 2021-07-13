@@ -7,16 +7,17 @@ import Typography from '../../mainLandingPage/Typography';
 import SearchIcon from '@material-ui/icons/Search';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import { blue } from '@material-ui/core/colors';
 
 const styles = (theme) => ({
   root: {
     display: 'flex',
     overflow: 'hidden',
-    backgroundColor: theme.palette.secondary.light,
+   // backgroundColor: theme.palette.secondary.light,
   },
   container: {
-    marginTop: theme.spacing(15),
-    marginBottom: theme.spacing(30),
+    marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(0),
     display: 'flex',
     position: 'relative',
   },
@@ -51,31 +52,20 @@ function ProductValues(props) {
           className={classes.curvyLines}
           alt="curvy lines"
         />
-        <Grid container spacing={5}>
+        <Grid container spacing={2}>
           <Grid item xs={12} md={4}>
             <div className={classes.item}>
-            <SearchIcon style={{ fontSize: 60 }} />
+            <SearchIcon style={{ fontSize: 60 }}/>
               <Typography variant="h6" className={classes.title}>
                 Search Your Meds
               </Typography>
               <Typography variant="h5">
-                {'From the latest trendy boutique hotel to the iconic palace with XXL pool'}
-                {', go for a mini-vacation just a few subway stops away from your home.'}
+                {'If you know the name of the medicine you want, all you have to do is search it by the name'}
+                {', you will see a list of pharmacies which has the medicine you want.'}
               </Typography>
             </div>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <div className={classes.item}>
-            <AddShoppingCartIcon style={{ fontSize: 55 }} />
-              <Typography variant="h6" className={classes.title}>
-                Order Your Meds
-              </Typography>
-              <Typography variant="h5">
-                {'Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… '}
-                {'your Sundays will not be alike.'}
-              </Typography>
-            </div>
-          </Grid>
+          
           <Grid item xs={12} md={4}>
             <div className={classes.item}>
             <LocalHospitalIcon style={{ fontSize: 55 }} />
@@ -83,11 +73,24 @@ function ProductValues(props) {
                 Choose Your Pharmacy
               </Typography>
               <Typography variant="h5">
-                {'By registering, you will access specially negotiated rates '}
-                {'that you will not find anywhere else.'}
+                {'You can choose the pharamcy according to your preference.'}
+                {'You are given plenty of options to search as you wish. Pharmacists will confirm your order once you request for it.'}
               </Typography>
             </div>
           </Grid>
+          <Grid item xs={12} md={4}>
+            <div className={classes.item}>
+            <AddShoppingCartIcon style={{ fontSize: 55 }} />
+              <Typography variant="h6" className={classes.title}>
+                Order Your Medicine
+              </Typography>
+              <Typography variant="h5">
+                {'After selecting a pharamcy, all you have to do is place your order.'}
+                {'Once your order is accepted you can orders your medicine. Your medicine will be delivered to your door step'}
+              </Typography>
+            </div>
+          </Grid>
+
         </Grid>
       </Container>
     </section>
