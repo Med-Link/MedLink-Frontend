@@ -12,6 +12,8 @@ import Accessibility from "@material-ui/icons/Accessibility";
 import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
+import Link  from "@material-ui/core/Link";
+
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
@@ -23,6 +25,8 @@ import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardIcon from "../../components/Dashboard/Card/CardIcon.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
+import Button from "../../components/Dashboard//CustomButtons/Button";
+
 
 import { bugs, website, server } from "../../variables/general.js";
 
@@ -94,52 +98,46 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={4}>
-          
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-        </GridItem>
-        
-        <GridItem xs={12} sm={12} md={4}>
-        </GridItem>
-      </GridContainer>
-      <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <CustomTabs
-            title="Tasks:"
             headerColor="primary"
             tabs={[
               {
                 tabName: "Re-Order Items",
                 // tabIcon: BugReport,
                 tabContent: (
-                  <Tasks
-                    checkedIndexes={[0, 3]}
-                    tasksIndexes={[0, 1, 2, 3]}
-                    tasks={bugs}
-                  />
+                  <Card>
+                    <CardBody>
+                      <Table
+                        tableHeaderColor="warning"
+                        tableHead={["MedId", "Med Name", "Current Quantity"]}
+                        tableData={[
+                          ["121", "Paradin", "20" ],
+                          ["921", "Domperidone", "20" ],
+                          ["4521", "Siddalepa", "5" ],
+                        ]}
+                      />
+                    </CardBody>
+                  </Card>
                 ),
               },
               {
                 tabName: "Out of Stock Items",
-                // tabIcon: Code,
+                // tabIcon: BugReport,
                 tabContent: (
-                  <Tasks
-                    checkedIndexes={[0]}
-                    tasksIndexes={[0, 1]}
-                    tasks={website}
-                  />
-                ),
-              },
-              {
-                tabName: "New Medicine",
-                // tabIcon: Cloud,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[1]}
-                    tasksIndexes={[0, 1, 2]}
-                    tasks={server}
-                  />
+                  <Card>
+                    <CardBody>
+                      <Table
+                        tableHeaderColor="warning"
+                        tableHead={["MedId", "Med Name"]}
+                        tableData={[
+                          ["121", "Ventoline"],
+                          ["921", "bandage"],
+                          ["4521", "Insuline Syringes 40 ui"],
+                        ]}
+                      />
+                    </CardBody>
+                  </Card>
                 ),
               },
             ]}
@@ -147,21 +145,26 @@ export default function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <Card>
-            <CardHeader color="warning">
-              <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>New Orders</h4>
               <p className={classes.cardCategoryWhite}>
-                New employees on 15th September, 2016
+                Today
               </p>
             </CardHeader>
             <CardBody>
               <Table
-                tableHeaderColor="warning"
-                tableHead={["ID", "Name", "Salary", "Country"]}
+                tableHeaderColor="primary"
+                tableHead={["Order ID", "CustomerName", "View"]}
                 tableData={[
-                  ["1", "Dakota Rice", "$36,738", "Niger"],
-                  ["2", "Minerva Hooper", "$23,789", "Curaçao"],
-                  ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
-                  ["4", "Philip Chaney", "$38,735", "Korea, South"],
+                  ["MO2001",
+                    "Michelle Fernando",
+                    <Link
+                      variant="h6"
+                      underline="none"
+                      href="orderrequests/"
+                    >
+                    <Button id="view" color="primary" >View</Button></Link>,
+                  ],
                 ]}
               />
             </CardBody>

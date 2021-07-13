@@ -103,44 +103,130 @@ export default function ClosedDealsDetails() {
         <GridItem xs={12} sm={12} md={6}>
           <Card>
             <CardBody color="primary" stats icon>
+              <React.Fragment  padding={2}>
+                <React.Fragment>
+                  <GridItem>
+                    <Typography component="h1" variant="h4" align="center" style={subHeaderStyle}>
+                      Order Details
+                    </Typography>
+                  </GridItem>
+                </React.Fragment>
+                <React.Fragment>
+                  <Grid container>
+                    <Grid item md={6} sm={6} xs={6} >
+                      <Typography variant="h6" style={subHeaderStyle}>
+                        Date :
+                      </Typography>
+                      <Typography variant="h7" gutterBottom>
+                        14/07/2021
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </React.Fragment>  
+                <React.Fragment>
+                  <Grid item >
+                    <Typography variant="h6" gutterBottom style={subHeaderStyle}>
+                      Order Summary :
+                    </Typography>
+                  </Grid>
+                </React.Fragment>  
+                <React.Fragment>
+                  <Grid container>
+                    <Grid item md={6} sm={6} xs={6} >
+                      <Typography variant="body1">
+                        Penadol
+                      </Typography>
+                    </Grid>
+                    <Grid item md={6} sm={6} xs={6} >
+                      <Typography variant="body1">
+                        Rs.20.00
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container>
+                    <Grid item md={6} sm={6} xs={6} >
+                      <Typography variant="body2" gutterBottom>
+                        Card 1
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </React.Fragment>
+                <React.Fragment>
+                  <Grid container>
+                    <Grid item md={6} sm={6} xs={6} >
+                      <Typography variant="body1">
+                        Amoxiline
+                      </Typography>
+                    </Grid>
+                    <Grid item md={6} sm={6} xs={6} >
+                      <Typography variant="body1">
+                        Rs.50.00
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container>
+                    <Grid item md={6} sm={6} xs={6} >
+                      <Typography variant="body2" gutterBottom>
+                        Card 2
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </React.Fragment>
+                <React.Fragment>
+                  <Grid container>
+                    <Grid item md={6} sm={6} xs={6} >
+                      <Typography variant="body1">
+                        Sitrizine
+                      </Typography>
+                    </Grid>
+                    <Grid item md={6} sm={6} xs={6} >
+                      <Typography variant="body1" >
+                        Rs.50.00
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container>
+                    <Grid item md={6} sm={6} xs={6} >
+                      <Typography variant="body2" gutterBottom>
+                        14 tablets
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </React.Fragment>
+              </React.Fragment>
+              <React.Fragment >
+                <Grid container  >
+                  <Grid item md={6} sm={6} xs={6} >
+                    <Typography variant="h6" gutterBottom>
+                      Total
+                    </Typography>
+                  </Grid>
+                  <Grid item md={6} sm={6} xs={6} >
+                    <Typography variant="h6" gutterBottom>
+                      Rs.120.00
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </React.Fragment>
+              <React.Fragment>
+                <Grid container>
+                  <Grid item md={6} sm={6} xs={6} >
+                    <Typography variant="h6" gutterBottom style={subHeaderStyle}>
+                      Delivery To :
+                    </Typography>
+                  {/* </Grid>
+                  <Grid item md={6} sm={6} xs={6} > */}
+                  <Typography variant="body2">
+                      Michelle Fernando
+                    </Typography>
+                    <Typography variant="body2" >
+                      Chapel Road, Colombo 04
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </React.Fragment>
+              
 
-            <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" align="center" style={subHeaderStyle}>
-            Order Details
-          </Typography>
-          <Stepper activeStep={activeStep} className={classes.stepper}>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-          <React.Fragment>
-            {activeStep === steps.length ? (
-              <React.Fragment>
-                <Typography variant="h5" gutterBottom style={subHeaderStyle}>
-                  Thank you for your order.
-                </Typography>
-                <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order confirmation, and will
-                  send you an update when your order has delivered.
-                </Typography>
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                {getStepContent(activeStep)}
-                <div className={classes.buttons}>
-                  {activeStep !== 0 && (
-                    <Button style={btStyle} onClick={handleBack} className={classes.button}>
-                      Back
-                    </Button>
-                  )}
-                  
-                </div>
-              </React.Fragment>
-            )}
-          </React.Fragment>
-        </Paper>
 
             </CardBody>
           </Card>

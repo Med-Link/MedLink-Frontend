@@ -67,6 +67,10 @@ const fontStyle = {fontSize: '20px',color: '#126e82'};
 const titleStyle = {fontSize: '30px',color: '#126e82'};
 const dropDownStyle = {width: '200px'};
 const btStyle = {width: '10px',backgroundColor: '#126e82',color: '#efe3e3'}
+const cardStyle = {backgroundColor: '#a6c6ca'}
+const searchButton = {backgroundColor: '#126e82'}
+const ftStyle = {color: '#126e82',textAlign: 'left',fontSize: '20px'}
+const cdStyle = {backgroundColor: 'rgb(226 243 242)'}
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
@@ -136,9 +140,9 @@ export default function Dashboard() {
       </GridContainer>*/}
       <GridContainer item spacing={3}>
       <GridItem xs={12} sm={4}  >
-          <Card >
-            <CardHeader color="success" stats icon>
-              <CardIcon color="success">
+          <Card style={cardStyle}>
+            <CardHeader color="info" stats icon>
+              <CardIcon color="info">
                 <AddShoppingCartIcon/>
               </CardIcon>
               <p className={classes.cardCategory} style={fontStyle}>Search</p>
@@ -158,15 +162,15 @@ export default function Dashboard() {
                 },
                 }}
               />
-              <Button color="white" aria-label="edit" justIcon round>
-                <Search />
+              <Button style={searchButton} color="white" aria-label="edit" justIcon round>
+                <Search style={searchButton}/>
               </Button>
               </div>
             </CardFooter>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={4}  >
-          <Card >
+          <Card style={cardStyle}>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
                 <AccountBalanceIcon/>
@@ -187,8 +191,8 @@ export default function Dashboard() {
                 },
                 }}
               />
-              <Button color="white" aria-label="edit" justIcon round>
-                <Search />
+              <Button style={searchButton} color="white" aria-label="edit" justIcon round>
+                <Search style={searchButton}/>
               </Button>
               </div>
             </CardFooter>
@@ -196,9 +200,9 @@ export default function Dashboard() {
         </GridItem>
 
         <GridItem xs={12} sm={4}>
-          <Card >
-            <CardHeader color="success" stats icon>
-              <CardIcon color="success">
+          <Card style={cardStyle}>
+            <CardHeader color="info" stats icon>
+              <CardIcon color="info">
                 <LocationOnIcon/>
               </CardIcon>
               <p className={classes.cardCategory} style={fontStyle}>Search Pharmacy By</p>
@@ -252,12 +256,13 @@ export default function Dashboard() {
       </GridContainer>
       
       <GridContainer xs={12} sm={12} md={8}>
-        <Card >  
+        <Card style={cdStyle}>  
           <CardHeader color="success" stats icon>
             <Grid item xs={12}>
-              <Typography>
+              {/*<Typography>
                 Result
-              </Typography>
+              </Typography>*/}
+              <p style={ftStyle}>Result</p>
             </Grid>
           </CardHeader>
           <CardBody>
