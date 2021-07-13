@@ -26,14 +26,13 @@ function Copyright() {
     );
   }
 
-const Profile=()=>{
+const EditProfile=()=>{
 
     const paperStyle={padding :20,height:'550px',width:'500px', margin:"20px auto"}
     const avatarStyle={backgroundColor: '#126e82'}
     const gridStyle={padding: 20}
-    const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0 0 0', width: '100%'}
-    const headingStyle={color: '#126e82'}
-
+    const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0', width: '50%', left:'50%', opacity:'0.9'}
+     
     return(
         
         <Grid style={gridStyle}>
@@ -41,7 +40,7 @@ const Profile=()=>{
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center' style={gridStyle}>
                     <Avatar style={avatarStyle}><AccountBoxIcon/></Avatar>
-                    <h1 style={headingStyle}>Kamal Perera</h1>
+                    <h1>Edit Profile</h1>
                 </Grid>
 
                 <Grid container spacing={2}> 
@@ -51,7 +50,7 @@ const Profile=()=>{
                             label="First Name"
                             defaultValue="Kamal"
                             InputProps={{
-                                readOnly: true,
+                                readOnly: false,
                             }}
                             variant="outlined"
                         />
@@ -63,7 +62,7 @@ const Profile=()=>{
                             label="Last Name"
                             defaultValue="Perera"
                             InputProps={{
-                                readOnly: true,
+                                readOnly: false,
                             }}
                             variant="outlined"
                         />
@@ -75,7 +74,7 @@ const Profile=()=>{
                             label="Email"
                             defaultValue="kamalperera@gmail.com"
                             InputProps={{
-                                readOnly: true,
+                                readOnly: false,
                             }}
                             variant="outlined"
                             fullWidth
@@ -89,7 +88,7 @@ const Profile=()=>{
                             label="Address"
                             defaultValue="No: 2, Galle Road, Colombo"
                             InputProps={{
-                                readOnly: true,
+                                readOnly: false,
                             }}
                             variant="outlined"
                             fullWidth
@@ -103,19 +102,15 @@ const Profile=()=>{
                             label="Mobile Number"
                             defaultValue="0711234567"
                             InputProps={{
-                                readOnly: true,
+                                readOnly: false,
                             }}
                             variant="outlined"
                         />
                     </Grid>
-                    <Grid container spacing={2}> 
-                    <Grid item xs={6}>
-                        <Button type='submit' fullWidth variant="contained" style={buttonStyle} href="/EditProfile/">Edit Profile</Button>
-                    </Grid> 
-                    <Grid item xs={6}>
-                        <Button type='submit' fullWidth variant="contained" style={buttonStyle} href="/ResetPassword/">Reset Password</Button>
-                    </Grid> 
-                    </Grid>
+
+                     
+                        <Button type='submit' variant="contained" style={buttonStyle} href="#">Submit</Button>
+                     
                 </Grid> 
 
                  
@@ -128,4 +123,4 @@ const Profile=()=>{
     )
 }
 
-export default Profile
+export default EditProfile

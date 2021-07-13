@@ -12,6 +12,24 @@ import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import { makeStyles } from '@material-ui/core/styles';
+
+const products = [
+    { name: 'Panadol', desc: '1 Card', price: 'Rs.20.00' },
+    { name: 'Citrazine', desc: '2 Cards', price: 'Rs.100.00' },
+    { name: 'Siddhalepa', desc: '1', price: 'Rs.150.00' },
+    
+];
+
+const useStyles = makeStyles((theme) => ({
+    listItem: {
+      padding: theme.spacing(1, 0),
+    },
+     
+  }));
 
 function Copyright() {
     return (
@@ -26,30 +44,30 @@ function Copyright() {
     );
   }
 
-const Profile=()=>{
+const BuyingHistory=()=>{
 
-    const paperStyle={padding :20,height:'550px',width:'500px', margin:"20px auto"}
+    const classes = useStyles();
+    const paperStyle={padding :20,height:'900px',width:'500px', margin:"20px auto"}
     const avatarStyle={backgroundColor: '#126e82'}
     const gridStyle={padding: 20}
-    const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0 0 0', width: '100%'}
-    const headingStyle={color: '#126e82'}
-
+    const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0', width: '50%', left:'50%', opacity:'0.9'}
+     
     return(
         
         <Grid style={gridStyle}>
              
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center' style={gridStyle}>
-                    <Avatar style={avatarStyle}><AccountBoxIcon/></Avatar>
-                    <h1 style={headingStyle}>Kamal Perera</h1>
+                     
+                    <h1>Order History</h1>
                 </Grid>
 
                 <Grid container spacing={2}> 
                     <Grid item xs={12} sm={6}>
                         <TextField
-                            id="firstName"
-                            label="First Name"
-                            defaultValue="Kamal"
+                            id="fullName"
+                            label="Full Name"
+                            defaultValue="Kamal Perera"
                             InputProps={{
                                 readOnly: true,
                             }}
@@ -57,17 +75,7 @@ const Profile=()=>{
                         />
                     </Grid>
 
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            id="lastName"
-                            label="Last Name"
-                            defaultValue="Perera"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                            variant="outlined"
-                        />
-                    </Grid>
+                     
 
                     <Grid item xs={12}>
                         <TextField
@@ -108,14 +116,29 @@ const Profile=()=>{
                             variant="outlined"
                         />
                     </Grid>
-                    <Grid container spacing={2}> 
-                    <Grid item xs={6}>
-                        <Button type='submit' fullWidth variant="contained" style={buttonStyle} href="/EditProfile/">Edit Profile</Button>
-                    </Grid> 
-                    <Grid item xs={6}>
-                        <Button type='submit' fullWidth variant="contained" style={buttonStyle} href="/ResetPassword/">Reset Password</Button>
-                    </Grid> 
+
+                    <Grid item xs={12}>
+                        <Typography variant="h6" gutterBottom>
+                            Order summary
+                        </Typography>
+                        <List disablePadding>
+                            {products.map((product) => (
+                            <ListItem className={classes.listItem} key={product.name}>
+                                <ListItemText primary={product.name} secondary={product.desc} />
+                                <Typography variant="body2">{product.price}</Typography>
+                            </ListItem>
+                            ))}
+                            <ListItem className={classes.listItem}>
+                            <ListItemText primary="Total" />
+                            <Typography variant="subtitle1" className={classes.total}>
+                            Rs.270.00
+                            </Typography>
+                            </ListItem>
+                        </List>
                     </Grid>
+                     
+                        <Button type='submit' variant="contained" style={buttonStyle} href="#">Back</Button>
+                     
                 </Grid> 
 
                  
@@ -128,4 +151,4 @@ const Profile=()=>{
     )
 }
 
-export default Profile
+export default BuyingHistory

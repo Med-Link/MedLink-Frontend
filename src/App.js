@@ -9,6 +9,9 @@ import Profile from './containers/customer/profile/Profile'
 import Form from './containers/customer/form/Form'
 import Checkout from './containers/customer/payment/Checkout'
 import Customer from './containers/customer/layouts/Customer.js'
+import BuyingHistory from './containers/customer/buyingHistory/ViewHistoryDetails.js'
+import EditProfile from './containers/customer/profile/EditProfile.js'
+import ResetPassword from './containers/customer/password/ResetPassword.js'
 
 
 import Admin from './containers/admin/layouts/Admin.js'
@@ -40,6 +43,9 @@ function App() {
           <Route path="/Profile" component={Profile} />
           <Route path="/Form" component={Form} />
           <Route path="/Checkout" component={Checkout} />
+          <Route path="/OrderHistory" component={BuyingHistory} />
+          <Route path="/EditProfile" component={EditProfile} />
+          <Route path="/ResetPassword" component={ResetPassword} />
            
 
 
@@ -47,7 +53,7 @@ function App() {
           <Route path="/adminsignup" component={SignUpAdmin} />
           <Route path="/adminsignin" component={SignInAdmin} />
 
-          <PrivateRoute1 path="/Customer" component={Customer} />
+          <Route path="/Customer" component={Customer} />
           <Route path="/customersignup" component={CustomerSignup} />
           <Route path="/customersignin" component={CustomerSignin} />
 
