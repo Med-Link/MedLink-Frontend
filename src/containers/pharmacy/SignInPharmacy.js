@@ -138,7 +138,7 @@ const SignInPharmacy=()=>{
 
     return(
         <div>
-        <GridContainer spacing={0}>
+        <GridContainer>
           <Hidden smDown>
               <GridItem xs={12} sm={12} md={7}>
                   <img src={pharmacist} className={classes.image} />
@@ -155,21 +155,27 @@ const SignInPharmacy=()=>{
               Pharmacy SignIn
             </Typography>
             <form className={classes.form} noValidate>
-              <Grid container spacing={2}>
-                          <TextField value ={email} onChange={(e) => setEmail(e.target.value)}  id="email" label="Email" placeholder="Enter Your Email" fullWidth required/>
-                          <TextField value ={password} onChange={(e) => setPassword(e.target.value)} id="password" label="Password" placeholder="Enter Password" type='password' fullWidth required/>
-              </Grid> 
-              <Grid item xs={12}>         
-                          <FormControlLabel  
-                              control={
-                                  <Checkbox 
-                                  name="checkedB"
-                                  color="Primary"
-                                  />
-                              }
-                              label="Remember me"
-                          />
-              </Grid>   
+              <Grid container spacing={3}>
+                <Grid item xs={12}>
+                          <TextField value ={email} onChange={(e) => setEmail(e.target.value)}  id="email" label="Email" placeholder="Enter Your Email" variant="outlined" size="small" fullWidth required/>
+                </Grid>
+                <Grid item xs={12}>            
+                          <TextField value ={password} onChange={(e) => setPassword(e.target.value)} id="password" label="Password" placeholder="Enter Password" type='password' variant="outlined" size="small" fullWidth required/>
+                </Grid> 
+              </Grid>
+              <Grid container spacing={3}>
+                <Grid item xs={12}>         
+                            <FormControlLabel  
+                                control={
+                                    <Checkbox 
+                                    name="checkedB"
+                                    color="Primary"
+                                    />
+                                }
+                                label="Remember me"
+                            />
+                </Grid> 
+              </Grid>  
               <Box xs={12} sm={12} md={12}
                 alignItems="center" 
                 display="flex" 
@@ -193,7 +199,7 @@ const SignInPharmacy=()=>{
                     </Typography>
                   </Grid>
                   </Grid>
-                  <Grid container justify="flex-end">
+                  <Grid container justify="left">
                     <Grid item>
                       <Typography>Do not have an account ? 
                             <Link href="/pharmacysignup">

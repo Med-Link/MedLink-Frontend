@@ -10,7 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { makeStyles } from '@material-ui/core/styles';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
- 
+import SendIcon from '@material-ui/icons/Send';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
@@ -71,7 +71,7 @@ const Form=()=>{
     const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '8px 0'}
     const classes = useStyles();
     const textFeildStyle = {height: '150px', width: '390px',margin: '8px 0 16px 0'}
-    const sendButtonStyle = {color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0', width: '50%', left:'50%', opacity:'0.9'}
+    const sendButtonStyle = {color: '#efe3e3',backgroundColor: '#126e82', width: '30%', left:'70%', opacity:'0.9'}
     const headerStyle = {color: '#126e82' }
     const [open, setOpen] = React.useState(false);
     
@@ -88,82 +88,58 @@ const Form=()=>{
       setOpen(false);
     };
 
-    return(
-        <Grid container> 
-        <Grid item xs={12}> 
-        <Grid style={gridStyle}>
-            <Paper elevation={10} style={paperStyle}>
-                <Grid align='center' style={gridStyle}>
-                    
-                    <h1 style={headerStyle}>Send Prescription</h1>
-                </Grid>
-                
+    return(               
                 <Grid container spacing={2}> 
-                    <Grid item xs={12}>
-                        <form>
+                  <Grid item xs={12}>
+                    <form> 
+                      <Grid item xs={12}>
+                        <p1>Description:</p1>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextareaAutosize 
+                          aria-label="Description" 
+                          style={textFeildStyle} 
+                          minRows={3} 
+                          placeholder="Description" 
+                        />
+                      </Grid>
+                      <Grid item xs={12} >
+                          <label>Upload Your Prescription:</label>
+                        </Grid>
+                        
+                        <Grid item xs={12} sm={12}>
+                          <Button
+                              variant="contained"
+                              component="label"
+                              startIcon={<CloudUploadIcon />}
+                              style={buttonStyle}
+                          >
+                              Upload
+                              <input
+                                  type="file"
+                                  hidden
+                                  startIcon={<CloudUploadIcon />}
+                                  
+                              />
+                          </Button>
+                        </Grid> 
+                        <Grid item xs={12} sm={12} >
+                          <div className={classes.root}>
+                            <Button variant="contained" onClick={handleClick} style={sendButtonStyle} startIcon={ <SendIcon/>}>
+                              
+                              Send 
                              
-                            <Grid item xs={12}>
-                            <p1>Description:</p1>
-                            </Grid>
-                            <Grid item xs={12}>
-                            <TextareaAutosize 
-                                aria-label="Description" 
-                                style={textFeildStyle} 
-                                minRows={3} 
-                                placeholder="Description" 
-                            />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <label>Upload Your Prescription:</label>
-                            </Grid>
-                            <Grid item xs={12} sm={4}className={classes.back}>
-                                <Button
-                                    variant="contained"
-                                    component="label"
-                                    startIcon={<CloudUploadIcon />}
-                                    style={buttonStyle}
-                                >
-                                    Upload
-                                    <input
-                                        type="file"
-                                        hidden
-                                        startIcon={<CloudUploadIcon />}
-                                        
-                                    />
-                                </Button>
-                             
-                                
-                            </Grid> 
-                            <Grid item xs={12}>
-                            <div className={classes.root}>
-                              <Button variant="contained" onClick={handleClick} style={sendButtonStyle}>
-                                Send
-                              </Button>
+                            </Button>
                             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} >
-                            <Alert onClose={handleClose} severity="success">
-                              Sending prescription successfully!
-                            </Alert>
+                              <Alert onClose={handleClose} severity="success">
+                                Sending prescription successfully!
+                              </Alert>
                             </Snackbar>
-       
-                            </div>
-                            </Grid>
-                        </form>
-                         
-                    </Grid>
-
-                    
-
-                     
+                          </div>
+                      </Grid>
+                    </form>
+                  </Grid>   
                 </Grid>
-
-                
-            </Paper>
-            <Box mt={5}>
-                <Copyright />
-            </Box>
-        </Grid>
-        </Grid>
-        </Grid>
     )
 }
 

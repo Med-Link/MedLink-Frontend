@@ -42,6 +42,13 @@ import ForwardRoundedIcon from '@material-ui/icons/ForwardRounded';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import LabelImportantIcon from '@material-ui/icons/LabelImportant';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Form from './form/Form'
 
 import { bugs, website, server } from "../../variables/general.js";
 
@@ -62,6 +69,15 @@ const dropDownStyle = {width: '200px'};
 const btStyle = {width: '10px',backgroundColor: '#126e82',color: '#efe3e3'}
 
 export default function Dashboard() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   const classes = useStyles();
   return (
     <div>
@@ -235,24 +251,41 @@ export default function Dashboard() {
          
       </GridContainer>
       
-      <GridContainer>
-        <Grid item xs={12}>
-          <Typography>
-            Result
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-        <Typography>
-          <Link href="/Form/">
-            Pharma, Nugegoda, Colombo
-          </Link>
-        </Typography>
-        <Typography>
-          <Link href="/Form/">
-            Aruna Pharmacy, Nugegoda, Colombo
-          </Link>
-        </Typography>
-        </Grid>
+      <GridContainer xs={12} sm={12} md={8}>
+        <Card >  
+          <CardHeader color="success" stats icon>
+            <Grid item xs={12}>
+              <Typography>
+                Result
+              </Typography>
+            </Grid>
+          </CardHeader>
+          <CardBody>
+            <Grid item xs={12}>
+              <Typography>
+                <Link onClick={handleClickOpen}>
+                  Pharma, Nugegoda, Colombo
+                </Link>
+              </Typography>
+              <Typography>
+                <Link onClick={handleClickOpen}>
+                  Aruna Pharmacy, Nugegoda, Colombo
+                </Link>
+              </Typography>
+              <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">
+                  Send Prescription
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                  <Form/>
+                  </DialogContentText>
+                </DialogContent>
+              </Dialog>
+              
+            </Grid>
+          </CardBody>
+        </Card>
       </GridContainer>
              
          

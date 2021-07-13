@@ -48,8 +48,6 @@ function App() {
           <Route path="/ResetPassword" component={ResetPassword} />
            
 
-
-
           <PrivateRoute path="/admin" component={Admin} />
           {/* <Route path="/adminsignup" component={SignUpAdmin} /> */}
 
