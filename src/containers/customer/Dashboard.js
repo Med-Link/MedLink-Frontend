@@ -42,6 +42,13 @@ import ForwardRoundedIcon from '@material-ui/icons/ForwardRounded';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import LabelImportantIcon from '@material-ui/icons/LabelImportant';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 import { bugs, website, server } from "../../variables/general.js";
 
@@ -62,6 +69,15 @@ const dropDownStyle = {width: '200px'};
 const btStyle = {width: '10px',backgroundColor: '#126e82',color: '#efe3e3'}
 
 export default function Dashboard() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   const classes = useStyles();
   return (
     <div>
@@ -243,10 +259,36 @@ export default function Dashboard() {
         </Grid>
         <Grid item xs={12}>
         <Typography>
-          <Link href="/Form/">
+          <Link onClick={handleClickOpen}>
             Pharma, Nugegoda, Colombo
           </Link>
         </Typography>
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        
+        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To subscribe to this website, please enter your email address here. We will send updates
+            occasionally.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Subscribe
+          </Button>
+        </DialogActions>
+      </Dialog>
         <Typography>
           <Link href="/Form/">
             Aruna Pharmacy, Nugegoda, Colombo
