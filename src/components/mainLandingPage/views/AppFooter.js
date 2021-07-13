@@ -56,24 +56,26 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
   listItem: {
-    paddingTop: theme.spacing(0.5),
-    paddingBottom: theme.spacing(0.5),
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
   },
   language: {
     marginTop: theme.spacing(1),
     width: 150,
   },
   textField: {
-    width: '100%',
-    marginTop: theme.spacing(3),
+    width: '75%',
+    marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
+    
   },
   subButton: {
-    padding: theme.spacing(1, 3),
+    padding: theme.spacing(1, 2),
     fontSize: theme.typography.pxToRem(13),
     backgroundColor: theme.palette.secondary.main,
 
   },
+
   
 }));
 
@@ -106,26 +108,23 @@ export default function AppFooter() {
     <Typography component="footer" className={classes.root}>
       <Container className={classes.container}>
 
-        <Grid container spacing={5}>
+        <Grid container spacing={10}>
        
-
-          <Grid item xs={6} sm={4} md={3}>
-            <Grid
-              container
-              direction="column"
-              justify="flex-end"
-              className={classes.iconsWrapper}
-              spacing={2}
-            >
-              <Grid item className={classes.icons}>
-                <FacebookIcon />
-                <InstagramIcon />
-                <TwitterIcon />
-              </Grid>
-              <Grid item>
-                <Copyright />
-              </Grid>
-            </Grid>
+        <Grid item xs={12} md={6} className={classes.cardWrapper}>
+          <div className={classes.card}>
+            <form onSubmit={handleSubmit} className={classes.cardContent}>
+              <Typography variant="h4" component="h2" gutterBottom>
+                Subscribe
+              </Typography>
+              <Typography variant="h5">
+                Subscribe to get in touch with us
+              </Typography>
+              <TextField noBorder className={classes.textField} placeholder="Your email" />
+              <Button type="submit" color="primary" variant="contained" className={classes.subButton}>
+                Keep me updated
+              </Button>
+            </form>
+          </div>
           </Grid>
           <Grid item xs={6} sm={4} md={2}>
             <Typography variant="h6" marked="left" gutterBottom>
@@ -140,7 +139,38 @@ export default function AppFooter() {
               </li>
             </ul>
           </Grid>
-          <Grid item xs={6} sm={8} md={4}>
+
+          <Grid item xs={6} sm={4} md={3} >
+            <Grid
+              container
+              direction="column"
+              justify="flex-end"
+              className={classes.iconsWrapper}
+              spacing={0}
+            >
+              <Grid item className={classes.icons} >
+              <ul className={classes.list}>
+              <li className={classes.listItem}>
+                <FacebookIcon/> Facebook 
+              </li>
+              <li className={classes.listItem}>
+              <InstagramIcon />Instagram
+              </li>
+              <li className={classes.listItem}>
+              <TwitterIcon />
+                Twitter
+              </li>
+            </ul>
+               </Grid>
+              
+            </Grid>
+           
+          </Grid>
+          <Grid listItem>
+                <Copyright />
+              </Grid>
+          
+          {/* <Grid item xs={6} sm={8} md={4}>
             <Typography variant="h6" marked="left" gutterBottom>
               Language
             </Typography>
@@ -157,23 +187,8 @@ export default function AppFooter() {
                 </option>
               ))}
             </TextField>
-          </Grid>
-          <Grid item xs={12} md={6} className={classes.cardWrapper}>
-          <div className={classes.card}>
-            <form onSubmit={handleSubmit} className={classes.cardContent}>
-              <Typography variant="h4" component="h2" gutterBottom>
-                Subscribe
-              </Typography>
-              <Typography variant="h5">
-                Subscribe to get in touch with us
-              </Typography>
-              <TextField noBorder className={classes.textField} placeholder="Your email" />
-              <Button type="submit" color="primary" variant="contained" className={classes.subButton}>
-                Keep me updated
-              </Button>
-            </form>
-          </div>
-          </Grid>
+          </Grid> */}
+         
           {/* <Grid item>
             <Typography variant="caption">
               {'Icons made by '}

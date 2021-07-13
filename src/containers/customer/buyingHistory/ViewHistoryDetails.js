@@ -16,6 +16,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
+//import headerStyle from '../../../assets/jss/material-dashboard-react/components/headerStyle';
 
 const products = [
     { name: 'Panadol', desc: '1 Card', price: 'Rs.20.00' },
@@ -51,7 +52,8 @@ const BuyingHistory=()=>{
     const avatarStyle={backgroundColor: '#126e82'}
     const gridStyle={padding: 20}
     const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0', width: '50%', left:'50%', opacity:'0.9'}
-     
+    const headerStyle={color: '#126e82'}
+
     return(
         
         <Grid style={gridStyle}>
@@ -59,7 +61,7 @@ const BuyingHistory=()=>{
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center' style={gridStyle}>
                      
-                    <h1>Order History</h1>
+                    <h1 style={headerStyle}>Order History</h1>
                 </Grid>
 
                 <Grid container spacing={2}> 
@@ -118,7 +120,7 @@ const BuyingHistory=()=>{
                     </Grid>
 
                     <Grid item xs={12}>
-                        <Typography variant="h6" gutterBottom>
+                        <Typography variant="h6" gutterBottom style={headerStyle}>
                             Order summary
                         </Typography>
                         <List disablePadding>
@@ -137,7 +139,7 @@ const BuyingHistory=()=>{
                         </List>
                     </Grid>
                      
-                        <Button type='submit' variant="contained" style={buttonStyle} href="#">Back</Button>
+                        <Button type='submit' variant="contained" style={buttonStyle} href="/customer/buyingHistory">Back</Button>
                      
                 </Grid> 
 

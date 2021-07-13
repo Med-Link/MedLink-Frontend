@@ -9,6 +9,7 @@ import ProductValues from '../../components/mainLandingPage/views/ProductValues'
 import ProductHowItWorks from '../../components/mainLandingPage/views/ProductHowItWorks';
 import ProductCTA from '../../components/mainLandingPage/views/ProductCTA';
 import AppAppBar from '../../components/mainLandingPage/views/AppAppBar';
+import WhyMedLink from '../../components/mainLandingPage/views/WhyMedLink';
 
 function Index() {
   return (
@@ -17,11 +18,12 @@ function Index() {
     <React.Fragment>
     <AppAppBar />
       <ProductHero />
+      <WhyMedLink />
+      {/* <ProductCategories /> */}
       <ProductValues />
-      <ProductCategories />
-      <ProductHowItWorks />
+      {/* <ProductHowItWorks /> */}
       <ProductCTA />
-      <ProductSmokingHero />
+      {/* <ProductSmokingHero /> */}
       <AppFooter />
     </React.Fragment>
     

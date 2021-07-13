@@ -56,8 +56,8 @@ import buttonStyle from "../../assets/jss/material-dashboard-react/components/bu
 
 
 const useStyles = makeStyles(styles);
-const fontStyle = {fontSize: '20px'};
-const titleStyle = {fontSize: '30px'};
+const fontStyle = {fontSize: '20px',color: '#126e82'};
+const titleStyle = {fontSize: '30px',color: '#126e82'};
 const dropDownStyle = {width: '200px'};
 const btStyle = {width: '10px',backgroundColor: '#126e82',color: '#efe3e3'}
 

@@ -28,9 +28,9 @@ function Copyright() {
 const SignUpUser=()=>{
 
     const paperStyle={padding :20,height:'620px',width:'400px', margin:"20px auto "}
-    const avatarStyle={backgroundColor: '#2ab5b5'}
+    const avatarStyle={backgroundColor: '#126e82'}
     const gridStyle={padding: 20}
-    const buttonStyle={backgroundColor: '#2ab5b5', margin: '8px 0'}
+    const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '8px 0'}
      
     return(
         

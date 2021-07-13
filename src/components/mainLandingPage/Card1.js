@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
  
     backgroundColor : theme.palette.secondary.light,
+    boxShadow:10,
  
   },
 
@@ -56,6 +57,9 @@ const useStyles = makeStyles((theme) => ({
     padding:25,
     
   },
+  font:{
+    color:theme.palette.secondary.dark,
+  }
 }));
 
 
@@ -80,7 +84,7 @@ export default function PharmacyCard(props) {
 
             <img src={pharmacy2} className={classes.image} />
             </CardMedia>
-            <CardContent>
+            <CardContent className={classes.font}>
               <Typography component="h1" variant="h7"  className={classes.color1}>
                 {"For Pharmacies"}
               </Typography>
@@ -97,7 +101,7 @@ export default function PharmacyCard(props) {
                           size="large"
                           className={classes.button}
                           component="a"
-                          // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
+                         
                     > Sign Up
                     </Button>
                     </Link>
@@ -108,7 +112,7 @@ export default function PharmacyCard(props) {
                         size="large"
                         className={classes.button}
                         component="a"
-                        // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
+                        
                   > Sign In 
                   </Button>
                   </Link>

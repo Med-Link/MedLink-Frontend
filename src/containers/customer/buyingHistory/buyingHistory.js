@@ -69,7 +69,7 @@ export default function TableList() {
               tableHead={["Date","Time","Pharmacy Name", "District", "City", ""]}
               tableData={[
                 ["10-07-2021","20:55","Pharma", "Colombo", "Nugegoda", 
-                  <Button variant="outlined" href="/OrderHistory/" color="primary">View</Button>
+                  <Button variant="outlined" href="/OrderHistory/" color="primary" round>View</Button>
                 ],
                  
               ]}
