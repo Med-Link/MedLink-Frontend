@@ -18,20 +18,13 @@ import Box from '@material-ui/core/Box';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
+import Card from "../../components/Dashboard/Card/Card.js";
+import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
+import CardBody from "../../components/Dashboard/Card/CardBody.js";
+
 //import { AST_SymbolBlockDeclaration } from 'terser';
 
-function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="/">
-          Medlink
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
+
 
 const SignUpAdmin=()=>{
     const [firstName, setFirstName] = useState("");
@@ -66,70 +59,56 @@ const SignUpAdmin=()=>{
         return <Redirect to={'/admin'} />
     }
 
-    const paperStyle={padding :20,height:'620px',width:'400px', margin:"20px auto "}
+    const paperStyle={padding :20,width:'80%', margin:"20px auto "}
     const avatarStyle={backgroundColor: '#2ab5b5'}
     const gridStyle={padding: 20}
-    const buttonStyle={backgroundColor: '#2ab5b5', margin: '8px 0'}
+    const buttonStyle={backgroundColor: '#126e82', margin: '8px 0', width:'30%',color:"#fff"}
      
     return(
         
         <Grid style={gridStyle}>
+            <Card>
+          <CardHeader color="primary">
+            <h4 >New Admin Registrations</h4>
+            {/* <p className={classes.cardCategoryWhite}>
+              Here is a subtitle for this table
+            </p> */}
+          </CardHeader>
+          <CardBody>
             <Paper elevation={10} style={paperStyle}>
-                <Grid align='center' style={gridStyle}>
-                    <Avatar style={avatarStyle}><LockOpenIcon/></Avatar>
-                    <h1>Admin New Admin</h1>
-                </Grid>
                 <Grid container spacing={2}> 
-                    <Grid item xs={12}>
-                        <TextField value ={firstName} onChange={(e) => setFirstName(e.target.value)} type="text" className="form-control" TextField id="firstName" variant="outlined"  placeholder="Enter Your First Name" fullWidth required/>
+                    <Grid item xs={12} md={6} padding={3}>
+                        <TextField value ={firstName} onChange={(e) => setFirstName(e.target.value)} id="firstName"  label="First Name"  placeholder="Enter Your First Name" fullWidth required/>
                     </Grid>
 
-                    <Grid item xs={12}>
-                    <TextField value ={lastName} onChange={(e) => setLastName(e.target.value)} id="lastName" variant="outlined" label="Last Name" placeholder="Enter Your Last Name" fullWidth required/>
+                    <Grid item xs={12} md={6} padding={3}>
+                    <TextField value ={lastName} onChange={(e) => setLastName(e.target.value)} id="lastName" label="Last Name" placeholder="Enter Your Last Name" fullWidth required/>
                     </Grid>
-
-                    <Grid item xs={12}>
-                        <TextField value ={email} onChange={(e) => setEmail(e.target.value)} id="email" variant="outlined" label="Email" placeholder="Enter Your Email" fullWidth required/>
                     </Grid>
-
-                    <Grid item xs={12}>
-                        <TextField value ={password} onChange={(e) => setPassword(e.target.value)}id="password" variant="outlined" label="Password" placeholder="Enter Password" type='password' fullWidth required/>
+                <Grid container spacing={2} padding={3}> 
+                    <Grid item xs={12} md={6}>
+                        <TextField value ={email} onChange={(e) => setEmail(e.target.value)} id="email" label="Email" placeholder="Enter Your Email" fullWidth required/>
                     </Grid>
-
+               
+                    <Grid item xs={12} md={6} padding={3}>
+                        <TextField value ={password} onChange={(e) => setPassword(e.target.value)}id="password"label="Password" placeholder="Enter Password" type='password' fullWidth required/>
+                    </Grid>
+                </Grid>
+                <Grid>
                     {/* <Grid item xs={12}> 
                         <TextField id="confirmPassword" variant="outlined" label="Confirm Password" placeholder="Re Enter Your Password" type='password' fullWidth required/>
                     </Grid> */}
                 </Grid>
-
-                <Grid item xs={12}> 
-                    {/* <FormControlLabel  
-                        control={
-                            <Checkbox 
-                            name="checkedB"
-                            color="Primary"
-                            onChange={(e) => setChecked(e.target.checked)}
-                            />
-                        }
-                        label="I agree to the Terms and Conditions"
-                    /> */}
-                </Grid>
+                <Box xs={12} md={12} padding={3} display="flex" justifyContent="center">
+                    <Button type='submit' variant="contained" style={buttonStyle} onClick={signup} fullWidth>Add</Button>
+                </Box>
                 
-                <Button type='submit' variant="contained" style={buttonStyle} onClick={signup} fullWidth>Add new Admin</Button>
                 <p>{error}</p>
-                <Grid container justify="center">
-                    {/* <Grid item> 
-                        <Typography>Already have an account? 
-                            <Link href="/adminsignin">
-                                Sign In
-                            </Link>
-                        </Typography>
-                    </Grid> */}
-                </Grid>
+                
 
             </Paper>
-            <Box mt={5}>
-                <Copyright />
-            </Box>
+            </CardBody>
+            </Card>
         </Grid>
     )
 }
