@@ -150,7 +150,7 @@ const SignUpPharmacy=()=>{
         <img src={pharmacist} className={classes.image} />
       </GridItem>
       </Hidden>
-      <GridItem xs={12} sm={12} md={5} spacing={3}  borderRadius={10}>
+      <GridItem xs={12} sm={12} md={4}  borderRadius={10}>
 
       <div className={classes.paper}>
         
