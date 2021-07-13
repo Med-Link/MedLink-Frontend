@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -19,6 +20,10 @@ import GridItem from '../../components/Dashboard/Grid/GridItem';
 import Hidden from '@material-ui/core/Hidden';
 
 import pharmacist from '../../assets/images/pharmacist2.jpg';
+
+import {isuserLoggedIn, login} from '../../actions/auth.actionspharmacy';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -85,8 +90,38 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function SignUp() {
+export default function SignInPharmacy() {
   const classes = useStyles();
+
+  const [email,setEmail] = useState ('');
+  const [password,setPassword] = useState ('');
+  const [error,setError] = useState ('');
+  const auth = useSelector(state => state.auth);
+
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      if(!auth.authenticate){
+          dispatch(isuserLoggedIn());
+      }
+  }, []);
+    
+    const userLogin =(e) =>{
+
+     e.preventDefault();
+
+
+        const user ={
+            email,password
+          }
+          console.log(user);
+          dispatch(login(user));
+    }   
+    
+    if (auth.authenticate){
+        return <Redirect to={'/pharmacy'} />
+    }
 
   return (
     <div>
@@ -116,6 +151,7 @@ export default function SignUp() {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
+                value ={email} onChange={(e) => setEmail(e.target.value)}
                 required
                 fullWidth
                 id="email"
@@ -129,6 +165,7 @@ export default function SignUp() {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
+                value ={password} onChange={(e) => setPassword(e.target.value)}
                 required
                 fullWidth
                 name="password"
@@ -141,10 +178,10 @@ export default function SignUp() {
             </Grid>
             
             <Grid item xs={12}>
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="Remember Me"
-              />
+              /> */}
             </Grid>
 
           </Grid>
@@ -156,6 +193,7 @@ export default function SignUp() {
           justify="center">
             <Button
             type="submit"
+            onClick= {userLogin}
             fullWidth
             variant="contained"
             color="primary"

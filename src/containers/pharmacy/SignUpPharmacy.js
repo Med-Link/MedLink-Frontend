@@ -116,8 +116,8 @@ const SignUpPharmacy=()=>{
           contactNumber:contactNumber,
           password:password,
           registrationDocs:registrationDocs,
-          registrationDocs:registrationDocs1,
-          registrationDocs:registrationDocs2,
+          registrationDocs1:registrationDocs1,
+          registrationDocs2:registrationDocs2,
 
       }).then((response)=>{
           console.log(response);
@@ -186,7 +186,6 @@ const SignUpPharmacy=()=>{
                 id="pNumber"
                 label="Mobile Number"
                 name="pNumber"
-                autoComplete="pnumber"
                 size="small"
               />
             </Grid>
@@ -200,7 +199,6 @@ const SignUpPharmacy=()=>{
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
                 size="small"
               />
             </Grid>
@@ -215,7 +213,6 @@ const SignUpPharmacy=()=>{
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
                 size="small"
               />
             </Grid>
@@ -229,7 +226,6 @@ const SignUpPharmacy=()=>{
                 id="location"
                 label="Location URL"
                 name="location"
-                autoComplete="location"
                 size="small"
               />
             </Grid>
@@ -242,7 +238,7 @@ const SignUpPharmacy=()=>{
             <Grid item xs={12}  sm={12} md={4}>
             <input
               accept="image/*"
-              value ={registrationDocs} onChange={(e) => setRegistrationDocs(e.target.value)}
+              onChange={(e) => setRegistrationDocs(e.target.files[0])}
               className={classes.input}
               id="contained-button-file"
               multiple
@@ -267,7 +263,7 @@ const SignUpPharmacy=()=>{
             <Grid item xs={12} sm={12} md={4}>
               <input
                 accept="image/*"
-                value ={registrationDocs1} onChange={(e) => setRegistrationDocs1(e.target.value)}
+                onChange={(e) => setRegistrationDocs1(e.target.files[0])}
                 className={classes.input}
                 id="contained-button-file"
                 multiple
@@ -292,7 +288,7 @@ const SignUpPharmacy=()=>{
             <Grid item xs={12} sm={12} md={4}>
               <input
                 accept="image/*"
-                value ={registrationDocs2} onChange={(e) => setRegistrationDocs2(e.target.value)}
+                onChange={(e) => setRegistrationDocs2(e.target.files[0])}
                 className={classes.input}
                 id="contained-button-file"
                 multiple
@@ -311,6 +307,7 @@ const SignUpPharmacy=()=>{
             
             <Grid item xs={12}>
               <FormControlLabel
+                onChange={(e) => setChecked(e.target.checked)}
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I agree to the Terms and Conditions"
               />
@@ -324,10 +321,11 @@ const SignUpPharmacy=()=>{
           direction="column"
           justify="center">
             <Button
-            type="submit"
+            type="button"
             fullWidth
             variant="contained"
             color="primary"
+            onClick={Signup}
             className={classes.submit}
 
           >
