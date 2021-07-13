@@ -49,15 +49,22 @@ function App() {
            
 
 
+<<<<<<< HEAD
+          {/* <PrivateRoute path="/admin" component={Admin} /> */}
+          <Route path="/admin" component={Admin} />
+          <Route path="/adminsignup" component={SignUpAdmin} />
+=======
           <PrivateRoute path="/admin" component={Admin} />
           {/* <Route path="/adminsignup" component={SignUpAdmin} /> */}
+>>>>>>> cc77609be9cfeffa6ea9fa6ae697ea30660dcb3e
           <Route path="/adminsignin" component={SignInAdmin} />
 
           <Route path="/Customer" component={Customer} />
           <Route path="/customersignup" component={CustomerSignup} />
           <Route path="/customersignin" component={CustomerSignin} />
 
-          <PrivateRoute2 path="/pharmacy" component={Pharmacy} />
+          {/* <PrivateRoute2 path="/pharmacy" component={Pharmacy} /> */}
+          <Route path="/pharmacy" component={Pharmacy} />
           <Route path="/pharmacysignup" component={SignUpPharmacy} />
           <Route path="/pharmacysignin" component={SignInPharmacy} />
 
