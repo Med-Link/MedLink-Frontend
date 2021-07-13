@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
       image: {
         alignItems: 'center',
         justifyContent: 'center',
-        width:"75%",
+        width:"70%",
         // height:'auto',
         // maxHeight:'400px',
         margin:theme.spacing(4,10),
