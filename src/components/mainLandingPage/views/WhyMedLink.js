@@ -13,7 +13,7 @@ const styles = (theme) => ({
     display: 'flex',
     overflow: 'hidden',
     backgroundColor: theme.palette.secondary.light,
-    color:theme.palette.secondary.dark,
+    
     
   },
   container: {
