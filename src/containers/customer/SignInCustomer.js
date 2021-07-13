@@ -156,8 +156,8 @@ const SignInCustomer=()=>{
             </Typography>
             <form className={classes.form} noValidate>
               <Grid container spacing={2}>
-                          <TextField value ={email} onChange={(e) => setEmail(e.target.value)} id="lastName" id="email" label="Email" placeholder="Enter Your Email" fullWidth required/>
-                          <TextField value ={password} onChange={(e) => setPassword(e.target.value)} id="lastName" id="password" label="Password" placeholder="Enter Password" type='password' fullWidth required/>
+                          <TextField value ={email} onChange={(e) => setEmail(e.target.value)}  id="email" label="Email" placeholder="Enter Your Email" fullWidth required/>
+                          <TextField value ={password} onChange={(e) => setPassword(e.target.value)}  id="password" label="Password" placeholder="Enter Password" type='password' fullWidth required/>
               </Grid> 
               <Grid item xs={12}>         
                           <FormControlLabel  
@@ -195,7 +195,7 @@ const SignInCustomer=()=>{
                   </Grid>
                   <Grid container justify="flex-end">
                     <Grid item>
-                      <Typography>Do you have an account ? 
+                      <Typography>Do not have an account ? 
                             <Link href="/customersignup">
                                 Sign Up
                             </Link>
