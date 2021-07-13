@@ -70,49 +70,55 @@ export default function PharmacyCard(props) {
 
   return (
     <Container xs={30} md={50}>
-    
-          <Grid item xs={30} md={50}>
-
-      
+      <Grid item xs={30} md={50}>
         <Card className={classes.root} xs={12} xs={12} >
-        <CardActionArea component="a" href="#">
+          <CardActionArea component="a" href="#">
           {/* <div className={classes.cardDetails}> */}
-          
-            <CardMedia className={classes.cardMedia} >
-            
-
+          <CardMedia className={classes.cardMedia} >
             <img src={cst} className={classes.image} />
-            </CardMedia>
-            <CardContent className={classes.font}>
-              <Typography component="h1" variant="h7"  className={classes.color1}>
-                {"For Customers"}
-              </Typography>
-              <Typography variant="subtitle1" >
-               {"We bring your medicine to your doorstep. Join us to find all the medicines you need"}
-              </Typography>
-              <Typography variant="h5" paragraph className={classes.description}>
-                {}
-              </Typography>
-              <Link href="/customersignup">                    
-              <Button  color="secondary"
-                    variant="contained"
-                    size="large"
-                    className={classes.button}
-                    component="a"
-                    // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
-               > Sign Up 
-              </Button>
-              </Link>
-              <Link href="/customersignin">
-              <Button  color="secondary"
-                    variant="contained"
-                    size="large"
-                    className={classes.button}
-                    component="a"
-                    // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
-               > Sign In 
-              </Button>
-              </Link>
+          </CardMedia>
+          <CardContent className={classes.font}>
+            <Grid container justifyContent='center'>
+              <Grid item >
+                <Typography component="h1" variant="h7"  className={classes.color1}>
+                  {"For Customers"}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="subtitle1" >
+                  {"We bring your medicine to your doorstep. Join us to find all the medicines you need"}
+                </Typography>
+                <Typography variant="h5" paragraph className={classes.description}>
+                  {}
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid container spacing={3} justifyContent='center'>
+              <Grid item>
+                <Link href="/customersignup">                    
+                <Button  color="secondary"
+                      variant="contained"
+                      size="large"
+                      className={classes.button}
+                      component="a"
+                      // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
+                > Sign Up 
+                </Button>
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/customersignin">
+                <Button  color="secondary"
+                      variant="contained"
+                      size="large"
+                      className={classes.button}
+                      component="a"
+                      // href="../../containers/pharmacyLandingPage/PharmacyLandingPage">
+                > Sign In 
+                </Button>
+                </Link>
+              </Grid>
+              </Grid>
             </CardContent>
           {/* </div> */}
           </CardActionArea>

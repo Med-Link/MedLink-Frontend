@@ -80,16 +80,22 @@ export default function PharmacyCard(props) {
             <img src={pharmacy2} className={classes.image} />
           </CardMedia>
           <CardContent className={classes.font}>
-            <Typography component="h1" variant="h7"  className={classes.color1}>
-              {"For Pharmacies"}
-            </Typography>
-            <Typography variant="subtitle1">
-              {"We make it easy for you to reach your customers.Join us to provide a better service"}
-            </Typography>
-            <Typography variant="h5" paragraph className={classes.description}>
-              {}
-            </Typography>
-            <Grid container spacing={3}>
+            <Grid container justifyContent='center'>
+              <Grid item>
+                <Typography component="h1" variant="h7"  className={classes.color1}>
+                  {"For Pharmacies"}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="subtitle1">
+                  {"We make it easy for you to reach your customers.Join us to provide a better service"}
+                </Typography>
+                <Typography variant="h5" paragraph className={classes.description}>
+                  {}
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid container spacing={3} justifyContent='center'>
               <Grid item>
                 <Link href="/pharmacysignup">                    
                   <Button  color="secondary"
