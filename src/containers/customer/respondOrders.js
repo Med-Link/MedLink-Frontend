@@ -66,18 +66,14 @@ export default function TableList() {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Pharmacy Name", "District", "City", "Description", "Accept"]}
+              tableHead={["Date","Time","Pharmacy Name", "District", "City", "Description", "Accept/Reject"]}
               tableData={[
-                ["Pharma", "Colombo", "Nugegoda", "Panadol is out of stock now", 
+                ["10-07-2021","20:55","Pharma", "Colombo", "Nugegoda", "Panadol is out of stock now", 
                 <ButtonGroup color="primary" aria-label="outlined primary button group">
                   <Button href="/Checkout/">View Order</Button>
                   <Button>Reject Order</Button>
                 </ButtonGroup>],
-                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
-                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
-                ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
-                ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
-                ["Mason Porter", "Chile", "Gloucester", "$78,615"],
+                 
               ]}
             />
           </CardBody>

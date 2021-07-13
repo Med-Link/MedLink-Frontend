@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -19,6 +20,9 @@ import GridItem from '../../components/Dashboard/Grid/GridItem';
 import Hidden from '@material-ui/core/Hidden';
 
 import pharmacist from '../../assets/images/pharmacist2.jpg';
+
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -84,9 +88,56 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function SignUp() {
-  const classes = useStyles();
+const SignUpPharmacy=()=>{
 
+
+  const classes = useStyles();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [location, setLocation] = useState("");
+  const [registrationDocs, setRegistrationDocs] = useState("");
+  const [registrationDocs1, setRegistrationDocs1] = useState("");
+  const [registrationDocs2, setRegistrationDocs2] = useState("");
+
+
+
+  const [checked, setChecked] = useState(false);
+  const [error, setError] = useState("");
+  const [signedUp, setSignedUp] = useState(false);
+  
+  const Signup =(e)=>{
+      e.preventDefault();
+      if(checked){
+      axios.post('http://localhost:4000/api/pharmacy/signup', {
+          name: name,
+          email:email,
+          contactNumber:contactNumber,
+          password:password,
+          registrationDocs:registrationDocs,
+          registrationDocs1:registrationDocs1,
+          registrationDocs2:registrationDocs2,
+
+      }).then((response)=>{
+          console.log(response);
+          setSignedUp(true);
+
+      }).catch((err)=>{
+          console.log(err);
+          setError("Signup error");
+      });
+      
+  }else{
+      console.log("Unchecked");
+  }
+  }
+
+  if(signedUp){
+      return <Redirect to={'/pharmacysignin'} />
+  }
+
+  
   return (
     <div>
     <GridContainer spacing={0} >
@@ -114,6 +165,7 @@ export default function SignUp() {
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="pname"
+                value ={name} onChange={(e) => setName(e.target.value)}
                 name="pharmacyName"
                 variant="outlined"
                 required
@@ -128,12 +180,12 @@ export default function SignUp() {
             <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
+                value ={contactNumber} onChange={(e) => setContactNumber(e.target.value)}
                 required
                 fullWidth
                 id="pNumber"
                 label="Mobile Number"
                 name="pNumber"
-                autoComplete="pnumber"
                 size="small"
               />
             </Grid>
@@ -141,12 +193,12 @@ export default function SignUp() {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
+                value ={email} onChange={(e) => setEmail(e.target.value)}
                 required
                 fullWidth
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
                 size="small"
               />
             </Grid>
@@ -154,13 +206,13 @@ export default function SignUp() {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
+                value ={password} onChange={(e) => setPassword(e.target.value)}
                 required
                 fullWidth
                 name="password"
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
                 size="small"
               />
             </Grid>
@@ -168,12 +220,12 @@ export default function SignUp() {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
+                value ={location} onChange={(e) => setLocation(e.target.value)}
                 required
                 fullWidth
                 id="location"
                 label="Location URL"
                 name="location"
-                autoComplete="location"
                 size="small"
               />
             </Grid>
@@ -186,6 +238,7 @@ export default function SignUp() {
             <Grid item xs={12}  sm={12} md={4}>
             <input
               accept="image/*"
+              onChange={(e) => setRegistrationDocs(e.target.files[0])}
               className={classes.input}
               id="contained-button-file"
               multiple
@@ -210,6 +263,7 @@ export default function SignUp() {
             <Grid item xs={12} sm={12} md={4}>
               <input
                 accept="image/*"
+                onChange={(e) => setRegistrationDocs1(e.target.files[0])}
                 className={classes.input}
                 id="contained-button-file"
                 multiple
@@ -234,6 +288,7 @@ export default function SignUp() {
             <Grid item xs={12} sm={12} md={4}>
               <input
                 accept="image/*"
+                onChange={(e) => setRegistrationDocs2(e.target.files[0])}
                 className={classes.input}
                 id="contained-button-file"
                 multiple
@@ -252,6 +307,7 @@ export default function SignUp() {
             
             <Grid item xs={12}>
               <FormControlLabel
+                onChange={(e) => setChecked(e.target.checked)}
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I agree to the Terms and Conditions"
               />
@@ -265,10 +321,11 @@ export default function SignUp() {
           direction="column"
           justify="center">
             <Button
-            type="submit"
+            type="button"
             fullWidth
             variant="contained"
             color="primary"
+            onClick={Signup}
             className={classes.submit}
 
           >
@@ -296,3 +353,4 @@ export default function SignUp() {
       </div>
   );
 }
+export default SignUpPharmacy ;

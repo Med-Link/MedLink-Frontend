@@ -1,116 +1,116 @@
-import React from "react";
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
-// core components
-import GridItem from "../../components/Dashboard/Grid/GridItem.js";
-import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
-import CustomInput from "../../components/Dashboard/CustomInput/CustomInput.js";
-import Button from "../../components/Dashboard/CustomButtons/Button.js";
+import React, {useState} from 'react';
+
+
+
+//material ui imports
+import { Grid } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
+import Avatar from '@material-ui/core/Avatar';
+//import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import { TextField } from '@material-ui/core';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+
 import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
-import CardAvatar from "../../components/Dashboard/Card/CardAvatar.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
-import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 
-import avatar from "../../assets/images/person.jpg";
+//import { AST_SymbolBlockDeclaration } from 'terser';
 
-const styles = {
-  cardCategoryWhite: {
-    color: "rgba(255,255,255,.62)",
-    margin: "0",
-    fontSize: "14px",
-    marginTop: "0",
-    marginBottom: "0",
-  },
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none",
-  },
-};
 
-const useStyles = makeStyles(styles);
 
-export default function UserProfile() {
-  const classes = useStyles();
-  return (
-    <div>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
-          <Card>
-            <CardHeader color="primary">
-              <p className={classes.cardCategoryWhite}>Complete New Admin profile</p>
-            </CardHeader>
-            <CardBody>
-              <GridContainer>
-                
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Email address"
-                    id="email-address"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="First Name"
-                    id="first-name"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Last Name"
-                    id="last-name"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="City"
-                    id="city"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Telephone Number"
-                    id="telephone-number"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-              
-            </CardBody>
-            <CardFooter>
-              <Button color="primary">Create Account</Button>
-            </CardFooter>
-          </Card>
-        </GridItem>
+const SignUpAdmin=()=>{
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [checked, setChecked] = useState(false);
+    const [error, setError] = useState("");
+    const [signedUp, setSignedUp] = useState(false);
+    
+    const signup =(e)=>{
+        e.preventDefault();
         
-      </GridContainer>
-    </div>
-  );
+        axios.post('http://localhost:4000/api/admin/signup', {
+            firstName: firstName,
+            lastName:lastName,
+            email:email,
+            password:password
+        }).then((response)=>{
+            console.log(response);
+            setSignedUp(true);
+
+        }).catch((err)=>{
+            console.log(err);
+            setError("error");
+        });
+        
+   
+    }
+
+    if(signedUp){
+        return <Redirect to={'/admin'} />
+    }
+
+    const paperStyle={padding :20,width:'80%', margin:"20px auto "}
+    const avatarStyle={backgroundColor: '#2ab5b5'}
+    const gridStyle={padding: 20}
+    const buttonStyle={backgroundColor: '#126e82', margin: '8px 0', width:'30%',color:"#fff"}
+     
+    return(
+        
+        <Grid style={gridStyle}>
+            <Card>
+          <CardHeader color="primary">
+            <h4 >New Admin Registrations</h4>
+            {/* <p className={classes.cardCategoryWhite}>
+              Here is a subtitle for this table
+            </p> */}
+          </CardHeader>
+          <CardBody>
+            <Paper elevation={10} style={paperStyle}>
+                <Grid container spacing={2}> 
+                    <Grid item xs={12} md={6} padding={3}>
+                        <TextField value ={firstName} onChange={(e) => setFirstName(e.target.value)} id="firstName"  label="First Name"  placeholder="Enter Your First Name" fullWidth required/>
+                    </Grid>
+
+                    <Grid item xs={12} md={6} padding={3}>
+                    <TextField value ={lastName} onChange={(e) => setLastName(e.target.value)} id="lastName" label="Last Name" placeholder="Enter Your Last Name" fullWidth required/>
+                    </Grid>
+                    </Grid>
+                <Grid container spacing={2} padding={3}> 
+                    <Grid item xs={12} md={6}>
+                        <TextField value ={email} onChange={(e) => setEmail(e.target.value)} id="email" label="Email" placeholder="Enter Your Email" fullWidth required/>
+                    </Grid>
+               
+                    <Grid item xs={12} md={6} padding={3}>
+                        <TextField value ={password} onChange={(e) => setPassword(e.target.value)}id="password"label="Password" placeholder="Enter Password" type='password' fullWidth required/>
+                    </Grid>
+                </Grid>
+                <Grid>
+                    {/* <Grid item xs={12}> 
+                        <TextField id="confirmPassword" variant="outlined" label="Confirm Password" placeholder="Re Enter Your Password" type='password' fullWidth required/>
+                    </Grid> */}
+                </Grid>
+                <Box xs={12} md={12} padding={3} display="flex" justifyContent="center">
+                    <Button type='submit' variant="contained" style={buttonStyle} onClick={signup} fullWidth>Add</Button>
+                </Box>
+                
+                <p>{error}</p>
+                
+
+            </Paper>
+            </CardBody>
+            </Card>
+        </Grid>
+    )
 }
+
+export default SignUpAdmin;

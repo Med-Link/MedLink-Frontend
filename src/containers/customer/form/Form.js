@@ -51,14 +51,15 @@ const Form=()=>{
     const paperStyle={padding :20, height:'500px',width:'400px', margin:"20px auto"}
     const avatarStyle={backgroundColor: '#2ab5b5'}
     const gridStyle={padding: 20}
-    const buttonStyle={backgroundColor: '#2ab5b5', margin: '8px 0'}
+    const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '8px 0'}
     const classes = useStyles();
     const textFeildStyle = {height: '150px', width: '390px',margin: '8px 0 16px 0'}
-    const sendButtonStyle = {color: '#efe3e3',backgroundColor: 'green', margin: '30px 0', width: '50%', left:'50%', opacity:'0.9'}
-    const headerStyle = {color: '#4e4e90'}
+    const sendButtonStyle = {color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0', width: '50%', left:'50%', opacity:'0.9'}
+    const headerStyle = {color: '#126e82' }
 
     return(
-        
+        <Grid container> 
+        <Grid item xs={12}> 
         <Grid style={gridStyle}>
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center' style={gridStyle}>
@@ -73,12 +74,14 @@ const Form=()=>{
                             <Grid item xs={12}>
                             <p1>Description:</p1>
                             </Grid>
+                            <Grid item xs={12}>
                             <TextareaAutosize 
                                 aria-label="Description" 
                                 style={textFeildStyle} 
                                 minRows={3} 
                                 placeholder="Description" 
                             />
+                            </Grid>
                             <Grid item xs={12}>
                                 <label>Upload Your Prescription:</label>
                             </Grid>
@@ -100,9 +103,9 @@ const Form=()=>{
                              
                                 
                             </Grid> 
-
-                            <Button type='submit' variant="contained" style={sendButtonStyle} href="#">Send</Button>
-   
+                            <Grid item xs={12}>
+                              <Button type='submit' variant="contained" style={sendButtonStyle} href="#">Send</Button>
+                            </Grid>
                         </form>
                          
                     </Grid>
@@ -115,6 +118,8 @@ const Form=()=>{
             <Box mt={5}>
                 <Copyright />
             </Box>
+        </Grid>
+        </Grid>
         </Grid>
     )
 }

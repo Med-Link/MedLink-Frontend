@@ -110,8 +110,8 @@ export default function Dashboard() {
             headerColor="primary"
             tabs={[
               {
-                tabName: "Bugs",
-                tabIcon: BugReport,
+                tabName: "Re-Order Items",
+                // tabIcon: BugReport,
                 tabContent: (
                   <Tasks
                     checkedIndexes={[0, 3]}
@@ -121,8 +121,8 @@ export default function Dashboard() {
                 ),
               },
               {
-                tabName: "Website",
-                tabIcon: Code,
+                tabName: "Out of Stock Items",
+                // tabIcon: Code,
                 tabContent: (
                   <Tasks
                     checkedIndexes={[0]}
@@ -132,8 +132,8 @@ export default function Dashboard() {
                 ),
               },
               {
-                tabName: "Server",
-                tabIcon: Cloud,
+                tabName: "New Medicine",
+                // tabIcon: Cloud,
                 tabContent: (
                   <Tasks
                     checkedIndexes={[1]}
