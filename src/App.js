@@ -50,7 +50,7 @@ function App() {
 
 
           <PrivateRoute path="/admin" component={Admin} />
-          <Route path="/adminsignup" component={SignUpAdmin} />
+          {/* <Route path="/adminsignup" component={SignUpAdmin} /> */}
           <Route path="/adminsignin" component={SignInAdmin} />
 
           <Route path="/Customer" component={Customer} />

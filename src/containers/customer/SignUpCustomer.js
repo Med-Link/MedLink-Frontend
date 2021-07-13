@@ -101,8 +101,9 @@ const SignUpCustomer=()=>{
             setSignedUp(true);
 
         }).catch((err)=>{
-            console.log(err);
-            setError("Password must be atleast 6 characters long");
+          if (err.response && err.response.data) {
+            console.log(err);// some reason error message
+          }
         });
         
     }else{
@@ -194,6 +195,7 @@ const SignUpCustomer=()=>{
                 size="small"
               />
             </Grid>
+            <p>{error}</p>
             
             {/* <Grid item xs={12}>
               <TextField
