@@ -251,39 +251,41 @@ export default function Dashboard() {
          
       </GridContainer>
       
-      <GridContainer>
-        <Grid item xs={12}>
-          <Typography>
-            Result
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-        <Typography>
-          <Link onClick={handleClickOpen}>
-            Pharma, Nugegoda, Colombo
-          </Link>
-        </Typography>
-        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        
-        <DialogTitle id="form-dialog-title">Send Prescription</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-          <Form/>
-          </DialogContentText>
-        </DialogContent>
-        {/* <DialogActions>
-             
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-        </DialogActions> */}
-      </Dialog>
-        <Typography>
-          <Link href="/Form/">
-            Aruna Pharmacy, Nugegoda, Colombo
-          </Link>
-        </Typography>
-        </Grid>
+      <GridContainer xs={12} sm={12} md={8}>
+        <Card >  
+          <CardHeader color="success" stats icon>
+            <Grid item xs={12}>
+              <Typography>
+                Result
+              </Typography>
+            </Grid>
+          </CardHeader>
+          <CardBody>
+            <Grid item xs={12}>
+              <Typography>
+                <Link onClick={handleClickOpen}>
+                  Pharma, Nugegoda, Colombo
+                </Link>
+              </Typography>
+              <Typography>
+                <Link onClick={handleClickOpen}>
+                  Aruna Pharmacy, Nugegoda, Colombo
+                </Link>
+              </Typography>
+              <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">
+                  Send Prescription
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                  <Form/>
+                  </DialogContentText>
+                </DialogContent>
+              </Dialog>
+              
+            </Grid>
+          </CardBody>
+        </Card>
       </GridContainer>
              
          
