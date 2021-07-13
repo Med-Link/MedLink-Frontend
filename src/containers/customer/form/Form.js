@@ -10,7 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { makeStyles } from '@material-ui/core/styles';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
- 
+import SendIcon from '@material-ui/icons/Send';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
@@ -125,8 +125,10 @@ const Form=()=>{
                         </Grid> 
                         <Grid item xs={12} sm={12} >
                           <div className={classes.root}>
-                            <Button variant="contained" onClick={handleClick} style={sendButtonStyle}>
-                              Send
+                            <Button variant="contained" onClick={handleClick} style={sendButtonStyle} startIcon={ <SendIcon/>}>
+                              
+                              Send 
+                             
                             </Button>
                             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} >
                               <Alert onClose={handleClose} severity="success">
