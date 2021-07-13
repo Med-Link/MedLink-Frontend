@@ -6,13 +6,13 @@ import Notifications from "@material-ui/icons/Notifications";
 import Unarchive from "@material-ui/icons/Unarchive";
 // core components/views for Admin layout
 import DashboardPage from "../Dashboard.js";
-import UserProfile from "../UserProfile.js";
+ 
 import RespondOrders from "../respondOrders.js";
-import AdminRequests from "../AdminRequests.js";
-import NotificationsPage from "../Notifications.js";
-import Report from "../Reports.js";
+ 
+ 
 import Profile from "../profile/Profile.js"
-import Checkout from "../profile/Profile.js"
+ 
+import BuyingHistory from "../buyingHistory/buyingHistory.js";
 
 const dashboardRoutes = [
   {
@@ -37,26 +37,13 @@ const dashboardRoutes = [
     layout: "/customer",
   },
   {
-    path: "/adminrequests",
-    name: "Admin Requests",
+    path: "/BuyingHistory",
+    name: "Buying History",
     icon: LibraryBooks,
-    component: AdminRequests,
+    component: BuyingHistory,
     layout: "/customer",
   },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: Notifications,
-    component: NotificationsPage,
-    layout: "/customer",
-  },
-  {
-    path: "/report",
-    name: "Report",
-    icon: Unarchive,
-    component: Report,
-    layout: "/customer",
-  },
+   
    
 ];
 
