@@ -19,7 +19,7 @@ import GridItem from '../../components/Dashboard/Grid/GridItem';
 
 import Hidden from '@material-ui/core/Hidden';
 
-import pharmacist from '../../assets/images/pharmacist2.jpg';
+import cust from '../../assets/images/cust.jpg';
 
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
@@ -38,51 +38,39 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor : '#eee',
-  },
-  paper: {
-    marginTop: theme.spacing(1),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding:theme.spacing(4),
-    borderRadius: '25px',
-    boxShadow: `2px 2px 2px 2px #ccc`,
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(2),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 1),
-    width:'70%',
-  },
-  /*label:{
-    marginLeft:theme.spacing(0),
-  // },*/
-  // back:{
-  //   backgroundColor: "#eee",
-  //   marginTop:theme.spacing(1),
-  //   margin:theme.spacing(1,1,1),
-  //   height:'small',
-  // },
-  input: {
-    display: 'none',
-  },
-  image: {
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    height:'100%',
-    // height:'auto',
-    // maxHeight:'400px',
-    
-    padding:theme.spacing(4),
-    maxWidth:'900px',
+    paper: {
+        marginTop: theme.spacing(10),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding:theme.spacing(4),
+        borderRadius: '25px',
+        boxShadow: `2px 2px 2px 2px #ccc`,
+      },
+      avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.primary.main,
+      },
+      form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+      },
+      submit: {
+        backgroundColor: theme.palette.primary.main,
+        margin: theme.spacing(2, 0, 1),
+        width:'70%',
+      },
+      input: {
+        display: 'none',
+      },
+      image: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width:"75%",
+        // height:'auto',
+        // maxHeight:'400px',
+        margin:theme.spacing(4,10),
+        maxWidth:'600px',
   },
   
 
@@ -133,10 +121,10 @@ const SignUpCustomer=()=>{
     <GridContainer spacing={0} >
     <Hidden smDown>
       <GridItem xs={12} sm={12} md={7}>
-        <img src={pharmacist} className={classes.image} />
+        <img src={cust} className={classes.image} />
       </GridItem>
       </Hidden>
-      <GridItem xs={12} sm={12} md={5} spacing={3}  borderRadius={10}>
+      <GridItem xs={12} sm={12} md={4} borderRadius={10}>
 
       <div className={classes.paper}>
         
@@ -152,7 +140,7 @@ const SignUpCustomer=()=>{
           
           <Grid container spacing={2}>
             
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 autoComplete="pname"
                 value ={firstName} onChange={(e) => setFirstName(e.target.value)}
@@ -167,7 +155,7 @@ const SignUpCustomer=()=>{
               />
             </Grid>
             
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 value ={lastName} onChange={(e) => setLastName(e.target.value)}
@@ -264,7 +252,7 @@ const SignUpCustomer=()=>{
       </GridItem>
       
       </GridContainer>
-      <Box xs={12} sm={12} md={12} >
+      <Box xs={12} sm={12} md={12}>
         <Copyright />
       </Box>
       </div>
