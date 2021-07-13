@@ -13,12 +13,13 @@ import Typography from '@material-ui/core/Typography';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
+import { Grid } from '@material-ui/core';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="">
         MedLink
       </Link>{' '}
       {new Date().getFullYear()}
@@ -81,8 +82,12 @@ function getStepContent(step) {
 }
 
 export default function Checkout() {
+  const toolBarStyle = {backgroundColor: '#126e82' }
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const headerStyle = {color: '#efe3e3',fontWeigth: 'bold'}
+  const btStyle = {color: '#efe3e3',backgroundColor: '#126e82'}
+  const subHeaderStyle = {color: '#126e82',fontWeigth: 'bold'}
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -96,15 +101,24 @@ export default function Checkout() {
     <React.Fragment>
       <CssBaseline />
       <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
+        <Toolbar style={toolBarStyle}>
+          <Grid container>
+          <Grid item xs={6} align='left'>
+          <Typography variant="h6" style={headerStyle} noWrap>
             MedLink
           </Typography>
+           
+          </Grid>
+
+          <Grid item xs={6} align='right'>
+            <Button variant="outlined" href="/customer/RespondingOrders/" style={btStyle}>Back</Button>
+          </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
       <main className={classes.layout}>
         <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" align="center">
+          <Typography component="h1" variant="h4" align="center" style={subHeaderStyle}>
             Checkout
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
@@ -117,12 +131,12 @@ export default function Checkout() {
           <React.Fragment>
             {activeStep === steps.length ? (
               <React.Fragment>
-                <Typography variant="h5" gutterBottom>
+                <Typography variant="h5" gutterBottom style={subHeaderStyle}>
                   Thank you for your order.
                 </Typography>
                 <Typography variant="subtitle1">
                   Your order number is #2001539. We have emailed your order confirmation, and will
-                  send you an update when your order has shipped.
+                  send you an update when your order has delivered.
                 </Typography>
               </React.Fragment>
             ) : (
@@ -130,13 +144,13 @@ export default function Checkout() {
                 {getStepContent(activeStep)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
+                    <Button style={btStyle} onClick={handleBack} className={classes.button}>
                       Back
                     </Button>
                   )}
                   <Button
                     variant="contained"
-                    color="primary"
+                    style={btStyle}
                     onClick={handleNext}
                     className={classes.button}
                   >

@@ -27,11 +27,7 @@ export default function Footer(props) {
                 Login
               </a>
             </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a href="#portfolio" className={classes.block}>
-                Subscriptions
-              </a>
-            </ListItem>
+             
             <ListItem className={classes.inlineBlock}>
               <a href="#blog" className={classes.block}>
                 Dashboard

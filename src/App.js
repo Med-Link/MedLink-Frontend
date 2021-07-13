@@ -49,7 +49,7 @@ function App() {
            
 
 
-          <PrivateRoute path="/admin" component={Admin} />
+          <Route path="/admin" component={Admin} />
           <Route path="/adminsignup" component={SignUpAdmin} />
           <Route path="/adminsignin" component={SignInAdmin} />
 

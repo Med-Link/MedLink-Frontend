@@ -10,6 +10,14 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { makeStyles } from '@material-ui/core/styles';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+ 
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 function Copyright() {
     return (
@@ -25,6 +33,13 @@ function Copyright() {
   }
 
 const useStyles = makeStyles((theme) => ({
+
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
      
     form: {
       width: '100%', // Fix IE 11 issue.
@@ -46,8 +61,10 @@ const useStyles = makeStyles((theme) => ({
   
 }));
 
+
 const Form=()=>{
 
+   
     const paperStyle={padding :20, height:'500px',width:'400px', margin:"20px auto"}
     const avatarStyle={backgroundColor: '#2ab5b5'}
     const gridStyle={padding: 20}
@@ -56,6 +73,20 @@ const Form=()=>{
     const textFeildStyle = {height: '150px', width: '390px',margin: '8px 0 16px 0'}
     const sendButtonStyle = {color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0', width: '50%', left:'50%', opacity:'0.9'}
     const headerStyle = {color: '#126e82' }
+    const [open, setOpen] = React.useState(false);
+    
+
+    const handleClick = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpen(false);
+    };
 
     return(
         <Grid container> 
@@ -104,11 +135,23 @@ const Form=()=>{
                                 
                             </Grid> 
                             <Grid item xs={12}>
-                              <Button type='submit' variant="contained" style={sendButtonStyle} href="#">Send</Button>
+                            <div className={classes.root}>
+                              <Button variant="contained" onClick={handleClick} style={sendButtonStyle}>
+                                Send
+                              </Button>
+                            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} >
+                            <Alert onClose={handleClose} severity="success">
+                              Sending prescription successfully!
+                            </Alert>
+                            </Snackbar>
+       
+                            </div>
                             </Grid>
                         </form>
                          
                     </Grid>
+
+                    
 
                      
                 </Grid>
