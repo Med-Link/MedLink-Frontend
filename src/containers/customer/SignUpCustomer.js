@@ -79,7 +79,7 @@ const Customersignup=()=>{
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center' style={gridStyle}>
                     <Avatar style={avatarStyle}><LockOpenIcon/></Avatar>
-                    <h1>Admin Sign Up</h1>
+                    <h1>Customer Sign Up</h1>
                 </Grid>
                 <Grid container spacing={2}> 
                     <Grid item xs={12}>

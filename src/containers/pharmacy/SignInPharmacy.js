@@ -28,7 +28,7 @@ import {isuserLoggedIn, login} from '../../actions/auth.actionspharmacy';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import pharmacist from '../../assets/images/cust.jpg';
+import pharmacist from '../../assets/images/pharmacist2.jpg';
 
 
 function Copyright() {
@@ -152,7 +152,7 @@ const SignInPharmacy=()=>{
             </Avatar>
           
             <Typography component="h1" variant="h5">
-              Customer SignIn
+              Pharmacy SignIn
             </Typography>
             <form className={classes.form} noValidate>
               <Grid container spacing={2}>
