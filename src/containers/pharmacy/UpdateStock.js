@@ -1,212 +1,254 @@
 import React from "react";
-// @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-// @material-ui/icons
-import Close from "@material-ui/icons/Close";
-import Check from "@material-ui/icons/Check";
-// core components
+// import { createMuiTheme } from '@material-ui/core/styles';
+import DateRange from "@material-ui/icons/DateRange";
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
+import TextField from '@material-ui/core/TextField';
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
-import Danger from "../../components/Dashboard/Typography/Danger.js";
-import Success from "../../components/Dashboard/Typography/Success.js";
-import Button from "../../components/Dashboard/CustomButtons/Button.js";
+import Table from "../../components/Dashboard/Table/Table.js";
 import Card from "../../components/Dashboard/Card/Card.js";
-import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
-
-const styles = {
-  cardCategoryWhite: {
-    "&,& a,& a:hover,& a:focus": {
-      color: "rgba(255,255,255,.62)",
-      margin: "0",
-      fontSize: "14px",
-      marginTop: "0",
-      marginBottom: "0",
-    },
-    "& a,& a:hover,& a:focus": {
-      color: "#FFFFFF",
-    },
-  },
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none",
-    "& small": {
-      color: "#777",
-      fontSize: "65%",
-      fontWeight: "400",
-      lineHeight: "1",
-    },
-  },
-  tableUpgradeWrapper: {
-    display: "block",
-    width: "100%",
-    overflowX: "auto",
-    WebkitOverflowScrolling: "touch",
-    MsOverflowStyle: "-ms-autohiding-scrollbar",
-  },
-  table: {
-    width: "100%",
-    maxWidth: "100%",
-    marginBottom: "1rem",
-    backgroundColor: "transparent",
-    borderCollapse: "collapse",
-    display: "table",
-    borderSpacing: "2px",
-    borderColor: "grey",
-    "& thdead tr th": {
-      fontSize: "1.063rem",
-      padding: "12px 8px",
-      verticalAlign: "middle",
-      fontWeight: "300",
-      borderTopWidth: "0",
-      borderBottom: "1px solid rgba(0, 0, 0, 0.06)",
-      textAlign: "inherit",
-    },
-    "& tbody tr td": {
-      padding: "12px 8px",
-      verticalAlign: "middle",
-      borderTop: "1px solid rgba(0, 0, 0, 0.06)",
-    },
-    "& td, & th": {
-      display: "table-cell",
-    },
-  },
-  center: {
-    textAlign: "center",
-  },
-};
+import Switch from "../../components/Dashboard/CustomButtons/Switch";
+import Button from "../../components/Dashboard//CustomButtons/Button";
+import Dialog from '@material-ui/core/Dialog';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import CustomTabs from "../../components/Dashboard/CustomTabs/CustomTabs.js";
+import PhotoSteps from "../../components/pharmacy/PhotoSteps"
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
+import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
+import Typography from '../../components/mainLandingPage/Typography';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import RemoveCircleOutlineOutlinedIcon from '@material-ui/icons/RemoveCircleOutlineOutlined';
+import Form from './forms/AddCsv';
+import AddNewMed from './forms/AddNewMed';
 
 const useStyles = makeStyles(styles);
 
-export default function UpgradeToPro() {
+
+export default function OrderProcess() {
   const classes = useStyles();
+
+
+
+  const [openAccept, setOpenAccept] = React.useState(false);
+
+  const handleClickOpenAccept = () => {
+    setOpenAccept(true);
+  };
+
+  const handleCloseAccept = () => {
+    setOpenAccept(false);
+  };
+
+  const [openAddMeds, setOpenAddMeds] = React.useState(false);
+
+  const handleClickOpenAddMeds = () => {
+    setOpenAddMeds(true);
+  };
+
+  const handleCloseAddMeds = () => {
+    setOpenAddMeds(false);
+  };
+
   return (
-    <GridContainer justify="center">
-      <GridItem xs={12} sm={12} md={8}>
-        <Card>
-          <CardHeader color="info">
-            <h4 className={classes.cardTitleWhite}>
-              Material Dashboard PRO React
-            </h4>
-            <p className={classes.cardCategoryWhite}>
-              Are you looking for more components? Please check our Premium
-              Version of Material Dashboard Angular.
-            </p>
-          </CardHeader>
-          <CardBody>
-            <div className={classes.tableUpgradeWrapper}>
-              <table className={classes.table}>
-                <thead>
-                  <tr>
-                    <th />
-                    <th className={classes.center}>Free</th>
-                    <th className={classes.center}>PRO</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Components</td>
-                    <td className={classes.center}>30</td>
-                    <td className={classes.center}>200</td>
-                  </tr>
-                  <tr>
-                    <td>Plugins</td>
-                    <td className={classes.center}>2</td>
-                    <td className={classes.center}>10</td>
-                  </tr>
-                  <tr>
-                    <td>Example Pages</td>
-                    <td className={classes.center}>7</td>
-                    <td className={classes.center}>28</td>
-                  </tr>
-                  <tr>
-                    <td>Login, Register, Pricing, Lock Pages</td>
-                    <td className={classes.center}>
-                      <Danger>
-                        <Close />
-                      </Danger>
-                    </td>
-                    <td className={classes.center}>
-                      <Success>
-                        <Check />
-                      </Success>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      ReactTables, ReactVectorMap, ReactSweetAlert, Wizard,
-                      Validation, ReactBigCalendar etc...
-                    </td>
-                    <td className={classes.center}>
-                      <Danger>
-                        <Close />
-                      </Danger>
-                    </td>
-                    <td className={classes.center}>
-                      <Success>
-                        <Check />
-                      </Success>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Mini Sidebar</td>
-                    <td className={classes.center}>
-                      <Danger>
-                        <Close />
-                      </Danger>
-                    </td>
-                    <td className={classes.center}>
-                      <Success>
-                        <Check />
-                      </Success>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Premium Support</td>
-                    <td className={classes.center}>
-                      <Danger>
-                        <Close />
-                      </Danger>
-                    </td>
-                    <td className={classes.center}>
-                      <Success>
-                        <Check />
-                      </Success>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td />
-                    <td className={classes.center}>Free</td>
-                    <td className={classes.center}>Just $59</td>
-                  </tr>
-                  <tr>
-                    <td />
-                    <td className={classes.center}>
-                      <Button round disabled>
-                        Current Version
-                      </Button>
-                    </td>
-                    <td className={classes.center}>
-                      <Button
-                        round
-                        color="danger"
-                        href="https://www.creative-tim.com/product/material-dashboard-pro-react?ref=mdr-upgrade-live"
-                      >
-                        Upgrade to Pro
-                      </Button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </CardBody>
-        </Card>
-      </GridItem>
-    </GridContainer>
+    <div>
+      <GridContainer>
+
+        <GridItem xs={12} >
+          <CustomTabs
+            headerColor="primary"
+            tabs={[
+              {
+                tabName: "Update Stock",
+                // tabIcon: <AddShoppingCartIcon/>,
+                tabContent: (
+                  <Card>
+                    <CardBody>
+                      <div className={classes.search}>
+                        <div className={classes.searchIcon}>
+                          <SearchIcon />
+                        </div>
+                        <InputBase
+                          placeholder="Panadol"
+                          classes={{
+                            root: classes.inputRoot,
+                            input: classes.inputInput,
+                          }}
+                          inputProps={{ 'aria-label': 'search' }}
+                        />
+                      </div>
+                      <Table
+                        tableHeaderColor="secondary"
+                        tableHead={["Med ID", "Batch ID", "Med Name", "Current Qty", "Unit Price(Rs.)", "Add to Stock", "Remove From Stock"]}
+                        tableData={[
+                          ["M001",
+                            "B456",
+                            "Panadol",
+                            "100",
+                            "1.00",
+                            <div>
+                              <TextField id="standard-basic" label="Qty" size='small' />
+                              <Button variant="contained" color="primary" round >Add <AddCircleOutlineIcon /></Button>
+
+                            </div>,
+
+                            <div>
+                              <TextField id="standard-basic" label="Qty" size='small' />
+                              <Button variant="contained" color="primary" round>Remove <RemoveCircleOutlineOutlinedIcon /></Button>
+
+
+                            </div>
+                          ],
+                        ]}
+                      />
+                    </CardBody>
+                  </Card>
+                ),
+              },
+
+              {
+                tabName: "View Stock",
+                // tabIcon: AddShoppingCartIcon,
+                tabContent: (
+                  <Card>
+                    <CardBody>
+                      <div className={classes.search}>
+                        <div className={classes.searchIcon}>
+                          <SearchIcon />
+                        </div>
+                        <InputBase
+                          placeholder="Panadol"
+                          classes={{
+                            root: classes.inputRoot,
+                            input: classes.inputInput,
+                          }}
+                          inputProps={{ 'aria-label': 'search' }}
+                        />
+                      </div>
+                      <Table
+                        tableHeaderColor="secondary"
+                        tableHead={["Medicine ID", "Batch ID", "Medicine Name", "Current Qty", "Unit Price(Rs.)"]}
+                        tableData={[
+                          ["M001", "B654", "Panadol", "100", 2],
+                          ["M002", "B624", "Panadene", "50", 6],
+                          ["M003", "B631", "Vitamin-C", "200", 4],
+
+                        ]}
+                      />
+                    </CardBody>
+                  </Card>
+                ),
+              },
+
+
+
+            ]}
+          />
+        </GridItem>
+      </GridContainer>
+
+      {/* Update Stock -csv */}
+<GridContainer>
+      <GridContainer xs={12} md={6} sm={6}>
+        <GridItem  md={6} sm={12}>
+          <Card >
+            <CardBody color="primary" stats icon>
+              {/* <div> */}
+              <GridContainer>
+                <GridItem>
+                  <Form />
+                </GridItem>
+                <GridItem>
+                  <Button variant="outlined" color="primary" onClick={handleClickOpenAccept}>
+                    Save
+                  </Button>
+                  <Dialog
+                    open={openAccept}
+                    onClose={handleCloseAccept}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
+                  <DialogTitle id="alert-dialog-title">{"Do you want to Save this to the stock"}</DialogTitle>
+
+                  <DialogActions>
+                    <Button onClick={handleCloseAccept} color="secondary">
+                      Cancle
+                    </Button>
+                    <Button onClick={handleCloseAccept} color="primary" autoFocus>
+                      Yes
+                    </Button>
+                  </DialogActions>
+                  </Dialog>
+                </GridItem>
+              </GridContainer>
+            
+                {/* <Typography color="primary" variant="h6"> */}
+              {/* </GridItem> */}
+              
+              
+              {/* </Typography> */}
+
+              {/* </div> */}
+              {/* <Switch color="secondary" inputProps={{ 'aria-label': 'primary checkbox' }} />, */}
+
+
+
+            </CardBody>
+          </Card>
+        </GridItem>
+      </GridContainer>
+
+        
+
+
+        {/* Add New Batch */}
+
+<GridContainer xs={12} md={6} sm={6}>
+        <GridItem  >
+          <Card >
+            <CardBody color="primary" stats icon>
+
+              <div>
+
+
+                <Typography variant="body1">
+                  Add New Medicine
+
+                  <Dialog
+                    open={openAddMeds}
+                    onClose={handleCloseAddMeds}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
+
+                    <DialogContent dividers><AddNewMed /></DialogContent>
+
+
+
+                  </Dialog>
+                  <br></br>
+                  <Button variant="outlined" color="primary" onClick={handleClickOpenAddMeds}>
+                    Add Medicine
+                  </Button>
+                </Typography>
+
+              </div>
+              {/* <Switch color="secondary" inputProps={{ 'aria-label': 'primary checkbox' }} />, */}
+
+
+
+            </CardBody>
+          </Card>
+
+        </GridItem>
+      </GridContainer>
+      </GridContainer>
+    
+</div>
   );
 }

@@ -20,6 +20,8 @@ import Profile from "../Profile.js";
 
 import OrderProcess from "../OrderProcess";
 import Order from "../OrderRequests";
+import { Block } from "@material-ui/icons";
+import { Hidden } from "@material-ui/core";
 
 const dashboardRoutes = [
   {
@@ -67,7 +69,7 @@ const dashboardRoutes = [
    },
   {
     path: "/ClosedDealsDetails",
-    name: "ClosedDealsDetails",
+    name: "Closed Deals Details",
     icon: AddShoppingCartIcon,
     component: ClosedDealsDetails,
     layout: "/pharmacy",
@@ -78,6 +80,7 @@ const dashboardRoutes = [
     icon: AddShoppingCartIcon,
     component: OrderProcess,
     layout: "/pharmacy",
+    display:Hidden,
   },
 ];
 

@@ -13,7 +13,7 @@ import CardAvatar from "../../components/Dashboard/Card/CardAvatar.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 
-import avatar from "../../assets/images/medLink.jpg";
+import avatar from "../../assets/images/pharmacist2.jpg";
 
 const styles = {
   cardCategoryWhite: {
@@ -44,14 +44,14 @@ export default function UserProfile() {
         <GridItem xs={12} sm={12} md={8}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
-              <p className={classes.cardCategoryWhite}>Complete your profile</p>
+              <h4 className={classes.cardTitleWhite}>Pharmacy Profile</h4>
+              <p className={classes.cardCategoryWhite}>Update your profile</p>
             </CardHeader>
             <CardBody>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={5}>
+                <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Company (disabled)"
+                    labelText="ABCD Pharmacy"
                     id="company-disabled"
                     formControlProps={{
                       fullWidth: true,
@@ -61,19 +61,20 @@ export default function UserProfile() {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
+               
+                <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Username"
-                    id="username"
+                    labelText="abcd@gmail.com"
+                    id="email-address"
                     formControlProps={{
                       fullWidth: true,
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
+                <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
-                    labelText="Email address"
-                    id="email-address"
+                    labelText="Rgp-569842156"
+                    id="web"
                     formControlProps={{
                       fullWidth: true,
                     }}
@@ -83,7 +84,7 @@ export default function UserProfile() {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="First Name"
+                    labelText="Nihal"
                     id="first-name"
                     formControlProps={{
                       fullWidth: true,
@@ -92,7 +93,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="Last Name"
+                    labelText="Sooriyabandara"
                     id="last-name"
                     formControlProps={{
                       fullWidth: true,
@@ -103,7 +104,7 @@ export default function UserProfile() {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="City"
+                    labelText="Panadura"
                     id="city"
                     formControlProps={{
                       fullWidth: true,
@@ -112,38 +113,17 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Country"
+                    labelText="+9411296583"
                     id="country"
                     formControlProps={{
                       fullWidth: true,
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Postal Code"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
+               
               </GridContainer>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
-                  <CustomInput
-                    labelText="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
-                    id="about-me"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      multiline: true,
-                      rows: 5,
-                    }}
-                  />
-                </GridItem>
+                
               </GridContainer>
             </CardBody>
             <CardFooter>
@@ -160,15 +140,13 @@ export default function UserProfile() {
             </CardAvatar>
             <CardBody profile>
               <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
-              <h4 className={classes.cardTitle}>Alec Thompson</h4>
+              <h4 className={classes.cardTitle}>ABCD Pharmacy</h4>
               <p className={classes.description}>
-                Don{"'"}t be scared of the truth because we need to restart the
-                human foundation in truth And I love you like Kanye loves Kanye
-                I love Rick Owens’ bed design but the back is...
+              As Sri Lanka’s first premier multi-specialty pharmacy, 
+              ABCD was set up to mirror reputed hospitals in the region which offered advanced medical technology and expert medical care,
+               thus eliminating the need for people to travel out of Sri Lanka for specialized medical treatment.
               </p>
-              <Button color="primary" round>
-                Follow
-              </Button>
+              
             </CardBody>
           </Card>
         </GridItem>
