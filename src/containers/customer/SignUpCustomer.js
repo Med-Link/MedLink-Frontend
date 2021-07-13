@@ -23,6 +23,8 @@ import cust from '../../assets/images/cust.jpg';
 
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import * as yup from 'yup';
+import {customerSchema} from '../../validations/customerValidation'
 
 function Copyright() {
   return (
@@ -88,15 +90,25 @@ const SignUpCustomer=()=>{
     const [error, setError] = useState("");
     const [signedUp, setSignedUp] = useState(false);
     
-    const signup =(e)=>{
+    const signup = async (e)=>{
         e.preventDefault();
         if(checked){
-        axios.post('http://localhost:4000/api/signup', {
+          let form ={
             firstName: firstName,
             lastName:lastName,
             email:email,
             password:password
-        }).then((response)=>{
+          };
+          const isValid = await customerSchema.isValid(form);
+          if(isValid===true){
+          axios.post('http://localhost:4000/api/signup', {
+            firstName: firstName,
+            lastName:lastName,
+            email:email,
+            password:password
+          }
+          
+        ).then((response)=>{
             console.log(response);
             setSignedUp(true);
 
@@ -105,8 +117,11 @@ const SignUpCustomer=()=>{
             console.log(err);// some reason error message
           }
         });
-        
-    }else{
+       }else{
+        // console.log(err);
+        setError("Signup Failed");
+       }
+     }else{
         console.log("Unchecked");
     }
     }
@@ -117,7 +132,7 @@ const SignUpCustomer=()=>{
 
 
   
-  return (
+   return (
     <div>
     <GridContainer spacing={0} >
     <Hidden smDown>
@@ -195,7 +210,7 @@ const SignUpCustomer=()=>{
                 size="small"
               />
             </Grid>
-            <p>{error}</p>
+            <p>{Error}</p>
             
             {/* <Grid item xs={12}>
               <TextField

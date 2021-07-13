@@ -23,6 +23,8 @@ import pharmacist from '../../assets/images/pharmacist2.jpg';
 
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import * as yup from 'yup';
+import {pharmacySchema} from '../../validations/pharmacyValidation'
 
 function Copyright() {
   return (
@@ -106,32 +108,45 @@ const SignUpPharmacy=()=>{
   const [error, setError] = useState("");
   const [signedUp, setSignedUp] = useState(false);
   
-  const Signup =(e)=>{
+  const Signup =async(e)=>{
       e.preventDefault();
+      let form ={
+        name: name,
+        email:email,
+        contactNumber:contactNumber,
+        password:password,
+        location:location,
+        // registrationDocs:registrationDocs,
+      };
+      const isValid = await pharmacySchema.isValid(form);
+      if(isValid===true){
 
-      const form = new FormData();
-    form.append("name", name);
-    form.append("email", email);
-    form.append("contactNumber", contactNumber);
-    form.append("password", password );
-    // form.append("category", categoryId);
+            const form = new FormData();
+          form.append("name", name);
+          form.append("email", email);
+          form.append("contactNumber", contactNumber);
+          form.append("password", password );
+          // form.append("category", categoryId);
 
-    for (let pic of registrationDocs) {
-      form.append("registrationDocs", pic);
-    }
-      if(checked){
-      axios.post('http://localhost:4000/api/pharmacy/signup', form).then((response)=>{
-          console.log(response);
-          setSignedUp(true);
+          for (let pic of registrationDocs) {
+            form.append("registrationDocs", pic);
+          }
+            if(checked){
+            axios.post('http://localhost:4000/api/pharmacy/signup', form).then((response)=>{
+                console.log(response);
+                setSignedUp(true);
 
-      }).catch((err)=>{
-          console.log(err);
-          setError("Signup error");
-      });
-      
-  }else{
-      console.log("Unchecked");
-  }
+            }).catch((err)=>{
+                console.log(err);
+                setError("Signup Failed");
+            });
+            
+        }else{
+            console.log("Unchecked");
+        }
+      }else{
+        console.log('signup error');
+      }  
   }
 
   if(signedUp){
