@@ -1,39 +1,97 @@
 import React, {useState} from 'react';
 
-
-
-//material ui imports
-import { Grid } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
-//import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import { TextField } from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import GridContainer from '../../components/Dashboard/Grid/GridContainer';
+import GridItem from '../../components/Dashboard/Grid/GridItem';
+
+import Hidden from '@material-ui/core/Hidden';
+
+import pharmacist from '../../assets/images/pharmacist2.jpg';
+
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
-//import { AST_SymbolBlockDeclaration } from 'terser';
-
 function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="/">
-          Medlink
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="/">
+        Medlink
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
-const Customersignup=()=>{
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor : '#eee',
+  },
+  paper: {
+    marginTop: theme.spacing(1),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding:theme.spacing(4),
+    borderRadius: '25px',
+    boxShadow: `2px 2px 2px 2px #ccc`,
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.primary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(2),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 1),
+    width:'70%',
+  },
+  /*label:{
+    marginLeft:theme.spacing(0),
+  // },*/
+  // back:{
+  //   backgroundColor: "#eee",
+  //   marginTop:theme.spacing(1),
+  //   margin:theme.spacing(1,1,1),
+  //   height:'small',
+  // },
+  input: {
+    display: 'none',
+  },
+  image: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    height:'100%',
+    // height:'auto',
+    // maxHeight:'400px',
+    
+    padding:theme.spacing(4),
+    maxWidth:'900px',
+  },
+  
+
+}));
+
+const SignUpCustomer=()=>{
+
+  const classes = useStyles();
+
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -68,72 +126,148 @@ const Customersignup=()=>{
         return <Redirect to={'/customersignin'} />
     }
 
-    const paperStyle={padding :20,height:'620px',width:'400px', margin:"20px auto "}
-    const avatarStyle={backgroundColor: '#2ab5b5'}
-    const gridStyle={padding: 20}
-    const buttonStyle={backgroundColor: '#2ab5b5', margin: '8px 0'}
-     
-    return(
+
+  
+  return (
+    <div>
+    <GridContainer spacing={0} >
+    <Hidden smDown>
+      <GridItem xs={12} sm={12} md={7}>
+        <img src={pharmacist} className={classes.image} />
+      </GridItem>
+      </Hidden>
+      <GridItem xs={12} sm={12} md={5} spacing={3}  borderRadius={10}>
+
+      <div className={classes.paper}>
         
-        <Grid style={gridStyle}>
-            <Paper elevation={10} style={paperStyle}>
-                <Grid align='center' style={gridStyle}>
-                    <Avatar style={avatarStyle}><LockOpenIcon/></Avatar>
-                    <h1>Customer Sign Up</h1>
-                </Grid>
-                <Grid container spacing={2}> 
-                    <Grid item xs={12}>
-                        <TextField value ={firstName} onChange={(e) => setFirstName(e.target.value)} type="text" className="form-control" TextField id="firstName" variant="outlined"  placeholder="Enter Your First Name" fullWidth required/>
-                    </Grid>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        
+        <Typography component="h1" variant="h5">
+          Customer Sign up
+        </Typography>
+        
+        <form className={classes.form} noValidate>
+          
+          <Grid container spacing={2}>
+            
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="pname"
+                value ={firstName} onChange={(e) => setFirstName(e.target.value)}
+                name="firstName"
+                variant="outlined"
+                required
+                fullWidth
+                id="fName"
+                label="First Name"
+                autoFocus
+                size="small"
+              />
+            </Grid>
+            
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                value ={lastName} onChange={(e) => setLastName(e.target.value)}
+                required
+                fullWidth
+                id="Lname"
+                label="Last Name"
+                name="lName"
+                size="small"
+              />
+            </Grid>
+            
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                value ={email} onChange={(e) => setEmail(e.target.value)}
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                size="small"
+              />
+            </Grid>
+            
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                value ={password} onChange={(e) => setPassword(e.target.value)}
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                size="small"
+              />
+            </Grid>
+            
+            {/* <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                value ={location} onChange={(e) => setLocation(e.target.value)}
+                required
+                fullWidth
+                id="location"
+                label="Location URL"
+                name="location"
+                size="small"
+              />
+            </Grid> */}
+            
+           
+            
+            <Grid item xs={12}>
+              <FormControlLabel
+                onChange={(e) => setChecked(e.target.checked)}
+                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                label="I agree to the Terms and Conditions"
+              />
+            </Grid>
 
-                    <Grid item xs={12}>
-                    <TextField value ={lastName} onChange={(e) => setLastName(e.target.value)} id="lastName" variant="outlined" label="Last Name" placeholder="Enter Your Last Name" fullWidth required/>
-                    </Grid>
+          </Grid>
+          <Box xs={12} sm={12} md={12}
+          alignItems="center" 
+          display="flex" 
+          justifyContent="center"
+          direction="column"
+          justify="center">
+            <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={signup}
+            className={classes.submit}
 
-                    <Grid item xs={12}>
-                        <TextField value ={email} onChange={(e) => setEmail(e.target.value)} id="email" variant="outlined" label="Email" placeholder="Enter Your Email" fullWidth required/>
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <TextField value ={password} onChange={(e) => setPassword(e.target.value)}id="password" variant="outlined" label="Password" placeholder="Enter Password" type='password' fullWidth required/>
-                    </Grid>
-
-                    {/* <Grid item xs={12}> 
-                        <TextField id="confirmPassword" variant="outlined" label="Confirm Password" placeholder="Re Enter Your Password" type='password' fullWidth required/>
-                    </Grid> */}
-                </Grid>
-
-                <Grid item xs={12}> 
-                    <FormControlLabel  
-                        control={
-                            <Checkbox 
-                            name="checkedB"
-                            color="Primary"
-                            onChange={(e) => setChecked(e.target.checked)}
-                            />
-                        }
-                        label="I agree to the Terms and Conditions"
-                    />
-                </Grid>
-                
-                <Button type='submit' variant="contained" style={buttonStyle} onClick={signup} fullWidth>Sign Up</Button>
-                <p>{error}</p>
-                <Grid container justify="center">
-                    <Grid item> 
-                        <Typography>Already have an account? 
-                            <Link href="/customersignin">
-                                Sign In
-                            </Link>
-                        </Typography>
-                    </Grid>
-                </Grid>
-
-            </Paper>
-            <Box mt={5}>
-                <Copyright />
-            </Box>
-        </Grid>
-    )
+          >
+            Sign Up
+          </Button>
+          </Box>
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Link href="/customersignin" variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid>
+          </Grid>
+          
+        </form>
+      </div>
+      
+      
+      </GridItem>
+      
+      </GridContainer>
+      <Box xs={12} sm={12} md={12} >
+        <Copyright />
+      </Box>
+      </div>
+  );
 }
-
-export default Customersignup;
+export default SignUpCustomer ;
