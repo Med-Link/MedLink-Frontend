@@ -48,7 +48,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import Form from './form/Form'
 
 import { bugs, website, server } from "../../variables/general.js";
 
@@ -265,29 +265,18 @@ export default function Dashboard() {
         </Typography>
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogTitle id="form-dialog-title">Send Prescription</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here. We will send updates
-            occasionally.
+          <Form/>
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-          />
         </DialogContent>
-        <DialogActions>
+        {/* <DialogActions>
+             
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
-            Subscribe
-          </Button>
-        </DialogActions>
+        </DialogActions> */}
       </Dialog>
         <Typography>
           <Link href="/Form/">
