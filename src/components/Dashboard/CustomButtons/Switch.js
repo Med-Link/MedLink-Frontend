@@ -5,7 +5,7 @@ import ThemeProvider from "@material-ui/styles/ThemeProvider";
 
 export default function Switches() {
     const [state, setState] = React.useState({
-      checkedA: true,
+      checkedA: false,
       checkedB: true,
     });
   
@@ -19,7 +19,7 @@ export default function Switches() {
             onChange={handleChange}
             name="checkedA"
             inputProps={{ 'aria-label': 'secondary checkbox' }}
-            color="primary"
+            color="secondary"
           />
           </div>
   );

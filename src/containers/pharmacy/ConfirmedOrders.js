@@ -1,6 +1,9 @@
 import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+
+import clsx from 'clsx';
+import Link from '@material-ui/core/Link';
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
@@ -8,6 +11,9 @@ import Table from "../../components/Dashboard/Table/Table.js";
 import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
+
+import Switch from "../../components/Dashboard/CustomButtons/Switch";
+import Button from "../../components/Dashboard//CustomButtons/Button";
 
 const styles = {
   cardCategoryWhite: {
@@ -48,7 +54,7 @@ export default function TableList() {
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Confirmed Orders</h4>
+            <h4 className={classes.cardTitleWhite}>Order Requests</h4>
             {/* <p className={classes.cardCategoryWhite}>
               Here is a subtitle for this table
             </p> */}
@@ -56,15 +62,31 @@ export default function TableList() {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Order ID", "Prescription", "Packed For Delivery"]}
+              tableHead={["Order ID", "CustomerName", "View","Packed For Delivery"]}
               tableData={[
-                ["MO2001", "Niger", "Button called Done. Then the row disappears. Row goes to another table with one clickable button "],
-                ["MO2002", "Curaçao", "Sinaai-Waas"],
-                ["MO2003", "Netherlands", "Baileux"],
-                ["MO2004", "Korea, South", "Overland Park"],
-                ["MO2005", "Malawi", "Feldkirchen in Kärnten"],
-                ["MO2006", "Chile", "Gloucester"],
-              ]}
+                [ "MO2001",
+                  "Michelle Fernando",
+                  <Link
+                    variant="h6"
+                    underline="none"
+                    className={clsx(classes.rightLink)}
+                    href="orderprocess/"
+                  >
+                  <Button color="primary" round>View</Button></Link>,
+                  <Switch color="secondary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
+                
+
+                [ "MO2002",
+                  "Sandali Perera",
+                  <Link
+                    variant="h6"
+                    underline="none"
+                    className={clsx(classes.rightLink)}
+                    href="orderprocess/"
+                  >
+                  <Button color="primary" round>View</Button></Link>,
+                  <Switch color="secondary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
+                ]}
             />
           </CardBody>
         </Card>
