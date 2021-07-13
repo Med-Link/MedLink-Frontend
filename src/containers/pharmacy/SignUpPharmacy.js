@@ -97,9 +97,8 @@ const SignUpPharmacy=()=>{
   const [contactNumber, setContactNumber] = useState("");
   const [password, setPassword] = useState("");
   const [location, setLocation] = useState("");
-  const [registrationDocs, setRegistrationDocs] = useState("");
-  const [registrationDocs1, setRegistrationDocs1] = useState("");
-  const [registrationDocs2, setRegistrationDocs2] = useState("");
+  const [registrationDocs, setRegistrationDocs] = useState([]);
+  
 
 
 
@@ -109,17 +108,19 @@ const SignUpPharmacy=()=>{
   
   const Signup =(e)=>{
       e.preventDefault();
-      if(checked){
-      axios.post('http://localhost:4000/api/pharmacy/signup', {
-          name: name,
-          email:email,
-          contactNumber:contactNumber,
-          password:password,
-          registrationDocs:registrationDocs,
-          registrationDocs1:registrationDocs1,
-          registrationDocs2:registrationDocs2,
 
-      }).then((response)=>{
+      const form = new FormData();
+    form.append("name", name);
+    form.append("email", email);
+    form.append("contactNumber", contactNumber);
+    form.append("password", password );
+    // form.append("category", categoryId);
+
+    for (let pic of registrationDocs) {
+      form.append("registrationDocs", pic);
+    }
+      if(checked){
+      axios.post('http://localhost:4000/api/pharmacy/signup', form).then((response)=>{
           console.log(response);
           setSignedUp(true);
 
@@ -137,6 +138,9 @@ const SignUpPharmacy=()=>{
       return <Redirect to={'/pharmacysignin'} />
   }
 
+  const handleRegisterDocs = (e) => {
+    setRegistrationDocs([...registrationDocs, e.target.files[0]]);
+  };
   
   return (
     <div>
@@ -146,7 +150,7 @@ const SignUpPharmacy=()=>{
         <img src={pharmacist} className={classes.image} />
       </GridItem>
       </Hidden>
-      <GridItem xs={12} sm={12} md={5} spacing={3}  borderRadius={10}>
+      <GridItem xs={12} sm={12} md={4}  borderRadius={10}>
 
       <div className={classes.paper}>
         
@@ -238,7 +242,7 @@ const SignUpPharmacy=()=>{
             <Grid item xs={12}  sm={12} md={4}>
             <input
               accept="image/*"
-              onChange={(e) => setRegistrationDocs(e.target.files[0])}
+              onChange={handleRegisterDocs}
               className={classes.input}
               id="contained-button-file"
               multiple
@@ -263,7 +267,7 @@ const SignUpPharmacy=()=>{
             <Grid item xs={12} sm={12} md={4}>
               <input
                 accept="image/*"
-                onChange={(e) => setRegistrationDocs1(e.target.files[0])}
+              onChange={handleRegisterDocs}
                 className={classes.input}
                 id="contained-button-file"
                 multiple
@@ -288,7 +292,7 @@ const SignUpPharmacy=()=>{
             <Grid item xs={12} sm={12} md={4}>
               <input
                 accept="image/*"
-                onChange={(e) => setRegistrationDocs2(e.target.files[0])}
+                onChange={handleRegisterDocs}
                 className={classes.input}
                 id="contained-button-file"
                 multiple

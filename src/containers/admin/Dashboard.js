@@ -9,6 +9,7 @@ import Accessibility from "@material-ui/icons/Accessibility";
 import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
+import Link  from "@material-ui/core/Link";
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
@@ -102,8 +103,14 @@ export default function Dashboard() {
                 tableHeaderColor="warning"
                 tableHead={["ID", "Name", "District", "Action"]}
                 tableData={[
-                  ["1", "Micael Medcare", "Colombo", <Button color="primary" round>View</Button>],
-                  ["2", "Minerva Pharmacy", "Puttalam", <Button color="primary" round>View</Button>],
+                  ["1", "Micael Medcare", "Colombo",
+                  <Link variant="h6" underline="none" href="pharmacyrequests/">
+                    <Button color="primary" round >View</Button>
+                  </Link> ],
+                  ["2", "Minerva Pharmacy", "Puttalam",
+                  <Link variant="h6" underline="none" href="pharmacyrequests/">
+                    <Button color="primary" round >View</Button>
+                  </Link> ],
                 ]}
               />
             </CardBody>
