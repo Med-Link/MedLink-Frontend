@@ -116,10 +116,10 @@ export default function TableList() {
                     className={clsx(classes.rightLink)}
                     href="closeddealsdetails/"
                   >
-                  <Button color="primary" round>View</Button></Link>,
+                  <Button color="primary" >View</Button></Link>,
                 ],
-                ["MO2002","2021-06-05 14:12","0712865562",<Button color="primary" round onClick={handleClickOpen}>View</Button>],
-                ["MO2003","2021-06-05 14:21","0759865544", <Button color="primary" round onClick={handleClickOpen}>View</Button> ],
+                ["MO2002","2021-06-05 14:12","0712865562",<Button color="primary"  onClick={handleClickOpen}>View</Button>],
+                ["MO2003","2021-06-05 14:21","0759865544", <Button color="primary"  onClick={handleClickOpen}>View</Button> ],
 
               ]}
             />

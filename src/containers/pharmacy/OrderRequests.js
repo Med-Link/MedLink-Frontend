@@ -146,86 +146,9 @@ export default function TableList() {
                   >
                   <Button id="view" color="primary" Button color="primary" onClick={handleClickOpenView}>View</Button></Link>,
 
-                  <Switch color="secondary" inputProps={{ 'aria-label': 'primary checkbox' }} />,
-
-                  <div> <Button id="reject" variant="outlined" color="primary" onClick={handleClickOpen}>Reject</Button>
-                    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                      <DialogTitle id="form-dialog-title">Reason to Reject Order</DialogTitle>
-                      <DialogContent>
-                        <DialogContentText>
-                          {"Reasons To reject orders:"}<br></br>
-
-                          {"1. Prescription is not clear. Please re-send it again"}<br></br>
-                          {"2. This is not a valid prescription"}<br></br>
-                          {"3. Prescription is too old."}<br></br>
-
-                        </DialogContentText>
-                        <TextField
-                          autoFocus
-                          margin="dense"
-                          id="name"
-                          label="State the reason"
-                          type="email"
-                          fullWidth
-                        />
-                      </DialogContent>
-                      <DialogActions>
-                        <Button onClick={handleClose} color="primary">
-                          Cancel
-                        </Button>
-                        <Button onClick={handleClose} color="primary">
-                          Send
-                        </Button>
-                      </DialogActions>
-                    </Dialog>
-                  </div>
-
+                  
                 ],
 
-
-                ["MO2002",
-                  "Sandali Perera",
-                  <Link
-                    variant="h6"
-                    underline="none"
-                    className={clsx(classes.rightLink)}
-                    href="orderprocess/"
-                  >
-                    <Button color="primary" onClick={handleClickOpenView}>View</Button></Link>,
-                  <Switch color="secondary" inputProps={{ 'aria-label': 'primary checkbox' }} />,
-                  <div> <Button variant="outlined" color="primary" onClick={handleClickOpen}> Reject</Button>
-                    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                      <DialogTitle id="form-dialog-title">Reason to Reject Order</DialogTitle>
-                      <DialogContent>
-                        <DialogContentText>
-                          {"Reasons To reject orders:"}<br></br>
-
-                          {"1. Prescription is not clear. Please re-send it again"}<br></br>
-                          {"2. This is not a valid prescription"}<br></br>
-                          {"3. Prescription is too old."}<br></br>
-
-                        </DialogContentText>
-                        <TextField
-                          autoFocus
-                          margin="dense"
-                          id="name"
-                          label="State the reason"
-                          type="email"
-                          fullWidth
-                        />
-                      </DialogContent>
-                      <DialogActions>
-                        <Button onClick={handleClose} color="primary">
-                          Cancel
-                        </Button>
-                        <Button onClick={handleClose} color="primary">
-                          Send
-                        </Button>
-                      </DialogActions>
-                    </Dialog>
-                  </div>
-
-                ],
               ]}
             />
 

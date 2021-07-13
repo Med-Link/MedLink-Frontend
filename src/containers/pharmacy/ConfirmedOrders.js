@@ -70,7 +70,7 @@ export default function TableList() {
                     variant="h6"
                     underline="none"
                     className={clsx(classes.rightLink)}
-                    href="orderprocess/"
+                    href="closeddealsdetails/"
                   >
                   <Button color="primary" round>View</Button></Link>,
                   <Switch color="secondary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
@@ -82,7 +82,7 @@ export default function TableList() {
                     variant="h6"
                     underline="none"
                     className={clsx(classes.rightLink)}
-                    href="orderprocess/"
+                    href="closeddealsdetails/"
                   >
                   <Button color="primary" round>View</Button></Link>,
                   <Switch color="secondary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
