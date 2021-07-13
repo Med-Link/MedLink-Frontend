@@ -57,7 +57,7 @@ export default function TableList() {
           <CardBody>
             <Table
               tableHeaderColor="secondary"
-              tableHead={["Full Name", "Email", "Telephone", "Deacticate/Activate"]}
+              tableHead={["Full Name", "Email", "Telephone", "Activate"]}
               tableData={[
                 ["Akila", "akila@we.com", "0114785259", <Switch inputProps={{ 'aria-label': 'primary checkbox' }} />],
                 ["Sandali", "sanu@we.com", "126987523", <Switch inputProps={{ 'aria-label': 'primary checkbox' }} />],
