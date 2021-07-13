@@ -88,7 +88,7 @@ export default function CustomerNavbarLinks() {
           className={classes.buttonLink}
         >
           <Notifications className={classes.icons} />
-          <span className={classes.notifications}>5</span>
+          <span className={classes.notifications}>2</span>
           <Hidden mdUp implementation="css">
             <p onClick={handleCloseNotification} className={classes.linkText}>
               Notification
@@ -122,15 +122,15 @@ export default function CustomerNavbarLinks() {
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
-                      Mike John responded to your email
+                      Pharma is responding your request
                     </MenuItem>
                     <MenuItem
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
-                      You have 5 new tasks
+                      Aruna phamrmacy is accept your order
                     </MenuItem>
-                    <MenuItem
+                    {/*<MenuItem
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
@@ -147,7 +147,7 @@ export default function CustomerNavbarLinks() {
                       className={classes.dropdownItem}
                     >
                       Another One
-                    </MenuItem>
+                    </MenuItem>*/}
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
@@ -202,6 +202,7 @@ export default function CustomerNavbarLinks() {
                     <MenuItem
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
+                      
                     >
                       Settings
                     </MenuItem>
