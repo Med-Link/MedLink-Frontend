@@ -35,13 +35,13 @@ const dashboardRoutes = [
     component: PharmacyRequests,
     layout: "/admin",
   },
-  {
-    path: "/adminrequests",
-    name: "Admin Requests",
-    icon: LibraryBooks,
-    component: AdminRequests,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/adminrequests",
+  //   name: "Admin Requests",
+  //   icon: LibraryBooks,
+  //   component: AdminRequests,
+  //   layout: "/admin",
+  // },
   {
     path: "/notifications",
     name: "Notifications",

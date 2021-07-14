@@ -10,6 +10,8 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Hidden from "@material-ui/core/Hidden";
 import Poppers from "@material-ui/core/Popper";
 import Divider from "@material-ui/core/Divider";
+import Link from "@material-ui/core/Link"
+
 // @material-ui/icons
 import Person from "@material-ui/icons/Person";
 import Notifications from "@material-ui/icons/Notifications";
@@ -18,6 +20,7 @@ import Search from "@material-ui/icons/Search";
 // core components
 import CustomInput from "../CustomInput/CustomInput.js";
 import Button from "../CustomButtons/Button.js";
+
 
 import styles from "../../../assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
@@ -211,7 +214,12 @@ export default function CustomerNavbarLinks() {
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
-                      Logout
+                      <Link color='secondary' size='small' variant="h6" underline="none" href="/">
+                        <Button>
+                          Logout
+                        </Button>
+                      </Link>
+
                     </MenuItem>
                   </MenuList>
                 </ClickAwayListener>

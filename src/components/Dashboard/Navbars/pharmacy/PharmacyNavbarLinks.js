@@ -10,6 +10,8 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Hidden from "@material-ui/core/Hidden";
 import Poppers from "@material-ui/core/Popper";
 import Divider from "@material-ui/core/Divider";
+import Link from "@material-ui/core/Link"
+
 // @material-ui/icons
 import Person from "@material-ui/icons/Person";
 import Notifications from "@material-ui/icons/Notifications";
@@ -210,7 +212,12 @@ export default function AdminNavbarLinks() {
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
-                      Logout
+                      <Link variant="h6" underline="none" href="/">
+                        <Button>
+                          Logout
+                        </Button>
+                      </Link>
+
                     </MenuItem>
                   </MenuList>
                 </ClickAwayListener>

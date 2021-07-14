@@ -18,6 +18,9 @@ import Search from "@material-ui/icons/Search";
 // core components
 import CustomInput from "../CustomInput/CustomInput.js";
 import Button from "../CustomButtons/Button.js";
+import Link from "@material-ui/core/Link"
+
+
 
 import styles from "../../../assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
@@ -208,10 +211,17 @@ export default function AdminNavbarLinks() {
                     </MenuItem>
                     <Divider light />
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      
+                      // onClick={handleClickProfile}
                       className={classes.dropdownItem}
+                      href="/"
                     >
-                      Logout
+                      <Link color='secondary' size='small' variant="h6" underline="none" href="/">
+                        <Button>
+                          Logout
+                        </Button>
+                      </Link>
+
                     </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
