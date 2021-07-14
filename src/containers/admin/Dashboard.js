@@ -100,16 +100,16 @@ export default function Dashboard() {
             </CardHeader>
             <CardBody>
               <Table
-                tableHeaderColor="warning"
+                tableHeaderColor="primary"
                 tableHead={["ID", "Name", "District", "Action"]}
                 tableData={[
                   ["1", "Micael Medcare", "Colombo",
                   <Link variant="h6" underline="none" href="pharmacyrequests/">
-                    <Button color="primary" round >View</Button>
+                    <Button color="primary" >View</Button>
                   </Link> ],
                   ["2", "Minerva Pharmacy", "Puttalam",
                   <Link variant="h6" underline="none" href="pharmacyrequests/">
-                    <Button color="primary" round >View</Button>
+                    <Button color="primary">View</Button>
                   </Link> ],
                 ]}
               />
@@ -126,7 +126,7 @@ export default function Dashboard() {
             </CardHeader>
             <CardBody>
               <Table
-                tableHeaderColor="warning"
+                tableHeaderColor="primary"
                 tableHead={["ID", "Name","Activate"]}
                 tableData={[
                   ["Admin2", "Sandali Perera",<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
