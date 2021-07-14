@@ -2,6 +2,7 @@
   "name": "medlink",
   "version": "0.1.0",
   "private": true,
+  "proxy":"http://localhost:4000",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@material-ui/core": "^4.12.1",

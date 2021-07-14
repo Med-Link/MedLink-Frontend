@@ -1,5 +1,5 @@
 import { authConstants } from "./constants";
-import axios from "../helpers/axios";
+import axios from "axios";
 
 export const login = (user) => {
 
@@ -9,11 +9,11 @@ export const login = (user) => {
     return async (dispatch) => {
 
         dispatch({ type: authConstants.LOGIN_REQUEST });
-        const res = await axios.post(`/pharmacy/signin`, {
+        const res = await axios.post(`http://localhost:4000/api/pharmacy/signin`, {
             ...user
         });
 
-        if(res.status === 201){
+        if(res.status === 200){
             const { token, user } = res.data;
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));

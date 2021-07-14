@@ -1,5 +1,5 @@
 import { authConstants } from "./constants";
-import axios from "../helpers/axios";
+import axios from "axios";
 
 export const login = (user) => {
 
@@ -9,7 +9,7 @@ export const login = (user) => {
     return async (dispatch) => {
 
         dispatch({ type: authConstants.LOGIN_REQUEST });
-        const res = await axios.post(`/signin`, {
+        const res = await axios.post(`http://localhost:4000/api/signin`, {
             ...user
         });
 
