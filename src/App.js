@@ -48,17 +48,17 @@ function App() {
           <Route path="/ResetPassword" component={ResetPassword} />
            
 
-          <Route path="/admin" component={Admin} />
+          <PrivateRoute path="/admin" component={Admin} />
           {/* <Route path="/adminsignup" component={SignUpAdmin} /> */}
 
           <Route path="/adminsignin" component={SignInAdmin} />
 
-          <Route path="/Customer" component={Customer} />
+          <PrivateRoute1 path="/Customer" component={Customer} />
           <Route path="/customersignup" component={CustomerSignup} />
           <Route path="/customersignin" component={CustomerSignin} />
 
           {/* <PrivateRoute2 path="/pharmacy" component={Pharmacy} /> */}
-          <Route path="/pharmacy" component={Pharmacy} />
+          <PrivateRoute2 path="/pharmacy" component={Pharmacy} />
           <Route path="/pharmacysignup" component={SignUpPharmacy} />
           <Route path="/pharmacysignin" component={SignInPharmacy} />
 
