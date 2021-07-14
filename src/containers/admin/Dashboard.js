@@ -100,7 +100,7 @@ export default function Dashboard() {
             </CardHeader>
             <CardBody>
               <Table
-                tableHeaderColor="warning"
+                tableHeaderColor="primary"
                 tableHead={["ID", "Name", "District", "Action"]}
                 tableData={[
                   ["1", "Micael Medcare", "Colombo",
@@ -126,7 +126,7 @@ export default function Dashboard() {
             </CardHeader>
             <CardBody>
               <Table
-                tableHeaderColor="warning"
+                tableHeaderColor="primary"
                 tableHead={["ID", "Name","Activate"]}
                 tableData={[
                   ["Admin2", "Sandali Perera",<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
