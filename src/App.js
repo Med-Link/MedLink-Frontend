@@ -48,7 +48,7 @@ function App() {
           <Route path="/ResetPassword" component={ResetPassword} />
            
 
-          <Route path="/admin" component={Admin} />
+          <PrivateRoute path="/admin" component={Admin} />
           {/* <Route path="/adminsignup" component={SignUpAdmin} /> */}
 
           <Route path="/adminsignin" component={SignInAdmin} />

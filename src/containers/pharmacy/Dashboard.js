@@ -1,24 +1,22 @@
 import React from "react";
 // react plugin for creating charts
-import ChartistGraph from "react-chartist";
+
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
-import Icon from "@material-ui/core/Icon";
+
 // @material-ui/icons
-import Store from "@material-ui/icons/Store";
+import CheckIcon from '@material-ui/icons/Check';
 import DateRange from "@material-ui/icons/DateRange";
 import Update from "@material-ui/icons/Update";
-import Accessibility from "@material-ui/icons/Accessibility";
-import BugReport from "@material-ui/icons/BugReport";
-import Code from "@material-ui/icons/Code";
-import Cloud from "@material-ui/icons/Cloud";
-import Link  from "@material-ui/core/Link";
+import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
+import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
+
 
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
 import Table from "../../components/Dashboard/Table/Table.js";
-import Tasks from "../../components/Dashboard/Tasks/Tasks.js";
+
 import CustomTabs from "../../components/Dashboard/CustomTabs/CustomTabs.js";
 import Card from "../../components/Dashboard/Card/Card";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
@@ -26,7 +24,7 @@ import CardIcon from "../../components/Dashboard/Card/CardIcon.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import Button from "../../components/Dashboard//CustomButtons/Button";
-
+import ReceiptIcon from '@material-ui/icons/Receipt';
 
 import { bugs, website, server } from "../../variables/general.js";
 
@@ -48,11 +46,11 @@ export default function Dashboard() {
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="success" stats icon>
-              <CardIcon color="success">
-                <Store />
+              <CardIcon color="danger">
+                <ReceiptIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Orders</p>
-              <h3 className={classes.cardTitle}>4,245</h3>
+              <h3 className={classes.cardTitle}>1</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -66,10 +64,10 @@ export default function Dashboard() {
         <Card>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
-                <Accessibility />
+                <CheckIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Confirmed</p>
-              <h3 className={classes.cardTitle}>+245</h3>
+              <h3 className={classes.cardTitle}>+2</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -82,11 +80,11 @@ export default function Dashboard() {
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="info" stats icon>
-              <CardIcon color="info">
-                <Accessibility />
+              <CardIcon color="success">
+                <CancelPresentationIcon />
               </CardIcon>
-              <p className={classes.cardCategory}>To Be Confirmed</p>
-              <h3 className={classes.cardTitle}>+245</h3>
+              <p className={classes.cardCategory}>Closed Deals</p>
+              <h3 className={classes.cardTitle}>3</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -110,11 +108,11 @@ export default function Dashboard() {
                     <CardBody>
                       <Table
                         tableHeaderColor="warning"
-                        tableHead={["MedId", "Med Name", "Current Quantity"]}
+                        tableHead={["MedID", "Med Name", "Current Quantity"]}
                         tableData={[
-                          ["121", "Paradin", "20" ],
-                          ["921", "Domperidone", "20" ],
-                          ["4521", "Siddalepa", "5" ],
+                          ["M004", "Panadene 10mg", "20" ],
+                          ["M008", "Domperidone 5mg", "20" ],
+                          ["M010", "Siddalepa 50ml", "5" ],
                         ]}
                       />
                     </CardBody>
@@ -129,11 +127,11 @@ export default function Dashboard() {
                     <CardBody>
                       <Table
                         tableHeaderColor="warning"
-                        tableHead={["MedId", "Med Name"]}
+                        tableHead={["MedID", "Med Name"]}
                         tableData={[
-                          ["121", "Ventoline"],
-                          ["921", "bandage"],
-                          ["4521", "Insuline Syringes 40 ui"],
+                          ["M003", "Ventoline 2mg"],
+                          ["M005", "Bandage"],
+                          ["M006", "Insuline Syringes 40 ui"],
                         ]}
                       />
                     </CardBody>
@@ -154,16 +152,11 @@ export default function Dashboard() {
             <CardBody>
               <Table
                 tableHeaderColor="primary"
-                tableHead={["Order ID", "CustomerName", "View"]}
+                tableHead={["Order ID", "CustomerName"]}
                 tableData={[
                   ["MO2001",
                     "Michelle Fernando",
-                    <Link
-                      variant="h6"
-                      underline="none"
-                      href="orderrequests/"
-                    >
-                    <Button id="view" color="primary" >View</Button></Link>,
+                    
                   ],
                 ]}
               />
