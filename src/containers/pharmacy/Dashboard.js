@@ -9,9 +9,6 @@ import Store from "@material-ui/icons/Store";
 import DateRange from "@material-ui/icons/DateRange";
 import Update from "@material-ui/icons/Update";
 import Accessibility from "@material-ui/icons/Accessibility";
-import BugReport from "@material-ui/icons/BugReport";
-import Code from "@material-ui/icons/Code";
-import Cloud from "@material-ui/icons/Cloud";
 import Link  from "@material-ui/core/Link";
 
 // core components

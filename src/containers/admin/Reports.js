@@ -155,13 +155,12 @@ export default function UpgradeToPro() {
                   <tr>
                     <td />
                     <td className={classes.center}>
-                      <Button round color="info">
+                      <Button color="info">
                         View Full Report
                       </Button>
                     </td>
                     <td className={classes.center}>
                       <Button
-                        round
                         color="primary"
                       >
                         Download

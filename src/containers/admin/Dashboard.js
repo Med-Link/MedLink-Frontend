@@ -105,11 +105,11 @@ export default function Dashboard() {
                 tableData={[
                   ["1", "Micael Medcare", "Colombo",
                   <Link variant="h6" underline="none" href="pharmacyrequests/">
-                    <Button color="primary" round >View</Button>
+                    <Button color="primary" >View</Button>
                   </Link> ],
                   ["2", "Minerva Pharmacy", "Puttalam",
                   <Link variant="h6" underline="none" href="pharmacyrequests/">
-                    <Button color="primary" round >View</Button>
+                    <Button color="primary">View</Button>
                   </Link> ],
                 ]}
               />
