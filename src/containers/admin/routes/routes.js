@@ -8,7 +8,7 @@ import Unarchive from "@material-ui/icons/Unarchive";
 import DashboardPage from "../Dashboard.js";
 import UserProfile from "../UserProfile.js";
 import PharmacyRequests from "../PharmacyRequests.js";
-import AdminRequests from "../AdminRequests.js";
+// import AdminRequests from "../AdminRequests.js";
 import NotificationsPage from "../Notifications.js";
 import AddNewAdmin from "../AddNewAdmin";
 import Report from "../Reports.js";

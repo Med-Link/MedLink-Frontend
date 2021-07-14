@@ -38,7 +38,7 @@ const SignUpAdmin=()=>{
     const signup =(e)=>{
         e.preventDefault();
         
-        axios.post('http://localhost:4000/api/admin/signup', {
+        axios.post('http://localhost:4000/api/admin/addnewAdmin', {
             firstName: firstName,
             lastName:lastName,
             email:email,

@@ -3,8 +3,8 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 // import './App.css';
 import Index from './containers/mainLandingPage/Home'
-import Signin from './containers/signin/SignIn'
-import SignUpUser from './containers/signup/SignUpUser'
+// import Signin from './containers/signin/SignIn'
+// import SignUpUser from './containers/signup/SignUpUser'
 import Profile from './containers/customer/profile/Profile'
 import Form from './containers/customer/form/Form'
 import Checkout from './containers/customer/payment/Checkout'
@@ -38,8 +38,8 @@ function App() {
        <Router>
         <Switch>
           <Route path="/" exact component={Index} />
-          <Route path="/Signin" component={Signin} />
-          <Route path="/SignupUser" component={SignUpUser} />
+          {/* <Route path="/Signin" component={Signin} /> */}
+          {/* <Route path="/SignupUser" component={SignUpUser} /> */}
           <Route path="/Profile" component={Profile} />
           <Route path="/Form" component={Form} />
           <Route path="/Checkout" component={Checkout} />
