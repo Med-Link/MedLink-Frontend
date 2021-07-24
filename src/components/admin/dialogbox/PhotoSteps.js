@@ -10,7 +10,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 const tutorialSteps = [
   {
     label: 'Medical Council Certificate',
-    imgPath:'http://ohlums.com/certificate/18.jpg',
+    imgPath: 'http://ohlums.com/certificate/18.jpg',
   },
   {
     label: 'Pharmaciest Licence',
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
   },
   img: {
-    width:'100%',
+    width: '100%',
     maxWidth: 600,
     overflow: 'hidden',
     display: 'block',
@@ -74,18 +74,18 @@ export default function TextMobileStepper() {
         position="static"
         variant="text"
         activeStep={activeStep}
-        nextButton={
+        nextButton={(
           <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
             Next
             {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
           </Button>
-        }
-        backButton={
+        )}
+        backButton={(
           <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
             {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
             Back
           </Button>
-        }
+        )}
       />
     </div>
   );

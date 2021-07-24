@@ -1,20 +1,22 @@
-import React from "react";
+import React from 'react';
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import classNames from 'classnames';
 // nodejs library to set properties for components
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 // @material-ui/icons
 
 // core components
-import styles from "../../../assets/jss/material-dashboard-react/components/cardStyle";
+import styles from '../../../assets/jss/material-dashboard-react/components/cardStyle';
 
 const useStyles = makeStyles(styles);
 
 export default function Card(props) {
   const classes = useStyles();
-  const { className, children, plain, profile, chart, ...rest } = props;
+  const {
+    className, children, plain, profile, chart, ...rest
+  } = props;
   const cardClasses = classNames({
     [classes.card]: true,
     [classes.cardPlain]: plain,
