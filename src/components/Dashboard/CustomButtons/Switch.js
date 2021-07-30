@@ -1,7 +1,6 @@
 import React from "react";
 
 import Switch from '@material-ui/core/Switch';
-import ThemeProvider from "@material-ui/styles/ThemeProvider";
 
 export default function Switches() {
     const [state, setState] = React.useState({
