@@ -23,6 +23,7 @@ import Button from "../CustomButtons/Button.js";
 
 
 import styles from "../../../assets/jss/material-dashboard-react/components/headerLinksStyle.js";
+import { signout } from "../../../actions/auth.actionscustomer.js";
 
 const useStyles = makeStyles(styles);
 
@@ -50,6 +51,12 @@ export default function CustomerNavbarLinks() {
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
+  const dispatch = useDispatch();
+  const logout = ()=>{
+    dispatch(signout);
+  }
+
+
   return (
     <div>
       {/*<div className={classes.searchWrapper}>
@@ -216,6 +223,7 @@ export default function CustomerNavbarLinks() {
                     >
                       <Link color='secondary' size='small' variant="h6" underline="none" href="/">
                         <Button>
+                          onClick={logout}
                           Logout
                         </Button>
                       </Link>

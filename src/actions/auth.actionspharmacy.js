@@ -49,7 +49,7 @@ export const isuserLoggedIn = () => async (dispatch) => {
 
 export const signout = () => async (dispatch) => {
   dispatch({ type: authConstants.LOGOUT_REQUEST });
-  const res = await axios.post('/signout');
+  const res = await axios.post('http://localhost:4000/api/pharmacy/signout');
 
   if (res.status === 200) {
     localStorage.clear();
