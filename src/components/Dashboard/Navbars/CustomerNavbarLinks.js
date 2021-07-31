@@ -222,8 +222,8 @@ export default function CustomerNavbarLinks() {
                       className={classes.dropdownItem}
                     >
                       <Link color='secondary' size='small' variant="h6" underline="none" href="/">
-                        <Button>
-                          onClick={logout}
+                        <Button
+                          onClick={logout}>
                           Logout
                         </Button>
                       </Link>

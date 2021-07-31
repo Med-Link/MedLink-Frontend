@@ -49,6 +49,11 @@ export default function AdminNavbarLinks() {
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
+  const dispatch = useDispatch();
+  const logout = ()=>{
+    dispatch(signout);
+  }
+
   return (
     <div>
       <div className={classes.searchWrapper}>
@@ -213,7 +218,7 @@ export default function AdminNavbarLinks() {
                       className={classes.dropdownItem}
                     >
                       <Link variant="h6" underline="none" href="/">
-                        <Button>
+                        <Button onClick={logout}>
                           Logout
                         </Button>
                       </Link>
