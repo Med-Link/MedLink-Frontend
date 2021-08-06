@@ -25,6 +25,7 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import * as yup from 'yup';
 import {pharmacySchema} from '../../validations/pharmacyValidation'
+import Footer from '../../components/Dashboard/Footer/Footer';
 
 function Copyright() {
   return (
@@ -158,7 +159,7 @@ const SignUpPharmacy=()=>{
   };
   
   return (
-    <div>
+    <div style={{overflow: "hidden"}}>
     <GridContainer spacing={0} >
     <Hidden smDown>
       <GridItem xs={12} sm={12} md={7}>
@@ -367,7 +368,7 @@ const SignUpPharmacy=()=>{
       
       </GridContainer>
       <Box xs={12} sm={12} md={12} >
-        <Copyright />
+        <Footer />
       </Box>
       </div>
   );
