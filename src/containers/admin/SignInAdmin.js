@@ -117,13 +117,6 @@ const SignIn=(props)=>{
                         Forgot Password ?
                     </Link>
                 </Typography>
-
-                {/* <Typography>Do not have an account ? 
-                    <Link href="/adminsignup">
-                        Sign Up
-                    </Link>
-                </Typography> */}
-                
             </Paper>
             <Box mt={5}>
                 <Footer style={foot}/>
