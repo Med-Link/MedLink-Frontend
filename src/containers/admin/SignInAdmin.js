@@ -19,22 +19,23 @@ import axios from 'axios';
 import {isuserLoggedIn, login} from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import Footer from "../../components/Dashboard/Footer/Footer.js";
 
 
-function Copyright() {
-    const foot={position: 'absolute', bottom: 0, width: '98%'}
+// function Copyright() {
+    
 
-    return (
-      <Typography variant="body2" color="textSecondary" align="center" style={foot}>
-        {'Copyright © '}
-        <Link color="inherit" href="/">
-          Medlink
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
+//     return (
+//       <Typography variant="body2" color="textSecondary" align="center" style={foot}>
+//         {'Copyright © '}
+//         <Link color="inherit" href="/">
+//           Medlink
+//         </Link>{' '}
+//         {new Date().getFullYear()}
+//         {'.'}
+//       </Typography>
+//     );
+//   }
 
 const SignIn=(props)=>{
     //   const [email, setEmail] = useState("");
@@ -88,7 +89,8 @@ const SignIn=(props)=>{
     const avatarStyle={backgroundColor: '#2ab5b5'}
     const gridStyle={padding: 20}
     const buttonStyle={backgroundColor: '#2ab5b5', margin: '8px 0'}
-     
+    const foot={position: 'absolute', bottom: 0}
+
     return(
         
         <Grid style={gridStyle}>
@@ -124,7 +126,7 @@ const SignIn=(props)=>{
                 
             </Paper>
             <Box mt={5}>
-                <Copyright />
+                <Footer style={foot}/>
             </Box>
         </Grid>
     )
