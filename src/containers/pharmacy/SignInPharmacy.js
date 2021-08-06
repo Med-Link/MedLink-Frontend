@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'center',
       justifyContent: 'center',
       width:"75%",
-      marginLeft:theme.spacing(2),
+      marginLeft:theme.spacing(8),
       padding:theme.spacing(2),
       marginTop:theme.spacing(3),
       maxWidth:'600px',
@@ -104,7 +104,7 @@ const SignInPharmacy=()=>{
       if (auth.authenticate){
           return <Redirect to={'/pharmacy'} />
       }
-      
+
     return(
         <div style={{overflow: "hidden"}}>
         <GridContainer>
