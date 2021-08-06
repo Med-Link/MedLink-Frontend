@@ -1,6 +1,7 @@
 /*eslint-disable*/
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
@@ -15,27 +16,28 @@ export default function Footer(props) {
   return (
     <footer className={classes.footer}>
       <div className={classes.container}>
-        <div className={classes.left}>
+        {/* <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
-              <a href="#home" className={classes.block}>
+              <Link to="/" className={classes.block}>
                 Home
-              </a>
+              </Link>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
-              <a href="#company" className={classes.block}>
+              <a
+              href="/adminsignin" className={classes.block}>
                 Login
               </a>
             </ListItem>
              
             <ListItem className={classes.inlineBlock}>
-              <a href="#blog" className={classes.block}>
+              <Link to="/{user.role}" className={classes.block}>
                 Dashboard
-              </a>
+              </Link>
             </ListItem>
           </List>
-        </div>
-        <p className={classes.right}>
+        </div> */}
+        <p className={classes.center}>
           <span>
             <a
               href="/"
