@@ -22,8 +22,10 @@ import { Redirect } from 'react-router-dom';
 
 
 function Copyright() {
+    const foot={position: 'absolute', bottom: 0, width: '98%'}
+
     return (
-      <Typography variant="body2" color="textSecondary" align="center">
+      <Typography variant="body2" color="textSecondary" align="center" style={foot}>
         {'Copyright © '}
         <Link color="inherit" href="/">
           Medlink
@@ -114,11 +116,11 @@ const SignIn=(props)=>{
                     </Link>
                 </Typography>
 
-                <Typography>Do not have an account ? 
+                {/* <Typography>Do not have an account ? 
                     <Link href="/adminsignup">
                         Sign Up
                     </Link>
-                </Typography>
+                </Typography> */}
                 
             </Paper>
             <Box mt={5}>
