@@ -1,8 +1,5 @@
 import React, {useEffect, useState} from 'react';
 
-
-
-
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
@@ -29,21 +26,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import pharmacist from '../../assets/images/pharmacist2.jpg';
+import Footer from '../../components/Dashboard/Footer/Footer';
 
 
-function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright ©️ '}
-        <Link color="inherit" href="/">
-          Medlink
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
-  const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
     root: {
       backgroundColor : '#eee',
     },
@@ -70,15 +56,6 @@ function Copyright() {
       margin: theme.spacing(3, 0, 1),
       width:'70%',
     },
-    /*label:{
-      marginLeft:theme.spacing(0),
-    // },*/
-    // back:{
-    //   backgroundColor: "#eee",
-    //   marginTop:theme.spacing(1),
-    //   margin:theme.spacing(1,1,1),
-    //   height:'small',
-    // },
     input: {
       display: 'none',
     },
@@ -86,16 +63,14 @@ function Copyright() {
       alignItems: 'center',
       justifyContent: 'center',
       width:"75%",
-      // height:'auto',
-      // maxHeight:'400px',
-      
-      padding:theme.spacing(4),
-      marginTop:theme.spacing(5),
+      marginLeft:theme.spacing(2),
+      padding:theme.spacing(2),
+      marginTop:theme.spacing(3),
       maxWidth:'600px',
     },
     
   
-  }));
+}));
 
 const SignInPharmacy=()=>{
   const classes = useStyles();
@@ -129,15 +104,9 @@ const SignInPharmacy=()=>{
       if (auth.authenticate){
           return <Redirect to={'/pharmacy'} />
       }
-
       
-    // const paperStyle={padding :20,height:'450px',width:'300px', margin:"20px auto"}
-    // const avatarStyle={backgroundColor: '#2ab5b5'}
-    // // const gridStyle={padding: 20}
-    // const buttonStyle={backgroundColor: '#2ab5b5', margin: '8px 0'}
-
     return(
-        <div>
+        <div style={{overflow: "hidden"}}>
         <GridContainer>
           <Hidden smDown>
               <GridItem xs={12} sm={12} md={7}>
@@ -214,7 +183,7 @@ const SignInPharmacy=()=>{
       
         </GridContainer>
         <Box xs={12} sm={12} md={12} >
-          <Copyright />
+          <Footer />
         </Box>
       </div>
     )
