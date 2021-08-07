@@ -73,7 +73,8 @@ export default function AdminNavbarLinks() {
           <Search />
         </Button>
       </div>
-      <Button
+      <Link href="/admin" color="inherit">
+        <Button
         color={window.innerWidth > 959 ? "transparent" : "white"}
         justIcon={window.innerWidth > 959}
         simple={!(window.innerWidth > 959)}
@@ -85,6 +86,7 @@ export default function AdminNavbarLinks() {
           <p className={classes.linkText}>Dashboard</p>
         </Hidden>
       </Button>
+      </Link>
       <div className={classes.manager}>
         <Button
           color={window.innerWidth > 959 ? "transparent" : "white"}
