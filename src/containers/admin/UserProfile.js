@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -14,6 +15,7 @@ import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 
 import avatar from "../../assets/images/person.jpg";
+import axios from "axios";
 
 const styles = {
   cardCategoryWhite: {
@@ -37,6 +39,16 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
+  // const [data, setData] = useEffect()
+  useEffect(()=>{
+    fetch('http://localhost:4000/api/admin/viewprofile')
+    .then(res =>{
+       return res.json()
+    })
+    .then(data =>{
+      console.log(data.result);
+    })
+  })
   const classes = useStyles();
   return (
     <div>

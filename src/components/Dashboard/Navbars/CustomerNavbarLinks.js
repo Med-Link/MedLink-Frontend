@@ -51,7 +51,7 @@ export default function CustomerNavbarLinks() {
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
-  const dispatch = useDispatch();
+  const dispatch = useDispatch;
   const logout = ()=>{
     dispatch(signout);
   }

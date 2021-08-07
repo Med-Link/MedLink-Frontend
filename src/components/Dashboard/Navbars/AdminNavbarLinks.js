@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useDispatch} from "react";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -50,7 +50,7 @@ export default function AdminNavbarLinks() {
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
-  const dispatch = useDispatch();
+  const dispatch = useDispatch;
   const logout = ()=>{
     dispatch(signout);
   };
