@@ -4,7 +4,7 @@ import { backendUrl } from '../urlConfig';
 // import axios from "../helpers/axios";
 
 export const login = (user) => {
-  console.log(user);
+  console.log("kkkkkkk");
 
   return async (dispatch) => {
     dispatch({ type: authConstants.LOGIN_REQUEST });
@@ -52,6 +52,7 @@ export const isuserLoggedIn = () => async (dispatch) => {
 };
 
 export const signout = () => async (dispatch) => {
+  console.log("gghjkkkk");
   dispatch({ type: authConstants.LOGOUT_REQUEST });
   const res = await axios.post('http://localhost:4000/api/admin/signout');
 

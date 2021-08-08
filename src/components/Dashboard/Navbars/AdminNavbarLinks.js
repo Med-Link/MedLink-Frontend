@@ -1,4 +1,5 @@
 import React, {useDispatch} from "react";
+import {signout} from '../../../actions/auth.actions';
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -52,7 +53,7 @@ export default function AdminNavbarLinks() {
   };
   const dispatch = useDispatch;
   const logout = ()=>{
-    dispatch(signout);
+    dispatch(signout);f
   };
 
   return (

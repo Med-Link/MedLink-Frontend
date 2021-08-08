@@ -41,7 +41,7 @@ const useStyles = makeStyles(styles);
 export default function UserProfile() {
   // const [data, setData] = useEffect()
   useEffect(()=>{
-    fetch('http://localhost:4000/api/admin/viewprofile')
+    fetch('http://localhost:4000/api/admin/viewadmins')
     .then(res =>{
        return res.json()
     })
