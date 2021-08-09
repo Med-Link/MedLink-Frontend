@@ -40,8 +40,13 @@ const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
   // const [data, setData] = useEffect()
+  const token = window.localStorage.getItem('token');
   useEffect(()=>{
-    fetch('http://localhost:4000/api/admin/viewadmins')
+    axios.get('http://localhost:4000/api/admin/viewprofile',{
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : ''
+      }
+      })
     .then(res =>{
        return res.json()
     })

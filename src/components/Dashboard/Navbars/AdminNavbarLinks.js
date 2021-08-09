@@ -53,7 +53,7 @@ export default function AdminNavbarLinks() {
   };
   const dispatch = useDispatch;
   const logout = ()=>{
-    dispatch(signout);f
+    dispatch(signout);
   };
 
   return (
