@@ -48,10 +48,10 @@ export default function UserProfile() {
       }
       })
     .then(res =>{
-       return res.json()
+       console.log(res);
     })
     .then(data =>{
-      console.log(data.result);
+      // console.log(data.message);
     })
   })
   const classes = useStyles();

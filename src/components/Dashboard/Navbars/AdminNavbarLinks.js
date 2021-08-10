@@ -1,6 +1,10 @@
-import React, {useDispatch} from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
 import {signout} from '../../../actions/auth.actions';
 import classNames from "classnames";
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -27,6 +31,7 @@ import styles from "../../../assets/jss/material-dashboard-react/components/head
 
 const useStyles = makeStyles(styles);
 
+
 export default function AdminNavbarLinks() {
   const classes = useStyles();
   const [openNotification, setOpenNotification] = React.useState(null);
@@ -51,11 +56,22 @@ export default function AdminNavbarLinks() {
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
-  const dispatch = useDispatch;
-  const logout = ()=>{
-    dispatch(signout);
-  };
+  const dispatch = useDispatch();
+  const logout = async ()=>{
+    console.log("gggggggllll");
+    // localStorage.clear();
+    const res = await axios.post(`http://localhost:4000/api/admin/signout`);
+    if(res.status === 200){
+      localStorage.clear();
+      // return <Redirect to={'/'} />
+      <Redirect to={'/'} />
+    }
 
+    // dispatch(signout);
+    // signout);
+  
+  };
+  
   return (
     <div>
       <div className={classes.searchWrapper}>
@@ -224,12 +240,14 @@ export default function AdminNavbarLinks() {
                       className={classes.dropdownItem}
                       href="/"
                     >
-                      <Link color='secondary' size='small' variant="h6" underline="none" href="/">
+                      {/* <Link color='secondary' size='small' variant="h6" underline="none">
+                        </Link> */}
+                        <Link href='/'>
                         <Button
                         onClick={logout}>
                           Logout
                         </Button>
-                      </Link>
+                        </Link>
 
                     </MenuItem>
                   </MenuList>
