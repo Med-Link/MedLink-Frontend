@@ -11,13 +11,13 @@ export const login = (user) => {
     });
 
     if (res.status === 200) {
-      const { token, user } = res.data;
+      const { token, userdet } = res.data;
       localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(userdet));
       dispatch({
         type: authConstants.LOGIN_SUCCESS,
         payload: {
-          token, user,
+          token, userdet,
         },
       });
     } else if (res.status === 400) {
