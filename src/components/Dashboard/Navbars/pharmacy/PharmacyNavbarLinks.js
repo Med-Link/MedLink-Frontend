@@ -49,10 +49,20 @@ export default function AdminNavbarLinks() {
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
-  const dispatch = useDispatch;
-  const logout = ()=>{
-    dispatch(signout);
-  }
+  const logout = async ()=>{
+    // console.log("gggggggllll");
+    // localStorage.clear();
+    const res = await axios.post(`http://localhost:4000/api/pharmacy/signout`);
+    if(res.status === 200){
+      localStorage.clear();
+      // return <Redirect to={'/'} />
+      // <Redirect to={'/'} />
+    }
+
+    // dispatch(signout);
+    // signout);
+  
+  };
 
   return (
     <div>
