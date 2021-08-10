@@ -19,7 +19,7 @@ export const login = (user) => {
       const { token, userdet } = res.data;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(userdet));
-      console.log(token,userdet);
+      // console.log(token,userdet);
       dispatch({
         type: authConstants.LOGIN_SUCCESS,
         payload: {

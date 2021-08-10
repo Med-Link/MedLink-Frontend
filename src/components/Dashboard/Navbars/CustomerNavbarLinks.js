@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import axios from "axios";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -51,10 +52,21 @@ export default function CustomerNavbarLinks() {
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
-  const dispatch = useDispatch;
-  const logout = ()=>{
-    dispatch(signout);
-  }
+
+  const logout = async ()=>{
+    console.log("gggggggllll");
+    // localStorage.clear();
+    const res = await axios.post(`http://localhost:4000/api/signout`);
+    if(res.status === 200){
+      localStorage.clear();
+      // return <Redirect to={'/'} />
+      // <Redirect to={'/'} />
+    }
+
+    // dispatch(signout);
+    // signout);
+  
+  };
 
 
   return (
@@ -221,7 +233,7 @@ export default function CustomerNavbarLinks() {
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
-                      <Link color='secondary' size='small' variant="h6" underline="none" href="/">
+                      <Link href="/">
                         <Button
                           onClick={logout}>
                           Logout

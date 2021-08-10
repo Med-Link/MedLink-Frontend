@@ -58,7 +58,7 @@ export default function AdminNavbarLinks() {
   };
   const dispatch = useDispatch();
   const logout = async ()=>{
-    console.log("gggggggllll");
+    // console.log("gggggggllll");
     // localStorage.clear();
     const res = await axios.post(`http://localhost:4000/api/admin/signout`);
     if(res.status === 200){
