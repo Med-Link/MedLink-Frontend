@@ -12,7 +12,7 @@ import PharmacyRequests from "../PharmacyRequests.js";
 import NotificationsPage from "../Notifications.js";
 import AddNewAdmin from "../AddNewAdmin";
 import Report from "../Reports.js";
-
+import Employees from "../Employees"
 const dashboardRoutes = [
   {
     path: "/dashboard",
@@ -36,6 +36,13 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
+    path: "/employees",
+    name: "Admin Accounts",
+    icon: Person,
+    component: Employees,
+    layout: "/admin",
+  },
+  {
     path: "/notifications",
     name: "Notifications",
     icon: Notifications,
@@ -49,13 +56,7 @@ const dashboardRoutes = [
     component: Report,
     layout: "/admin",
   },
-  {
-    path: "/addnewadmin",
-    name: "Add New Admin",
-    icon: Person,
-    component: AddNewAdmin,
-    layout: "/admin",
-  },
+  
 ];
 
 export default dashboardRoutes;
