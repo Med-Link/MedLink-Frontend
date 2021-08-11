@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,6 +16,7 @@ import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 
 import avatar from "../../assets/images/person.jpg";
 import axios from "axios";
+import reactDom from "react-dom";
 
 const styles = {
   cardCategoryWhite: {
@@ -39,21 +40,30 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
-  // const [data, setData] = useEffect()
-  const token = window.localStorage.getItem('token');
-  useEffect(()=>{
-    axios.get('http://localhost:4000/api/admin/viewprofile',{
-      headers: {
-        'Authorization': token ? `Bearer ${token}` : ''
-      }
+  const [data, setData] = useState([]);
+  const getdata =() =>{
+    const token = window.localStorage.getItem('token');
+    
+      axios.get('http://localhost:4000/api/admin/viewprofile',{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results =  res.data.result[0];
+         console.log(results);
+        setData(results);
       })
-    .then(res =>{
-       console.log(res);
-    })
-    .then(data =>{
-      // console.log(data.message);
-    })
-  })
+      // .then(data =>{
+      //   // console.log(data.message);
+      //   // const s= res.data.result[0];
+      //   // console.log(s);
+      // })
+    
+  }
+  React.useEffect(()=>{
+    getdata();
+  },[]);
   const classes = useStyles();
   return (
     <div>
@@ -66,11 +76,12 @@ export default function UserProfile() {
             </CardHeader>
             <CardBody>
               <GridContainer>
-                
+                {/* {data.email} */}
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="Username"
-                    id="username"
+                    labelText="First Name"
+                    id="firstname"
+                    value= {data.firstname}
                     formControlProps={{
                       fullWidth: true,
                     }}
@@ -78,8 +89,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="Email address"
-                    id="email-address"
+                    labelText="Last Name"
+                    id="lastname"
+                    value = {data.lastname}
                     formControlProps={{
                       fullWidth: true,
                     }}
@@ -92,8 +104,9 @@ export default function UserProfile() {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="First Name"
-                    id="first-name"
+                    labelText="Email"
+                    id="email"
+                    value={data.email}
                     formControlProps={{
                       fullWidth: true,
                     }}

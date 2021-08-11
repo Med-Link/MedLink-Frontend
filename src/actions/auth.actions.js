@@ -6,7 +6,7 @@ import { backendUrl } from '../urlConfig';
 // import axios from "../helpers/axios";
 
 export const login = (user) => {
-  console.log("kkkkkkk");
+  // console.log("kkkkkkk");
 
   return async (dispatch) => {
     dispatch({ type: authConstants.LOGIN_REQUEST });
