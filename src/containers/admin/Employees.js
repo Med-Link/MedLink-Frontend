@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import React from "react";
+import React, { useEffect, useState } from "react";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -13,10 +13,39 @@ import AddNewAdmin from "./AddNewAdmin"
 
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
+import axios from "axios";
+
 const useStyles = makeStyles(styles);
 
 export default function Dashboard() {
+
   const classes = useStyles();
+
+  // const { data: alladmins } = useFetch(
+	// 	'http://localhost:4000/api/admin/viewprofile'
+	// );
+	// console.log(alladmins);
+  const [data, setData] = useState([]);
+  const getdata =() =>{
+    const token = window.localStorage.getItem('token');
+    
+      axios.get('http://localhost:4000/api/admin/viewadmins')
+      .then(res =>{
+        const results =  res.data.result;
+         console.log(results);
+        setData(results);
+      })
+      // .then(data =>{
+      //   // console.log(data.message);
+      //   // const s= res.data.result[0];
+      //   // console.log(s);
+      // })
+    
+  }
+  React.useEffect(()=>{
+    getdata();
+  },[]);
+
   return (
     <div>
       
@@ -27,15 +56,49 @@ export default function Dashboard() {
                 <h4 className={classes.cardTitleWhite}>Registered Admin Accounts</h4>
               </CardHeader>
               <CardBody>
-              <Table
+              <div>
+                <table>
+                  <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                  </tr>
+                  
+                
+                {data ? (
+                  data.map((post) => 
+                  <tr>
+                  <td>
+                  {post.adminid}
+                  </td>
+                  <td>
+                  {post.firstname}
+                  </td>
+                  <td>
+                  {post.lastname}
+                  </td>
+                  <td>
+                  {post.email}
+                  </td>
+                </tr> )
+                  ) : 
+                  (
+                    <p>Loading..</p>
+                  )
+                }
+                </table>
+              </div>
+               
+              {/* <Table
                   tableHeaderColor="primary"
                   tableHead={["ID", "Name"]}
                   tableData={[
                     ["Admin2", "Sandali Perera"],
                     ["Admin3", "Akila De Silva"],
                     ["Admin4", "Piyumi Senarath"],
-                  ]}
-                />
+                  ]} 
+                /> */}
               </CardBody>
             </Card>
         </GridItem>
