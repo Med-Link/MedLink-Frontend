@@ -14,38 +14,30 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import Hidden from '@material-ui/core/Hidden';
+
+
 import GridContainer from '../../components/Dashboard/Grid/GridContainer';
 import GridItem from '../../components/Dashboard/Grid/GridItem';
-
-import Hidden from '@material-ui/core/Hidden';
+import Footer from '../../components/Dashboard/Footer/Footer';
 
 import pharmacist from '../../assets/images/pharmacist2.jpg';
 
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect,useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import {pharmacySchema} from '../../validations/pharmacyValidation'
-import Footer from '../../components/Dashboard/Footer/Footer';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="/">
-        Medlink
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+// import GoogleApiWrapper from '../../components/pharmacy/MapComponent'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor : '#eee',
   },
   paper: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(12),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -67,17 +59,8 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     // display: 'none',
+    marginLeft:theme.spacing(5),
   },
-  // image: {
-  //   alignItems: 'center',
-  //   justifyContent: 'flex-end',
-  //   height:'100%',
-  //   // height:'auto',
-  //   // maxHeight:'400px',
-    
-  //   padding:theme.spacing(4),
-  //   maxWidth:'900px',
-  // },
   image: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -87,12 +70,23 @@ const useStyles = makeStyles((theme) => ({
     marginTop:theme.spacing(3),
     maxWidth:'600px',
   },
+  para:
+  {
+    marginTop:theme.spacing(4),
+  },
+  backButton: {
+    marginRight: theme.spacing(3),
+  },
+  instructions: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
   
 
 }));
 
 const SignUpPharmacy=()=>{
-
+  let history = useHistory();
 
   const classes = useStyles();
   const [name, setName] = useState("");
@@ -117,7 +111,7 @@ const SignUpPharmacy=()=>{
         contactNumber:contactNumber,
         password:password,
         location:location,
-        // registrationDocs:registrationDocs,
+        registrationDocs:registrationDocs,
       };
       const isValid = await pharmacySchema.isValid(form);
       if(isValid===true){
@@ -135,8 +129,8 @@ const SignUpPharmacy=()=>{
             if(checked){
             axios.post('http://localhost:4000/api/pharmacy/signup', form).then((response)=>{
                 console.log(response);
-                setSignedUp(true);
-
+                // setSignedUp(true);
+                history.push("/pharmacysignin");
             }).catch((err)=>{
                 console.log(err);
                 setError("Signup Failed");
@@ -150,188 +144,189 @@ const SignUpPharmacy=()=>{
       }  
   }
 
-  if(signedUp){
-      return <Redirect to={'/pharmacysignin'} />
-  }
+  // if(signedUp){
+  //   // console.log("hhhhhhhhhhhhhhhhhhhhhhhhhh")
+  //     return <Redirect to={'/pharmacysignin'} />
+  // }
 
   const handleRegisterDocs = (e) => {
     setRegistrationDocs([...registrationDocs, e.target.files[0]]);
   };
+
+  function getSteps() {
+    return ['Enter Details', 'Select Location', 'Upload Documents','Complete Registration'];
+  }
   
-  return (
-    <div style={{overflow: "hidden"}}>
-      <GridContainer spacing={0} >
-        <Hidden smDown>
-          <GridItem xs={12} sm={12} md={7}>
-            <img src={pharmacist} className={classes.image} />
-          </GridItem>
-        </Hidden>
-        <GridItem xs={12} sm={12} md={4}  borderRadius={10}>
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Pharmacy Sign up
-            </Typography>
-          
-            <form className={classes.form} noValidate>
-              
-              <Grid container spacing={2}>
-                
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    autoComplete="pname"
-                    value ={name} onChange={(e) => setName(e.target.value)}
-                    name="pharmacyName"
-                    variant="outlined"
-                    required
-                    fullWidth
-                    id="pharmacyName"
-                    label="Pharmacy Name"
-                    autoFocus
-                    size="small"
-                  />
-                </Grid>
-                
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    variant="outlined"
-                    value ={contactNumber} onChange={(e) => setContactNumber(e.target.value)}
-                    required
-                    fullWidth
-                    id="pNumber"
-                    label="Mobile Number"
-                    name="pNumber"
-                    size="small"
-                  />
-                </Grid>
-                
-                <Grid item xs={12}>
-                  <TextField
-                    variant="outlined"
-                    value ={email} onChange={(e) => setEmail(e.target.value)}
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    size="small"
-                  />
-                </Grid>
-                
-                <Grid item xs={12}>
-                  <TextField
-                    variant="outlined"
-                    value ={password} onChange={(e) => setPassword(e.target.value)}
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    size="small"
-                  />
-                </Grid>
-                
-                <Grid item xs={12}>
-                  <TextField
-                    variant="outlined"
-                    value ={location} onChange={(e) => setLocation(e.target.value)}
-                    required
-                    fullWidth
-                    id="location"
-                    label="Location URL"
-                    name="location"
-                    size="small"
-                  />
-                </Grid>
-                
-                <Grid item xs={12} sm={12} md={6} >
-                  <Typography variant="body2" display="block">
-                    Medical Council Certificate *
-                  </Typography>                
-                </Grid>
-                <Grid item xs={12}  sm={12} md={6}>
-                <input
-                  accept="image/*"
-                  onChange={handleRegisterDocs}
-                  className={classes.input}
-                  id="contained-button-file"
-                  multiple
-                  type="file"
-                />
-                {/* <label htmlFor="contained-button-file">
-                  <Button 
-                    variant="contained" 
-                    component="span" 
-                    color="default"
-                    startIcon={<CloudUploadIcon />}>
-                  Upload
-                  </Button>
-                </label>              */}
-                </Grid>
-                
-                <Grid item xs={12} sm={12} md={6}>
-                  <Typography variant="body2" display="block" >
-                    Pharmaciest Licence *
-                  </Typography>                
-                </Grid>
-                <Grid item xs={12} sm={12} md={6}>
-                  <input
-                    accept="image/*"
-                  onChange={handleRegisterDocs}
-                    className={classes.input}
-                    id="contained-button-file"
-                    multiple
-                    type="file"
-                  />
-                  {/* <label htmlFor="contained-button-file">
-                    <Button 
-                      variant="contained" 
-                      component="span" 
-                      color="default"
-                      startIcon={<CloudUploadIcon />}>
-                    Upload
-                    </Button>
-                  </label>                  */}
-                </Grid>
+  const [activeStep, setActiveStep] = React.useState(0);
+  const steps = getSteps();
 
-                <Grid item xs={12} sm={12} md={6}>
-                  <Typography variant="body2" display="block">
-                    Business Registration Certificate *
-                  </Typography>                
-                </Grid>
-                <Grid item xs={12} sm={12} md={6}>
-                  <input
-                    accept="image/*"
-                    onChange={handleRegisterDocs}
-                    className={classes.input}
-                    id="contained-button-file"
-                    multiple
-                    type="file"
-                  />
-                  {/* <label htmlFor="contained-button-file">
-                    <Button 
-                      variant="contained" 
-                      component="span" 
-                      color="default"
-                      startIcon={<CloudUploadIcon />}>
-                    Upload
-                    </Button>
-                  </label>                 */}
-                </Grid>
-                
-                <Grid item xs={12}>
-                  <FormControlLabel
-                    onChange={(e) => setChecked(e.target.checked)}
-                    control={<Checkbox value="allowExtraEmails" color="primary" />}
-                    label="I agree to the Terms and Conditions"
-                  />
-                </Grid>
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
 
-              </Grid>
-              <Box xs={12} sm={12} md={12}
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
+
+  function getStepContent(stepIndex) {
+    
+    switch (stepIndex) {
+        case 0:
+            return (
+                <div>
+                    {/* <form className={classes.form} noValidate> */}
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                autoComplete="pname"
+                                value ={name} onChange={(e) => setName(e.target.value)}
+                                name="pharmacyName"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="pharmacyName"
+                                label="Pharmacy Name"
+                                autoFocus
+                                size="small"
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                variant="outlined"
+                                value ={contactNumber} onChange={(e) => setContactNumber(e.target.value)}
+                                required
+                                fullWidth
+                                id="pNumber"
+                                label="Mobile Number"
+                                name="pNumber"
+                                size="small"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                variant="outlined"
+                                value ={email} onChange={(e) => setEmail(e.target.value)}
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email Address"
+                                name="email"
+                                size="small"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                variant="outlined"
+                                value ={password} onChange={(e) => setPassword(e.target.value)}
+                                required
+                                fullWidth
+                                name="password"
+                                label="Password"
+                                type="password"
+                                id="password"
+                                size="small"
+                                />
+                            </Grid>                            
+                        </Grid>
+                    {/* </form> */}
+                </div>
+            )
+        case 1:
+            return (
+                <div>
+                    {/* <form className={classes.form} noValidate> */}
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <TextField
+                                variant="outlined"
+                                value ={location} onChange={(e) => setLocation(e.target.value)}
+                                required
+                                fullWidth
+                                id="location"
+                                label="Location URL"
+                                name="location"
+                                size="small"
+                                />
+                            </Grid>
+                        </Grid>
+                    {/* </form> */}
+                </div>
+            )
+        case 2:
+            return (
+                <div>
+                {/* <form className={classes.form} noValidate> */}
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={12} md={5}>
+                            <Typography variant="body2" display="block">
+                            Medical Council Certificate *
+                            </Typography>                
+                        </Grid>
+                        <Grid item xs={12}  sm={12} md={7}>
+                            <input
+                                accept="image/*"
+                                onChange={handleRegisterDocs}
+                                className={classes.input}
+                                id="contained-button-file"
+                                multiple
+                                type="file"
+                            />
+                        </Grid>
+                        
+                        <Grid item xs={12} sm={12} md={5}>
+                            <Typography variant="body2" display="block" >
+                            Pharmaciest Licence *
+                            </Typography>                
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={7}>
+                            <input
+                            accept="image/*"
+                            onChange={handleRegisterDocs}
+                            className={classes.input}
+                            id="contained-button-file"
+                            multiple
+                            type="file"
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} sm={12} md={5}>
+                            <Typography variant="body2" display="block">
+                            Business Registration Certificate *
+                            </Typography>                
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={7}>
+                            <input
+                            accept="image/*"
+                            onChange={handleRegisterDocs}
+                            className={classes.input}
+                            id="contained-button-file"
+                            multiple
+                            type="file"
+                            />
+                        </Grid>
+                    </Grid>
+                    
+                {/* </form> */}
+                </div>
+            )
+        case 3:
+            return (
+              <div>
+                {/* <form className={classes.form} noValidate> */}
+                    <Grid container spacing={2}>
+                      <Grid item xs={12}>
+                        <FormControlLabel
+                          onChange={(e) => setChecked(e.target.checked)}
+                          control={<Checkbox value="allowExtraEmails" color="primary" />}
+                          label="I agree to the Terms and Conditions"
+                        />
+                      </Grid>
+                      </Grid>
+                      <Box xs={12} sm={12} md={12}
               alignItems="center" 
               display="flex" 
               justifyContent="center"
@@ -349,15 +344,86 @@ const SignUpPharmacy=()=>{
                 Sign Up
               </Button>
               </Box>
-              <Grid container justify="flex-end">
-                <Grid item>
-                  <Link href="/pharmacysignin" variant="body2">
-                    Already have an account? Sign in
-                  </Link>
-                </Grid>
-              </Grid>
-              
-            </form>
+                {/* </form> */}
+              </div>
+                
+            )
+    }
+  }
+
+
+  return (
+    <div style={{overflow: "hidden"}}>
+      <GridContainer spacing={0} >
+        <Hidden smDown>
+          <GridItem xs={12} sm={12} md={7}>
+            <img src={pharmacist} className={classes.image} />
+          </GridItem>
+        </Hidden>
+        <GridItem xs={12} sm={12} md={4}  borderRadius={10}>
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Pharmacy Sign up
+            </Typography>
+            <Stepper activeStep={activeStep} alternativeLabel>
+                {steps.map((label) => (
+                <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                </Step>
+                ))}
+            </Stepper>
+            <div>
+            {activeStep === steps.length ? 
+                    (
+                        <div>
+                            <Typography className={classes.instructions}>All steps completed</Typography>
+                            <Button onClick={handleReset}>Reset</Button>
+                        </div>
+                    ) : 
+                    (
+                        <div>
+                            <Typography className={classes.instructions}>
+                            <form className={classes.form} noValidate>
+                            {getStepContent(activeStep)}
+                            </form>
+                            </Typography>
+                            <div>
+                                <Button
+                                    disabled={activeStep === 0}
+                                    onClick={handleBack}
+                                    className={classes.backButton}
+                                >
+                                    Back
+                                </Button>
+                                {/* <Button variant="contained" color="primary" onClick={handleNext}>
+                                    {activeStep === steps.length - 1 ? 'Reset' : 'Next'}
+                                </Button> */}
+                                {activeStep === steps.length - 1 ?
+                                (
+                                  
+                                    <Button type="button" variant="contained" color="primary" onClick={handleReset}>
+                                        Reset
+                                    </Button>
+                                ) : 
+                                (   
+                                    <Button variant="contained" color="primary" onClick={handleNext}>
+                                        Next
+                                    </Button>)}
+                            </div>
+                        </div>
+                    )
+                }
+            </div>
+            <Grid container justify="flex-end" className={classes.para}>
+                    <Grid item>
+                        <Link href="/pharmacysignin" variant="body2">
+                        Already have an account? Sign in
+                        </Link>
+                    </Grid>
+            </Grid>
           </div>
         </GridItem>
       </GridContainer>
