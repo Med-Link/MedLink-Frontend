@@ -37,6 +37,8 @@ const useStyles = makeStyles(styles);
 export default function Dashboard() {
   const classes = useStyles();
   const [data, setData] = useState();
+  const [datapharm, setDatapharm] = useState();
+
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
     
@@ -50,17 +52,26 @@ export default function Dashboard() {
          console.log(results);
         setData(results);
       })
-
-
-      // .then(data =>{
-      //   // console.log(data.message);
-      //   // const s= res.data.result[0];
-      //   // console.log(s);
-      // })
+    
+  }
+  const getdata1 =() =>{
+    const token = window.localStorage.getItem('token');
+    
+      axios.get('http://localhost:4000/api/admin/countpharmacy',{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results =  res.data.row;
+         console.log(results);
+        setDatapharm(results);
+      })
     
   }
   React.useEffect(()=>{
     getdata();
+    getdata1();
   },[]);
   return (
     <div>
@@ -89,7 +100,7 @@ export default function Dashboard() {
                 <Accessibility />
               </CardIcon>
               <p className={classes.cardCategory}>Pharmacies</p>
-              <h3 className={classes.cardTitle}>+245</h3>
+              <h3 className={classes.cardTitle}>{datapharm}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
