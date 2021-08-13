@@ -120,7 +120,7 @@ export default function TableList() {
          let array =[];
          results.forEach(element=>{
           let arr=[];
-          arr.push(element.name,element.email,element.contactnumber,element.location,<Button color="primary" round onClick={()=>handleClickOpen(element.document1,element.document2,element.document3)}>View</Button>,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />);
+          arr.push(element.name,element.email,element.contactnumber,element.location,<Button color="primary" round onClick={()=>handleClickOpen(element.document1,element.document2,element.document3)}>View</Button>,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />,<Button color="danger" round>Reject</Button>);
           array.push(arr);
          })         
         setData(array);

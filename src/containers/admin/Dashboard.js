@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-key */
-import React from "react";
+import React,{useState} from "react";
+import axios from 'axios';
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
@@ -35,6 +36,32 @@ const useStyles = makeStyles(styles);
 
 export default function Dashboard() {
   const classes = useStyles();
+  const [data, setData] = useState();
+  const getdata =() =>{
+    const token = window.localStorage.getItem('token');
+    
+      axios.get('http://localhost:4000/api/admin/countcustomer',{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results =  res.data.row;
+         console.log(results);
+        setData(results);
+      })
+
+
+      // .then(data =>{
+      //   // console.log(data.message);
+      //   // const s= res.data.result[0];
+      //   // console.log(s);
+      // })
+    
+  }
+  React.useEffect(()=>{
+    getdata();
+  },[]);
   return (
     <div>
       <GridContainer>
@@ -79,7 +106,7 @@ export default function Dashboard() {
                 <Accessibility />
               </CardIcon>
               <p className={classes.cardCategory}>Customers</p>
-              <h3 className={classes.cardTitle}>+245</h3>
+              <h3 className={classes.cardTitle}>{data}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
