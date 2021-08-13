@@ -12,6 +12,7 @@ import Customer from './containers/customer/layouts/Customer.js'
 import BuyingHistory from './containers/customer/buyingHistory/ViewHistoryDetails.js'
 import EditProfile from './containers/customer/profile/EditProfile.js'
 import ResetPassword from './containers/customer/password/ResetPassword.js'
+import ForgotPassword from './containers/customer/password/ForgotPassword.js'
 
 
 import Admin from './containers/admin/layouts/Admin.js'
@@ -46,6 +47,7 @@ function App() {
           <Route path="/OrderHistory" component={BuyingHistory} />
           <Route path="/EditProfile" component={EditProfile} />
           <Route path="/ResetPassword" component={ResetPassword} />
+          <Route path="/ForgotPassword" component={ForgotPassword} />
            
 
           <PrivateRoute path="/admin" component={Admin} />

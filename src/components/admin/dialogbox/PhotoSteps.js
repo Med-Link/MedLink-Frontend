@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Paper from '@material-ui/core/Paper';
@@ -6,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+
 
 const tutorialSteps = [
   {
@@ -45,7 +47,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TextMobileStepper() {
+export default function TextMobileStepper(props) {
+  const { doc1, doc2, doc3 } = props;
+  let images=[doc1,doc2,doc3]
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -64,10 +68,11 @@ export default function TextMobileStepper() {
       <Paper square elevation={0} className={classes.header}>
         <Typography>{tutorialSteps[activeStep].label}</Typography>
       </Paper>
+      {doc1}
       <img
         className={classes.img}
-        src={tutorialSteps[activeStep].imgPath}
-        alt={tutorialSteps[activeStep].label}
+        src={images[activeStep]}
+        alt={images[activeStep]}
       />
       <MobileStepper
         steps={maxSteps}
@@ -90,3 +95,10 @@ export default function TextMobileStepper() {
     </div>
   );
 }
+
+TextMobileStepper.propTypes = {
+  doc1: PropTypes.string,
+  doc2: PropTypes.string,
+  doc3: PropTypes.string,
+
+};

@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-key */
-import React from "react";
+import React,{useState} from "react";
+import axios from 'axios';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -87,36 +88,80 @@ const useStyles = makeStyles(styles);
 export default function TableList() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [doc1,setDoc1]= React.useState('');
+  const [doc2,setDoc2]= React.useState('');
+  const [doc3,setDoc3]= React.useState('');
 
-  const handleClickOpen = () => {
+
+  const handleClickOpen = (document1,document2,document3) => {
+    setDoc1(document1);
+    setDoc2(document2);
+    setDoc3(document3);
+  
+    // console.log(document1)
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+
+  const [data, setData] = useState([]);
+  const getdata =() =>{
+    const token = window.localStorage.getItem('token');
+    
+      axios.get('http://localhost:4000/api/admin/viewpharmacyrequests',{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results =  res.data.result;
+         console.log(results);
+         let array =[];
+         results.forEach(element=>{
+          let arr=[];
+          arr.push(element.name,element.email,element.contactnumber,element.location,<Button color="primary" round onClick={()=>handleClickOpen(element.document1,element.document2,element.document3)}>View</Button>,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />);
+          array.push(arr);
+         })         
+        setData(array);
+      })
+      // .then(data =>{
+      //   // console.log(data.message);
+      //   // const s= res.data.result[0];
+      //   // console.log(s);
+      // })
+    
+  }
+  React.useEffect(()=>{
+    getdata();
+  },[]);
   return (
+    
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Pharmacy Registration Requests</h4>
+            <h4 className={classes.cardTitleWhite}>Pharmacy Registration Requests  </h4>
             {/* <p className={classes.cardCategoryWhite}>
               Here is a subtitle for this table
             </p> */}
           </CardHeader>
           <CardBody>
+           
           <Table
               tableHeaderColor="primary"
               tableHead={["Pharmacy Name", "Email", "Mobile Number",  "Location","Documents" ,"Activate"]}
-              tableData={[
+              tableData={data}
+              // tableData={[
+              // data.map((row)=>(
+              //     [row.name,row.email,row.contactnumber,row.location ]
+              //   ))
+                  // ["Micael Medicare","mmc@yahoo.com","0759865522", "https://goo.gl/maps/9JrK788MDv1D89wPg7",<Button color="primary" round onClick={handleClickOpen}>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />,<Button color="danger" round>Reject</Button>],
+                  // ["Minerva Pharmacy","minervapharm@yahoo.com","0759865522", "https://goo.gl/maps/9JrKw8MDv1D89wPg7",<Button color="primary" round onClick={handleClickOpen}>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />,<Button color="danger" round>Reject</Button>],
+                  // ["HelaOsu","helaosu@yahoo.com","0759865522", "https://goo.gl/maps/9JrKw8MDv1D89wPg7",<Button color="primary" round onClick={handleClickOpen}>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />,<Button color="danger" round>Reject</Button>],
+                // })
 
-                ["Micael Medicare","mmc@yahoo.com","0759865522", "https://goo.gl/maps/9JrK788MDv1D89wPg7",<Button color="primary" round onClick={handleClickOpen}>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
-                ["Minerva Pharmacy","minervapharm@yahoo.com","0759865522", "https://goo.gl/maps/9JrKw8MDv1D89wPg7",<Button color="primary" round onClick={handleClickOpen}>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
-                ["HelaOsu","helaosu@yahoo.com","0759865522", "https://goo.gl/maps/9JrKw8MDv1D89wPg7",<Button color="primary" round onClick={handleClickOpen}>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
-
-
-
-              ]}
+              // ]}
             />
           </CardBody>
         </Card>
@@ -126,7 +171,7 @@ export default function TableList() {
           Documents
         </DialogTitle>
         <DialogContent dividers>
-          <PhotoSteps/>
+          <PhotoSteps doc1={doc1} doc2={doc2} doc3={doc3}/>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
