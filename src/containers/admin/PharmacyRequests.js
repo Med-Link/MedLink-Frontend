@@ -152,7 +152,7 @@ export default function TableList() {
          let array =[];
          results.forEach(element=>{
           let arr=[];
-          arr.push(element.name,element.email,element.contactnumber,element.location,<Button color="primary" round onClick={()=>handleClickOpen(element.document1,element.document2,element.document3)}>View</Button>,<Button color="primary" onClick={acceptPharmacy(element.pharmacyid)} round>Accept</Button>,<Button color="danger" round>Reject</Button>);
+          arr.push(element.name,element.email,element.contactnumber,element.location,<Button color="primary" round onClick={()=>handleClickOpen(element.document1,element.document2,element.document3)}>View</Button>,<Button color="primary" onClick={acceptPharmacy(element.pharmacyid)} round>Accept</Button>,<Button color="default" round onClick={handleClickOpenReject}>Reject</Button>);
           array.push(arr);
          })         
         setData(array);

@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-key */
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 // @material-ui/core
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -68,6 +69,37 @@ export default function Medicine() {
 
   const classes = useStyles();
 
+  const [data, setData] = useState([]);
+  const getdata =() =>{
+    const token = window.localStorage.getItem('token');
+    
+      axios.get('http://localhost:4000/api/admin/viewallmedicine',{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results =  res.data.result;
+         console.log(results);
+         let array =[];
+         results.forEach(element=>{
+          let arr=[];
+          arr.push(element.medid,element.medname,element.brand,<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>,<IconButton aria-label="delete"><DeleteIcon /></IconButton>);
+          array.push(arr);
+         }) 
+        //  console.log(arr[0])        
+        setData(array);
+      })
+      // .then(data =>{
+      //   // console.log(data.message);
+      //   // const s= res.data.result[0];
+      //   // console.log(s);
+      // })
+    
+  }
+  React.useEffect(()=>{
+    getdata();
+  },[]);
   return (
     <div>
       {/* <GridContainer> */}
@@ -82,11 +114,12 @@ export default function Medicine() {
                   <Table
                     tableHeaderColor="primary"
                     tableHead={["Med ID", "Med Name","Brand","Edit","Delete"]}
-                    tableData={[
-                      ["Medicine2", "AAAAAAAAAAA",'Brand1',<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>,<IconButton aria-label="delete"><DeleteIcon /></IconButton>],
-                      ["Medicine3", "BBBBBBBBBBB","Brand1",<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>,<IconButton aria-label="delete"><DeleteIcon /></IconButton>],
-                      ["Medicine4", "BBBBBBBBBBB","Brand2",<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>,<IconButton aria-label="delete"><DeleteIcon /></IconButton>],
-                    ]} 
+                    tableData={data}
+                  // {[
+                  //     ["Medicine2", "AAAAAAAAAAA",'Brand1',<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>,<IconButton aria-label="delete"><DeleteIcon /></IconButton>],
+                  //     ["Medicine3", "BBBBBBBBBBB","Brand1",<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>,<IconButton aria-label="delete"><DeleteIcon /></IconButton>],
+                  //     ["Medicine4", "BBBBBBBBBBB","Brand2",<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>,<IconButton aria-label="delete"><DeleteIcon /></IconButton>],
+                  //   ]} 
                   />
                 </CardBody>
               </Card>
