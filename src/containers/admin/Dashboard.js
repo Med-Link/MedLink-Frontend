@@ -112,7 +112,7 @@ export default function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
-            <CardHeader color="info" stats icon>
+            <CardHeader color="success" stats icon>
               <CardIcon color="info">
                 <Accessibility />
               </CardIcon>
@@ -155,28 +155,6 @@ export default function Dashboard() {
             </CardBody>
           </Card>
         </GridItem>
-          <GridItem xs={12} sm={12} md={6}>
-          <Card>
-            <CardHeader color="info">
-              <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
-              <p className={classes.cardCategoryWhite}>
-                on July 2021
-              </p>
-            </CardHeader>
-            <CardBody>
-              <Table
-                tableHeaderColor="primary"
-                tableHead={["ID", "Name","Activate"]}
-                tableData={[
-                  ["Admin2", "Sandali Perera",<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
-                  ["Admin3", "Akila De Silva",<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
-                  ["Admin4", "Piyumi Senarath",<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />],
-                ]}
-              />
-            </CardBody>
-          </Card>
-        </GridItem>
-        
       </GridContainer>
     </div>
   );

@@ -17,7 +17,7 @@ import axios from "axios";
 
 const useStyles = makeStyles(styles);
 
-export default function Dashboard() {
+export default function Employees() {
 
   const classes = useStyles();
 
