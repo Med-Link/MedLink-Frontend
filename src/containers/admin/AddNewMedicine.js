@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 // material ui imports
@@ -46,7 +47,25 @@ const AddNewMedicine = () => {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-
+  const [brand, setBrand] = useState("");
+  const [medname, setMedname] = useState("");
+      const submit=(e)=>{
+        e.preventDefault();
+        const token = window.localStorage.getItem('token'); 
+        axios.post('http://localhost:4000/api/admin/addmedicine', {
+          brand: brand,
+          medname:medname,
+          headers: {
+            'Authorization': token ? `Bearer ${token}` : ''
+          },
+        }).then((response)=>{
+            console.log(response);
+        })
+        
+      }  
+      // React.useEffect(()=>{
+      //   submit();
+      // },[]);    
   return (
     
 
@@ -58,14 +77,14 @@ const AddNewMedicine = () => {
         <CardBody>
           <GridContainer>
             <GridItem xs={6} sm={6} md={6}>
-              <TextField id="medname" label="Medicine Name" placeholder="Enter Medicine Name" fullWidth required />
+              <TextField id="medname" value ={medname} onChange={(e) => setMedname(e.target.value)} label="Medicine Name" placeholder="Enter Medicine Name" fullWidth required />
             </GridItem>
             <GridItem xs={6} sm={6} md={6}>
-              <TextField id="brandname" label="Brand Name" placeholder="Enter Brand Name" fullWidth required />
+              <TextField id="brandname" value ={brand} onChange={(e) => setBrand(e.target.value)} label="Brand Name" placeholder="Enter Brand Name" fullWidth required />
             </GridItem>
           </GridContainer>
           <Box xs={12} md={12} padding={3} display="flex" justifyContent="center">
-            <Button type="submit" variant="contained" style={buttonStyle} fullWidth>Add</Button>
+            <Button type="submit" onClick={submit} variant="contained" style={buttonStyle} fullWidth>Add</Button>
           </Box>
         </CardBody>
       </Card>
