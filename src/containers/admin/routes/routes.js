@@ -13,6 +13,8 @@ import NotificationsPage from "../Notifications.js";
 import AddNewAdmin from "../AddNewAdmin";
 import Report from "../Reports.js";
 import Employees from "../Employees"
+import Medicine from "../Medicine"
+
 const dashboardRoutes = [
   {
     path: "/dashboard",
@@ -40,6 +42,13 @@ const dashboardRoutes = [
     name: "Admin Accounts",
     icon: Person,
     component: Employees,
+    layout: "/admin",
+  },
+  {
+    path: "/medicine",
+    name: "Medicine",
+    icon: Person,
+    component: Medicine,
     layout: "/admin",
   },
   {
