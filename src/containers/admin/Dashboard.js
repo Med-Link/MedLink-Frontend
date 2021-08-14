@@ -49,30 +49,30 @@ export default function Dashboard() {
         })
       .then(res =>{
         const results =  res.data.row;
-         console.log(results);
+        //  console.log(results);
         setData(results);
       })
     
   }
-  const getdata1 =() =>{
+  const getdata1 =async() =>{
     const token = window.localStorage.getItem('token');
-    
-      axios.get('http://localhost:4000/api/admin/countpharmacy',{
+    // console.log('xxxxx')
+     await axios.get('http://localhost:4000/api/admin/countpharmacy',{
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         }
         })
       .then(res =>{
         const results =  res.data.row;
-         console.log(results);
+        //  console.log(results);
         setDatapharm(results);
-      })
+      },[])
     
   }
   React.useEffect(()=>{
     getdata();
     getdata1();
-  },[]);
+  });
   return (
     <div>
       <GridContainer>

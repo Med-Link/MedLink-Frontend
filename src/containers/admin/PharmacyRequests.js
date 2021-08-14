@@ -87,6 +87,27 @@ const useStyles = makeStyles(styles);
 
 export default function TableList() {
   const classes = useStyles();
+  const acceptPharmacy = (pharmacyid) => {
+      const token = window.localStorage.getItem('token');
+  
+      console.log('kkkk')
+      axios.post('http://localhost:4000/api/admin/acceptpharmacy', {
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        },
+        pharmacyid:pharmacyid,
+    }).then((response)=>{
+        console.log(response);
+        // setSignedUp(true);
+  
+    }).catch((err)=>{
+        console.log(err);
+        // console.log("kkkkkk");
+  
+        // setError("Password must be atleast 6 characters long");
+    });
+    // console.log(token)
+  };
   const [open, setOpen] = React.useState(false);
   const [doc1,setDoc1]= React.useState('');
   const [doc2,setDoc2]= React.useState('');
@@ -120,7 +141,7 @@ export default function TableList() {
          let array =[];
          results.forEach(element=>{
           let arr=[];
-          arr.push(element.name,element.email,element.contactnumber,element.location,<Button color="primary" round onClick={()=>handleClickOpen(element.document1,element.document2,element.document3)}>View</Button>,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />,<Button color="danger" round>Reject</Button>);
+          arr.push(element.name,element.email,element.contactnumber,element.location,<Button color="primary" round onClick={()=>handleClickOpen(element.document1,element.document2,element.document3)}>View</Button>,<Button color="primary" onClick={acceptPharmacy(element.pharmacyid)} round>Accept</Button>,<Button color="danger" round>Reject</Button>);
           array.push(arr);
          })         
         setData(array);
