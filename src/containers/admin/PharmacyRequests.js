@@ -2,16 +2,17 @@
 import React,{useState} from "react";
 import axios from 'axios';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles,withStyles } from "@material-ui/core/styles";
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
@@ -126,6 +127,16 @@ export default function TableList() {
     setOpen(false);
   };
 
+  const [openReject, setOpenReject] = React.useState(false);
+
+  const handleClickOpenReject = () => {
+    setOpenReject(true);
+  };
+
+  const handleCloseReject = () => {
+    setOpenReject(false);
+  };
+
   const [data, setData] = useState([]);
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
@@ -171,18 +182,17 @@ export default function TableList() {
            
           <Table
               tableHeaderColor="primary"
-              tableHead={["Pharmacy Name", "Email", "Mobile Number",  "Location","Documents" ,"Activate"]}
+              tableHead={["Pharmacy Name", "Email", "Mobile Number",  "Location","Documents" ,"Activate","Reject"]}
               tableData={data}
               // tableData={[
               // data.map((row)=>(
               //     [row.name,row.email,row.contactnumber,row.location ]
               //   ))
-                  // ["Micael Medicare","mmc@yahoo.com","0759865522", "https://goo.gl/maps/9JrK788MDv1D89wPg7",<Button color="primary" round onClick={handleClickOpen}>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />,<Button color="danger" round>Reject</Button>],
-                  // ["Minerva Pharmacy","minervapharm@yahoo.com","0759865522", "https://goo.gl/maps/9JrKw8MDv1D89wPg7",<Button color="primary" round onClick={handleClickOpen}>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />,<Button color="danger" round>Reject</Button>],
-                  // ["HelaOsu","helaosu@yahoo.com","0759865522", "https://goo.gl/maps/9JrKw8MDv1D89wPg7",<Button color="primary" round onClick={handleClickOpen}>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />,<Button color="danger" round>Reject</Button>],
+                  // ["Micael Medicare","mmc@yahoo.com","0759865522", "https://goo.gl/maps/9JrK788MDv1D89wPg7",<Button color="primary" round onClick={handleClickOpen}>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />,<Button color="default" round onClick={handleClickOpenReject}>Reject</Button>],
+                  // ["Minerva Pharmacy","minervapharm@yahoo.com","0759865522", "https://goo.gl/maps/9JrKw8MDv1D89wPg7",<Button color="primary" round onClick={handleClickOpen}>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />,<Button color="default" round onClick={handleClickOpenReject}>Reject</Button>],
+                  // ["HelaOsu","helaosu@yahoo.com","0759865522", "https://goo.gl/maps/9JrKw8MDv1D89wPg7",<Button color="primary" round onClick={handleClickOpen}>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />,<Button color="default" round onClick={handleClickOpenReject}>Reject</Button>],
 
                 // })
-
               // ]}
             />
           </CardBody>
@@ -198,6 +208,38 @@ export default function TableList() {
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
             Okay
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* reject button dialogbox */}
+      <Dialog open={openReject} onClose={handleCloseReject} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Reason to Reject the Request</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {"Reasons To reject the Request"}<br></br>
+
+            {"1. Documents are not clear. Please re-register with necessary documents"}<br></br>
+            {"2. Documents not Valid"}<br></br>
+            {"3. Pharmacy Licence is overdue."}<br></br>
+            {"4. Business Rejistration is overdue."}<br></br>
+
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="State the reason"
+            type="email"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseReject} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleCloseReject} color="primary">
+            Send
           </Button>
         </DialogActions>
       </Dialog>
