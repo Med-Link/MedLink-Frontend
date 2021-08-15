@@ -1,6 +1,8 @@
 import React from "react";
 import classNames from "classnames";
 import axios from "axios";
+import { Redirect, useHistory } from 'react-router-dom';
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -29,6 +31,7 @@ import { signout } from "../../../actions/auth.actionscustomer.js";
 const useStyles = makeStyles(styles);
 
 export default function CustomerNavbarLinks() {
+  let history = useHistory();
   const classes = useStyles();
   const [openNotification, setOpenNotification] = React.useState(null);
   const [openProfile, setOpenProfile] = React.useState(null);
@@ -59,6 +62,8 @@ export default function CustomerNavbarLinks() {
     const res = await axios.post(`http://localhost:4000/api/signout`);
     if(res.status === 200){
       localStorage.clear();
+      history.push("/");
+
       // return <Redirect to={'/'} />
       // <Redirect to={'/'} />
     }
@@ -233,12 +238,12 @@ export default function CustomerNavbarLinks() {
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
-                      <Link href="/">
+                      
                         <Button
                           onClick={logout}>
                           Logout
                         </Button>
-                      </Link>
+                     
 
                     </MenuItem>
                   </MenuList>
