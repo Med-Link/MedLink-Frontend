@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import {signout} from '../../../actions/auth.actions';
 import classNames from "classnames";
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 // @material-ui/core components
@@ -33,6 +33,7 @@ const useStyles = makeStyles(styles);
 
 
 export default function AdminNavbarLinks() {
+  let history = useHistory();
   const classes = useStyles();
   const [openNotification, setOpenNotification] = React.useState(null);
   const [openProfile, setOpenProfile] = React.useState(null);
@@ -63,8 +64,10 @@ export default function AdminNavbarLinks() {
     const res = await axios.post(`http://localhost:4000/api/admin/signout`);
     if(res.status === 200){
       localStorage.clear();
+      history.push("/");
       // return <Redirect to={'/'} />
-      <Redirect to={'/'} />
+      // <Redirect to={'/'} />
+      
     }
 
     // dispatch(signout);
@@ -242,12 +245,10 @@ export default function AdminNavbarLinks() {
                     >
                       {/* <Link color='secondary' size='small' variant="h6" underline="none">
                         </Link> */}
-                        <Link href='/'>
                         <Button
                         onClick={logout}>
                           Logout
                         </Button>
-                        </Link>
 
                     </MenuItem>
                   </MenuList>

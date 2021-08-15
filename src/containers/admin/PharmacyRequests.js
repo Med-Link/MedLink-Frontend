@@ -88,17 +88,18 @@ const useStyles = makeStyles(styles);
 
 export default function TableList() {
   const classes = useStyles();
+
   const acceptPharmacy = (pharmacyid) => {
       const token = window.localStorage.getItem('token');
   
-      console.log('kkkk')
-      axios.post('http://localhost:4000/api/admin/acceptpharmacy', {
+      // console.log('kkkk')
+      axios.post('http://localhost:4000/api/admin/acceptpharmacy', {pharmacyid:pharmacyid}, {
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         },
-        pharmacyid:pharmacyid,
     }).then((response)=>{
         console.log(response);
+        getdata();
         // setSignedUp(true);
   
     }).catch((err)=>{
@@ -152,7 +153,7 @@ export default function TableList() {
          let array =[];
          results.forEach(element=>{
           let arr=[];
-          arr.push(element.name,element.email,element.contactnumber,element.location,<Button color="primary" round onClick={()=>handleClickOpen(element.document1,element.document2,element.document3)}>View</Button>,<Button color="primary" onClick={acceptPharmacy(element.pharmacyid)} round>Accept</Button>,<Button color="default" round onClick={handleClickOpenReject}>Reject</Button>);
+          arr.push(element.name,element.email,element.contactnumber,element.location,<Button color="primary" round onClick={()=>handleClickOpen(element.document1,element.document2,element.document3)}>View</Button>,<Button color="primary" onClick={()=>acceptPharmacy(element.pharmacyid)} round>Accept</Button>,<Button color="default" round onClick={handleClickOpenReject}>Reject</Button>);
           array.push(arr);
          })         
         setData(array);

@@ -44,6 +44,7 @@ const SignUpAdmin=()=>{
     const [signedUp, setSignedUp] = useState(false);
     
     const signup =(e)=>{
+        
         e.preventDefault();
         if(checked){
         axios.post('http://localhost:4000/api/admin/signup', {
