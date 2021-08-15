@@ -1,5 +1,7 @@
 import React from "react";
 import classNames from "classnames";
+import { Redirect, useHistory } from 'react-router-dom';
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -26,6 +28,8 @@ import styles from "../../../assets/jss/material-dashboard-react/components/head
 const useStyles = makeStyles(styles);
 
 export default function AdminNavbarLinks() {
+  let history = useHistory();
+
   const classes = useStyles();
   const [openNotification, setOpenNotification] = React.useState(null);
   const [openProfile, setOpenProfile] = React.useState(null);
@@ -55,6 +59,8 @@ export default function AdminNavbarLinks() {
     const res = await axios.post(`http://localhost:4000/api/pharmacy/signout`);
     if(res.status === 200){
       localStorage.clear();
+      history.push("/");
+
       // return <Redirect to={'/'} />
       // <Redirect to={'/'} />
     }
@@ -227,11 +233,11 @@ export default function AdminNavbarLinks() {
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
-                      <Link variant="h6" underline="none" href="/">
+                      
                         <Button onClick={logout}>
                           Logout
                         </Button>
-                      </Link>
+                      
 
                     </MenuItem>
                   </MenuList>
