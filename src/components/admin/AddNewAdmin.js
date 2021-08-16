@@ -8,11 +8,11 @@ import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 
-import GridItem from "../../components/Dashboard/Grid/GridItem.js";
-import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
-import Card from '../../components/Dashboard/Card/Card.js';
-import CardHeader from '../../components/Dashboard/Card/CardHeader.js';
-import CardBody from '../../components/Dashboard/Card/CardBody.js';
+import GridItem from "../Dashboard/Grid/GridItem.js";
+import GridContainer from "../Dashboard/Grid/GridContainer.js";
+import Card from '../Dashboard/Card/Card.js';
+import CardHeader from '../Dashboard/Card/CardHeader.js';
+import CardBody from '../Dashboard/Card/CardBody.js';
 
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
@@ -51,7 +51,7 @@ const SignUpAdmin = () => {
   };
 
   if (signedUp) {
-    return <Redirect to="/admin" />;
+    return <Redirect to="/admin/employees" />;
   }
 
   const buttonStyle = {

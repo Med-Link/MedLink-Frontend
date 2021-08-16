@@ -24,7 +24,7 @@ import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import Button from "../../components/Dashboard//CustomButtons/Button";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
-import AddNewMedicine from "./AddNewMedicine"
+import AddNewMedicine from "../../components/admin/AddNewMedicine"
 
 
 const useStyles = makeStyles(styles);
