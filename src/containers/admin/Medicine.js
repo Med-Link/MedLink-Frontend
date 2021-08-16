@@ -125,7 +125,7 @@ export default function Medicine() {
               </Card>
           </GridItem>   
           <GridItem xs={12} sm={12} md={5}>
-            <AddNewMedicine/>
+            <AddNewMedicine getdata={getdata}/>
           </GridItem>     
         </GridContainer>
       {/* </GridContainer> */}

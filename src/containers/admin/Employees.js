@@ -29,8 +29,11 @@ export default function Employees() {
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
     
-      axios.get('http://localhost:4000/api/admin/viewadmins')
-      .then(res =>{
+      axios.get('http://localhost:4000/api/admin/viewadmins',{
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+      }).then(res =>{
         const results =  res.data.result;
          console.log(results);
         setData(results);

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
+
 import { Redirect } from "react-router-dom";
 
 // material ui imports
@@ -33,7 +35,9 @@ const useStyles2 = makeStyles((theme) => ({
   },
 }));
 
-const AddNewMedicine = () => {
+const AddNewMedicine = (props) => {
+  const { getdata } = props;
+
   const classes = useStyles();
   const classes2 = useStyles2();
 
@@ -62,6 +66,7 @@ const AddNewMedicine = () => {
       })
       .then((response) => {
         console.log(response);
+        getdata();
         // return <Redirect to={'/admin/medicine'} />
       });
   };
@@ -121,3 +126,7 @@ const AddNewMedicine = () => {
 };
 
 export default AddNewMedicine;
+
+AddNewMedicine.propTypes = {
+  getdata:PropTypes.func,
+};

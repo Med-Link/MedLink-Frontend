@@ -88,6 +88,17 @@ const useStyles = makeStyles(styles);
 
 export default function TableList() {
   const classes = useStyles();
+  const [openReject, setOpenReject] = React.useState(false);
+  
+
+  const handleClickOpenReject = (pharmacyid) => {
+    setOpenReject(true);
+    setPharmacyid(pharmacyid);
+  };
+
+  const handleCloseReject = () => {
+    setOpenReject(false);
+  };
   
   const [pharmacyid,setPharmacyid] = useState();
   const [rejectreason, setRejectreason] = useState();
@@ -102,7 +113,7 @@ export default function TableList() {
   }).then((response)=>{
       console.log(response);
       getdata();
-      // handleCloseReject();
+      handleCloseReject();
       // setSignedUp(true);
 
   }).catch((err)=>{
@@ -155,17 +166,7 @@ export default function TableList() {
     setOpen(false);
   };
 
-  const [openReject, setOpenReject] = React.useState(false);
-  
-
-  const handleClickOpenReject = (pharmacyid) => {
-    setOpenReject(true);
-    setPharmacyid(pharmacyid);
-  };
-
-  const handleCloseReject = () => {
-    setOpenReject(false);
-  };
+ 
 
   const [data, setData] = useState([]);
   const getdata =() =>{
