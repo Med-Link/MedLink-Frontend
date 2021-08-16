@@ -88,6 +88,31 @@ const useStyles = makeStyles(styles);
 
 export default function TableList() {
   const classes = useStyles();
+  
+  const [pharmacyid,setPharmacyid] = useState();
+  const [rejectreason, setRejectreason] = useState();
+  const rejectPharmacy = () => {
+    const token = window.localStorage.getItem('token');
+    console.log(pharmacyid);
+    // console.log('kkkk')
+    axios.post('http://localhost:4000/api/admin/rejectpharmacy', {pharmacyid:pharmacyid,rejectreason:rejectreason}, {
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : ''
+      },
+  }).then((response)=>{
+      console.log(response);
+      getdata();
+      // handleCloseReject();
+      // setSignedUp(true);
+
+  }).catch((err)=>{
+      console.log(err);
+      // console.log("kkkkkk");
+
+      // setError("Password must be atleast 6 characters long");
+  });
+  // console.log(token)
+};
 
   const acceptPharmacy = (pharmacyid) => {
       const token = window.localStorage.getItem('token');
@@ -116,6 +141,8 @@ export default function TableList() {
   const [doc3,setDoc3]= React.useState('');
 
 
+
+
   const handleClickOpen = (document1,document2,document3) => {
     setDoc1(document1);
     setDoc2(document2);
@@ -129,9 +156,11 @@ export default function TableList() {
   };
 
   const [openReject, setOpenReject] = React.useState(false);
+  
 
-  const handleClickOpenReject = () => {
+  const handleClickOpenReject = (pharmacyid) => {
     setOpenReject(true);
+    setPharmacyid(pharmacyid);
   };
 
   const handleCloseReject = () => {
@@ -149,11 +178,11 @@ export default function TableList() {
         })
       .then(res =>{
         const results =  res.data.result;
-         console.log(results);
+        //  console.log(results);
          let array =[];
          results.forEach(element=>{
           let arr=[];
-          arr.push(element.name,element.email,element.contactnumber,element.location,<Button color="primary" round onClick={()=>handleClickOpen(element.document1,element.document2,element.document3)}>View</Button>,<Button color="primary" onClick={()=>acceptPharmacy(element.pharmacyid)} round>Accept</Button>,<Button color="default" round onClick={handleClickOpenReject}>Reject</Button>);
+          arr.push(element.name,element.email,element.contactnumber,element.location,<Button color="primary" round onClick={()=>handleClickOpen(element.document1,element.document2,element.document3)}>View</Button>,<Button color="primary" onClick={()=>acceptPharmacy(element.pharmacyid)} round>Accept</Button>,<Button color="default" round onClick={()=>handleClickOpenReject(element.pharmacyid)}>Reject</Button>);
           array.push(arr);
          })         
         setData(array);
@@ -230,8 +259,9 @@ export default function TableList() {
             autoFocus
             margin="dense"
             id="name"
+            onChange={(e) => setRejectreason(e.target.value)}
             label="State the reason"
-            type="email"
+            // type="email"
             fullWidth
           />
         </DialogContent>
@@ -239,7 +269,7 @@ export default function TableList() {
           <Button onClick={handleCloseReject} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleCloseReject} color="primary">
+          <Button onClick={()=>rejectPharmacy()} color="primary">
             Send
           </Button>
         </DialogActions>
