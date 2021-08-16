@@ -48,7 +48,20 @@ export default function Employees() {
   React.useEffect(()=>{
     getdata();
   },[]);
-
+  
+  const columns = [
+    { id: 'AdminId', label: 'Admin Id', minWidth: 100 },
+    { id: 'FirstName', label: 'First Name', minWidth: 170 },
+    { id: 'LastName', label: 'Last Name', minWidth: 170 },
+    { id: 'Email', label: 'Email', minWidth: 170 },
+  
+  ];
+  
+  const rows = data ? ( data.map((d) => [ d.adminid, d.firstname, d.lastname,d.email] )
+            ) : 
+            (
+              ['No data to show']
+            )
   return (
     <div>
       
@@ -59,49 +72,11 @@ export default function Employees() {
                 <h4 className={classes.cardTitleWhite}>Registered Admin Accounts</h4>
               </CardHeader>
               <CardBody>
-              <div>
-                <table>
-                  <tr>
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                  </tr>
-                  
-                
-                {data ? (
-                  data.map((post) => 
-                  <tr>
-                  <td>
-                  {post.adminid}
-                  </td>
-                  <td>
-                  {post.firstname}
-                  </td>
-                  <td>
-                  {post.lastname}
-                  </td>
-                  <td>
-                  {post.email}
-                  </td>
-                </tr> )
-                  ) : 
-                  (
-                    <p>Loading..</p>
-                  )
-                }
-                </table>
-              </div>
-               
-              {/* <Table
+                <Table
                   tableHeaderColor="primary"
-                  tableHead={["ID", "Name"]}
-                  tableData={[
-                    ["Admin2", "Sandali Perera"],
-                    ["Admin3", "Akila De Silva"],
-                    ["Admin4", "Piyumi Senarath"],
-                  ]} 
-                /> */}
+                  tableHead={["ID", "First Name","Last Name","Email"]}
+                  tableData={rows} 
+                />
               </CardBody>
             </Card>
         </GridItem>
