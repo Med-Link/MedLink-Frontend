@@ -10,7 +10,6 @@ import UserProfile from "../UserProfile.js";
 import PharmacyRequests from "../PharmacyRequests.js";
 // import AdminRequests from "../AdminRequests.js";
 import NotificationsPage from "../Notifications.js";
-import AddNewAdmin from "../AddNewAdmin";
 import Report from "../Reports.js";
 import Employees from "../Employees"
 import Medicine from "../Medicine"
