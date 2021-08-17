@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-key */
-import React from "react";
+import React,{useState} from "react";
+import axios from 'axios';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -63,6 +64,65 @@ export default function TableList() {
   const handleClose = () => {
     setOpen(false);
   };
+  const [data, setData] = useState([]);
+  const getdata =() =>{
+    const token = window.localStorage.getItem('token');
+    
+      axios.get('http://localhost:4000/api/order/allorderbills',{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results =  res.data.rows;
+        //  console.log(res.data.rows);
+         let array =[];
+         results.forEach(element=>{
+          let arr=[];
+          arr.push(element.medlistid,element.order_reqid,element.totalprice,element.name,<ButtonGroup color="primary" aria-label="outlined primary button group">
+          <Button href="/Checkout/">View Order</Button>
+           
+          <div>
+          <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+            Reject Order
+          </Button>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+          <DialogTitle id="alert-dialog-title">{"Are you sure reject the order?"}</DialogTitle>
+          <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            If yes, the order will disappear from your responding order list.
+          </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Yes
+          </Button>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            No
+          </Button>
+          </DialogActions>
+          </Dialog>
+          </div>
+        </ButtonGroup>);
+          array.push(arr);
+         })         
+        setData(array);
+      })
+      // .then(data =>{
+      //   // console.log(data.message);
+      //   // const s= res.data.result[0];
+      //   // console.log(s);
+      // })
+    
+  }
+  React.useEffect(()=>{
+    getdata();
+  },[])
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
@@ -76,41 +136,41 @@ export default function TableList() {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Date","Time","Pharmacy Name", "District", "City", "Description", "Accept/Reject"]}
-              tableData={[
-                ["10-07-2021","20:55","Pharma", "Colombo", "Nugegoda", "Panadol is out of stock now", 
-                <ButtonGroup color="primary" aria-label="outlined primary button group">
-                  <Button href="/Checkout/">View Order</Button>
+              tableHead={["List number","Order Request","Total Price", "Pharmacy", "Accept/Reject"]}
+              tableData={data}
+              //   ["10-07-2021","20:55","Pharma", "Colombo", "Nugegoda", "Panadol is out of stock now", 
+              //   <ButtonGroup color="primary" aria-label="outlined primary button group">
+              //     <Button href="/Checkout/">View Order</Button>
                    
-                  <div>
-                  <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                    Reject Order
-                  </Button>
-                  <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                  >
-                  <DialogTitle id="alert-dialog-title">{"Are you sure reject the order?"}</DialogTitle>
-                  <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    If yes, the order will disappear from your responding order list.
-                  </DialogContentText>
-                  </DialogContent>
-                  <DialogActions>
-                  <Button onClick={handleClose} color="primary">
-                    Yes
-                  </Button>
-                  <Button onClick={handleClose} color="primary" autoFocus>
-                    No
-                  </Button>
-                  </DialogActions>
-                  </Dialog>
-                  </div>
-                </ButtonGroup>],
+              //     <div>
+              //     <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+              //       Reject Order
+              //     </Button>
+              //     <Dialog
+              //       open={open}
+              //       onClose={handleClose}
+              //       aria-labelledby="alert-dialog-title"
+              //       aria-describedby="alert-dialog-description"
+              //     >
+              //     <DialogTitle id="alert-dialog-title">{"Are you sure reject the order?"}</DialogTitle>
+              //     <DialogContent>
+              //     <DialogContentText id="alert-dialog-description">
+              //       If yes, the order will disappear from your responding order list.
+              //     </DialogContentText>
+              //     </DialogContent>
+              //     <DialogActions>
+              //     <Button onClick={handleClose} color="primary">
+              //       Yes
+              //     </Button>
+              //     <Button onClick={handleClose} color="primary" autoFocus>
+              //       No
+              //     </Button>
+              //     </DialogActions>
+              //     </Dialog>
+              //     </div>
+              //   </ButtonGroup>],
                  
-              ]}
+              // ]}
             />
           </CardBody>
         </Card>
