@@ -52,7 +52,7 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function TableList() {
+export default function BuyingHistory() {
   const classes = useStyles();
   return (
     <GridContainer>

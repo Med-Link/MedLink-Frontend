@@ -86,7 +86,7 @@ const DialogActions = withStyles((theme) => ({
 
 const useStyles = makeStyles(styles);
 
-export default function TableList() {
+export default function PharmacyRequests() {
   const classes = useStyles();
   const [openReject, setOpenReject] = React.useState(false);
   

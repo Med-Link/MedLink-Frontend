@@ -53,18 +53,49 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function TableList() {
+
+export default function RespondOrders() {
   const classes = useStyles();
+  const [data, setData] = useState([]);
+  const [rejectRowid, setRejectRowid] = useState("");
+
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (medlistid) => {
     setOpen(true);
+    setRejectRowid(medlistid);
+    // console.log("hjjkjjjj")
   };
 
   const handleClose = () => {
+    setRejectRowid("");
+    // console.log("nnnnnn")
+
     setOpen(false);
   };
-  const [data, setData] = useState([]);
+  
+const rejectOrder = () => {
+  const token = window.localStorage.getItem('token');
+
+  // console.log('kkkk')
+  axios.post('http://localhost:4000/api/order/rejectbill', {medlistid:rejectRowid}, {
+    headers: {
+      'Authorization': token ? `Bearer ${token}` : ''
+    },
+}).then((response)=>{
+    console.log(response);
+    getdata();
+    handleClose();
+    // setSignedUp(true);
+
+}).catch((err)=>{
+    console.log(err);
+    // console.log("kkkkkk");
+
+    // setError("Password must be atleast 6 characters long");
+});
+// console.log(token)
+};
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
     
@@ -83,30 +114,11 @@ export default function TableList() {
           <Button href="/Checkout/">View Order</Button>
            
           <div>
-          <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+          <Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.medlistid)}>
+            
             Reject Order
           </Button>
-          <Dialog
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-          <DialogTitle id="alert-dialog-title">{"Are you sure reject the order?"}</DialogTitle>
-          <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            If yes, the order will disappear from your responding order list.
-          </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Yes
-          </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            No
-          </Button>
-          </DialogActions>
-          </Dialog>
+         
           </div>
         </ButtonGroup>);
           array.push(arr);
@@ -176,6 +188,29 @@ export default function TableList() {
         </Card>
       </GridItem>
       
+      <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+          <DialogTitle id="alert-dialog-title">{"Are you sure reject the order?"}</DialogTitle>
+          <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            If yes, the order will disappear from your responding order list.
+          </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+          <Button onClick={rejectOrder} color="primary">
+            Yes
+          </Button>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            No
+          </Button>
+          </DialogActions>
+          </Dialog>
+
     </GridContainer>
   );
 }
+

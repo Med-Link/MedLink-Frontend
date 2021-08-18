@@ -101,7 +101,7 @@ const DialogActions = withStyles((theme) => ({
 
 const useStyles = makeStyles(styles);
 
-export default function TableList() {
+export default function OrderRequests() {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
