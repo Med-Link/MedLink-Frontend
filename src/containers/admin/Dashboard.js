@@ -127,6 +127,23 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>
+        <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="success" stats icon>
+              <CardIcon color="info">
+                <Accessibility />
+              </CardIcon>
+              <p className={classes.cardCategory}>New Pharmacy Requests</p>
+              {/* <h3 className={classes.cardTitle}>{newPharmacyRequests}</h3> */}
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <Update />
+                Just Updated
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
       </GridContainer>
       <GridContainer>
       <GridItem xs={12} sm={12} md={6}>
