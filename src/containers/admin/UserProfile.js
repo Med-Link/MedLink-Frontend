@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { backendUrl } from "../../urlConfig.js";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -43,7 +44,7 @@ export default function UserProfile() {
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
     
-      axios.get('http://localhost:4000/api/admin/viewprofile',{
+      axios.get(`${backendUrl}/admin/viewprofile`,{
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         }

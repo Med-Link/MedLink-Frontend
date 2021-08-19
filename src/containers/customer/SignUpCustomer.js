@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { backendUrl } from '../../urlConfig';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -99,7 +100,7 @@ const SignUpCustomer = () => {
       };
       const isValid = await customerSchema.isValid(form);
       if (isValid === true) {
-        axios.post('http://localhost:4000/api/signup', {
+        axios.post(`${backendUrl}/signup`, {
           firstName,
           lastName,
           email,

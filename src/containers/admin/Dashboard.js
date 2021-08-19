@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-key */
 import React,{useState} from "react";
 import axios from 'axios';
+import { backendUrl } from "../../urlConfig.js";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
@@ -42,7 +43,7 @@ export default function Dashboard() {
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
     
-      axios.get('http://localhost:4000/api/admin/countcustomer',{
+      axios.get(`${backendUrl}/admin/countcustomer`,{
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         }
@@ -57,7 +58,7 @@ export default function Dashboard() {
   const getdata1 =async() =>{
     const token = window.localStorage.getItem('token');
     // console.log('xxxxx')
-     await axios.get('http://localhost:4000/api/admin/countpharmacy',{
+     await axios.get(`${backendUrl}/admin/countpharmacy`,{
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         }
