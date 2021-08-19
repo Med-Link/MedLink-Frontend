@@ -33,9 +33,9 @@ const useStyles1 = makeStyles((theme) => ({
   },
 }));
 const useStyles2 = makeStyles({
-  table: {
-    minWidth: 500,
-  },
+  // table: {
+  //   minWidth: 500,
+  // },
 });
 
 
@@ -128,9 +128,9 @@ export default function ViewEmployees() {
       },[]);
 
       const columns = [
-        { id: 'AdminId', label: 'Admin Id', minWidth: 100 },
-        { id: 'Name', label: 'Full Name', minWidth: 170 },
-        { id: 'Email', label: 'Email', minWidth: 170 },];
+        { id: 'AdminId', label: 'Admin Id'},
+        { id: 'Name', label: 'Full Name'},
+        { id: 'Email', label: 'Email'},];
       const rows = data ? ( data.map((d) => [ d.adminid, d.firstname, d.lastname,d.email] )
                 ) : 
                 (
@@ -155,14 +155,13 @@ export default function ViewEmployees() {
                 <h4 className={classes.cardTitleWhite}>Registered Admin Accounts</h4>
       </CardHeader>
       <CardBody>
-      <Table className={classes.table} aria-label="custom pagination table">
+      <Table  aria-label="custom pagination table">
       <TableHead >
             <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth}}
                 >
                   {column.label}
                 </TableCell>
@@ -175,13 +174,16 @@ export default function ViewEmployees() {
             : data
           ).map((row) => (
             <TableRow key={row.adminid}>
-              <TableCell component="th" scope="row">
+              {/* <TableCell component="th" scope="row">
+                {row.adminid}
+              </TableCell> */}
+              <TableCell align="left">
                 {row.adminid}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="left">
+              <TableCell align="left">
                 {row.firstname}  {row.lastname}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="left">
+              <TableCell align="left">
                 {row.email}
               </TableCell>
             </TableRow>
@@ -189,7 +191,7 @@ export default function ViewEmployees() {
 
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
+              <TableCell colSpan={3} />
             </TableRow>
           )}
         </TableBody>
