@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-key */
 import React,{useState} from "react";
 import axios from 'axios';
+import { backendUrl } from "../../urlConfig.js";
 // @material-ui/core components
 import { makeStyles,withStyles } from "@material-ui/core/styles";
 import Dialog from '@material-ui/core/Dialog';
@@ -106,7 +107,7 @@ export default function PharmacyRequests() {
     const token = window.localStorage.getItem('token');
     console.log(pharmacyid);
     // console.log('kkkk')
-    axios.post('http://localhost:4000/api/admin/rejectpharmacy', {pharmacyid:pharmacyid,rejectreason:rejectreason}, {
+    axios.post(`${backendUrl}/admin/rejectpharmacy`, {pharmacyid:pharmacyid,rejectreason:rejectreason}, {
       headers: {
         'Authorization': token ? `Bearer ${token}` : ''
       },
@@ -129,7 +130,7 @@ export default function PharmacyRequests() {
       const token = window.localStorage.getItem('token');
   
       // console.log('kkkk')
-      axios.post('http://localhost:4000/api/admin/acceptpharmacy', {pharmacyid:pharmacyid}, {
+      axios.post(`${backendUrl}/admin/acceptpharmacy`, {pharmacyid:pharmacyid}, {
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         },
@@ -172,7 +173,7 @@ export default function PharmacyRequests() {
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
     
-      axios.get('http://localhost:4000/api/admin/viewpharmacyrequests',{
+      axios.get(`${backendUrl}/admin/viewpharmacyrequests`,{
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         }

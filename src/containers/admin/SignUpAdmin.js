@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { backendUrl } from '../../urlConfig';
 
 
 
@@ -47,7 +48,7 @@ const SignUpAdmin=()=>{
         
         e.preventDefault();
         if(checked){
-        axios.post('http://localhost:4000/api/admin/signup', {
+        axios.post(`${backendUrl}/admin/signup`, {
             firstName: firstName,
             lastName:lastName,
             email:email,

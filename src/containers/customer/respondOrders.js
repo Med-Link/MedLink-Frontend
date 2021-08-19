@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-key */
 import React,{useState} from "react";
 import axios from 'axios';
+import { backendUrl } from "../../urlConfig.js";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -78,7 +79,7 @@ const rejectOrder = () => {
   const token = window.localStorage.getItem('token');
 
   // console.log('kkkk')
-  axios.post('http://localhost:4000/api/order/rejectbill', {medlistid:rejectRowid}, {
+  axios.post(`${backendUrl}/order/rejectbill`, {medlistid:rejectRowid}, {
     headers: {
       'Authorization': token ? `Bearer ${token}` : ''
     },
@@ -99,7 +100,7 @@ const rejectOrder = () => {
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
     
-      axios.get('http://localhost:4000/api/order/allorderbills',{
+      axios.get(`${backendUrl}/order/allorderbills`,{
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         }

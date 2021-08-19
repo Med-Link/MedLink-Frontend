@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-key */
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import { backendUrl } from "../../urlConfig.js";
 // @material-ui/core
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -73,7 +74,7 @@ export default function Medicine() {
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
     
-      axios.get('http://localhost:4000/api/admin/viewallmedicine',{
+      axios.get(`${backendUrl}/admin/viewallmedicine`,{
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         }
