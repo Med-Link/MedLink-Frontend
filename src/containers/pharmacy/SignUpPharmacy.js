@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import { backendUrl } from '../../urlConfig';
+import { Redirect,useHistory } from 'react-router-dom';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -13,22 +12,19 @@ import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Hidden from '@material-ui/core/Hidden';
 
-
 import GridContainer from '../../components/Dashboard/Grid/GridContainer';
 import GridItem from '../../components/Dashboard/Grid/GridItem';
 import Footer from '../../components/Dashboard/Footer/Footer';
+import Map from '../../components/pharmacy/Map'
 
 import pharmacist from '../../assets/images/pharmacist2.jpg';
 
 import axios from 'axios';
-import { Redirect,useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import {pharmacySchema} from '../../validations/pharmacyValidation'
 // import GoogleApiWrapper from '../../components/pharmacy/MapComponent'
@@ -38,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor : '#eee',
   },
   paper: {
-    marginTop: theme.spacing(12),
+    marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -81,6 +77,9 @@ const useStyles = makeStyles((theme) => ({
   instructions: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
+  },
+  loc:{
+    marginTop: theme.spacing(-4),
   },
   
 
@@ -240,19 +239,12 @@ const SignUpPharmacy=()=>{
             return (
                 <div>
                     {/* <form className={classes.form} noValidate> */}
-                        <Grid container spacing={2}>
-                            <Grid item xs={12}>
-                                <TextField
-                                variant="outlined"
-                                value ={location} onChange={(e) => setLocation(e.target.value)}
-                                required
-                                fullWidth
-                                id="location"
-                                label="Location URL"
-                                name="location"
-                                size="small"
-                                />
-                            </Grid>
+                        <Grid container sm={12} className={classes.loc}>
+                                <Map
+                                center={{lat: 7.2906, lng: 80.6337}}
+                                height='230px'
+                                width='100%'
+                                zoom={7} />
                         </Grid>
                     {/* </form> */}
                 </div>
@@ -357,11 +349,11 @@ const SignUpPharmacy=()=>{
     <div style={{overflow: "hidden"}}>
       <GridContainer spacing={0} >
         <Hidden smDown>
-          <GridItem xs={12} sm={12} md={7}>
+          <GridItem xs={12} sm={12} md={6}>
             <img src={pharmacist} className={classes.image} />
           </GridItem>
         </Hidden>
-        <GridItem xs={12} sm={12} md={4}  borderRadius={10}>
+        <GridItem xs={12} sm={12} md={5}  borderRadius={10}>
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
               <LockOutlinedIcon />
