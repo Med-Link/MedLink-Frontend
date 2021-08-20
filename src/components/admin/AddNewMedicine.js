@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+import { backendUrl } from "../../urlConfig.js";
 
 import { Redirect } from "react-router-dom";
 
@@ -58,7 +59,7 @@ const AddNewMedicine = (props) => {
   const submit = (e) => {
     e.preventDefault();
     const token = window.localStorage.getItem("token");
-    axios.post("http://localhost:4000/api/admin/addmedicine", {brand: brand, medname: medname},{
+    axios.post(`${backendUrl}/admin/addmedicine`, {brand: brand, medname: medname},{
         
         headers: {
           Authorization: token ? `Bearer ${token}` : "",

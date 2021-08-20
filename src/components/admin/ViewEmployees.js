@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
+import { backendUrl } from "../../urlConfig.js";
 
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -107,7 +108,7 @@ export default function ViewEmployees() {
       const getdata =() =>{
         const token = window.localStorage.getItem('token');
         
-          axios.get('http://localhost:4000/api/admin/viewadmins',{
+          axios.get(`${backendUrl}/admin/viewadmins`,{
           headers: {
             Authorization: token ? `Bearer ${token}` : "",
           },

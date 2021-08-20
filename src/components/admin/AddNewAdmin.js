@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import { backendUrl } from '../../urlConfig.js';
 
 // material ui imports
 import { makeStyles } from "@material-ui/core/styles";
@@ -36,7 +37,7 @@ const SignUpAdmin = () => {
   const signup = (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:4000/api/admin/addnewAdmin', {
+    axios.post(`${backendUrl}/admin/addnewAdmin`, {
       firstName,
       lastName,
       email,

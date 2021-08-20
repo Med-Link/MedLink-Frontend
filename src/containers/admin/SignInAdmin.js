@@ -38,23 +38,7 @@ import Footer from "../../components/Dashboard/Footer/Footer.js";
 //   }
 
 const SignIn=(props)=>{
-    //   const [email, setEmail] = useState("");
-    //   const [password, setPassword] = useState("");
-  
-    //   const handleSubmit=(e)=>{
-    //       e.preventDefault();
-    //   }
-      
-    //   const signin =()=>{
-    //       axios.post('http://localhost:4000/api/admin/signin', {
-    //           email:email,
-    //           password:password
-    //       }).then((response)=>{
-    //           console.log(response);
-    //       }).catch((err)=>{
-    //           console.log(err);
-    //       });
-    //   }
+   
     const [email,setEmail] = useState ('');
     const [password,setPassword] = useState ('');
     const [error,setError] = useState ('');

@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { backendUrl } from '../../urlConfig';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -127,7 +128,7 @@ const SignUpPharmacy=()=>{
             form.append("registrationDocs", pic);
           }
             if(checked){
-            axios.post('http://localhost:4000/api/pharmacy/signup', form).then((response)=>{
+            axios.post(`${backendUrl}/pharmacy/signup`, form).then((response)=>{
                 console.log(response);
                 // setSignedUp(true);
                 history.push("/pharmacysignin");

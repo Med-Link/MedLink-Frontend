@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import { Redirect, useHistory } from 'react-router-dom';
+import { backendUrl } from "../../../../urlConfig.js";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -56,7 +57,7 @@ export default function AdminNavbarLinks() {
   const logout = async ()=>{
     // console.log("gggggggllll");
     // localStorage.clear();
-    const res = await axios.post(`http://localhost:4000/api/pharmacy/signout`);
+    const res = await axios.post(`${backendUrl}/pharmacy/signout`);
     if(res.status === 200){
       localStorage.clear();
       history.push("/");

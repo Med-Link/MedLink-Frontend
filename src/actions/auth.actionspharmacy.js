@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { authConstants } from './constants';
+import { backendUrl } from '../urlConfig';
 
 export const login = (user) => {
   console.log(user);
 
   return async (dispatch) => {
     dispatch({ type: authConstants.LOGIN_REQUEST });
-    const res = await axios.post('http://localhost:4000/api/pharmacy/signin', {
+    const res = await axios.post(`${backendUrl}/pharmacy/signin`, {
       ...user,
     });
 
@@ -49,7 +50,7 @@ export const isuserLoggedIn = () => async (dispatch) => {
 
 export const signout = () => async (dispatch) => {
   dispatch({ type: authConstants.LOGOUT_REQUEST });
-  const res = await axios.post('http://localhost:4000/api/pharmacy/signout');
+  const res = await axios.post(`${backendUrl}/pharmacy/signout`);
 
   if (res.status === 200) {
     localStorage.clear();
