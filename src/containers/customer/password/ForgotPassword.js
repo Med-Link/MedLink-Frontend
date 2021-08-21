@@ -86,7 +86,7 @@ const ForgotPassword=()=>{
     const paragraphStyle = {color: '#126e82'};
     const inputStyle = {width: '700px'}
     const grid2Style={padding: 10}
-    const iconStyle = {color: '#126e82',height:'50px',width:'40px'}
+    const iconStyle = {color: '#126e82',height:'50px',width:'50px'}
 
     return(
         
