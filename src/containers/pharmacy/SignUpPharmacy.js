@@ -241,7 +241,7 @@ const SignUpPharmacy=()=>{
                     {/* <form className={classes.form} noValidate> */}
                         <Grid container sm={12} className={classes.loc}>
                                 <Map
-                                center={{lat: 7.2906, lng: 80.6337}}
+                                center={{lat: 6.9271, lng: 79.8612}}
                                 height='230px'
                                 width='100%'
                                 zoom={7} />
@@ -254,12 +254,12 @@ const SignUpPharmacy=()=>{
                 <div>
                 {/* <form className={classes.form} noValidate> */}
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={12} md={5}>
+                        <Grid item xs={12} sm={5} md={5}>
                             <Typography variant="body2" display="block">
                             Medical Council Certificate *
                             </Typography>                
                         </Grid>
-                        <Grid item xs={12}  sm={12} md={7}>
+                        <Grid item xs={12}  sm={7} md={7}>
                             <input
                                 accept="image/*"
                                 onChange={handleRegisterDocs}
@@ -270,12 +270,12 @@ const SignUpPharmacy=()=>{
                             />
                         </Grid>
                         
-                        <Grid item xs={12} sm={12} md={5}>
+                        <Grid item xs={12} sm={5} md={5}>
                             <Typography variant="body2" display="block" >
                             Pharmaciest Licence *
                             </Typography>                
                         </Grid>
-                        <Grid item xs={12} sm={12} md={7}>
+                        <Grid item xs={12} sm={7} md={7}>
                             <input
                             accept="image/*"
                             onChange={handleRegisterDocs}
@@ -286,12 +286,12 @@ const SignUpPharmacy=()=>{
                             />
                         </Grid>
 
-                        <Grid item xs={12} sm={12} md={5}>
+                        <Grid item xs={12} sm={5} md={5}>
                             <Typography variant="body2" display="block">
                             Business Registration Certificate *
                             </Typography>                
                         </Grid>
-                        <Grid item xs={12} sm={12} md={7}>
+                        <Grid item xs={12} sm={7} md={7}>
                             <input
                             accept="image/*"
                             onChange={handleRegisterDocs}

@@ -255,18 +255,7 @@ class Map extends React.Component{
 						        position={{ lat: this.state.markerPosition.lat, lng: this.state.markerPosition.lng }}
 						/>
 						<Marker />
-						{/* For Auto complete Search Box */}
-						<Autocomplete
-							style={{
-								width: '100%',
-								height: '40px',
-								paddingLeft: '16px',
-								marginTop: '2px',
-								marginBottom: '500px'
-							}}
-							onPlaceSelected={ this.onPlaceSelected }
-							types={['(regions)']}
-						/>
+						
 					</GoogleMap>
 				)
 			)
@@ -275,7 +264,22 @@ class Map extends React.Component{
 		if( this.props.center.lat !== undefined ) {
 			map = <div>
 					<Grid container spacing={1}>
-						<Grid item xs={6} sm={6} md={4}>
+						<Grid item xs={12} sm={12} md={12}>
+						{/* For Auto complete Search Box */}
+							<Autocomplete
+								style={{
+									width: '95%',
+									height: '40px',
+									paddingLeft: '16px',
+									marginBottom: '10px',
+								}}
+								onPlaceSelected={ this.onPlaceSelected }
+								types={['(regions)']}
+							/>
+						</Grid>
+					</Grid>	
+					<Grid container spacing={1} style={{marginBottom: '10px'}}>
+						<Grid item xs={12} sm={8} md={8}>
 							<TextField 
 								variant="outlined"
 								readOnly="readOnly" 
@@ -289,7 +293,7 @@ class Map extends React.Component{
 								size="small"
 								/>
 						</Grid>
-						<Grid item xs={6} sm={6} md={4}>
+						<Grid item xs={6} sm={2} md={2}>
 							<TextField 
 								variant="outlined"
 								readOnly="readOnly" 
@@ -303,7 +307,7 @@ class Map extends React.Component{
 								size="small"
 							/>	
 						</Grid>	
-						<Grid item xs={6} sm={6} md={4}>
+						<Grid item xs={6} sm={2} md={2}>
 							<TextField 
 								variant="outlined"
 								readOnly="readOnly" 
