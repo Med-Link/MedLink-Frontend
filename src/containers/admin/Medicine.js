@@ -4,7 +4,6 @@ import axios from 'axios';
 import { backendUrl } from "../../urlConfig.js";
 // @material-ui/core
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import CreateIcon from '@material-ui/icons/Create';
 import Dialog from '@material-ui/core/Dialog';
@@ -85,17 +84,35 @@ export default function Medicine() {
          let array =[];
          results.forEach(element=>{
           let arr=[];
-          arr.push(element.medid,element.medname,element.brand,<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>,<IconButton aria-label="delete"><DeleteIcon /></IconButton>);
+          arr.push(element.medid,element.medname,element.brand,<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>);
           array.push(arr);
          }) 
         //  console.log(arr[0])        
         setData(array);
       })
-      // .then(data =>{
-      //   // console.log(data.message);
-      //   // const s= res.data.result[0];
-      //   // console.log(s);
-      // })
+  
+      //  update function
+      //  const [data1, setData1] = useState([]);
+      // const getdata1 =() =>{
+      //   const token = window.localStorage.getItem('token');
+        
+      //     axios.get(`${backendUrl}/admin/viewallmedicine`,{
+      //       headers: {
+      //         'Authorization': token ? `Bearer ${token}` : ''
+      //       }
+      //       })
+      //     .then(res =>{
+      //       const results =  res.data.result;
+      //        console.log(results);
+      //        let array =[];
+      //        results.forEach(element=>{
+      //         let arr=[];
+      //         arr.push(element.medid,element.medname<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>);
+      //         array.push(arr);
+      //        }) 
+      //       //  console.log(arr[0])        
+      //       setData1(array);
+      //     })
     
   }
   React.useEffect(()=>{
@@ -114,7 +131,7 @@ export default function Medicine() {
                 <CardBody>
                   <Table
                     tableHeaderColor="primary"
-                    tableHead={["Med ID", "Med Name","Brand","Edit","Delete"]}
+                    tableHead={["Med ID", "Med Name","Brand","Edit"]}
                     tableData={data}
                   // {[
                   //     ["Medicine2", "AAAAAAAAAAA",'Brand1',<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>,<IconButton aria-label="delete"><DeleteIcon /></IconButton>],
