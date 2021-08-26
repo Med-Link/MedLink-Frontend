@@ -25,6 +25,7 @@ import Button from "../../components/Dashboard//CustomButtons/Button";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
 import AddNewMedicine from "../../components/admin/AddNewMedicine"
+import { SentimentDissatisfied } from "@material-ui/icons";
 
 
 const useStyles = makeStyles(styles);
@@ -58,9 +59,12 @@ const DialogActions = withStyles((theme) => ({
 export default function Medicine() {
 
   const [openEdit, setOpenEdit] = React.useState(false);
+  const [medid, setMedid] = React.useState();
 
-  const handleClickOpenEdit = () => {
+
+  const handleClickOpenEdit = (medid) => {
     setOpenEdit(true);
+    setMedid(medid);
   };
 
   const handleCloseEdit = () => {
@@ -70,6 +74,29 @@ export default function Medicine() {
   const classes = useStyles();
 
   const [data, setData] = useState([]);
+  const [medicinename, setMedicinename] = useState();
+
+  const updatemedicine =(e)=>{
+    const token = window.localStorage.getItem('token');
+        
+    // e.preventDefault();
+    console.log("hhhhhhhh")
+    axios.post(`${backendUrl}/admin/updatemedicine`, {
+        medid:medid,
+        newmedname:medicinename}, {headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        },
+    }).then((response)=>{
+        // console.log(response);
+        // setSignedUp(true);
+        getdata();
+        handleCloseEdit();
+    }).catch((err)=>{
+        console.log(err);
+        handleCloseEdit();
+        // setError("Password must be atleast 6 characters long");
+    });
+  }
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
     
@@ -84,35 +111,14 @@ export default function Medicine() {
          let array =[];
          results.forEach(element=>{
           let arr=[];
-          arr.push(element.medid,element.medname,element.brand,<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>);
+          arr.push(element.medid,element.medname,element.brand,<IconButton aria-label="delete" onClick={()=>handleClickOpenEdit(element.medid)}><CreateIcon /></IconButton>);
           array.push(arr);
          }) 
         //  console.log(arr[0])        
         setData(array);
       })
   
-      //  update function
-      //  const [data1, setData1] = useState([]);
-      // const getdata1 =() =>{
-      //   const token = window.localStorage.getItem('token');
-        
-      //     axios.get(`${backendUrl}/admin/viewallmedicine`,{
-      //       headers: {
-      //         'Authorization': token ? `Bearer ${token}` : ''
-      //       }
-      //       })
-      //     .then(res =>{
-      //       const results =  res.data.result;
-      //        console.log(results);
-      //        let array =[];
-      //        results.forEach(element=>{
-      //         let arr=[];
-      //         arr.push(element.medid,element.medname<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>);
-      //         array.push(arr);
-      //        }) 
-      //       //  console.log(arr[0])        
-      //       setData1(array);
-      //     })
+    
     
   }
   React.useEffect(()=>{
@@ -155,13 +161,14 @@ export default function Medicine() {
             margin="dense"
             variant="standard"
             id="newmedname"
+            onChange={(e) => setMedicinename(e.target.value)}
             label="Update Medicine name"
             type="text"
             fullWidth
           />
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleCloseEdit} color="primary">
+          <Button autoFocus onClick={()=>updatemedicine()} color="primary">
             Save
           </Button>
         </DialogActions>
