@@ -48,7 +48,7 @@ function Copyright() {
 const BuyingHistory=()=>{
 
     const classes = useStyles();
-    const paperStyle={padding :20,height:'900px',width:'500px', margin:"20px auto"}
+    const paperStyle={padding :20,height:'850px',width:'400px', margin:"10px auto"}
     const avatarStyle={backgroundColor: '#126e82'}
     const gridStyle={padding: 20}
     const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0', width: '50%', left:'50%', opacity:'0.9'}
