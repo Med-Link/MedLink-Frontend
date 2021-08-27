@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import DateRange from "@material-ui/icons/DateRange";
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
@@ -65,14 +66,18 @@ const useStyles = makeStyles((theme) => ({
   withoutLabel: {
     marginTop: theme.spacing(3),
   },
+  sub: {
+    width: '20',
+  },
   textField: {
     width: '25ch',
   },
+
 }));
 export default function OrderProcess() {
   const classes = useStyles();
 
-  const [currency, setCurrency] = React.useState('EUR');
+  const [currency, setCurrency] = React.useState('B124');
 
   const handleChange = (event) => {
     setCurrency(event.target.value);
@@ -135,17 +140,12 @@ export default function OrderProcess() {
                         tableHeaderColor="secondary"
                         tableHead={["Medicine ID", "Batch ID", "Medicine Name", "Current Qty", "Unit Price(Rs.)", "Update", "Delete"]}
                         tableData={[
-                          
+
                           ["M002",
                             <TextField
-                              id="outlined-select-currency"
                               select
-                              
                               value={currency}
-                              onChange={handleChange}
-                              
-                              variant="outlined"
-                            >
+                              onChange={handleChange}>
                               {currencies.map((option) => (
                                 <MenuItem key={option.value} value={option.value}>
                                   {option.label}
@@ -155,7 +155,7 @@ export default function OrderProcess() {
                             <InputBase
                               className={classes.margin}
                               defaultValue="Ventalin"
-                              inputProps={{ 'aria-label': 'naked' }}
+                              inputProps={{ 'aria-label': 'med' }}
                             />,
                             <InputBase
                               id="outlined-number"
@@ -165,38 +165,91 @@ export default function OrderProcess() {
                                 shrink: true,
                               }}
                               variant="outlined"
+                              width={50}
                             />,
                             2,
                             <Button variant="contained" color="primary"><AddCircleOutlineIcon />Update</Button>,
-                            <Button variant="contained" color="primary"><RemoveCircleOutlineOutlinedIcon /> Remove</Button>],
+                            <Button variant="contained" color="danger"><RemoveCircleOutlineOutlinedIcon /> Remove</Button>],
                         ]}
                       />
                     </CardBody>
                   </Card>
                 ),
               },
-              {
-                tabName: "Update stock",
 
-                tabContent: (
-                  <Card>
-                    <CardBody>
-
-
-                    </CardBody>
-                  </Card>
-                ),
-              },
               {
                 tabName: "Add New Medicine",
 
                 tabContent: (
-                  <Card>
+                  <Card >
                     <CardBody>
-
-
+                      <Grid xs={12} md={6} sm={6}>
+                        <Card className={classes.sub}>
+                          <CardBody>
+                            <GridContainer xs={12} md={12} sm={6}>
+                              <AddNewMed />
+                            </GridContainer>
+                          </CardBody>
+                        </Card>
+                      </Grid>
                     </CardBody>
+                    {/* -------------------- */}
+
+                    <CardBody>
+                      <Grid xs={12} md={6} sm={6}>
+                        <Card className={classes.sub}>
+                          <CardBody>
+                            
+                    <GridContainer xs={12}>
+                      <GridItem xs={12} md={6} sm={6}>
+
+                        <CardBody color="primary" stats icon>
+                          {/* <div> */}
+                          <GridContainer>
+                            <GridItem>
+                              
+                                  <Form />
+                                
+                            </GridItem>
+                            <GridItem xs={12}>
+                              <Button variant="outlined" color="primary" onClick={handleClickOpenAccept}>
+                                Save
+                              </Button>
+                              <Dialog
+                                open={openAccept}
+                                onClose={handleCloseAccept}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description"
+                              >
+                                <DialogTitle id="alert-dialog-title">{"Do you want to Save this to the stock"}</DialogTitle>
+                                <DialogActions>
+                                  <Button onClick={handleCloseAccept} color="danger">
+                                    Cancle
+                                  </Button>
+                                  <Button onClick={handleCloseAccept} color="primary" autoFocus>
+                                    Yes
+                                  </Button>
+                                </DialogActions>
+                              </Dialog>
+                            </GridItem>
+                          </GridContainer>
+
+
+
+
+
+                        </CardBody>
+
+                      </GridItem>
+                    </GridContainer>
+                          </CardBody>
+                        </Card>
+                      </Grid>
+                    </CardBody>
+                    {/* ----------------- */}
+                    
                   </Card>
+
                 ),
               },
 
@@ -208,101 +261,14 @@ export default function OrderProcess() {
       </GridContainer>
 
       {/* Update Stock -csv */}
-      < GridContainer >
-        <GridContainer xs={12} md={6} sm={6}>
-          <GridItem md={6} sm={12}>
-            <Card >
-              <CardBody color="primary" stats icon>
-                {/* <div> */}
-                <GridContainer>
-                  <GridItem>
-                    <Form />
-                  </GridItem>
-                  <GridItem>
-                    <Button variant="outlined" color="primary" onClick={handleClickOpenAccept}>
-                      Save
-                    </Button>
-                    <Dialog
-                      open={openAccept}
-                      onClose={handleCloseAccept}
-                      aria-labelledby="alert-dialog-title"
-                      aria-describedby="alert-dialog-description"
-                    >
-                      <DialogTitle id="alert-dialog-title">{"Do you want to Save this to the stock"}</DialogTitle>
-
-                      <DialogActions>
-                        <Button onClick={handleCloseAccept} color="secondary">
-                          Cancle
-                        </Button>
-                        <Button onClick={handleCloseAccept} color="primary" autoFocus>
-                          Yes
-                        </Button>
-                      </DialogActions>
-                    </Dialog>
-                  </GridItem>
-                </GridContainer>
-
-                {/* <Typography color="primary" variant="h6"> */}
-                {/* </GridItem> */}
-
-
-                {/* </Typography> */}
-
-                {/* </div> */}
-                {/* <Switch color="secondary" inputProps={{ 'aria-label': 'primary checkbox' }} />, */}
-
-
-
-              </CardBody>
-            </Card>
-          </GridItem>
-        </GridContainer>
 
 
 
 
-        {/* Add New Batch */}
-
-        < GridContainer xs={12} md={6} sm={6} >
-          <GridItem  >
-            <Card >
-              <CardBody color="primary" stats icon>
-
-                <div>
-
-
-                  <Typography variant="body1">
-                    Add New Medicine
-
-                    <Dialog
-                      open={openAddMeds}
-                      onClose={handleCloseAddMeds}
-                      aria-labelledby="alert-dialog-title"
-                      aria-describedby="alert-dialog-description"
-                    >
-
-                      <DialogContent dividers><AddNewMed /></DialogContent>
 
 
 
-                    </Dialog>
-                    <br></br>
-                    <Button variant="outlined" color="primary" onClick={handleClickOpenAddMeds}>
-                      Add Medicine
-                    </Button>
-                  </Typography>
 
-                </div>
-                {/* <Switch color="secondary" inputProps={{ 'aria-label': 'primary checkbox' }} />, */}
-
-
-
-              </CardBody>
-            </Card>
-
-          </GridItem>
-        </GridContainer>
-      </GridContainer>
 
     </div>
   );
