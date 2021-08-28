@@ -19,6 +19,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Checkout from './payment/Checkout'
 
  
 
@@ -61,6 +62,7 @@ export default function RespondOrders() {
   const [rejectRowid, setRejectRowid] = useState("");
 
   const [open, setOpen] = React.useState(false);
+  const [openCheckout, setOpenCheckout] = React.useState(false);
 
   const handleClickOpen = (medlistid) => {
     setOpen(true);
@@ -75,6 +77,15 @@ export default function RespondOrders() {
     setOpen(false);
   };
   
+  const handleClickOpen2 = (medlistid) => {
+    setOpenCheckout(true);
+     
+  };
+
+  const handleClose2 = () => {
+    setOpenCheckout(false);
+  };
+
 const rejectOrder = () => {
   const token = window.localStorage.getItem('token');
 
@@ -112,7 +123,7 @@ const rejectOrder = () => {
          results.forEach(element=>{
           let arr=[];
           arr.push(element.medlistid,element.order_reqid,element.totalprice,element.name,<ButtonGroup color="primary" aria-label="outlined primary button group">
-          <Button href="/Checkout/">View Order</Button>
+          <Button onClick={handleClickOpen2}>View Order</Button>
            
           <div>
           <Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.medlistid)}>
@@ -189,6 +200,17 @@ const rejectOrder = () => {
         </Card>
       </GridItem>
       
+      <Dialog open={openCheckout} onClose={handleClose2} aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title">
+                             
+            </DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  <Checkout/>
+                </DialogContentText>
+              </DialogContent>
+      </Dialog>
+
       <Dialog
             open={open}
             onClose={handleClose}
