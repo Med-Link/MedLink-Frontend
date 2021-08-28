@@ -124,7 +124,7 @@ const rejectOrder = () => {
         </ButtonGroup>);
           array.push(arr);
          })         
-        setData(array);
+        setData(array); 
       })
       // .then(data =>{
       //   // console.log(data.message);

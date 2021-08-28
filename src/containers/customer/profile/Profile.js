@@ -18,6 +18,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import EditProfile from './EditProfile';
+import ResetPassword from '../password/ResetPassword'
 
 function Copyright() {
     return (
@@ -34,14 +35,23 @@ function Copyright() {
 
 const Profile=()=>{
 
-    const [open, setOpen] = React.useState(false);
+    const [openEdit, setOpenEdit] = React.useState(false);
+    const [openReset, setOpenReset] = React.useState(false);
 
-    const handleClickOpen = () => {
-    setOpen(true);
+    const handleClickOpen1 = () => {
+        setOpenEdit(true);
     };
 
-    const handleClose = () => {
-    setOpen(false);
+    const handleClose1 = () => {
+        setOpenEdit(false);
+    };
+
+    const handleClickOpen2 = () => {
+        setOpenReset(true);
+    };
+    
+    const handleClose2 = () => {
+        setOpenReset(false);
     };
 
     const paperStyle={padding :20,height:'550px',width:'500px', margin:"20px auto"}
@@ -126,20 +136,30 @@ const Profile=()=>{
                     </Grid>
                     <Grid container spacing={2}> 
                     <Grid item xs={6}>
-                        <Button type='submit' fullWidth variant="contained" style={buttonStyle} onClick={handleClickOpen}>Edit Profile</Button>
-                        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                        <Button type='submit' fullWidth variant="contained" style={buttonStyle} onClick={handleClickOpen1}>Edit Profile</Button>
+                        <Dialog open={openEdit} onClose={handleClose1} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">
                              
                         </DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                            <EditProfile/>
+                                <EditProfile/>
                             </DialogContentText>
                         </DialogContent>
                         </Dialog>
                     </Grid> 
                     <Grid item xs={6}>
-                        <Button type='submit' fullWidth variant="contained" style={buttonStyle} href="/ResetPassword/">Reset Password</Button>
+                        <Button type='submit' fullWidth variant="contained" style={buttonStyle} onClick={handleClickOpen2}>Reset Password</Button>
+                        <Dialog open={openReset} onClose={handleClose2} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">
+                             
+                        </DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                <ResetPassword/>
+                            </DialogContentText>
+                        </DialogContent>
+                        </Dialog>
                     </Grid> 
                     </Grid>
                 </Grid> 
