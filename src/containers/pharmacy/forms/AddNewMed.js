@@ -55,6 +55,7 @@ const AddNewMed=()=>{
                                 readOnly: false,
                             }}
                             variant="outlined"
+                            fullWidth
                         />
                     </Grid>
 
@@ -67,6 +68,7 @@ const AddNewMed=()=>{
                                 readOnly: false,
                             }}
                             variant="outlined"
+                            fullWidth
                         />
                     </Grid>
 
@@ -107,9 +109,7 @@ const AddNewMed=()=>{
                  
                 
             
-            <Box mt={5}>
-                <Copyright />
-            </Box>
+           
         </Grid>
     )
 }
