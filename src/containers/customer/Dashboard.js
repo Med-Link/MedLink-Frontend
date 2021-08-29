@@ -49,7 +49,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Form from './form/Form'
+import Form from './form/Form';
+import Map from '../../components/customer/Map';
+import Paper from '@material-ui/core/Paper';
 
 import { bugs, website, server } from "../../variables/general.js";
 
@@ -64,6 +66,15 @@ import buttonStyle from "../../assets/jss/material-dashboard-react/components/bu
 
 
 const useStyles = makeStyles(styles);
+{/*const useStyles = makeStyles((theme) => ({
+   
+  loc:{
+    marginTop: theme.spacing(-4),
+  },
+  
+
+}));*/}
+
 const fontStyle = {fontSize: '20px',color: '#126e82'};
 const titleStyle = {fontSize: '30px',color: '#126e82'};
 const dropDownStyle = {width: '200px'};
@@ -75,6 +86,8 @@ const cdStyle = {backgroundColor: 'rgb(226 243 242)'}
 const goButtonStyle={color: '#efe3e3',backgroundColor: '#126e82',right: '-120%', margin: '30px 0', opacity:'0.9'}
 const shareButtonStyle={color: '#efe3e3',left: '-10%',backgroundColor: '#126e82', marginTop: '10px',width: '30%', padding: '2px', opacity:'0.9'}
 const sentenceStyle={fontSize: '16px', color: '#126e82', fontWeight: 'bold'}
+const paperStyle={padding :20,height:'350px',width:'90%', margin:"20px auto"}
+//const locStyle={marginTop: theme.spacing(-4)}
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
@@ -89,15 +102,26 @@ export default function Dashboard() {
   const classes = useStyles();
   return (
     <div>
-      <GridContainer item spacing={3}>
-        <GridItem xs={6}>
+      <Paper elevation={10} style={paperStyle}> 
+      <GridContainer item spacing={1}>
+        <GridItem xs={5}>
           <p style={sentenceStyle}>Share Your Location To Get The Nearest Pharmacies In Order :</p>
         </GridItem>
          
-        <GridItem xs={6}> 
-          <Button variant="contained" style={shareButtonStyle} href="#">Share Location</Button>
-        </GridItem>
+        <Grid container xs={7} >
+          <Map
+            center={{lat: 6.9271, lng: 79.8612}}
+            height='230px'
+            width='70%'
+            
+            zoom={7} />
+        </Grid>
+          {/*<Button variant="contained" style={shareButtonStyle} href="#">Share Location</Button>
+          */}
+
+        
       </GridContainer>
+      </Paper>
       {/*<GridContainer>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
