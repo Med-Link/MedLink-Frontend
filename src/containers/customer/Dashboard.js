@@ -49,7 +49,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Form from './form/Form'
+import Form from './form/Form';
+import Map from '../../components/customer/Map'
 
 import { bugs, website, server } from "../../variables/general.js";
 
@@ -64,6 +65,15 @@ import buttonStyle from "../../assets/jss/material-dashboard-react/components/bu
 
 
 const useStyles = makeStyles(styles);
+{/*const useStyles = makeStyles((theme) => ({
+   
+  loc:{
+    marginTop: theme.spacing(-4),
+  },
+  
+
+}));*/}
+
 const fontStyle = {fontSize: '20px',color: '#126e82'};
 const titleStyle = {fontSize: '30px',color: '#126e82'};
 const dropDownStyle = {width: '200px'};
@@ -75,6 +85,7 @@ const cdStyle = {backgroundColor: 'rgb(226 243 242)'}
 const goButtonStyle={color: '#efe3e3',backgroundColor: '#126e82',right: '-120%', margin: '30px 0', opacity:'0.9'}
 const shareButtonStyle={color: '#efe3e3',left: '-10%',backgroundColor: '#126e82', marginTop: '10px',width: '30%', padding: '2px', opacity:'0.9'}
 const sentenceStyle={fontSize: '16px', color: '#126e82', fontWeight: 'bold'}
+//const locStyle={marginTop: theme.spacing(-4)}
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
@@ -90,13 +101,21 @@ export default function Dashboard() {
   return (
     <div>
       <GridContainer item spacing={3}>
-        <GridItem xs={6}>
+        <GridItem xs={4}>
           <p style={sentenceStyle}>Share Your Location To Get The Nearest Pharmacies In Order :</p>
         </GridItem>
          
-        <GridItem xs={6}> 
-          <Button variant="contained" style={shareButtonStyle} href="#">Share Location</Button>
-        </GridItem>
+        <Grid container xs={8} >
+          <Map
+            center={{lat: 6.9271, lng: 79.8612}}
+            height='230px'
+            width='100%'
+            zoom={7} />
+        </Grid>
+          {/*<Button variant="contained" style={shareButtonStyle} href="#">Share Location</Button>
+          */}
+
+        
       </GridContainer>
       {/*<GridContainer>
         <GridItem xs={12} sm={6} md={3}>
