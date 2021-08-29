@@ -5,8 +5,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Map from '../../../components/customer/Map'
 
 const products = [
   { name: 'Panadol', desc: '1 Card', price: 'Rs.20.00' },
@@ -34,10 +32,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Review() {
+export default function TotalBill() {
   const classes = useStyles();
-
-  const shareButtonStyle={color: '#efe3e3', backgroundColor: '#126e82', marginTop: '35px',width: '100%', padding: '2px', opacity:'0.9'}
 
   return (
     <React.Fragment>
@@ -51,11 +47,28 @@ export default function Review() {
             <Typography variant="body2">{product.price}</Typography>
           </ListItem>
         ))}
+
         <ListItem className={classes.listItem}>
-          <ListItemText primary="Total (Without Delivery Charges)" />
+          <ListItemText primary="Total (Without Delivery Charges" />
           <Typography variant="subtitle1" className={classes.total}>
             Rs.270.00
           </Typography>
+          
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <ListItemText primary="Delivery Charges" />
+          <Typography variant="subtitle1" className={classes.total}>
+            Rs.150.00
+          </Typography>
+          
+        </ListItem>
+
+        <ListItem className={classes.listItem}>
+          <ListItemText primary="Total" />
+          <Typography variant="subtitle1" className={classes.total}>
+            Rs.420.00
+          </Typography>
+          
         </ListItem>
       </List>
       <Grid container spacing={2}>
@@ -66,20 +79,6 @@ export default function Review() {
           <Typography gutterBottom>Kamal Perera</Typography>
           <Typography gutterBottom>{addresses.join(', ')}</Typography>
         </Grid>*/}
-        <Grid item xs={12}>
-          <Typography variant="h6" gutterBottom className={classes.title}>
-            Please Share Your Location To Calculate Delivery Charges (Compulsary):
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          {/*<Button variant="contained" style={shareButtonStyle} href="#">Share Location</Button>
-          */}
-          <Map
-            center={{lat: 6.9271, lng: 79.8612}}
-            height='230px'
-            width='100%'
-            zoom={7} />
-        </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           {/*<Typography variant="h6" gutterBottom className={classes.title}>
             Payment details

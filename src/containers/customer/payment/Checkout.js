@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
+import TotalBill from './TotalBill'
 import { Grid } from '@material-ui/core';
 
 function Copyright() {
@@ -65,16 +66,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Review your order', 'Delivery address', 'Payment details' ];
+const steps = ['Review your order', 'Total Bill','Delivery address', 'Payment details' ];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
       return <Review />;
-
     case 1:
-      return <AddressForm />;
+      return <TotalBill />;
     case 2:
+      return <AddressForm />;
+    case 3:
       return <PaymentForm />;
     default:
       throw new Error('Unknown step');

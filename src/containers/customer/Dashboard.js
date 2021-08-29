@@ -26,7 +26,8 @@ import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import { Grid, Typography } from '@material-ui/core';
 import Search from "@material-ui/icons/Search";
 import CustomInput from "../../components/Dashboard/CustomInput/CustomInput.js";
-import Button from "../../components/Dashboard/CustomButtons/Button.js";
+//import Button from "../../components/Dashboard/CustomButtons/Button.js";
+import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -48,7 +49,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Form from './form/Form'
+import Form from './form/Form';
+import Map from '../../components/customer/Map';
+import Paper from '@material-ui/core/Paper';
 
 import { bugs, website, server } from "../../variables/general.js";
 
@@ -63,6 +66,15 @@ import buttonStyle from "../../assets/jss/material-dashboard-react/components/bu
 
 
 const useStyles = makeStyles(styles);
+{/*const useStyles = makeStyles((theme) => ({
+   
+  loc:{
+    marginTop: theme.spacing(-4),
+  },
+  
+
+}));*/}
+
 const fontStyle = {fontSize: '20px',color: '#126e82'};
 const titleStyle = {fontSize: '30px',color: '#126e82'};
 const dropDownStyle = {width: '200px'};
@@ -71,6 +83,11 @@ const cardStyle = {backgroundColor: '#a6c6ca'}
 const searchButton = {backgroundColor: '#126e82'}
 const ftStyle = {color: '#126e82',textAlign: 'left',fontSize: '20px'}
 const cdStyle = {backgroundColor: 'rgb(226 243 242)'}
+const goButtonStyle={color: '#efe3e3',backgroundColor: '#126e82',right: '-120%', margin: '30px 0', opacity:'0.9'}
+const shareButtonStyle={color: '#efe3e3',left: '-10%',backgroundColor: '#126e82', marginTop: '10px',width: '30%', padding: '2px', opacity:'0.9'}
+const sentenceStyle={fontSize: '16px', color: '#126e82', fontWeight: 'bold'}
+const paperStyle={padding :20,height:'350px',width:'90%', margin:"20px auto"}
+//const locStyle={marginTop: theme.spacing(-4)}
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
@@ -85,6 +102,26 @@ export default function Dashboard() {
   const classes = useStyles();
   return (
     <div>
+      <Paper elevation={10} style={paperStyle}> 
+      <GridContainer item spacing={1}>
+        <GridItem xs={5}>
+          <p style={sentenceStyle}>Share Your Location To Get The Nearest Pharmacies In Order :</p>
+        </GridItem>
+         
+        <Grid container xs={7} >
+          <Map
+            center={{lat: 6.9271, lng: 79.8612}}
+            height='230px'
+            width='70%'
+            
+            zoom={7} />
+        </Grid>
+          {/*<Button variant="contained" style={shareButtonStyle} href="#">Share Location</Button>
+          */}
+
+        
+      </GridContainer>
+      </Paper>
       {/*<GridContainer>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
@@ -212,9 +249,10 @@ export default function Dashboard() {
               <div> 
               <FormControl className={classes.formControl}>
               
-              <Grid container spacing={4}> 
-              <Grid item xs={8}> 
-              <InputLabel htmlFor="grouped-native-select">Select Location</InputLabel>
+              {/*<Grid container spacing={4}>*/}
+              <Grid>
+              <Button variant="contained" style={goButtonStyle} href="#">Search</Button> 
+              {/*<InputLabel htmlFor="grouped-native-select">Select Location</InputLabel>
               <Select style={dropDownStyle} native defaultValue="" id="grouped-native-select">
                 <option aria-label="None" value="" />
                 <option value={1}>All of Sri Lanka</option>
@@ -229,23 +267,23 @@ export default function Dashboard() {
                 <option value={4}>Dikwella</option>
                 </optgroup>
                 
-              </Select>
+              </Select>*/}
               
               </Grid>
 
-              <Grid item xs={4}>
-              {/*<Button
+              {/*<Grid item xs={4}>
+               <Button
                 variant="contained"
                 style={{top: '30%',backgroundColor: '#126e82',color: '#efe3e3',width: '1px',height: '30px'}}
                 size="sm"
               >
         <CheckCircleIcon style={{ fontSize: 'large' }} />
-              </Button>*/}
+              </Button> 
               <IconButton aria-label="delete" style={{top: '30%',color: '#126e82'}}>
           <CheckCircleIcon fontSize="large" />
         </IconButton>
-              </Grid>
-              </Grid>
+              </Grid>*/}
+              {/*</Grid>*/}
               </FormControl>
               </div>
               
@@ -267,6 +305,16 @@ export default function Dashboard() {
           </CardHeader>
           <CardBody>
             <Grid item xs={12}>
+            {/*<Table
+              tableHeaderColor="primary"
+              tableHead={["Pharmacy Name", "District", "City", ""]}
+              tableData={[
+                ["Pharma", "Colombo", "Nugegoda", 
+                  <Button variant="outlined" onClick={handleClickOpen} color="primary">View</Button>
+                ],
+                 
+              ]}
+            />*/}
               <Typography>
                 <Link onClick={handleClickOpen}>
                   Pharma, Nugegoda, Colombo
