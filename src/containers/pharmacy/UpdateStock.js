@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import DateRange from "@material-ui/icons/DateRange";
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
@@ -27,14 +28,60 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineOutlinedIcon from '@material-ui/icons/RemoveCircleOutlineOutlined';
 import Form from './forms/AddCsv';
 import AddNewMed from './forms/AddNewMed';
+import FormControl from '@material-ui/core/FormControl';
+import FilledInput from '@material-ui/core/FilledInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import MenuItem from '@material-ui/core/MenuItem';
 
-const useStyles = makeStyles(styles);
+// const useStyles = makeStyles(styles);
 
+const currencies = [
+  {
+    value: 'B123',
+    label: 'B123',
+  },
+  {
+    value: 'B124',
+    label: 'B124',
+  },
+  {
+    value: 'B125',
+    label: 'B125',
+  },
+  {
+    value: 'B126',
+    label: 'B126',
+  },
+];
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
+  withoutLabel: {
+    marginTop: theme.spacing(3),
+  },
+  sub: {
+    width: '20',
+  },
+  textField: {
+    width: '25ch',
+  },
 
+}));
 export default function OrderProcess() {
   const classes = useStyles();
 
+  const [currency, setCurrency] = React.useState('B124');
 
+  const handleChange = (event) => {
+    setCurrency(event.target.value);
+  };
 
   const [openAccept, setOpenAccept] = React.useState(false);
 
@@ -65,46 +112,64 @@ export default function OrderProcess() {
             headerColor="primary"
             tabs={[
               {
-                tabName: "Update Stock",
-                // tabIcon: <AddShoppingCartIcon/>,
+                tabName: "View Stock",
+                // tabIcon: AddShoppingCartIcon,
                 tabContent: (
                   <Card>
                     <CardBody>
+
                       <div className={classes.search}>
                         <div className={classes.searchIcon}>
-                          <SearchIcon />
+                          <FormControl fullWidth className={classes.margin} variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">Search</InputLabel>
+                            <OutlinedInput
+
+                              endAdornment={
+                                <InputAdornment position="end">
+                                  <SearchIcon />
+                                  {/* <Button variant="contained" color="primary"><SearchIcon />Search</Button> */}
+                                </InputAdornment>
+                              }
+                              labelWidth={70}
+                            />
+                          </FormControl>
+
                         </div>
-                        <InputBase
-                          placeholder="Panadol"
-                          classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                          }}
-                          inputProps={{ 'aria-label': 'search' }}
-                        />
                       </div>
                       <Table
                         tableHeaderColor="secondary"
-                        tableHead={["Med ID", "Batch ID", "Med Name", "Current Qty", "Unit Price(Rs.)", "Add to Stock", "Remove From Stock"]}
+                        tableHead={["Medicine ID", "Batch ID", "Medicine Name", "Current Qty", "Unit Price(Rs.)", "Update", "Delete"]}
                         tableData={[
-                          ["M001",
-                            "B456",
-                            "Panadol",
-                            "100",
-                            "1.00",
-                            <div>
-                              <TextField id="standard-basic" label="Qty" size='small' />
-                              <Button variant="contained" color="primary" round >Add <AddCircleOutlineIcon /></Button>
 
-                            </div>,
-
-                            <div>
-                              <TextField id="standard-basic" label="Qty" size='small' />
-                              <Button variant="contained" color="primary" round>Remove <RemoveCircleOutlineOutlinedIcon /></Button>
-
-
-                            </div>
-                          ],
+                          ["M002",
+                            <TextField
+                              select
+                              value={currency}
+                              onChange={handleChange}>
+                              {currencies.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>
+                                  {option.label}
+                                </MenuItem>
+                              ))}
+                            </TextField>,
+                            <InputBase
+                              className={classes.margin}
+                              defaultValue="Ventalin"
+                              inputProps={{ 'aria-label': 'med' }}
+                            />,
+                            <InputBase
+                              id="outlined-number"
+                              defaultValue="5"
+                              type="number"
+                              InputLabelProps={{
+                                shrink: true,
+                              }}
+                              variant="outlined"
+                              width={50}
+                            />,
+                            2,
+                            <Button variant="contained" color="primary"><AddCircleOutlineIcon />Update</Button>,
+                            <Button variant="contained" color="danger"><RemoveCircleOutlineOutlinedIcon /> Remove</Button>],
                         ]}
                       />
                     </CardBody>
@@ -113,36 +178,78 @@ export default function OrderProcess() {
               },
 
               {
-                tabName: "View Stock",
-                // tabIcon: AddShoppingCartIcon,
-                tabContent: (
-                  <Card>
-                    <CardBody>
-                      <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                          <SearchIcon />
-                        </div>
-                        <InputBase
-                          placeholder="Panadol"
-                          classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                          }}
-                          inputProps={{ 'aria-label': 'search' }}
-                        />
-                      </div>
-                      <Table
-                        tableHeaderColor="secondary"
-                        tableHead={["Medicine ID", "Batch ID", "Medicine Name", "Current Qty", "Unit Price(Rs.)"]}
-                        tableData={[
-                          ["M001", "B654", "Panadol", "100", 2],
-                          ["M002", "B624", "Panadene", "50", 6],
-                          ["M003", "B631", "Vitamin-C", "200", 4],
+                tabName: "Add New Medicine",
 
-                        ]}
-                      />
+                tabContent: (
+                  <Card >
+                    <CardBody>
+                      <Grid xs={12} md={6} sm={6}>
+                        <Card className={classes.sub}>
+                          <CardBody>
+                            <GridContainer xs={12} md={12} sm={6}>
+                              <AddNewMed />
+                            </GridContainer>
+                          </CardBody>
+                        </Card>
+                      </Grid>
                     </CardBody>
+                    {/* -------------------- */}
+
+                    <CardBody>
+                      <Grid xs={12} md={6} sm={6}>
+                        <Card className={classes.sub}>
+                          <CardBody>
+                            
+                    <GridContainer xs={12}>
+                      <GridItem xs={12} md={6} sm={6}>
+
+                        <CardBody color="primary" stats icon>
+                          {/* <div> */}
+                          <GridContainer>
+                            <GridItem>
+                              
+                                  <Form />
+                                
+                            </GridItem>
+                            <GridItem xs={12}>
+                              <Button variant="outlined" color="primary" onClick={handleClickOpenAccept}>
+                                Save
+                              </Button>
+                              <Dialog
+                                open={openAccept}
+                                onClose={handleCloseAccept}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description"
+                              >
+                                <DialogTitle id="alert-dialog-title">{"Do you want to Save this to the stock"}</DialogTitle>
+                                <DialogActions>
+                                  <Button onClick={handleCloseAccept} color="danger">
+                                    Cancle
+                                  </Button>
+                                  <Button onClick={handleCloseAccept} color="primary" autoFocus>
+                                    Yes
+                                  </Button>
+                                </DialogActions>
+                              </Dialog>
+                            </GridItem>
+                          </GridContainer>
+
+
+
+
+
+                        </CardBody>
+
+                      </GridItem>
+                    </GridContainer>
+                          </CardBody>
+                        </Card>
+                      </Grid>
+                    </CardBody>
+                    {/* ----------------- */}
+                    
                   </Card>
+
                 ),
               },
 
@@ -154,102 +261,15 @@ export default function OrderProcess() {
       </GridContainer>
 
       {/* Update Stock -csv */}
-<GridContainer>
-      <GridContainer xs={12} md={6} sm={6}>
-        <GridItem  md={6} sm={12}>
-          <Card >
-            <CardBody color="primary" stats icon>
-              {/* <div> */}
-              <GridContainer>
-                <GridItem>
-                  <Form />
-                </GridItem>
-                <GridItem>
-                  <Button variant="outlined" color="primary" onClick={handleClickOpenAccept}>
-                    Save
-                  </Button>
-                  <Dialog
-                    open={openAccept}
-                    onClose={handleCloseAccept}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                  >
-                  <DialogTitle id="alert-dialog-title">{"Do you want to Save this to the stock"}</DialogTitle>
-
-                  <DialogActions>
-                    <Button onClick={handleCloseAccept} color="secondary">
-                      Cancle
-                    </Button>
-                    <Button onClick={handleCloseAccept} color="primary" autoFocus>
-                      Yes
-                    </Button>
-                  </DialogActions>
-                  </Dialog>
-                </GridItem>
-              </GridContainer>
-            
-                {/* <Typography color="primary" variant="h6"> */}
-              {/* </GridItem> */}
-              
-              
-              {/* </Typography> */}
-
-              {/* </div> */}
-              {/* <Switch color="secondary" inputProps={{ 'aria-label': 'primary checkbox' }} />, */}
 
 
 
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
-
-        
-
-
-        {/* Add New Batch */}
-
-<GridContainer xs={12} md={6} sm={6}>
-        <GridItem  >
-          <Card >
-            <CardBody color="primary" stats icon>
-
-              <div>
-
-
-                <Typography variant="body1">
-                  Add New Medicine
-
-                  <Dialog
-                    open={openAddMeds}
-                    onClose={handleCloseAddMeds}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                  >
-
-                    <DialogContent dividers><AddNewMed /></DialogContent>
 
 
 
-                  </Dialog>
-                  <br></br>
-                  <Button variant="outlined" color="primary" onClick={handleClickOpenAddMeds}>
-                    Add Medicine
-                  </Button>
-                </Typography>
-
-              </div>
-              {/* <Switch color="secondary" inputProps={{ 'aria-label': 'primary checkbox' }} />, */}
 
 
 
-            </CardBody>
-          </Card>
-
-        </GridItem>
-      </GridContainer>
-      </GridContainer>
-    
-</div>
+    </div>
   );
 }

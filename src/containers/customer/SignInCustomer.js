@@ -187,7 +187,7 @@ const SignInCustomer=()=>{
                 <Grid container justify="flex-end">
                   <Grid item>
                     <Typography>
-                            <Link href="#">
+                            <Link href="/ForgotPassword">
                                 Forgot Password ?
                             </Link>
                     </Typography>
