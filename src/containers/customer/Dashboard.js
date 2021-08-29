@@ -50,7 +50,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Form from './form/Form';
-import Map from '../../components/customer/Map'
+import Map from '../../components/customer/Map';
+import Paper from '@material-ui/core/Paper';
 
 import { bugs, website, server } from "../../variables/general.js";
 
@@ -85,6 +86,7 @@ const cdStyle = {backgroundColor: 'rgb(226 243 242)'}
 const goButtonStyle={color: '#efe3e3',backgroundColor: '#126e82',right: '-120%', margin: '30px 0', opacity:'0.9'}
 const shareButtonStyle={color: '#efe3e3',left: '-10%',backgroundColor: '#126e82', marginTop: '10px',width: '30%', padding: '2px', opacity:'0.9'}
 const sentenceStyle={fontSize: '16px', color: '#126e82', fontWeight: 'bold'}
+const paperStyle={padding :20,height:'350px',width:'90%', margin:"20px auto"}
 //const locStyle={marginTop: theme.spacing(-4)}
 
 export default function Dashboard() {
@@ -100,16 +102,18 @@ export default function Dashboard() {
   const classes = useStyles();
   return (
     <div>
-      <GridContainer item spacing={3}>
-        <GridItem xs={4}>
+      <Paper elevation={10} style={paperStyle}> 
+      <GridContainer item spacing={1}>
+        <GridItem xs={5}>
           <p style={sentenceStyle}>Share Your Location To Get The Nearest Pharmacies In Order :</p>
         </GridItem>
          
-        <Grid container xs={8} >
+        <Grid container xs={7} >
           <Map
             center={{lat: 6.9271, lng: 79.8612}}
             height='230px'
-            width='100%'
+            width='70%'
+            
             zoom={7} />
         </Grid>
           {/*<Button variant="contained" style={shareButtonStyle} href="#">Share Location</Button>
@@ -117,6 +121,7 @@ export default function Dashboard() {
 
         
       </GridContainer>
+      </Paper>
       {/*<GridContainer>
         <GridItem xs={12} sm={6} md={3}>
           <Card>

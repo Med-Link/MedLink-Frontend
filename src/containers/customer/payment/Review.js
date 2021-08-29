@@ -6,6 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Map from '../../../components/customer/Map'
 
 const products = [
   { name: 'Panadol', desc: '1 Card', price: 'Rs.20.00' },
@@ -65,13 +66,19 @@ export default function Review() {
           <Typography gutterBottom>Kamal Perera</Typography>
           <Typography gutterBottom>{addresses.join(', ')}</Typography>
         </Grid>*/}
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12}>
           <Typography variant="h6" gutterBottom className={classes.title}>
-            Click here to share your location (Compulsary):
+            Please Share Your Location To Calculate Delivery Charges (Compulsary):
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={4}>
-          <Button variant="contained" style={shareButtonStyle} href="#">Share Location</Button>
+        <Grid item xs={12}>
+          {/*<Button variant="contained" style={shareButtonStyle} href="#">Share Location</Button>
+          */}
+          <Map
+            center={{lat: 6.9271, lng: 79.8612}}
+            height='230px'
+            width='100%'
+            zoom={7} />
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           {/*<Typography variant="h6" gutterBottom className={classes.title}>
