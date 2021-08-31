@@ -279,8 +279,8 @@ class Map extends React.Component{
 						</Grid>
 					</Grid>	
 					<Grid container spacing={1} style={{marginBottom: '10px'}}>
-						<Grid item xs={12} sm={8} md={8}>
-							<TextField 
+						<Grid item xs={12} sm={4} md={4}>
+							{/* <TextField 
 								variant="outlined"
 								readOnly="readOnly" 
 								value={ this.state.address }
@@ -291,15 +291,26 @@ class Map extends React.Component{
 								label="Location Address"
 								name="address"
 								size="small"
+								/> */}
+								<TextField 
+								variant="outlined"
+								readOnly="readOnly" 
+								value={ this.state.city }
+								// onChange={(e) => setLocation(e.target.value)}
+								onChange={ this.onChange }
+								fullWidth
+								id="city"
+								label="City"
+								name="city"
+								size="small"
 								/>
+
 						</Grid>
-						<Grid item xs={6} sm={2} md={2}>
+						<Grid item xs={6} sm={4} md={4}>
 							<TextField 
 								variant="outlined"
 								readOnly="readOnly" 
 								value={ this.state.markerPosition.lat}
-								// value ={location} 
-									// onChange={(e) => setLocation(e.target.value)}
 								fullWidth
 								id="location"
 								label="Latitude"
@@ -307,13 +318,11 @@ class Map extends React.Component{
 								size="small"
 							/>	
 						</Grid>	
-						<Grid item xs={6} sm={2} md={2}>
+						<Grid item xs={6} sm={4} md={4}>
 							<TextField 
 								variant="outlined"
 								readOnly="readOnly" 
 								value={ this.state.markerPosition.lng}
-								// value ={location} 
-									// onChange={(e) => setLocation(e.target.value)}
 								fullWidth
 								id="location"
 								label="Longitude"
