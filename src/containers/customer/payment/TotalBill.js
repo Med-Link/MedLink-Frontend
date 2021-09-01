@@ -5,13 +5,15 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
 
-const products = [
-  { name: 'Panadol', desc: '1 Card', price: 'Rs.20.00' },
-  { name: 'Citrazine', desc: '2 Cards', price: 'Rs.100.00' },
-  { name: 'Siddhalepa', desc: '1', price: 'Rs.150.00' },
+
+// const products = [
+//   // { name: 'Panadol', desc: '1 Card', price: 'Rs.20.00' },
+//   // { name: 'Citrazine', desc: '2 Cards', price: 'Rs.100.00' },
+//   // { name: 'Siddhalepa', desc: '1', price: 'Rs.150.00' },
   
-];
+// ];
 const addresses = ['No: 2', 'Gall Road', 'Colombo'];
 //const payments = [
   //{ name: 'Card type', detail: 'Visa' },
@@ -32,9 +34,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TotalBill() {
-  const classes = useStyles();
 
+export default function TotalBill(props) {
+  // console.log(props)
+  const classes = useStyles();
+  const products= props.products;
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -42,8 +46,8 @@ export default function TotalBill() {
       </Typography>
       <List disablePadding>
         {products.map((product) => (
-          <ListItem className={classes.listItem} key={product.name}>
-            <ListItemText primary={product.name} secondary={product.desc} />
+          <ListItem className={classes.listItem} key={product.medname}>
+            <ListItemText primary={product.medname} secondary={product.quantity} />
             <Typography variant="body2">{product.price}</Typography>
           </ListItem>
         ))}
@@ -100,3 +104,8 @@ export default function TotalBill() {
     </React.Fragment>
   );
 }
+TotalBill.propTypes = {
+  products: PropTypes.any,
+  // children: PropTypes.node.isRequired,
+  // classes: PropTypes.object.isRequired,
+};

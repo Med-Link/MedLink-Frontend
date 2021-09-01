@@ -16,6 +16,7 @@ import Review from './Review';
 import TotalBill from './TotalBill'
 import { Grid } from '@material-ui/core';
 
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -68,12 +69,14 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Review your order', 'Total Bill','Delivery address', 'Payment details' ];
 
-function getStepContent(step) {
+function getStepContent(step,props) {
   switch (step) {
     case 0:
-      return <Review />;
+      return <Review products={props.products} />;
     case 1:
-      return <TotalBill />;
+      return <TotalBill products={props.products} />;
+      // console.log(props)
+      // return 
     case 2:
       return <AddressForm />;
     case 3:
@@ -83,7 +86,7 @@ function getStepContent(step) {
   }
 }
 
-export default function Checkout() {
+export default function Checkout(props) {
   const toolBarStyle = {backgroundColor: '#126e82' }
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -143,7 +146,7 @@ export default function Checkout() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep)}
+                {getStepContent(activeStep, props)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button style={btStyle} onClick={handleBack} className={classes.button}>
