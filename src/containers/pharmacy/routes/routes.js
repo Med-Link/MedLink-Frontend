@@ -73,6 +73,7 @@ const dashboardRoutes = [
     icon: AddShoppingCartIcon,
     component: ClosedDealsDetails,
     layout: "/pharmacy",
+    display:false,
   },
   {
     path: "/orderprocess",
@@ -80,7 +81,7 @@ const dashboardRoutes = [
     icon: AddShoppingCartIcon,
     component: OrderProcess,
     layout: "/pharmacy",
-    display:Hidden,
+    display:false,
   },
 ];
 
