@@ -15,6 +15,10 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 import TotalBill from './TotalBill'
 import { Grid } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import { backendUrl } from '../../../urlConfig';
+
 
 
 function Copyright() {
@@ -94,7 +98,33 @@ export default function Checkout(props) {
   const btStyle = {color: '#efe3e3',backgroundColor: '#126e82'}
   const subHeaderStyle = {color: '#126e82',fontWeigth: 'bold'}
 
+  const calculatetotal = async() => {
+    const token = window.localStorage.getItem('token');
+    
+    console.log(token)
+    const latitude = window.sessionStorage.getItem("latitude");
+    const longitude = window.sessionStorage.getItem("longitude");
+    
+    axios.post(`${backendUrl}/order/findtotal`, {latitude:latitude, longitude:longitude, pharmacyid:props.products[0].pharmacyid, totalprice:props.products[0].totalprice}, {
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : ''
+      },
+  }).then((response)=>{
+      console.log(response);
+  
+  }).catch((err)=>{
+      console.log(err);
+  });
+  // console.log(token)
+  };
+
   const handleNext = () => {
+    if(activeStep == 1){
+      calculatetotal();
+
+    }
+    calculatetotal();
+    // console.log(props.products)
     setActiveStep(activeStep + 1);
   };
 
@@ -171,3 +201,8 @@ export default function Checkout(props) {
     </React.Fragment>
   );
 }
+Checkout.propTypes = {
+  products: PropTypes.any,
+  // children: PropTypes.node.isRequired,
+  // classes: PropTypes.object.isRequired,
+};

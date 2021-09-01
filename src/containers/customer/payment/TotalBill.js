@@ -45,12 +45,12 @@ export default function TotalBill(props) {
         Order summary
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
+        {/* {products.map((product) => (
           <ListItem className={classes.listItem} key={product.medname}>
             <ListItemText primary={product.medname} secondary={product.quantity} />
             <Typography variant="body2">{product.price}</Typography>
           </ListItem>
-        ))}
+        ))} */}
 
         <ListItem className={classes.listItem}>
           <ListItemText primary="Total (Without Delivery Charges" />
@@ -61,6 +61,13 @@ export default function TotalBill(props) {
         </ListItem>
         <ListItem className={classes.listItem}>
           <ListItemText primary="Delivery Charges" />
+          <Typography variant="subtitle1" className={classes.total}>
+            Rs.150.00
+          </Typography>
+          
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <ListItemText primary="Service Charges" />
           <Typography variant="subtitle1" className={classes.total}>
             Rs.150.00
           </Typography>
