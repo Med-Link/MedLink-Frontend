@@ -55,15 +55,15 @@ export default function Review(props) {
           </ListItem>
         ))}
 
-        {products.map((product) => (
-        <ListItem className={classes.listItem} key={product.totalprice}>
+        {/* {products.map((product) => ( */}
+        {products.length>0 ? <ListItem className={classes.listItem} key={products[0].totalprice}>
           <ListItemText primary="Total (Without Delivery Charges)" />
           <Typography variant="subtitle1" className={classes.total}>
-            {product.totalprice}
+            {products[0].totalprice}
           </Typography>
-        </ListItem>
+        </ListItem>:<></>}
 
-        ))} 
+        {/* ))}  */}
       </List>
       <Grid container spacing={2}>
         {/*<Grid item xs={12} sm={6}>
