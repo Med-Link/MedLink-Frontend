@@ -76,14 +76,36 @@ export default function RespondOrders() {
 
     setOpen(false);
   };
+  const [vieworderdata, setVieworderdata] = useState([]);
   
   const handleClickOpen2 = (medlistid) => {
+    viewOrder(medlistid);
     setOpenCheckout(true);
      
   };
 
   const handleClose2 = () => {
     setOpenCheckout(false);
+  };
+
+  const viewOrder = (medlistid) => {
+
+    const token = window.localStorage.getItem('token');
+  
+    // console.log('kkkk')
+    axios.post(`${backendUrl}/order/singleorderbill`, {medlistid: medlistid}, {
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : ''
+      },
+  }).then((response)=>{
+      console.log(response);
+      setVieworderdata(response.data.rows);
+  
+  }).catch((err)=>{
+      console.log(err);
+ 
+  });
+  
   };
 
 const rejectOrder = () => {
@@ -102,12 +124,10 @@ const rejectOrder = () => {
 
 }).catch((err)=>{
     console.log(err);
-    // console.log("kkkkkk");
-
-    // setError("Password must be atleast 6 characters long");
 });
 // console.log(token)
 };
+
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
     
@@ -123,7 +143,8 @@ const rejectOrder = () => {
          results.forEach(element=>{
           let arr=[];
           arr.push(element.medlistid,element.order_reqid,element.totalprice,element.name,<ButtonGroup color="primary" aria-label="outlined primary button group">
-          <Button onClick={handleClickOpen2}>View Order</Button>
+          
+          <Button onClick={()=>handleClickOpen2(element.medlistid)}>View Order</Button>
            
           <div>
           <Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.medlistid)}>
@@ -206,7 +227,7 @@ const rejectOrder = () => {
             </DialogTitle>
               <DialogContent>
                 <DialogContentText>
-                  <Checkout/>
+                  <Checkout products={vieworderdata}/>
                 </DialogContentText>
               </DialogContent>
       </Dialog>

@@ -5,14 +5,16 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
 
-const products = [
-  { name: 'Panadol', desc: '1 Card', price: 'Rs.20.00' },
-  { name: 'Citrazine', desc: '2 Cards', price: 'Rs.100.00' },
-  { name: 'Siddhalepa', desc: '1', price: 'Rs.150.00' },
+
+// const products = [
+//   // { name: 'Panadol', desc: '1 Card', price: 'Rs.20.00' },
+//   // { name: 'Citrazine', desc: '2 Cards', price: 'Rs.100.00' },
+//   // { name: 'Siddhalepa', desc: '1', price: 'Rs.150.00' },
   
-];
-const addresses = ['No: 2', 'Gall Road', 'Colombo'];
+// ];
+// const addresses = ['No: 2', 'Gall Road', 'Colombo'];
 //const payments = [
   //{ name: 'Card type', detail: 'Visa' },
   //{ name: 'Card holder', detail: 'Mr John Smith' },
@@ -32,33 +34,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TotalBill() {
-  const classes = useStyles();
 
+export default function TotalBill(props) {
+  // console.log(props)
+  const classes = useStyles();
+  const costs= props.costs;
+  // console.log(props);
+
+  if(!costs){
+    return<></>
+  }else{
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Order summary
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
-          <ListItem className={classes.listItem} key={product.name}>
-            <ListItemText primary={product.name} secondary={product.desc} />
+        {/* {products.map((product) => (
+          <ListItem className={classes.listItem} key={product.medname}>
+            <ListItemText primary={product.medname} secondary={product.quantity} />
             <Typography variant="body2">{product.price}</Typography>
           </ListItem>
-        ))}
+        ))} */}
 
-        <ListItem className={classes.listItem}>
+        {<ListItem className={classes.listItem}>
           <ListItemText primary="Total (Without Delivery Charges" />
           <Typography variant="subtitle1" className={classes.total}>
-            Rs.270.00
+            {costs.totalprice}
+          </Typography>
+          
+        </ListItem>}
+        <ListItem className={classes.listItem}>
+          <ListItemText primary="Delivery Charges" />
+          <Typography variant="subtitle1" className={classes.total}>
+          {costs.deliverycost}
           </Typography>
           
         </ListItem>
         <ListItem className={classes.listItem}>
-          <ListItemText primary="Delivery Charges" />
+          <ListItemText primary="Service Charges" />
           <Typography variant="subtitle1" className={classes.total}>
-            Rs.150.00
+          {costs.servicecost}
           </Typography>
           
         </ListItem>
@@ -66,7 +82,7 @@ export default function TotalBill() {
         <ListItem className={classes.listItem}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" className={classes.total}>
-            Rs.420.00
+          {costs.totalcost}
           </Typography>
           
         </ListItem>
@@ -99,4 +115,10 @@ export default function TotalBill() {
       </Grid>
     </React.Fragment>
   );
+  }
 }
+TotalBill.propTypes = {
+  costs: PropTypes.any,
+  // children: PropTypes.node.isRequired,
+  // classes: PropTypes.object.isRequired,
+};

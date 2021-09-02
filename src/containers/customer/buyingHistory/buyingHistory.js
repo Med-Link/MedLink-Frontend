@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-key */
 import React from "react";
+import { backendUrl } from "../../../urlConfig.js";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -64,6 +65,7 @@ export default function BuyingHistory() {
   };
 
   const classes = useStyles();
+  
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>

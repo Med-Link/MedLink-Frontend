@@ -6,14 +6,16 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Map from '../../../components/customer/Map'
+import Map from '../../../components/customer/CustomerLocationSelection'
+import PropTypes from 'prop-types';
 
-const products = [
-  { name: 'Panadol', desc: '1 Card', price: 'Rs.20.00' },
-  { name: 'Citrazine', desc: '2 Cards', price: 'Rs.100.00' },
-  { name: 'Siddhalepa', desc: '1', price: 'Rs.150.00' },
+
+// const products = [
+//   { name: 'Panadol', desc: '1 Card', price: 'Rs.20.00' },
+//   { name: 'Citrazine', desc: '2 Cards', price: 'Rs.100.00' },
+//   { name: 'Siddhalepa', desc: '1', price: 'Rs.150.00' },
   
-];
+// ];
 const addresses = ['No: 2', 'Gall Road', 'Colombo'];
 //const payments = [
   //{ name: 'Card type', detail: 'Visa' },
@@ -34,8 +36,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Review() {
+export default function Review(props) {
   const classes = useStyles();
+  const products= props.products;
 
   const shareButtonStyle={color: '#efe3e3', backgroundColor: '#126e82', marginTop: '35px',width: '100%', padding: '2px', opacity:'0.9'}
 
@@ -46,17 +49,21 @@ export default function Review() {
       </Typography>
       <List disablePadding>
         {products.map((product) => (
-          <ListItem className={classes.listItem} key={product.name}>
-            <ListItemText primary={product.name} secondary={product.desc} />
+          <ListItem className={classes.listItem} key={product.medname}>
+            <ListItemText primary={product.medname} secondary={product.quantity} />
             <Typography variant="body2">{product.price}</Typography>
           </ListItem>
         ))}
-        <ListItem className={classes.listItem}>
+
+        {/* {products.map((product) => ( */}
+        {products.length>0 ? <ListItem className={classes.listItem} key={products[0].totalprice}>
           <ListItemText primary="Total (Without Delivery Charges)" />
           <Typography variant="subtitle1" className={classes.total}>
-            Rs.270.00
+            {products[0].totalprice}
           </Typography>
-        </ListItem>
+        </ListItem>:<></>}
+
+        {/* ))}  */}
       </List>
       <Grid container spacing={2}>
         {/*<Grid item xs={12} sm={6}>
@@ -101,3 +108,9 @@ export default function Review() {
     </React.Fragment>
   );
 }
+
+Review.propTypes = {
+  products: PropTypes.any,
+  // children: PropTypes.node.isRequired,
+  // classes: PropTypes.object.isRequired,
+};

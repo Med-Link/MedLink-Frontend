@@ -21,7 +21,7 @@ import Table from "../../components/Dashboard/Table/Table.js";
 import Card from "../../components/Dashboard/Card/Card";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
-import Button from "../../components/Dashboard//CustomButtons/Button";
+import Button from "../../components/Dashboard/CustomButtons/Button";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
 import AddNewMedicine from "../../components/admin/AddNewMedicine"

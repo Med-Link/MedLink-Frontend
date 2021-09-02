@@ -189,8 +189,10 @@ class Map extends React.Component{
 						lng: newLng
 					},
 				} )
-				// window.sessionStorage.setItem("latitude", newLat);
-				// window.sessionStorage.setItem("longitude", newLng);
+				window.sessionStorage.setItem("latitude", newLat);
+				window.sessionStorage.setItem("longitude", newLng);
+				window.sessionStorage.setItem("address", address);
+
 			},
 			error => {
 				console.error(error);
@@ -282,19 +284,18 @@ class Map extends React.Component{
 					</Grid>	
 					<Grid container spacing={1} style={{marginBottom: '10px'}}>
 						<Grid item xs={12} sm={4} md={4}>
-							{/* <TextField 
+							<TextField 
 								variant="outlined"
 								readOnly="readOnly" 
 								value={ this.state.address }
-								// value ={location} 
-									onChange={(e) => setLocation(e.target.value)}
+								onChange={ this.onChange }
 								fullWidth
 								id="location"
 								label="Location Address"
 								name="address"
 								size="small"
-								/> */}
-								<TextField 
+								/>
+								{/* <TextField 
 								variant="outlined"
 								readOnly="readOnly" 
 								value={ this.state.city }
@@ -305,7 +306,7 @@ class Map extends React.Component{
 								label="City"
 								name="city"
 								size="small"
-								/>
+								/> */}
 
 						</Grid>
 						<Grid item xs={6} sm={4} md={4}>

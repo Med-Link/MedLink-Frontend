@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,6 +15,13 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 import TotalBill from './TotalBill'
 import { Grid } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import { backendUrl } from '../../../urlConfig';
+import { getInitialGridColumnsState } from '@material-ui/data-grid';
+import { orderplaceSchema } from '../../../validations/orderplaceValidation';
+
+
 
 function Copyright() {
   return (
@@ -66,24 +73,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Review your order', 'Total Bill','Delivery address', 'Payment details' ];
+const steps = ['Review your order', 'Total Bill','Delivery address' ];
 
-function getStepContent(step) {
+function getStepContent(step,props,costdata) {
+
   switch (step) {
     case 0:
-      return <Review />;
+      return <Review products={props.products} />;
     case 1:
-      return <TotalBill />;
+      return <TotalBill costs={costdata} />;
+      // console.log(props)
+      // // return 
     case 2:
       return <AddressForm />;
-    case 3:
-      return <PaymentForm />;
+    // case 3:
+    //   return <PaymentForm />;
     default:
       throw new Error('Unknown step');
   }
 }
 
-export default function Checkout() {
+export default function Checkout(props) {
   const toolBarStyle = {backgroundColor: '#126e82' }
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -91,7 +101,67 @@ export default function Checkout() {
   const btStyle = {color: '#efe3e3',backgroundColor: '#126e82'}
   const subHeaderStyle = {color: '#126e82',fontWeigth: 'bold'}
 
+const [costdata, setCostdata] = useState([]);
+
+const Checkoutorder = async (e) => {
+  e.preventDefault();
+    const form = {
+      contactnumber,
+    };
+    const isValid = await orderplaceSchema.isValid(form);
+    if (isValid === true) {
+      axios.post(`${backendUrl}/signup`, {
+        firstName,
+        lastName,
+        email,
+        password,
+      }).then((response) => {
+        console.log(response);
+        // setSignedUp(true);
+      }).catch((err) => {
+        if (err.response && err.response.data) {
+          console.log(err);// some reason error message
+        }
+      });
+    } else {
+      // console.log(err);
+      setError('Signup Failed');
+    }
+  
+};
+  
+  const calculatetotal = async() => {
+    // const { costs } = props;
+
+    const token = window.localStorage.getItem('token');
+    
+    // console.log(token)
+    const latitude = window.sessionStorage.getItem("latitude");
+    const longitude = window.sessionStorage.getItem("longitude");
+    
+    axios.post(`${backendUrl}/order/findtotal`, {latitude:latitude, longitude:longitude, pharmacyid:props.products[0].pharmacyid, totalprice:props.products[0].totalprice}, {
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : ''
+      },
+  }).then((response)=>{
+      // console.log(response);
+      setCostdata(response.data);
+      // costs();
+
+  }).catch((err)=>{
+      console.log(err);
+  });
+  // console.log(token)
+  };
+
   const handleNext = () => {
+    if(activeStep == 0){
+      calculatetotal();
+    }
+    if(activeStep==2){
+      // console.log("hhhhhh")
+    }
+    
     setActiveStep(activeStep + 1);
   };
 
@@ -143,7 +213,7 @@ export default function Checkout() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep)}
+                {getStepContent(activeStep, props, costdata)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button style={btStyle} onClick={handleBack} className={classes.button}>
@@ -168,3 +238,9 @@ export default function Checkout() {
     </React.Fragment>
   );
 }
+Checkout.propTypes = {
+  products: PropTypes.any,
+  costs:PropTypes.any,
+  // children: PropTypes.node.isRequired,
+  // classes: PropTypes.object.isRequired,
+};

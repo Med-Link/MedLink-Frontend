@@ -170,7 +170,9 @@ export default function PharmacyRequests() {
  
 
   const [data, setData] = useState([]);
+
   const getdata =() =>{
+    
     const token = window.localStorage.getItem('token');
     
       axios.get(`${backendUrl}/admin/viewpharmacyrequests`,{
