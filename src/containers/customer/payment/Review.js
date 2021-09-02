@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Map from '../../../components/customer/Map'
+import Map from '../../../components/customer/CustomerLocationSelection'
 import PropTypes from 'prop-types';
 
 
