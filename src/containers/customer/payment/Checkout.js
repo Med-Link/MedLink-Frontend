@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -18,6 +18,7 @@ import { Grid } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { backendUrl } from '../../../urlConfig';
+import { getInitialGridColumnsState } from '@material-ui/data-grid';
 
 
 
@@ -73,14 +74,15 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Review your order', 'Total Bill','Delivery address', 'Payment details' ];
 
-function getStepContent(step,props) {
+function getStepContent(step,props,costdata) {
+
   switch (step) {
     case 0:
       return <Review products={props.products} />;
     case 1:
-      return <TotalBill products={props.products} />;
+      return <TotalBill costs={costdata} />;
       // console.log(props)
-      // return 
+      // // return 
     case 2:
       return <AddressForm />;
     case 3:
@@ -98,7 +100,11 @@ export default function Checkout(props) {
   const btStyle = {color: '#efe3e3',backgroundColor: '#126e82'}
   const subHeaderStyle = {color: '#126e82',fontWeigth: 'bold'}
 
+const [costdata, setCostdata] = useState([]);
+  
   const calculatetotal = async() => {
+    // const { costs } = props;
+
     const token = window.localStorage.getItem('token');
     
     console.log(token)
@@ -111,7 +117,9 @@ export default function Checkout(props) {
       },
   }).then((response)=>{
       console.log(response);
-  
+      setCostdata(response.data);
+      // costs();
+
   }).catch((err)=>{
       console.log(err);
   });
@@ -119,12 +127,10 @@ export default function Checkout(props) {
   };
 
   const handleNext = () => {
-    if(activeStep == 1){
+    if(activeStep == 0){
       calculatetotal();
-
     }
-    calculatetotal();
-    // console.log(props.products)
+    
     setActiveStep(activeStep + 1);
   };
 
@@ -176,7 +182,7 @@ export default function Checkout(props) {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep, props)}
+                {getStepContent(activeStep, props, costdata)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button style={btStyle} onClick={handleBack} className={classes.button}>
@@ -203,6 +209,7 @@ export default function Checkout(props) {
 }
 Checkout.propTypes = {
   products: PropTypes.any,
+  costs:PropTypes.any,
   // children: PropTypes.node.isRequired,
   // classes: PropTypes.object.isRequired,
 };

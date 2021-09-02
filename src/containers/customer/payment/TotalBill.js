@@ -38,7 +38,12 @@ const useStyles = makeStyles((theme) => ({
 export default function TotalBill(props) {
   // console.log(props)
   const classes = useStyles();
-  const products= props.products;
+  const costs= props.costs;
+  // console.log(props);
+
+  if(!costs){
+    return<></>
+  }else{
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -52,24 +57,24 @@ export default function TotalBill(props) {
           </ListItem>
         ))} */}
 
-        <ListItem className={classes.listItem}>
+        {<ListItem className={classes.listItem}>
           <ListItemText primary="Total (Without Delivery Charges" />
           <Typography variant="subtitle1" className={classes.total}>
-            Rs.270.00
+            {costs.totalprice}
           </Typography>
           
-        </ListItem>
+        </ListItem>}
         <ListItem className={classes.listItem}>
           <ListItemText primary="Delivery Charges" />
           <Typography variant="subtitle1" className={classes.total}>
-            Rs.150.00
+          {costs.deliverycost}
           </Typography>
           
         </ListItem>
         <ListItem className={classes.listItem}>
           <ListItemText primary="Service Charges" />
           <Typography variant="subtitle1" className={classes.total}>
-            Rs.150.00
+          {costs.servicecost}
           </Typography>
           
         </ListItem>
@@ -77,7 +82,7 @@ export default function TotalBill(props) {
         <ListItem className={classes.listItem}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" className={classes.total}>
-            Rs.420.00
+          {costs.totalcost}
           </Typography>
           
         </ListItem>
@@ -110,9 +115,10 @@ export default function TotalBill(props) {
       </Grid>
     </React.Fragment>
   );
+  }
 }
 TotalBill.propTypes = {
-  products: PropTypes.any,
+  costs: PropTypes.any,
   // children: PropTypes.node.isRequired,
   // classes: PropTypes.object.isRequired,
 };
