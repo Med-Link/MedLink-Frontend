@@ -22,6 +22,7 @@ import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import Switch from "../../components/Dashboard/CustomButtons/Switch";
 import Button from "../../components/Dashboard//CustomButtons/Button";
 import PhotoSteps from "../../components/admin/dialogbox/PhotoSteps";
+import Search from "../../components/pharmacy/Search";
 
 const styles = {
   cardCategoryWhite: {
@@ -106,6 +107,7 @@ export default function ClosedDeals() {
             </p> */}
           </CardHeader>
           <CardBody>
+          <Search />
           <Table
               tableHeaderColor="primary"
               tableHead={["Pharmacy Name", "Date and Time", "Mobile Number",  "Documents"]}
