@@ -189,6 +189,10 @@ class Map extends React.Component{
 						lng: newLng
 					},
 				} )
+				window.sessionStorage.setItem("latitude", newLat);
+				window.sessionStorage.setItem("longitude", newLng);
+				window.sessionStorage.setItem("address", address);
+
 			},
 			error => {
 				console.error(error);
