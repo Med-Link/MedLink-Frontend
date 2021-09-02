@@ -8,10 +8,18 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 
 export default function AddressForm() {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
+  // const [firstname, setFirstname] = useState("");
+  // const [lastname, setLastname] = useState("");
   const [addressline1, setAddressline1] = useState("");
   const [contactno, setContactno] = useState("");
+  const customer = JSON.parse(localStorage.getItem('user'));
+  // const lastname = window.localStorage.getItem("address");
+  const firstname = customer[0].firstname;
+  const lastname = customer[0].lastname;
+
+  // console.log(customer[0].firstname)
+
+
 
   const address = window.sessionStorage.getItem("address");
 
@@ -28,7 +36,8 @@ export default function AddressForm() {
             name="firstName"
             label="First name"
             fullWidth
-            value ={firstname} onChange={(e) => setFirstname(e.target.value)}
+            aria-readonly="true"
+            value ={firstname} 
             autoComplete="given-name"
           />
         </Grid>
@@ -39,7 +48,8 @@ export default function AddressForm() {
             name="lastName"
             label="Last name"
             fullWidth
-            value ={lastname} onChange={(e) => setLastname(e.target.value)}
+            aria-readonly="true"
+            value ={lastname} 
             autoComplete="family-name"
           />
         </Grid>

@@ -19,6 +19,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { backendUrl } from '../../../urlConfig';
 import { getInitialGridColumnsState } from '@material-ui/data-grid';
+import { orderplaceSchema } from '../../../validations/orderplaceValidation';
 
 
 
@@ -101,13 +102,40 @@ export default function Checkout(props) {
   const subHeaderStyle = {color: '#126e82',fontWeigth: 'bold'}
 
 const [costdata, setCostdata] = useState([]);
+
+const Checkoutorder = async (e) => {
+  e.preventDefault();
+    const form = {
+      contactnumber,
+    };
+    const isValid = await orderplaceSchema.isValid(form);
+    if (isValid === true) {
+      axios.post(`${backendUrl}/signup`, {
+        firstName,
+        lastName,
+        email,
+        password,
+      }).then((response) => {
+        console.log(response);
+        // setSignedUp(true);
+      }).catch((err) => {
+        if (err.response && err.response.data) {
+          console.log(err);// some reason error message
+        }
+      });
+    } else {
+      // console.log(err);
+      setError('Signup Failed');
+    }
+  
+};
   
   const calculatetotal = async() => {
     // const { costs } = props;
 
     const token = window.localStorage.getItem('token');
     
-    console.log(token)
+    // console.log(token)
     const latitude = window.sessionStorage.getItem("latitude");
     const longitude = window.sessionStorage.getItem("longitude");
     
@@ -116,7 +144,7 @@ const [costdata, setCostdata] = useState([]);
         'Authorization': token ? `Bearer ${token}` : ''
       },
   }).then((response)=>{
-      console.log(response);
+      // console.log(response);
       setCostdata(response.data);
       // costs();
 
@@ -129,6 +157,9 @@ const [costdata, setCostdata] = useState([]);
   const handleNext = () => {
     if(activeStep == 0){
       calculatetotal();
+    }
+    if(activeStep==2){
+      // console.log("hhhhhh")
     }
     
     setActiveStep(activeStep + 1);

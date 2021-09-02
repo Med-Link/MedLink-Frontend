@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 //   // { name: 'Siddhalepa', desc: '1', price: 'Rs.150.00' },
   
 // ];
-const addresses = ['No: 2', 'Gall Road', 'Colombo'];
+// const addresses = ['No: 2', 'Gall Road', 'Colombo'];
 //const payments = [
   //{ name: 'Card type', detail: 'Visa' },
   //{ name: 'Card holder', detail: 'Mr John Smith' },
