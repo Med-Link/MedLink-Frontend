@@ -20,6 +20,21 @@ import axios from 'axios';
 import { backendUrl } from '../../../urlConfig';
 import { getInitialGridColumnsState } from '@material-ui/data-grid';
 import { orderplaceSchema } from '../../../validations/orderplaceValidation';
+import { atom } from 'jotai'
+import { useAtom } from 'jotai'
+import {merchantID} from '../../../merchantconfig';
+
+const addScript = (src, callback) => {
+  const tag = document.createElement("script");
+  tag.type = "text/javascript";
+  tag.src = src;
+  tag.onload = callback;
+  document.body.appendChild(tag);
+};
+
+export const addressAtom = atom('');
+export const contactnumberAtom = atom('');
+
 
 
 
@@ -73,9 +88,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Review your order', 'Total Bill','Delivery address' ];
+const steps = ['Review your order', 'Total Bill','Delivery address','Payment form' ];
 
-function getStepContent(step,props,costdata) {
+
+function getStepContent(step,props,costdata,handlePayherePayment) {
 
   switch (step) {
     case 0:
@@ -86,8 +102,8 @@ function getStepContent(step,props,costdata) {
       // // return 
     case 2:
       return <AddressForm />;
-    // case 3:
-    //   return <PaymentForm />;
+    case 3:
+      return <PaymentForm handlePayherePayment={handlePayherePayment} />;
     default:
       throw new Error('Unknown step');
   }
@@ -101,20 +117,88 @@ export default function Checkout(props) {
   const btStyle = {color: '#efe3e3',backgroundColor: '#126e82'}
   const subHeaderStyle = {color: '#126e82',fontWeigth: 'bold'}
 
+  const handlePayherePayment = async () => {
+    const payment={
+      sandbox:true,
+      merchant_id :merchantID,
+      return_url : 'https://0e5b-2402-4000-2081-83ea-140-6b58-cde5-d785.ngrok.io/api/order/checkout',
+      cancel_url :'https://0e5b-2402-4000-2081-83ea-140-6b58-cde5-d785.ngrok.io/api/order/checkout' ,
+      notify_url :'https://0e5b-2402-4000-2081-83ea-140-6b58-cde5-d785.ngrok.io/api/order/checkout' ,
+      first_name :'akila' ,
+      last_name : 'akila' ,
+      email : "akila@gmail.com",
+      phone : '0778886081',
+      address : "no.21,matara",
+      city : 'matara',
+      country : 'Sri Lanka',
+      order_id : 1,
+      items : '2',
+      currency : 'LKR',
+      amount : 500}
+    payhere.startPayment(payment);
+
+  };
+  React.useEffect(() => {
+    const init = () => {
+      payhere.onCompleted = async function onCompleted() {
+        console.log("Payment completed. OrderID:" );       
+        //Note: validate the payment and show success or failure page to the customer
+        ``;
+      };
+      payhere.onDismissed = function onDismissed() {
+        //Note: Prompt user to pay again or show an error page
+        console.log("Payment dismissed");
+      };
+
+      // Called when error happens when initializing payment such as invalid parameters
+      payhere.onError = function onError(error) {
+        // Note: show an error page
+        console.log("Error:" + error);
+      };
+    };
+    // if (orderDetails.orderCode !== "") {
+    addScript(
+      "https://www.payhere.lk/lib/payhere.js",
+      init
+    );
+    // }S
+
+    // return () => {
+    //   setBtnsVisible(true);
+    //   setActiveStep(2);
+    // };
+  }, []);
+
 const [costdata, setCostdata] = useState([]);
 
-const Checkoutorder = async (e) => {
-  e.preventDefault();
+// const [addressline1, setAddressline1] = useState("");
+// const [contactno, setContactno] = useState("");
+
+
+const [addressline1, setAddressline1] = useAtom(addressAtom);
+const [contactnumber, setContactnumber] = useAtom(contactnumberAtom);
+// console.log(addressline1)
+const Checkoutorder = async () => {
+  // e.preventDefault();
+  const address2 = window.sessionStorage.getItem("address");
+  const customer = JSON.parse(localStorage.getItem('user'));
+  const firstname = customer[0].firstname;
+  const lastname = customer[0].lastname;
+
+    const address = addressline1 + address2;
     const form = {
       contactnumber,
     };
     const isValid = await orderplaceSchema.isValid(form);
     if (isValid === true) {
-      axios.post(`${backendUrl}/signup`, {
-        firstName,
-        lastName,
-        email,
-        password,
+      axios.post(`${backendUrl}/order/checkout`, {
+        medlistid,
+        totalcost,
+        deliverycost,
+        servicecost,
+        totalprice,
+        contactnumber,
+        address,
       }).then((response) => {
         console.log(response);
         // setSignedUp(true);
@@ -124,15 +208,14 @@ const Checkoutorder = async (e) => {
         }
       });
     } else {
-      // console.log(err);
-      setError('Signup Failed');
+      console.log(err);
     }
   
 };
   
   const calculatetotal = async() => {
     // const { costs } = props;
-
+    // console.log(merchantID)
     const token = window.localStorage.getItem('token');
     
     // console.log(token)
@@ -192,6 +275,7 @@ const Checkoutorder = async (e) => {
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center" style={subHeaderStyle}>
             Checkout
+            {/* {addressline1} */}
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map((label) => (
@@ -213,7 +297,7 @@ const Checkoutorder = async (e) => {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep, props, costdata)}
+                {getStepContent(activeStep, props, costdata, handlePayherePayment)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button style={btStyle} onClick={handleBack} className={classes.button}>
@@ -226,7 +310,7 @@ const Checkoutorder = async (e) => {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    {activeStep === steps.length - 2 ? 'Place order' : 'Next'}
                   </Button>
                 </div>
               </React.Fragment>
