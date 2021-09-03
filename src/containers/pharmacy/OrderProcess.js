@@ -3,15 +3,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import DateRange from "@material-ui/icons/DateRange";
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
 import Table from "../../components/Dashboard/Table/Table.js";
 import Card from "../../components/Dashboard/Card/Card.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
-import Switch from "../../components/Dashboard/CustomButtons/Switch";
 import Button from "../../components/Dashboard//CustomButtons/Button";
 import Dialog from '@material-ui/core/Dialog';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -22,10 +19,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
-
+import Search from '../../components/pharmacy/Search';
 import SimpleSelect from '../../components/pharmacy/DropDown';
-
-
 
 
 const useStyles = makeStyles(styles);
@@ -56,8 +51,6 @@ export default function OrderProcess() {
   return (
     <div>
       <GridContainer>
-        
-
         <GridItem xs={8} >
           <CustomTabs
             headerColor="primary"
@@ -68,19 +61,7 @@ export default function OrderProcess() {
                 tabContent: (
                   <Card>
                     <CardBody>
-                      <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                          <SearchIcon />
-                        </div>
-                        <InputBase
-                          placeholder="Panadol"
-                          classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                          }}
-                          inputProps={{ 'aria-label': 'search' }}
-                        />
-                      </div>
+                      <Search />
                       <Table
                         tableHeaderColor="secondary"
                         tableHead={["Med Id", "Batch Id", "Med Name", "Current Qty", "Unit Price(Rs.)", "Add to cart", "Confirm"]}
@@ -98,6 +79,21 @@ export default function OrderProcess() {
                   </Card>
                 ),
               },
+            ]}
+          />
+        </GridItem>
+        <GridItem xs={4}>    
+        <PhotoSteps /> 
+        
+        </GridItem>
+      </GridContainer>
+
+      <GridContainer>
+        <GridItem xs={8} >
+          <CustomTabs
+            headerColor="primary"
+            tabs={[
+              
 
               {
                 tabName: "Medicine Cart",
@@ -122,10 +118,47 @@ export default function OrderProcess() {
             ]}
           />
 
-          <Card>
+          
+        </GridItem>
+        <GridItem xs={4}>
+         
+        <Card>
             <CardBody color="primary" stats icon>
+            
+              <div className={classes.stats}>
+                <h1>Michelle Fernando - 0768757722</h1>
+              </div>
+              <div color="primary" className={classes.stats} style={{fontSize:20}} >
+                <p>I Need this medicine except Codein Zulphet</p>
+              </div>
+              
+            </CardBody>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <DateRange />
+                36 mins Ago
+              </div>
+            </CardFooter>
+          </Card>
+          
+          <Card>
+            
+            <CardBody color="primary" stats icon>
+            
+            <div className={classes.stats}>
+              <h1>Verify Order</h1>
+            </div>
+            <div color="primary" className={classes.stats} style={{fontSize:19}} >
+              <p>Accept order if the prescriptions are correct.
+              <center><br></br>or</center> 
+              <br></br>Reject the order with a valid reason.</p>
+            </div>
+            
+          </CardBody>
 
-              <div className={classes.stats}><h1 color="primary"> Accept Order </h1>
+            <div className={classes.stats} style={{marginRight:20}}>
+             <CardBody color="primary" stats icon></CardBody>
+             
               <Button variant="outlined" color="primary" onClick={handleClickOpenAccept}>
                   Accept
                 </Button>
@@ -150,12 +183,8 @@ export default function OrderProcess() {
                     </Button>
                   </DialogActions>
                 </Dialog>
-              
-              </div>
-              {/* <Switch color="secondary" inputProps={{ 'aria-label': 'primary checkbox' }} />, */}
-              <br></br>
-              <div className={classes.stats}><h1 color="primary">Reject Order</h1> 
-              <Button id="reject" variant="outlined" color="secondary" onClick={handleClickOpen}>Reject</Button>
+               
+              <Button id="reject" variant="outlined" color="danger" onClick={handleClickOpen}>Reject</Button>
 
                 <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                   <DialogTitle id="form-dialog-title">Reason to Reject Order</DialogTitle>
@@ -186,35 +215,14 @@ export default function OrderProcess() {
                     </Button>
                   </DialogActions>
                 </Dialog>
-              
-              </div>
+                
+                </div>
+             
 
-              
-            </CardBody>
+              <CardFooter></CardFooter>
+           
+
           </Card>
-        </GridItem>
-        <GridItem xs={4}>
-
-
-          <Card>
-            <CardBody color="primary" stats icon>
-            
-              <div className={classes.stats}>
-                <h1>Michelle Fernando - 0768757722</h1>
-              </div>
-              <div color="primary" className={classes.stats} style={{fontSize:20}} >
-                <p>I Need this medicine except Codein Zulphet</p>
-              </div>
-              
-            </CardBody>
-            <CardFooter stats>
-              <div className={classes.stats}>
-                <DateRange />
-                36 mins Ago
-              </div>
-            </CardFooter>
-          </Card>
-          <PhotoSteps />
         </GridItem>
       </GridContainer>
 

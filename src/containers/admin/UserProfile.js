@@ -79,7 +79,6 @@ export default function UserProfile() {
                 {/* {data.email} */}
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="First Name"
                     id="firstname"
                     value= {data.firstname}
                     formControlProps={{
@@ -89,9 +88,19 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="Last Name"
                     id="lastname"
                     value = {data.lastname}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                  />
+                </GridItem>
+              </GridContainer>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={6}> 
+                  <CustomInput
+                    id="email"
+                    value={data.email}
                     formControlProps={{
                       fullWidth: true,
                     }}
@@ -99,50 +108,32 @@ export default function UserProfile() {
                       disabled: true,
                     }}
                   />
-                </GridItem>
+                </GridItem>                
               </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Email"
-                    id="email"
-                    value={data.email}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Last Name"
-                    id="last-name"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="City"
-                    id="city"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Telephone Number"
-                    id="telephone-number"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
+                
               
+              <GridContainer>
+              <GridItem xs={12} sm={12} md={12}>
+                <h4 className={classes.cardCategory} style={{marginTop:'35px',marginBottom:'0px'}}>Reset your Password here:</h4>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    id="newpswd1"
+                    labelText="Enter New Password"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                  />
+                </GridItem><GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    id="newpswd2"
+                    labelText="Re-enter New Password"                    
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                  />
+                </GridItem>
+              </GridContainer>
             </CardBody>
             <CardFooter>
               <Button color="primary">Update Profile</Button>
@@ -157,14 +148,13 @@ export default function UserProfile() {
               </a>
             </CardAvatar>
             <CardBody profile>
-              <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
-              <h4 className={classes.cardTitle}>Alec Thompson</h4>
-              {/* <p className={classes.description}>
+              <h4 className={classes.cardCategory}>Administrator</h4>
+              <h1 className={classes.cardTitle}>{data.firstname} {data.lastname}</h1>
+              <p className={classes.description}>
                 Don{"'"}t be scared of the truth because we need to restart the
-                human foundation in truth And I love you like Kanye loves Kanye
-                I love Rick Owens’ bed design but the back is...
+                human foundation in truth.
               </p>
-               */}
+              
             </CardBody>
           </Card>
         </GridItem>

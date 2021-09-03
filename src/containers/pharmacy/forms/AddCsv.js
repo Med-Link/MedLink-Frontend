@@ -1,18 +1,10 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
-import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { makeStyles } from '@material-ui/core/styles';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import InputLabel from '@material-ui/core/InputLabel';
-
-import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
 

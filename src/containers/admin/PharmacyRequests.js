@@ -22,7 +22,7 @@ import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import Switch from "../../components/Dashboard/CustomButtons/Switch";
-import Button from "../../components/Dashboard//CustomButtons/Button";
+import Button from "../../components/Dashboard/CustomButtons/Button";
 import PhotoSteps from "../../components/admin/dialogbox/PhotoSteps";
 
 const styles = {
@@ -52,6 +52,9 @@ const styles = {
       fontWeight: "400",
       lineHeight: "1",
     },
+    button:{
+      maxHeight: '4px',
+    }
   },
 };
 
@@ -186,17 +189,11 @@ export default function PharmacyRequests() {
          let array =[];
          results.forEach(element=>{
           let arr=[];
-          arr.push(element.name,element.email,element.contactnumber,element.location,<Button color="primary" round onClick={()=>handleClickOpen(element.document1,element.document2,element.document3)}>View</Button>,<Button color="primary" onClick={()=>acceptPharmacy(element.pharmacyid)} round>Accept</Button>,<Button color="default" round onClick={()=>handleClickOpenReject(element.pharmacyid)}>Reject</Button>);
+          arr.push(element.name,element.email,element.contactnumber,element.location,<Button size='sm' color="primary" onClick={()=>handleClickOpen(element.document1,element.document2,element.document3)}>View</Button>,<Button size='sm' color="primary" onClick={()=>acceptPharmacy(element.pharmacyid)}>Accept</Button>,<Button size='sm' color="default" onClick={()=>handleClickOpenReject(element.pharmacyid)}>Reject</Button>);
           array.push(arr);
          })         
         setData(array);
-      })
-      // .then(data =>{
-      //   // console.log(data.message);
-      //   // const s= res.data.result[0];
-      //   // console.log(s);
-      // })
-    
+      })    
   }
   React.useEffect(()=>{
     getdata();
@@ -218,16 +215,6 @@ export default function PharmacyRequests() {
               tableHeaderColor="primary"
               tableHead={["Pharmacy Name", "Email", "Mobile Number",  "Location","Documents" ,"Activate","Reject"]}
               tableData={data}
-              // tableData={[
-              // data.map((row)=>(
-              //     [row.name,row.email,row.contactnumber,row.location ]
-              //   ))
-                  // ["Micael Medicare","mmc@yahoo.com","0759865522", "https://goo.gl/maps/9JrK788MDv1D89wPg7",<Button color="primary" round onClick={handleClickOpen}>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />,<Button color="default" round onClick={handleClickOpenReject}>Reject</Button>],
-                  // ["Minerva Pharmacy","minervapharm@yahoo.com","0759865522", "https://goo.gl/maps/9JrKw8MDv1D89wPg7",<Button color="primary" round onClick={handleClickOpen}>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />,<Button color="default" round onClick={handleClickOpenReject}>Reject</Button>],
-                  // ["HelaOsu","helaosu@yahoo.com","0759865522", "https://goo.gl/maps/9JrKw8MDv1D89wPg7",<Button color="primary" round onClick={handleClickOpen}>View</Button> ,<Switch color="primary" inputProps={{ 'aria-label': 'primary checkbox' }} />,<Button color="default" round onClick={handleClickOpenReject}>Reject</Button>],
-
-                // })
-              // ]}
             />
           </CardBody>
         </Card>
