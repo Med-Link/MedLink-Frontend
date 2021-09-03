@@ -14,7 +14,7 @@ import CardAvatar from "../../components/Dashboard/Card/CardAvatar.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 
-import avatar from "../../assets/images/person.jpg";
+import avatar from "../../assets/images/admin.png";
 import axios from "axios";
 import reactDom from "react-dom";
 
@@ -110,13 +110,21 @@ export default function UserProfile() {
                   />
                 </GridItem>                
               </GridContainer>
-                
-              
+          
               <GridContainer>
               <GridItem xs={12} sm={12} md={12}>
                 <h4 className={classes.cardCategory} style={{marginTop:'35px',marginBottom:'0px'}}>Reset your Password here:</h4>
                 </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    id="newpswd1"
+                    labelText="Current Password"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     id="newpswd1"
                     labelText="Enter New Password"
@@ -124,7 +132,8 @@ export default function UserProfile() {
                       fullWidth: true,
                     }}
                   />
-                </GridItem><GridItem xs={12} sm={12} md={6}>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     id="newpswd2"
                     labelText="Re-enter New Password"                    
@@ -143,9 +152,7 @@ export default function UserProfile() {
         <GridItem xs={12} sm={12} md={4}>
           <Card profile>
             <CardAvatar profile>
-              <a href="#pablo" onClick={(e) => e.preventDefault()}>
                 <img src={avatar} alt="..." />
-              </a>
             </CardAvatar>
             <CardBody profile>
               <h4 className={classes.cardCategory}>Administrator</h4>
