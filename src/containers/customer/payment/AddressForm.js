@@ -4,24 +4,24 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import { atom } from 'jotai'
+import { useAtom } from 'jotai'
 
+import { addressAtom } from './Checkout';
+import { contactnumberAtom } from './Checkout';
 
 
 export default function AddressForm() {
   // const [firstname, setFirstname] = useState("");
   // const [lastname, setLastname] = useState("");
-  const [addressline1, setAddressline1] = useState("");
-  const [contactno, setContactno] = useState("");
+  const [addressline1, setAddressline1] = useAtom(addressAtom);
+  const [contactnumber, setContactnumber] = useAtom(contactnumberAtom);
   const customer = JSON.parse(localStorage.getItem('user'));
-  // const lastname = window.localStorage.getItem("address");
+  const address = window.sessionStorage.getItem("address");
   const firstname = customer[0].firstname;
   const lastname = customer[0].lastname;
 
-  // console.log(customer[0].firstname)
-
-
-
-  const address = window.sessionStorage.getItem("address");
+  
 
   return (
     <React.Fragment>
@@ -82,7 +82,7 @@ export default function AddressForm() {
             name="Contact No"
             label="Contact No"
             fullWidth
-            value ={contactno} onChange={(e) => setContactno(e.target.value)}
+            value ={contactnumber} onChange={(e) => setContactnumber(e.target.value)}
             autoComplete="07********"
           />
         </Grid>
