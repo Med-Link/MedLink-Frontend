@@ -53,8 +53,6 @@ import Form from './form/Form';
 import Map from '../../components/customer/Map';
 import Paper from '@material-ui/core/Paper';
 
-import { bugs, website, server } from "../../variables/general.js";
-
 // import {
 //   dailySalesChart,
 //   emailsSubscriptionChart,

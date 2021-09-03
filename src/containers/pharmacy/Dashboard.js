@@ -31,7 +31,6 @@ import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import Button from "../../components/Dashboard//CustomButtons/Button";
 import ReceiptIcon from '@material-ui/icons/Receipt';
 
-import { bugs, website, server } from "../../variables/general.js";
 
 // import {
 //   dailySalesChart,
