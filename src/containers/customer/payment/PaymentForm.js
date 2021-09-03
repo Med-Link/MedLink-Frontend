@@ -4,13 +4,26 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import { Button } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import { Payment } from '@material-ui/icons';
 
-export default function PaymentForm() {
+
+export default function PaymentForm(props) {
+  
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Payment method
       </Typography>
+      <Button onClick={props.handlePayherePayment} >
+            <img
+              src="https://www.payhere.lk/downloads/images/pay_with_payhere_light.png"
+              alt="Pay with PayHere"
+              width="180"
+            />
+          </Button>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <TextField required id="cardName" label="Name on card" fullWidth autoComplete="cc-name" />
@@ -47,3 +60,9 @@ export default function PaymentForm() {
     </React.Fragment>
   );
 }
+PaymentForm.propTypes = {
+  handlePayherePayment: PropTypes.func ,
+  // costs:PropTypes.any,
+  // children: PropTypes.node.isRequired,
+  // classes: PropTypes.object.isRequired,
+};
