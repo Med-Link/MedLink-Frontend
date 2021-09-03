@@ -4,20 +4,20 @@ import axios from 'axios';
 import { backendUrl } from "../../urlConfig.js";
 // @material-ui/core
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import IconButton from '@material-ui/core/IconButton';
-import CreateIcon from '@material-ui/icons/Create';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
-
-import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+
+import IconButton from '@material-ui/core/IconButton';
+import CreateIcon from '@material-ui/icons/Create';
+import CloseIcon from '@material-ui/icons/Close';
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
-import Table from "../../components/Dashboard/Table/Table.js";
+// import Table from "../../components/Dashboard/Table/Table.js";
 import Card from "../../components/Dashboard/Card/Card";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
@@ -26,9 +26,11 @@ import styles from "../../assets/jss/material-dashboard-react/views/dashboardSty
 
 import AddNewMedicine from "../../components/admin/AddNewMedicine"
 import { SentimentDissatisfied } from "@material-ui/icons";
-
-
+import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
+import ScrollArea from "react-scrollbar";
+import TableScrollbar from 'react-table-scrollbar'
 const useStyles = makeStyles(styles);
+
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -107,15 +109,8 @@ export default function Medicine() {
         })
       .then(res =>{
         const results =  res.data.result;
-         console.log(results);
-         let array =[];
-         results.forEach(element=>{
-          let arr=[];
-          arr.push(element.medid,element.medname,element.brand,<IconButton aria-label="delete" onClick={()=>handleClickOpenEdit(element.medid)}><CreateIcon /></IconButton>);
-          array.push(arr);
-         }) 
-        //  console.log(arr[0])        
-        setData(array);
+            console.log(results);
+            setData(results);
       })
   
     
@@ -124,6 +119,14 @@ export default function Medicine() {
   React.useEffect(()=>{
     getdata();
   },[]);
+
+  const columns = [
+    { id: 'medid', label: 'Med ID'},
+    { id: 'medname', label: 'Med Name'},
+    { id: 'brand', label: 'Brand'},
+    { id: 'edit', label: 'Edit'},];
+  const rows = data; 
+
   return (
     <div>
       {/* <GridContainer> */}
@@ -134,17 +137,51 @@ export default function Medicine() {
                 <CardHeader color="success">
                   <h4 className={classes.cardTitleWhite}>Current Medicine Types</h4>
                 </CardHeader>
-                <CardBody>
-                  <Table
+                <CardBody >
+                  {/* <Table style={{ maxHeight: 350 }}
                     tableHeaderColor="primary"
                     tableHead={["Med ID", "Med Name","Brand","Edit"]}
                     tableData={data}
-                  // {[
-                  //     ["Medicine2", "AAAAAAAAAAA",'Brand1',<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>,<IconButton aria-label="delete"><DeleteIcon /></IconButton>],
-                  //     ["Medicine3", "BBBBBBBBBBB","Brand1",<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>,<IconButton aria-label="delete"><DeleteIcon /></IconButton>],
-                  //     ["Medicine4", "BBBBBBBBBBB","Brand2",<IconButton aria-label="delete" onClick={handleClickOpenEdit}><CreateIcon /></IconButton>,<IconButton aria-label="delete"><DeleteIcon /></IconButton>],
-                  //   ]} 
-                  />
+                  /> */}
+                  
+                  <TableScrollbar rows={15} style={{}}>
+              <Table>
+                    <TableHead>
+                      <TableRow>
+                        {columns.map((column) => (
+                          <TableCell style={{color:'#213458',backgroundColor: "white"}}
+                            key={column.id}
+                            align={column.align}
+                          >
+                            {column.label}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </TableHead>
+                    
+                    <TableBody >
+                    
+                      {data.map((row) => (
+                      <TableRow key={row.adminid}>
+                        <TableCell align="left">
+                          {row.medid}
+                        </TableCell>
+                        <TableCell align="left">
+                          {row.medname}
+                        </TableCell>
+                        <TableCell align="left">
+                          {row.brand}
+                        </TableCell>
+                        <TableCell align="left">
+                          <IconButton aria-label="delete" onClick={()=>handleClickOpenEdit(row.medid)}><CreateIcon /></IconButton>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                    </TableBody> 
+                    
+
+                  </Table>
+                  </TableScrollbar>
                 </CardBody>
               </Card>
           </GridItem>   

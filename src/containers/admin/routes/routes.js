@@ -4,7 +4,8 @@ import Person from "@material-ui/icons/Person";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import Notifications from "@material-ui/icons/Notifications";
 import Unarchive from "@material-ui/icons/Unarchive";
-// core components/views for Admin layout
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import DashboardPage from "../Dashboard.js";
 import UserProfile from "../UserProfile.js";
 import PharmacyRequests from "../PharmacyRequests.js";
@@ -39,14 +40,14 @@ const dashboardRoutes = [
   {
     path: "/employees",
     name: "Admin Accounts",
-    icon: Person,
+    icon: PersonAddIcon,
     component: Employees,
     layout: "/admin",
   },
   {
     path: "/medicine",
     name: "Medicine",
-    icon: Person,
+    icon: LocalHospitalIcon,
     component: Medicine,
     layout: "/admin",
   },
