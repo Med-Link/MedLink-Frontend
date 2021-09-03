@@ -1,8 +1,10 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/jsx-no-duplicate-props */
-import React from "react";
-// @material-ui/core components
+import React, { useEffect, useState } from "react";
+import { backendUrl } from "../../urlConfig.js";
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
+// @material-ui/core components
 import { withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Link from '@material-ui/core/Link';
@@ -123,6 +125,41 @@ export default function OrderRequests() {
     setOpenView(false);
   };
 
+
+  // --------------------------------
+
+  const [data, setData] = useState([]);
+  const getdata = () => {
+    const token = window.localStorage.getItem('token');
+
+    axios.get(`${backendUrl}/pharmacy/getOrderReqs`, {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+    }).then(res => {
+      const results = res.data.allOrders.rows;
+      console.log(res);
+      let array = [];
+      results.forEach(element => {
+        let arr = [];
+        let name = element.firstname+" "+element.lastname;
+        arr.push(element.id, element.description, element.prescription, element.customerid,name,
+          <Button variant="contained" color="primary">Update</Button>);
+        array.push(arr);
+      })
+
+      // ["Order ID", "Description", "Prescription", "Customer ID", "Customer Name","View Order"]}
+
+      setData(array);
+    })
+
+  }
+  React.useEffect(() => {
+    getdata();
+  }, []);
+
+  // ------------------------------------
+
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
@@ -136,22 +173,19 @@ export default function OrderRequests() {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Order ID", "CustomerName", "View"]}
-              tableData={[
-                ["MO2001",
-                  "Michelle Fernando",
-                  <Link
-                    variant="h6"
-                    underline="none"
-                    className={clsx(classes.rightLink)}
-                    href="orderprocess/"
-                  >
-                  <Button id="view" color="primary" Button color="primary" onClick={handleClickOpenView}>View</Button></Link>,
-
-                  
-                ],
-
-              ]}
+              tableHead={["Order ID", "Description", "Prescription", "Customer ID", "Customer Name","View Order"]}
+              tableData={data}
+              //   [["MO2001",
+              //     "Michelle Fernando",
+              //     <Link
+              //       variant="h6"
+              //       underline="none"
+              //       className={clsx(classes.rightLink)}
+              //       href="orderprocess/"
+              //     >
+              //     <Button id="view" color="primary" Button color="primary" onClick={handleClickOpenView}>View</Button></Link>,
+              //   ],]
+              
             />
 
             {/* <Dialog onClose={handleCloseView} aria-labelledby="customized-dialog-title" open={openView}>

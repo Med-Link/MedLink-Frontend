@@ -14,14 +14,7 @@ import ClosedDeals from "../ClosedDeals.js";
 import UpdateStock from "../UpdateStock.js";
 import ClosedDealsDetails from "../ClosedDealsDetails.js";
 import Profile from "../Profile.js";
-
-
-
-
 import OrderProcess from "../OrderProcess";
-import Order from "../OrderRequests";
-import { Block } from "@material-ui/icons";
-import { Hidden } from "@material-ui/core";
 
 const dashboardRoutes = [
   {
