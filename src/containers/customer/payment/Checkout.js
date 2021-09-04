@@ -18,6 +18,7 @@ import { Grid } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { backendUrl } from '../../../urlConfig';
+import { ngrokUrl } from '../../../urlConfig';
 import { getInitialGridColumnsState } from '@material-ui/data-grid';
 import { orderplaceSchema } from '../../../validations/orderplaceValidation';
 import { atom } from 'jotai'
@@ -135,9 +136,9 @@ export default function Checkout(props) {
     const payment={
       sandbox:true,
       merchant_id :merchantID,
-      return_url : 'https://0e5b-2402-4000-2081-83ea-140-6b58-cde5-d785.ngrok.io/api/order/checkout',
-      cancel_url :'https://0e5b-2402-4000-2081-83ea-140-6b58-cde5-d785.ngrok.io/api/order/checkout' ,
-      notify_url :'https://0e5b-2402-4000-2081-83ea-140-6b58-cde5-d785.ngrok.io/api/order/checkout' ,
+      return_url : `${ngrokUrl}/order/checkoutsuccess`,
+      cancel_url :`${ngrokUrl}/order/checkout`,
+      notify_url :`${ngrokUrl}/order/checkout`,
       first_name :firstname ,
       last_name : lastname ,
       email : customeremail,
