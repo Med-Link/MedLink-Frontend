@@ -117,24 +117,38 @@ export default function Checkout(props) {
   const btStyle = {color: '#efe3e3',backgroundColor: '#126e82'}
   const subHeaderStyle = {color: '#126e82',fontWeigth: 'bold'}
 
+  const [addressline1, setAddressline1] = useAtom(addressAtom);
+  const [contactnumber, setContactnumber] = useAtom(contactnumberAtom);
+
   const handlePayherePayment = async () => {
+    const address2 = window.sessionStorage.getItem("address");
+    const address = addressline1 + address2;
+    
+    const customer = JSON.parse(localStorage.getItem('user'));
+    const customeremail = customer[0].email;
+    const firstname = customer[0].firstname;
+    const lastname = customer[0].lastname;
+    const medlistid=props.products[0].medlistid;
+    const totalcost = costdata.totalcost;
+
+
     const payment={
       sandbox:true,
       merchant_id :merchantID,
       return_url : 'https://0e5b-2402-4000-2081-83ea-140-6b58-cde5-d785.ngrok.io/api/order/checkout',
       cancel_url :'https://0e5b-2402-4000-2081-83ea-140-6b58-cde5-d785.ngrok.io/api/order/checkout' ,
       notify_url :'https://0e5b-2402-4000-2081-83ea-140-6b58-cde5-d785.ngrok.io/api/order/checkout' ,
-      first_name :'akila' ,
-      last_name : 'akila' ,
-      email : "akila@gmail.com",
-      phone : '0778886081',
-      address : "no.21,matara",
+      first_name :firstname ,
+      last_name : lastname ,
+      email : customeremail,
+      phone : contactnumber,
+      address : address,
       city : 'matara',
       country : 'Sri Lanka',
-      order_id : 1,
+      order_id : medlistid,
       items : '2',
       currency : 'LKR',
-      amount : 500}
+      amount : totalcost}
     payhere.startPayment(payment);
 
   };
@@ -175,8 +189,8 @@ const [costdata, setCostdata] = useState([]);
 // const [contactno, setContactno] = useState("");
 
 
-const [addressline1, setAddressline1] = useAtom(addressAtom);
-const [contactnumber, setContactnumber] = useAtom(contactnumberAtom);
+// const [addressline1, setAddressline1] = useAtom(addressAtom);
+// const [contactnumber, setContactnumber] = useAtom(contactnumberAtom);
 
 const Completeorder = async () => {
   const token = window.localStorage.getItem('token');
