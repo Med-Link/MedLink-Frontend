@@ -23,7 +23,7 @@ import Button from "../../components/Dashboard/CustomButtons/Button";
 
 
 
-import { bugs, website, server } from "../../variables/general.js";
+// import { bugs, website, server } from "../../variables/general.js";
 
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
