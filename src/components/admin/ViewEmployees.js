@@ -12,19 +12,21 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import IconButton from '@material-ui/core/IconButton';
+import FormControl from '@material-ui/core/FormControl';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+
+import SearchIcon from '@material-ui/icons/Search';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+
 import Card from '../../components/Dashboard/Card/Card.js';
 import CardHeader from '../../components/Dashboard/Card/CardHeader.js';
 import CardBody from '../../components/Dashboard/Card/CardBody.js';
-import { TextField } from '@material-ui/core';
 
-import FormControl from '@material-ui/core/FormControl';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import SearchIcon from '@material-ui/icons/Search';
+
 
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
@@ -39,13 +41,6 @@ const useStyles1 = makeStyles((theme) => ({
     marginLeft: theme.spacing(2.5),
   },
 }));
-const useStyles2 = makeStyles({
-  // table: {
-  //   minWidth: 500,
-  // },
-});
-
-
 
 function TablePaginationActions(props) {
 
@@ -108,7 +103,6 @@ function TablePaginationActions(props) {
 
 export default function ViewEmployees() {
       const classes = useStyles();
-      const classes2 = useStyles2();
       const [searchTerm, setSearchTerm] = useState("");
 
       const [data, setData] = useState([]);
@@ -123,13 +117,7 @@ export default function ViewEmployees() {
             const results =  res.data.result;
             console.log(results);
             setData(results);
-          })
-          // .then(data =>{
-          //   // console.log(data.message);
-          //   // const s= res.data.result[0];
-          //   // console.log(s);
-          // })
-        
+          })        
       }
       React.useEffect(()=>{
         getdata();
