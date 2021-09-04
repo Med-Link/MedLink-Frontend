@@ -88,19 +88,29 @@ const paperStyle={padding :20,height:'350px',width:'90%', margin:"20px auto"}
 //const locStyle={marginTop: theme.spacing(-4)}
 
 export default function Dashboard() {
-  const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const [openList, setOpenList] = React.useState(false);
+  const [openLocation, setOpenLocation] = React.useState(false);
+
+  const handleClickOpen1 = () => {
+    setOpenList(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose1 = () => {
+    setOpenList(false);
+  };
+
+  const handleClickOpen2 = () => {
+    setOpenLocation(true);
+  };
+
+  const handleClose2 = () => {
+    setOpenLocation(false);
   };
   const classes = useStyles();
   return (
     <div>
-      <Paper elevation={10} style={paperStyle}> 
+      {/*<Paper elevation={10} style={paperStyle}> 
       <GridContainer item spacing={1}>
         <GridItem xs={5}>
           <p style={sentenceStyle}>Share Your Location To Get The Nearest Pharmacies In Order :</p>
@@ -114,12 +124,12 @@ export default function Dashboard() {
             
             zoom={7} />
         </Grid>
-          {/*<Button variant="contained" style={shareButtonStyle} href="#">Share Location</Button>
-          */}
+          <Button variant="contained" style={shareButtonStyle} href="#">Share Location</Button>
+           
 
         
       </GridContainer>
-      </Paper>
+      </Paper>*/}
       {/*<GridContainer>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
@@ -249,7 +259,37 @@ export default function Dashboard() {
               
               {/*<Grid container spacing={4}>*/}
               <Grid>
-              <Button variant="contained" style={goButtonStyle} href="#">Search</Button> 
+              <Button variant="contained" style={goButtonStyle} onClick={handleClickOpen2}>Search</Button> 
+              <Dialog open={openLocation} onClose={handleClose2} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">
+                             
+        </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                
+                <GridContainer item spacing={1}>
+                  <GridItem xs={12}>
+                    <p style={sentenceStyle}>Share Your Location To Get The Nearest Pharmacies In Order :</p>
+                  </GridItem>
+         
+                <Grid container xs={12} >
+                <Map
+                  center={{lat: 6.9271, lng: 79.8612}}
+                  height='230px'
+                  width='95%'
+            
+                  zoom={7} />
+                </Grid>
+                {/*<Button variant="contained" style={shareButtonStyle} href="#">Share Location</Button>
+                */}
+
+        
+                </GridContainer>
+              
+              </DialogContentText>
+            </DialogContent>
+      </Dialog>
+              
               {/*<InputLabel htmlFor="grouped-native-select">Select Location</InputLabel>
               <Select style={dropDownStyle} native defaultValue="" id="grouped-native-select">
                 <option aria-label="None" value="" />
@@ -314,16 +354,16 @@ export default function Dashboard() {
               ]}
             />*/}
               <Typography>
-                <Link onClick={handleClickOpen}>
+                <Link onClick={handleClickOpen1}>
                   Pharma, Nugegoda, Colombo
                 </Link>
               </Typography>
               <Typography>
-                <Link onClick={handleClickOpen}>
+                <Link onClick={handleClickOpen1}>
                   Aruna Pharmacy, Nugegoda, Colombo
                 </Link>
               </Typography>
-              <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+              <Dialog open={openList} onClose={handleClose1} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">
                   Send Prescription
                 </DialogTitle>
