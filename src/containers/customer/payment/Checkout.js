@@ -136,8 +136,8 @@ export default function Checkout(props) {
     const payment={
       sandbox:true,
       merchant_id :merchantID,
-      return_url : `${ngrokUrl}/order/checkoutsuccess`,
-      cancel_url :`${ngrokUrl}/order/checkout`,
+      return_url : `www.abcd.com`,
+      cancel_url :`www.abcd.com`,
       notify_url :`${ngrokUrl}/order/checkout`,
       first_name :firstname ,
       last_name : lastname ,
