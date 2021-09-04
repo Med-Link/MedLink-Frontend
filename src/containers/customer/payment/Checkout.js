@@ -210,7 +210,7 @@ const Completeorder = async () => {
   const servicecost = costdata.servicecost;
 
 
-    // console.log(medlistid)
+    // console.log(typeof(contactnumber))
     const form = {
       contactnumber,
     };
@@ -222,8 +222,8 @@ const Completeorder = async () => {
         deliverycost,
         servicecost,
         totalprice,
-        contactnumber,
         address,
+        contactnumber,
       },{headers : {
         'Authorization': token ? `Bearer ${token}` : ''
       },
