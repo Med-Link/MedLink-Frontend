@@ -60,6 +60,10 @@ const Profile=()=>{
     const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0 0 0', width: '100%'}
     const headingStyle={color: '#126e82'}
 
+    const customer = JSON.parse(localStorage.getItem('user'));
+    const customeremail = customer[0].email;
+    const firstname = customer[0].firstname;
+    const lastname = customer[0].lastname;
     return(
         
         <Grid style={gridStyle}>
@@ -76,6 +80,7 @@ const Profile=()=>{
                             id="firstName"
                             label="First Name"
                             defaultValue="Kamal"
+                            value={firstname}
                             InputProps={{
                                 readOnly: true,
                             }}
@@ -87,6 +92,7 @@ const Profile=()=>{
                         <TextField
                             id="lastName"
                             label="Last Name"
+                            value={lastname}
                             defaultValue="Perera"
                             InputProps={{
                                 readOnly: true,
@@ -99,6 +105,7 @@ const Profile=()=>{
                         <TextField
                             id="email"
                             label="Email"
+                            value={customeremail}
                             defaultValue="kamalperera@gmail.com"
                             InputProps={{
                                 readOnly: true,
@@ -109,7 +116,7 @@ const Profile=()=>{
                          
                     </Grid>
 
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                         <TextField
                             id="address"
                             label="Address"
@@ -133,9 +140,9 @@ const Profile=()=>{
                             }}
                             variant="outlined"
                         />
-                    </Grid>
+                    </Grid> */}
                     <Grid container spacing={2}> 
-                    <Grid item xs={6}>
+                    {/* <Grid item xs={6}>
                         <Button type='submit' fullWidth variant="contained" style={buttonStyle} onClick={handleClickOpen1}>Edit Profile</Button>
                         <Dialog open={openEdit} onClose={handleClose1} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">
@@ -147,7 +154,7 @@ const Profile=()=>{
                             </DialogContentText>
                         </DialogContent>
                         </Dialog>
-                    </Grid> 
+                    </Grid>  */}
                     <Grid item xs={6}>
                         <Button type='submit' fullWidth variant="contained" style={buttonStyle} onClick={handleClickOpen2}>Reset Password</Button>
                         <Dialog open={openReset} onClose={handleClose2} aria-labelledby="form-dialog-title">
