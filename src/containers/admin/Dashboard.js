@@ -2,6 +2,8 @@
 import React,{useState} from "react";
 import axios from 'axios';
 import { backendUrl } from "../../urlConfig.js";
+import ChartistGraph from "react-chartist";
+
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
@@ -9,6 +11,8 @@ import Store from "@material-ui/icons/Store";
 import DateRange from "@material-ui/icons/DateRange";
 import Update from "@material-ui/icons/Update";
 import Accessibility from "@material-ui/icons/Accessibility";
+import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import AccessTime from "@material-ui/icons/AccessTime";
 import Link  from "@material-ui/core/Link";
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
@@ -20,11 +24,7 @@ import CardIcon from "../../components/Dashboard/Card/CardIcon.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import Button from "../../components/Dashboard/CustomButtons/Button";
-
-
-
-// import { bugs, website, server } from "../../variables/general.js";
-
+import {dailySalesChart} from "../../components/admin/DailySalesChart";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
 const useStyles = makeStyles(styles);
@@ -141,33 +141,64 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
       <GridContainer>
-      <GridItem xs={12} sm={12} md={6}>
+      <GridItem xs={12} sm={6} md={6}>
           <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Pharmacy Registration Requests</h4>
-              <p className={classes.cardCategoryWhite}>
-                on July 2021
-              </p>
+            <CardHeader color="success" stats icon>
+            <ChartistGraph
+                className="ct-chart"
+                data={dailySalesChart.data}
+                type="Line"
+                options={dailySalesChart.options}
+                listener={dailySalesChart.animation}
+              />
             </CardHeader>
             <CardBody>
-              <Table
-                tableHeaderColor="primary"
-                tableHead={["ID", "Name", "District", "Action"]}
-                tableData={[
-                  ["1", "Micael Medcare", "Colombo",
-                  <Link variant="h6" underline="none" href="pharmacyrequests/">
-                    <Button color="primary" >View</Button>
-                  </Link> ],
-                  ["2", "Minerva Pharmacy", "Puttalam",
-                  <Link variant="h6" underline="none" href="pharmacyrequests/">
-                    <Button color="primary">View</Button>
-                  </Link> ],
-                ]}
-              />
+              <h4 className={classes.cardTitle}>Daily Sales</h4>
+              <p className={classes.cardCategory}>
+                <span className={classes.successText}>
+                  <ArrowUpward className={classes.upArrowCardCategory} /> 55%
+                </span>{" "}
+                increase in today sales.
+              </p>
             </CardBody>
+            <CardFooter chart>
+              <div className={classes.stats}>
+                <AccessTime /> updated 4 minutes ago
+              </div>
+            </CardFooter>
           </Card>
         </GridItem>
       </GridContainer>
     </div>
   );
 }
+
+
+
+
+// <GridItem xs={12} sm={12} md={6}>
+//           <Card>
+//             <CardHeader color="primary">
+//               <h4 className={classes.cardTitleWhite}>Pharmacy Registration Requests</h4>
+//               <p className={classes.cardCategoryWhite}>
+//                 on July 2021
+//               </p>
+//             </CardHeader>
+//             <CardBody>
+//               <Table
+//                 tableHeaderColor="primary"
+//                 tableHead={["ID", "Name", "District", "Action"]}
+//                 tableData={[
+//                   ["1", "Micael Medcare", "Colombo",
+//                   <Link variant="h6" underline="none" href="pharmacyrequests/">
+//                     <Button color="primary" >View</Button>
+//                   </Link> ],
+//                   ["2", "Minerva Pharmacy", "Puttalam",
+//                   <Link variant="h6" underline="none" href="pharmacyrequests/">
+//                     <Button color="primary">View</Button>
+//                   </Link> ],
+//                 ]}
+//               />
+//             </CardBody>
+//           </Card>
+//         </GridItem>
