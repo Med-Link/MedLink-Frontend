@@ -24,7 +24,7 @@ export default function PaymentForm(props) {
               width="180"
             />
           </Button>
-      <Grid container spacing={3}>
+      {/* <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <TextField required id="cardName" label="Name on card" fullWidth autoComplete="cc-name" />
         </Grid>
@@ -56,7 +56,7 @@ export default function PaymentForm(props) {
             label="Remember credit card details for next time"
           />
         </Grid>
-      </Grid>
+      </Grid> */}
     </React.Fragment>
   );
 }

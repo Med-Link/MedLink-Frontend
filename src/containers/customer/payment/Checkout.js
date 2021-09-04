@@ -177,21 +177,31 @@ const [costdata, setCostdata] = useState([]);
 
 const [addressline1, setAddressline1] = useAtom(addressAtom);
 const [contactnumber, setContactnumber] = useAtom(contactnumberAtom);
-// console.log(addressline1)
-const Checkoutorder = async () => {
+
+const Completeorder = async () => {
+  const token = window.localStorage.getItem('token');
+  
+  // console.log(costdata.t)
   // e.preventDefault();
   const address2 = window.sessionStorage.getItem("address");
   const customer = JSON.parse(localStorage.getItem('user'));
   const firstname = customer[0].firstname;
   const lastname = customer[0].lastname;
+  const medlistid=props.products[0].medlistid;
+  const totalprice=props.products[0].totalprice;
+  const address = addressline1 + address2;
+  const totalcost = costdata.totalcost;
+  const deliverycost = costdata.deliverycost;
+  const servicecost = costdata.servicecost;
 
-    const address = addressline1 + address2;
+
+    // console.log(medlistid)
     const form = {
       contactnumber,
     };
     const isValid = await orderplaceSchema.isValid(form);
     if (isValid === true) {
-      axios.post(`${backendUrl}/order/checkout`, {
+      axios.post(`${backendUrl}/order/completeorder`, {
         medlistid,
         totalcost,
         deliverycost,
@@ -199,7 +209,10 @@ const Checkoutorder = async () => {
         totalprice,
         contactnumber,
         address,
-      }).then((response) => {
+      },{headers : {
+        'Authorization': token ? `Bearer ${token}` : ''
+      },
+    }).then((response) => {
         console.log(response);
         // setSignedUp(true);
       }).catch((err) => {
@@ -226,15 +239,15 @@ const Checkoutorder = async () => {
       headers: {
         'Authorization': token ? `Bearer ${token}` : ''
       },
-  }).then((response)=>{
+    }).then((response)=>{
       // console.log(response);
       setCostdata(response.data);
       // costs();
 
-  }).catch((err)=>{
+    }).catch((err)=>{
       console.log(err);
-  });
-  // console.log(token)
+    });
+    // console.log(token)
   };
 
   const handleNext = () => {
@@ -242,7 +255,8 @@ const Checkoutorder = async () => {
       calculatetotal();
     }
     if(activeStep==2){
-      // console.log("hhhhhh")
+      console.log("hhhhhh")
+      Completeorder()
     }
     
     setActiveStep(activeStep + 1);
@@ -311,6 +325,7 @@ const Checkoutorder = async () => {
                     className={classes.button}
                   >
                     {activeStep === steps.length - 2 ? 'Place order' : 'Next'}
+
                   </Button>
                 </div>
               </React.Fragment>
