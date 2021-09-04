@@ -19,6 +19,12 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import Card from '../../components/Dashboard/Card/Card.js';
 import CardHeader from '../../components/Dashboard/Card/CardHeader.js';
 import CardBody from '../../components/Dashboard/Card/CardBody.js';
+import { TextField } from '@material-ui/core';
+
+import FormControl from '@material-ui/core/FormControl';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import SearchIcon from '@material-ui/icons/Search';
 
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
@@ -103,6 +109,7 @@ function TablePaginationActions(props) {
 export default function ViewEmployees() {
       const classes = useStyles();
       const classes2 = useStyles2();
+      const [searchTerm, setSearchTerm] = useState("");
 
       const [data, setData] = useState([]);
       const getdata =() =>{
@@ -156,9 +163,28 @@ export default function ViewEmployees() {
                 <h4 className={classes.cardTitleWhite}>Registered Admin Accounts</h4>
       </CardHeader>
       <CardBody>
+        <div>
+          <FormControl fullWidth variant="outlined" size="small">
+            <OutlinedInput
+              endAdornment={
+                <InputAdornment position="end">
+                  <SearchIcon/>
+                </InputAdornment>
+              }
+              onChange={(event)=>{
+                setSearchTerm(event.target.value);
+              }}
+              placeholder="Search..."
+              fontSize="small"
+              size="sm"
+            />
+          </FormControl>
+        </div>
+      
+
       <Table  aria-label="custom pagination table">
-      <TableHead >
-            <TableRow>
+        <TableHead >
+          <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
@@ -167,28 +193,35 @@ export default function ViewEmployees() {
                   {column.label}
                 </TableCell>
               ))}
-            </TableRow>
-          </TableHead>
+          </TableRow>
+        </TableHead>
         <TableBody>
           {(rowsPerPage > 0
             ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : data
-          ).map((row) => (
-            <TableRow key={row.adminid}>
-              {/* <TableCell component="th" scope="row">
-                {row.adminid}
-              </TableCell> */}
-              <TableCell align="left">
-                {row.adminid}
-              </TableCell>
-              <TableCell align="left">
-                {row.firstname}  {row.lastname}
-              </TableCell>
-              <TableCell align="left">
-                {row.email}
-              </TableCell>
-            </TableRow>
-          ))}
+            : data).filter((row)=>{
+              if (searchTerm == "") {
+                return row
+              } else if (row.firstname.toLowerCase().includes(searchTerm.toLowerCase()) || 
+              row.lastname.toLowerCase().includes(searchTerm.toLowerCase()) || 
+              row.email.toLowerCase().includes(searchTerm.toLowerCase())){
+                return row
+              }
+            }).map((row) => {
+              return(
+                <TableRow key={row.adminid}>
+                  <TableCell align="left">
+                    {row.adminid}
+                  </TableCell>
+                  <TableCell align="left">
+                    {row.firstname}  {row.lastname}
+                  </TableCell>
+                  <TableCell align="left">
+                    {row.email}
+                  </TableCell>
+                </TableRow>
+              );
+            }
+          )}
 
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
