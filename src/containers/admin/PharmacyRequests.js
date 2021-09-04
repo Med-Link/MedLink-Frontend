@@ -2,6 +2,8 @@
 import React,{useState} from "react";
 import axios from 'axios';
 import { backendUrl } from "../../urlConfig.js";
+import TableScrollbar from 'react-table-scrollbar'
+
 // @material-ui/core components
 import { makeStyles,withStyles } from "@material-ui/core/styles";
 import Dialog from '@material-ui/core/Dialog';
@@ -10,18 +12,22 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
+
+import CloseIcon from '@material-ui/icons/Close';
+import SearchIcon from '@material-ui/icons/Search';
 
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
-import Table from "../../components/Dashboard/Table/Table.js";
 import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
-import Switch from "../../components/Dashboard/CustomButtons/Switch";
 import Button from "../../components/Dashboard/CustomButtons/Button";
 import PhotoSteps from "../../components/admin/dialogbox/PhotoSteps";
 
@@ -92,14 +98,13 @@ const useStyles = makeStyles(styles);
 
 export default function PharmacyRequests() {
   const classes = useStyles();
-  const [openReject, setOpenReject] = React.useState(false);
-  
+  const [searchTerm, setSearchTerm] = useState(""); //for search function
 
+  const [openReject, setOpenReject] = React.useState(false);
   const handleClickOpenReject = (pharmacyid) => {
     setOpenReject(true);
     setPharmacyid(pharmacyid);
   };
-
   const handleCloseReject = () => {
     setOpenReject(false);
   };
@@ -185,19 +190,23 @@ export default function PharmacyRequests() {
         })
       .then(res =>{
         const results =  res.data.result;
-        //  console.log(results);
-         let array =[];
-         results.forEach(element=>{
-          let arr=[];
-          arr.push(element.name,element.email,element.contactnumber,element.location,<Button size='sm' color="primary" onClick={()=>handleClickOpen(element.document1,element.document2,element.document3)}>View</Button>,<Button size='sm' color="primary" onClick={()=>acceptPharmacy(element.pharmacyid)}>Accept</Button>,<Button size='sm' color="default" onClick={()=>handleClickOpenReject(element.pharmacyid)}>Reject</Button>);
-          array.push(arr);
-         })         
-        setData(array);
+        setData(results);
       })    
   }
   React.useEffect(()=>{
     getdata();
   },[]);
+
+  const columns = [
+    { id: 'name', label: 'Name'},
+    { id: 'email', label: 'Email'},
+    { id: 'contactnumber', label: 'ContactNo'},
+    { id: 'location', label: 'Location'},
+    { id: 'document', label: 'Documents'},
+    { id: 'activate', label: 'Activate'},
+    { id: 'reject', label: 'Reject'},];
+  const rows = data; 
+
   return (
     
     <GridContainer>
@@ -205,17 +214,81 @@ export default function PharmacyRequests() {
         <Card>
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Pharmacy Registration Requests  </h4>
-            {/* <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
-            </p> */}
           </CardHeader>
           <CardBody>
-           
-          <Table
-              tableHeaderColor="primary"
-              tableHead={["Pharmacy Name", "Email", "Mobile Number",  "Location","Documents" ,"Activate","Reject"]}
-              tableData={data}
-            />
+            <div>
+              <FormControl fullWidth variant="outlined" size="small">
+                <OutlinedInput
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <SearchIcon/>
+                    </InputAdornment>
+                  }
+                  onChange={(event)=>{
+                    setSearchTerm(event.target.value);
+                  }}
+                  placeholder="Search..."
+                  fontSize="small"
+                  size="sm"
+                />
+              </FormControl>
+            </div>
+            <TableScrollbar rows={20}>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          {columns.map((column) => (
+                            <TableCell style={{color:'#213458',backgroundColor: "white"}}
+                              key={column.id}
+                              align={column.align}
+                            >
+                              {column.label}
+                            </TableCell>
+                          ))}
+                        </TableRow>
+                      </TableHead>
+                      
+                      <TableBody >
+                        {data.filter((row)=>{
+                          if (searchTerm == "") {
+                            return row
+                          } else if (row.name.toLowerCase().includes(searchTerm.toLowerCase()) || row.email.toLowerCase().includes(searchTerm.toLowerCase()) 
+                          // || row.location.toLowerCase().includes(searchTerm.toLowerCase())
+                          ){
+                            return row
+                          }
+                        }).map((row) => {
+                          return(
+                          <TableRow>
+                            <TableCell align="left">
+                              {row.name}
+                            </TableCell>
+                            <TableCell align="left">
+                              {row.email}
+                            </TableCell>
+                            <TableCell align="left">
+                              {row.contactnumber}
+                            </TableCell>
+                            <TableCell align="left">
+                              {row.location}
+                            </TableCell>
+                            <TableCell align="left">
+                            <Button size='sm' color="primary" onClick={()=>handleClickOpen(row.document1,row.document2,row.document3)}>View</Button>
+                            </TableCell>
+                            <TableCell>
+                            <Button size='sm' color="primary" onClick={()=>acceptPharmacy(row.pharmacyid)}>Accept</Button>
+                            </TableCell>
+                            <TableCell align="left">
+                            <Button size='sm' color="default" onClick={()=>handleClickOpenReject(row.pharmacyid)}>Reject</Button>
+                            </TableCell>
+                          </TableRow>
+                          );
+                        }
+                        )
+                        }
+                      </TableBody>
+                    </Table>
+                  </TableScrollbar>
           </CardBody>
         </Card>
       </GridItem>
