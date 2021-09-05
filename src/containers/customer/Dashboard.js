@@ -13,16 +13,13 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
 import FormControl from '@material-ui/core/FormControl';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 import Search from "@material-ui/icons/Search";
 import StoreMallDirectoryIcon from '@material-ui/icons/StoreMallDirectory';
-import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 
-import CustomInput from "../../components/Dashboard/CustomInput/CustomInput.js";
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
 import Card from "../../components/Dashboard/Card/Card";
@@ -42,16 +39,16 @@ const useStyles = makeStyles(styles);
 
 const fontStyle = {fontSize: '20px',color: '#126e82'};
 const titleStyle = {fontSize: '30px',color: '#126e82'};
-const dropDownStyle = {width: '200px'};
-const btStyle = {width: '10px',backgroundColor: '#126e82',color: '#efe3e3'}
+// const dropDownStyle = {width: '200px'};
+// const btStyle = {width: '10px',backgroundColor: '#126e82',color: '#efe3e3'}
 const cardStyle = {backgroundColor: '#a6c6ca'}
 const searchButton = {backgroundColor: '#126e82'}
 const ftStyle = {color: '#126e82',textAlign: 'left',fontSize: '20px'}
 const cdStyle = {backgroundColor: 'rgb(226 243 242)'}
 const goButtonStyle={color: '#efe3e3',backgroundColor: '#126e82',opacity:'0.9', display:"flex", flex:"column", textAlign:"center"}
-const shareButtonStyle={color: '#efe3e3',left: '-10%',backgroundColor: '#126e82', marginTop: '10px',width: '30%', padding: '2px', opacity:'0.9'}
+// const shareButtonStyle={color: '#efe3e3',left: '-10%',backgroundColor: '#126e82', marginTop: '10px',width: '30%', padding: '2px', opacity:'0.9'}
 const sentenceStyle={fontSize: '16px', color: '#126e82', fontWeight: 'bold'}
-const paperStyle={padding :20,height:'350px',width:'90%', margin:"20px auto"}
+// const paperStyle={padding :20,height:'350px',width:'90%', margin:"20px auto"}
 //const locStyle={marginTop: theme.spacing(-4)}
 
 export default function Dashboard() {
