@@ -186,7 +186,7 @@ export default function Dashboard() {
                         <DialogContentText>
                           <GridContainer item spacing={1}>
                             <GridItem xs={12}>
-                              <p style={sentenceStyle}>Share Your Location To Get The Nearest Pharmacies In Order :</p>
+                              <p style={sentenceStyle}>Select an Area to Get the Nearest Pharmacies in Order :</p>
                             </GridItem>
                             <Grid container xs={12} >
                             <Map
@@ -195,7 +195,12 @@ export default function Dashboard() {
                               width='95%'
                         
                               zoom={7} />
-                            </Grid>        
+                            </Grid>
+                            <Grid container justify="center" style={{marginTop:"10px"}}>
+                            <Button color="primary" justifyContent="center">OK</Button>
+
+                            </Grid>
+  
                           </GridContainer>
                         </DialogContentText>
                       </DialogContent>

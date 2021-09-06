@@ -281,20 +281,18 @@ class Map extends React.Component{
 						</Grid>
 					</Grid>	
 					<Grid container spacing={1} style={{marginBottom: '10px'}}>
-						<Grid item xs={12} sm={4} md={4}>
-							{/* <TextField 
-								variant="outlined"
-								readOnly="readOnly" 
-								value={ this.state.address }
-								// value ={location} 
-									onChange={(e) => setLocation(e.target.value)}
-								fullWidth
-								id="location"
-								label="Location Address"
-								name="address"
-								size="small"
-								/> */}
-								<TextField 
+						<Grid item xs={12} sm={12} md={12}>
+							<TextField 
+									variant="outlined"
+									fullWidth
+									id="city"
+									label="Enter a Radius to search (km)"
+									name="Radius"
+									size="small"
+									/>
+						</Grid>	
+						<Grid item xs={6} sm={6} md={6}>
+							<TextField 
 								variant="outlined"
 								readOnly="readOnly" 
 								value={ this.state.city }
@@ -308,30 +306,20 @@ class Map extends React.Component{
 								/>
 
 						</Grid>
-						<Grid item xs={6} sm={4} md={4}>
-							<TextField 
+						<Grid item xs={6} sm={6} md={6}>
+						<TextField 
 								variant="outlined"
 								readOnly="readOnly" 
-								value={ this.state.markerPosition.lat}
+								value={ this.state.state }
+								onChange={ this.onChange }
 								fullWidth
-								id="location"
-								label="Latitude"
-								name="address"
+								id="province"
+								label="Province"
+								name="province"
 								size="small"
-							/>	
+								/>
 						</Grid>	
-						<Grid item xs={6} sm={4} md={4}>
-							<TextField 
-								variant="outlined"
-								readOnly="readOnly" 
-								value={ this.state.markerPosition.lng}
-								fullWidth
-								id="location"
-								label="Longitude"
-								name="address"
-								size="small"
-							/>	
-						</Grid>	
+						
 					</Grid>
 
 				<AsyncMap
