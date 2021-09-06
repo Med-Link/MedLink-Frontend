@@ -10,11 +10,11 @@ export default function Employees() {
   return (
     <div>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={6}>
+        <GridItem xs={12} sm={12} md={7}>
                 <ViewEmployees/>
         </GridItem>
 
-        <GridItem xs={12} sm={12} md={6}>
+        <GridItem xs={12} sm={12} md={5}>
           <AddNewAdmin/>
         </GridItem>
       </GridContainer>

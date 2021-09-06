@@ -124,7 +124,7 @@ export default function Notifications() {
     <GridContainer>
       <GridItem xs={12} sm={12} md={6}>
         <Card>
-          <CardHeader color="primary">
+          <CardHeader color="info">
             <h4 className={classes.cardTitleWhite}>Notifications from Pharmacies</h4>
           </CardHeader>
           <CardBody>
@@ -143,7 +143,7 @@ export default function Notifications() {
       </GridItem>
       <GridItem xs={12} sm={12} md={6}>
       <Card>
-          <CardHeader color="info">
+          <CardHeader color="warning">
             <h4 className={classes.cardTitleWhite}>Notifications from Customers</h4>
           </CardHeader>
           <CardBody>

@@ -134,7 +134,7 @@ export default function Medicine() {
         <GridContainer>
           <GridItem xs={12} sm={12} md={7}>
               <Card>
-                <CardHeader color="success">
+                <CardHeader color="primary">
                   <h4 className={classes.cardTitleWhite}>Current Medicine Types</h4>
                 </CardHeader>
                 <CardBody >
