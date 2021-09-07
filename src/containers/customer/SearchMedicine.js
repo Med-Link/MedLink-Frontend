@@ -30,7 +30,6 @@ import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import Button from "../../components/Dashboard/CustomButtons/Button";
 
 import Form from './form/Form';
-import Map from '../../components/customer/Map';
 import MedList from "../../components/customer/MedList"
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
@@ -111,48 +110,22 @@ export default function Dashboard() {
           <Card style={cardStyle}>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
-                <LocationOnIcon/>
+                <LocalHospitalIcon/>
               </CardIcon>
               <p className={classes.cardCategory} style={fontStyle}>Search</p>
-              <h3 className={classes.cardTitle} style={titleStyle}>Location</h3>
+              <h3 className={classes.cardTitle} style={titleStyle}>Medicine</h3>
             </CardHeader>
             <CardFooter stats>
-              <div> 
-                <FormControl className={classes.formControl}>
-                  <Grid>
-                    <Button variant="contained" style={goButtonStyle} onClick={handleClickOpen2}>Select Area to search</Button> 
-                    <Dialog open={openLocation} onClose={handleClose2} aria-labelledby="form-dialog-title">
-                      <DialogTitle id="form-dialog-title">          
-                      </DialogTitle>
-                      <DialogContent>
-                        <DialogContentText>
-                          <GridContainer item spacing={1}>
-                            <GridItem xs={12}>
-                              <p style={sentenceStyle}>Select an Area to Get the Nearest Pharmacies in Order :</p>
-                            </GridItem>
-                            <Grid container xs={12} >
-                            <Map
-                              center={{lat: 6.9271, lng: 79.8612}}
-                              height='230px'
-                              width='95%'
-                        
-                              zoom={7} />
-                            </Grid>
-                            <Grid container justify="center" style={{marginTop:"10px"}}>
-                            <Button color="primary" justifyContent="center">OK</Button>
-
-                            </Grid>
-  
-                          </GridContainer>
-                        </DialogContentText>
-                      </DialogContent>
-                    </Dialog>
-                  </Grid>
-                </FormControl>
-              </div> 
+            <div>
+                <MedList/>
+                </div>
+              <Button style={searchButton} color="white" aria-label="edit" justIcon round>
+                <Search style={searchButton}/>
+              </Button>
+              
             </CardFooter>
           </Card>
-        </GridItem>  
+        </GridItem>
         <GridItem xs={12} sm={6} md={6}>
           <Card style={cardStyle}>
             <CardHeader color="info" stats icon>
@@ -180,7 +153,7 @@ export default function Dashboard() {
               </Button>
             </CardFooter>
           </Card>
-        </GridItem> 
+        </GridItem>
       </GridContainer>
       
       <GridContainer xs={12} sm={12} md={12}>
