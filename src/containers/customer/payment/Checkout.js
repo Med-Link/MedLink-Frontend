@@ -268,9 +268,11 @@ const Completeorder = async () => {
   const handleNext = () => {
     if(activeStep == 0){
       calculatetotal();
+      window.sessionStorage.removeItem('latitude');
+      window.sessionStorage.removeItem('longitude');
     }
     if(activeStep==2){
-      console.log("hhhhhh")
+      // console.log("hhhhhh")
       Completeorder()
     }
     
