@@ -54,8 +54,6 @@ const sentenceStyle={fontSize: '16px', color: '#126e82', fontWeight: 'bold'}
 export default function Dashboard() {
   const classes = useStyles();
 
-  const [searchTerm, setSearchTerm] = useState(""); //for search function
-
   const [openList, setOpenList] = React.useState(false);
   const [openLocation, setOpenLocation] = React.useState(false);
 
@@ -76,7 +74,25 @@ export default function Dashboard() {
   };
 
   //get data from the backend
+  // const [medicine, setMedicine] = useState([]);
+  const [medicine, setMedicine] = useState(""); 
+
   const [data, setData] = useState([]);
+  const findmedicine =() =>{
+    const token = window.localStorage.getItem('token');
+    
+      axios.post(`${backendUrl}/order/searchmedicine`,{ typetext:medicine},{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results =  res;
+        // console.log("test123mish here");
+            console.log(results);
+            // setData(results);
+      })
+  }
 
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
@@ -121,8 +137,8 @@ export default function Dashboard() {
             <div>
               <FormControl fullWidth variant="outlined" size="small">
                 <OutlinedInput
-                  onChange={(event)=>{
-                    setSearchTerm(event.target.value);
+                  onChange={(e)=>{
+                    setMedicine(e.target.value);
                   }}
                   placeholder="Search..."
                   fontSize="small"
@@ -130,7 +146,7 @@ export default function Dashboard() {
                 />
                 </FormControl>
                 </div>
-              <Button style={searchButton} color="white" aria-label="edit" justIcon round>
+              <Button style={searchButton} onClick={findmedicine} color="white" aria-label="edit" justIcon round>
                 <Search style={searchButton}/>
               </Button>
               
@@ -238,11 +254,11 @@ export default function Dashboard() {
               
                 <TableBody>
                   {data.filter((row)=>{
-                    if (searchTerm == "") {
+                    // if (searchTerm == "") {
+                    //   return row
+                    // } else if (row.name.toLowerCase().includes(searchTerm.toLowerCase())){
                       return row
-                    } else if (row.name.toLowerCase().includes(searchTerm.toLowerCase())){
-                      return row
-                    }
+                    // }
                   }).map((row) => {
                     return(
                     <TableRow>
