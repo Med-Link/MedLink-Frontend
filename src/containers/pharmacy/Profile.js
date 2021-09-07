@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { backendUrl } from "../../urlConfig.js";
+import axios from "axios";
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -13,7 +16,7 @@ import CardAvatar from "../../components/Dashboard/Card/CardAvatar.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 
-import avatar from "../../assets/images/pharmacist2.jpg";
+import avatar from "../../assets/images/admin.png";
 
 const styles = {
   cardCategoryWhite: {
@@ -38,9 +41,48 @@ const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
   const classes = useStyles();
+
+  // backend function 
+  const [data, setData] = useState([]);
+  const getdata =() =>{
+    const token = window.localStorage.getItem('token');
+    
+      axios.get(`${backendUrl}/pharmacy/viewprofile`,{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results =  res.data.result[0];
+         console.log(results);
+        setData(results);
+      })
+    
+  }
+  React.useEffect(()=>{
+    getdata();
+  },[]);
   return (
     <div>
       <GridContainer>
+      <GridItem xs={12} sm={12} md={4}>
+          <Card profile>
+            <CardAvatar profile>
+              <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                <img src={avatar} alt="..." />
+              </a>
+            </CardAvatar>
+            <CardBody profile>
+              <h4 className={classes.cardTitle}>{data.name}</h4>
+              <p className={classes.description}>
+              As Sri Lanka’s first premier multi-specialty pharmacy, 
+              ABCD was set up to mirror reputed hospitals in the region which offered advanced medical technology and expert medical care,
+               thus eliminating the need for people to travel out of Sri Lanka for specialized medical treatment.
+              </p>
+              
+            </CardBody>
+          </Card>
+        </GridItem>
         <GridItem xs={12} sm={12} md={8}>
           <Card>
             <CardHeader color="primary">
@@ -49,79 +91,42 @@ export default function UserProfile() {
             </CardHeader>
             <CardBody>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={4}>
+                <GridItem xs={12} sm={12} md={12}>
                   <CustomInput
-                    labelText="ABCD Pharmacy"
-                    id="company-disabled"
+                    id="pharmacyname"
                     formControlProps={{
                       fullWidth: true,
                     }}
                     inputProps={{
                       disabled: true,
                     }}
-                  />
-                </GridItem>
-               
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="abcd@gmail.com"
-                    id="email-address"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Rgp-569842156"
-                    id="web"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
+                    value={data.name}
                   />
                 </GridItem>
               </GridContainer>
-              <GridContainer>
+              <GridContainer> 
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="Nihal"
-                    id="first-name"
+                    id="email"
                     formControlProps={{
                       fullWidth: true,
                     }}
+                    value={data.email}
+
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="Sooriyabandara"
-                    id="last-name"
+                    id="contactnumber"
                     formControlProps={{
                       fullWidth: true,
                     }}
+                    value={data.contactnumber}
                   />
                 </GridItem>
               </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Panadura"
-                    id="city"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="+9411296583"
-                    id="country"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-               
-              </GridContainer>
+              
+              
               <GridContainer>
                 
               </GridContainer>
@@ -129,25 +134,6 @@ export default function UserProfile() {
             <CardFooter>
               <Button color="primary">Update Profile</Button>
             </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
-              <h4 className={classes.cardTitle}>ABCD Pharmacy</h4>
-              <p className={classes.description}>
-              As Sri Lanka’s first premier multi-specialty pharmacy, 
-              ABCD was set up to mirror reputed hospitals in the region which offered advanced medical technology and expert medical care,
-               thus eliminating the need for people to travel out of Sri Lanka for specialized medical treatment.
-              </p>
-              
-            </CardBody>
           </Card>
         </GridItem>
       </GridContainer>
