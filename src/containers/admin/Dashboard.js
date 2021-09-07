@@ -43,6 +43,7 @@ export default function Dashboard() {
         }
         })
       .then(res =>{
+
         const results =  res.data.row;
         //  console.log(results);
         setData(results);
