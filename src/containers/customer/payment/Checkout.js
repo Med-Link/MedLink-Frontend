@@ -18,6 +18,7 @@ import { Grid } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { backendUrl } from '../../../urlConfig';
+import { ngrokUrl } from '../../../urlConfig';
 import { getInitialGridColumnsState } from '@material-ui/data-grid';
 import { orderplaceSchema } from '../../../validations/orderplaceValidation';
 import { atom } from 'jotai'
@@ -117,24 +118,38 @@ export default function Checkout(props) {
   const btStyle = {color: '#efe3e3',backgroundColor: '#126e82'}
   const subHeaderStyle = {color: '#126e82',fontWeigth: 'bold'}
 
+  const [addressline1, setAddressline1] = useAtom(addressAtom);
+  const [contactnumber, setContactnumber] = useAtom(contactnumberAtom);
+
   const handlePayherePayment = async () => {
+    const address2 = window.sessionStorage.getItem("address");
+    const address = addressline1 + address2;
+    
+    const customer = JSON.parse(localStorage.getItem('user'));
+    const customeremail = customer[0].email;
+    const firstname = customer[0].firstname;
+    const lastname = customer[0].lastname;
+    const medlistid=props.products[0].medlistid;
+    const totalcost = costdata.totalcost;
+
+
     const payment={
       sandbox:true,
       merchant_id :merchantID,
-      return_url : 'https://0e5b-2402-4000-2081-83ea-140-6b58-cde5-d785.ngrok.io/api/order/checkout',
-      cancel_url :'https://0e5b-2402-4000-2081-83ea-140-6b58-cde5-d785.ngrok.io/api/order/checkout' ,
-      notify_url :'https://0e5b-2402-4000-2081-83ea-140-6b58-cde5-d785.ngrok.io/api/order/checkout' ,
-      first_name :'akila' ,
-      last_name : 'akila' ,
-      email : "akila@gmail.com",
-      phone : '0778886081',
-      address : "no.21,matara",
+      return_url : `www.abcd.com`,
+      cancel_url :`www.abcd.com`,
+      notify_url :`${ngrokUrl}/order/checkout`,
+      first_name :firstname ,
+      last_name : lastname ,
+      email : customeremail,
+      phone : contactnumber,
+      address : address,
       city : 'matara',
       country : 'Sri Lanka',
-      order_id : 1,
+      order_id : medlistid,
       items : '2',
       currency : 'LKR',
-      amount : 500}
+      amount : totalcost}
     payhere.startPayment(payment);
 
   };
@@ -175,31 +190,44 @@ const [costdata, setCostdata] = useState([]);
 // const [contactno, setContactno] = useState("");
 
 
-const [addressline1, setAddressline1] = useAtom(addressAtom);
-const [contactnumber, setContactnumber] = useAtom(contactnumberAtom);
-// console.log(addressline1)
-const Checkoutorder = async () => {
+// const [addressline1, setAddressline1] = useAtom(addressAtom);
+// const [contactnumber, setContactnumber] = useAtom(contactnumberAtom);
+
+const Completeorder = async () => {
+  const token = window.localStorage.getItem('token');
+  
+  // console.log(costdata.t)
   // e.preventDefault();
   const address2 = window.sessionStorage.getItem("address");
   const customer = JSON.parse(localStorage.getItem('user'));
   const firstname = customer[0].firstname;
   const lastname = customer[0].lastname;
+  const medlistid=props.products[0].medlistid;
+  const totalprice=props.products[0].totalprice;
+  const address = addressline1 + address2;
+  const totalcost = costdata.totalcost;
+  const deliverycost = costdata.deliverycost;
+  const servicecost = costdata.servicecost;
 
-    const address = addressline1 + address2;
+
+    // console.log(typeof(contactnumber))
     const form = {
       contactnumber,
     };
     const isValid = await orderplaceSchema.isValid(form);
     if (isValid === true) {
-      axios.post(`${backendUrl}/order/checkout`, {
+      axios.post(`${backendUrl}/order/completeorder`, {
         medlistid,
         totalcost,
         deliverycost,
         servicecost,
         totalprice,
-        contactnumber,
         address,
-      }).then((response) => {
+        contactnumber,
+      },{headers : {
+        'Authorization': token ? `Bearer ${token}` : ''
+      },
+    }).then((response) => {
         console.log(response);
         // setSignedUp(true);
       }).catch((err) => {
@@ -226,15 +254,15 @@ const Checkoutorder = async () => {
       headers: {
         'Authorization': token ? `Bearer ${token}` : ''
       },
-  }).then((response)=>{
+    }).then((response)=>{
       // console.log(response);
       setCostdata(response.data);
       // costs();
 
-  }).catch((err)=>{
+    }).catch((err)=>{
       console.log(err);
-  });
-  // console.log(token)
+    });
+    // console.log(token)
   };
 
   const handleNext = () => {
@@ -242,7 +270,8 @@ const Checkoutorder = async () => {
       calculatetotal();
     }
     if(activeStep==2){
-      // console.log("hhhhhh")
+      console.log("hhhhhh")
+      Completeorder()
     }
     
     setActiveStep(activeStep + 1);
@@ -311,6 +340,7 @@ const Checkoutorder = async () => {
                     className={classes.button}
                   >
                     {activeStep === steps.length - 2 ? 'Place order' : 'Next'}
+
                   </Button>
                 </div>
               </React.Fragment>

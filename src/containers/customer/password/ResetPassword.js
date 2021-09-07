@@ -88,7 +88,6 @@ const ResetPassword=()=>{
         
         <Grid style={gridStyle}>
              
-            <Paper elevation={10} style={paperStyle}>
                 <Grid align='center' style={gridStyle}>
                      
                     <h1 style={headingStyle}>Reset Password</h1>
@@ -206,10 +205,7 @@ const ResetPassword=()=>{
 
                  
                 
-            </Paper>
-            <Box mt={5}>
-                <Copyright />
-            </Box>
+            
         </Grid>
     )
 }

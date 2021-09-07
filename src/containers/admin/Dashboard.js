@@ -13,7 +13,8 @@ import Update from "@material-ui/icons/Update";
 import Accessibility from "@material-ui/icons/Accessibility";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import AccessTime from "@material-ui/icons/AccessTime";
-import Link  from "@material-ui/core/Link";
+import AnnouncementIcon from '@material-ui/icons/Announcement';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
@@ -33,6 +34,7 @@ export default function Dashboard() {
   const classes = useStyles();
   const [data, setData] = useState();
   const [datapharm, setDatapharm] = useState();
+  const [datapharmreq, setDatapharmReq] = useState();
 
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
@@ -65,9 +67,24 @@ export default function Dashboard() {
       },[])
     
   }
+  const getdata2 =async() =>{
+    const token = window.localStorage.getItem('token');
+     await axios.get(`${backendUrl}/admin/viewpharmacyrequests`,{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results =  res.data.result.length; 
+        setDatapharmReq(results);
+      },[])
+    
+  }
   React.useEffect(()=>{
     getdata();
     getdata1();
+    getdata2();
+
   });
   return (
     <div>
@@ -76,7 +93,7 @@ export default function Dashboard() {
           <Card>
             <CardHeader color="primary" stats icon>
               <CardIcon color="primary">
-                <Store />
+                <MonetizationOnIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Revenue</p>
               <h3 className={classes.cardTitle}>$34,245</h3>
@@ -93,7 +110,7 @@ export default function Dashboard() {
         <Card>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
-                <Accessibility />
+                <Store />
               </CardIcon>
               <p className={classes.cardCategory}>Pharmacies</p>
               <h3 className={classes.cardTitle}>{datapharm}</h3>
@@ -109,7 +126,7 @@ export default function Dashboard() {
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="success" stats icon>
-              <CardIcon color="info">
+              <CardIcon color="success">
                 <Accessibility />
               </CardIcon>
               <p className={classes.cardCategory}>Customers</p>
@@ -126,11 +143,11 @@ export default function Dashboard() {
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="success" stats icon>
-              <CardIcon color="info">
-                <Accessibility />
+              <CardIcon color="rose">
+                <AnnouncementIcon />
               </CardIcon>
               <p className={classes.cardCategory}>New Pharmacy Requests</p>
-              {/* <h3 className={classes.cardTitle}>{newPharmacyRequests}</h3> */}
+              <h3 className={classes.cardTitle}>{datapharmreq}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>

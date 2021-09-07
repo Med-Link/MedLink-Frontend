@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-key */
-import React, { useEffect, useState } from "react";
+import React, {useState} from "react";
 import axios from 'axios';
 import { backendUrl } from "../../urlConfig.js";
+import TableScrollbar from 'react-table-scrollbar'
 // @material-ui/core
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Dialog from '@material-ui/core/Dialog';
@@ -10,14 +11,17 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-
+import FormControl from '@material-ui/core/FormControl';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import CreateIcon from '@material-ui/icons/Create';
 import CloseIcon from '@material-ui/icons/Close';
-// core components
+import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
+
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
-// import Table from "../../components/Dashboard/Table/Table.js";
 import Card from "../../components/Dashboard/Card/Card";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
@@ -25,10 +29,7 @@ import Button from "../../components/Dashboard/CustomButtons/Button";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
 import AddNewMedicine from "../../components/admin/AddNewMedicine"
-import { SentimentDissatisfied } from "@material-ui/icons";
-import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
-import ScrollArea from "react-scrollbar";
-import TableScrollbar from 'react-table-scrollbar'
+
 const useStyles = makeStyles(styles);
 
 const DialogTitle = withStyles(styles)((props) => {
@@ -62,7 +63,8 @@ export default function Medicine() {
 
   const [openEdit, setOpenEdit] = React.useState(false);
   const [medid, setMedid] = React.useState();
-
+  
+  const [searchTerm, setSearchTerm] = useState(""); //for search function
 
   const handleClickOpenEdit = (medid) => {
     setOpenEdit(true);
@@ -129,58 +131,77 @@ export default function Medicine() {
 
   return (
     <div>
-      {/* <GridContainer> */}
         <GridContainer>
-         
           <GridItem xs={12} sm={12} md={7}>
               <Card>
-                <CardHeader color="success">
+                <CardHeader color="primary">
                   <h4 className={classes.cardTitleWhite}>Current Medicine Types</h4>
                 </CardHeader>
                 <CardBody >
-                  {/* <Table style={{ maxHeight: 350 }}
-                    tableHeaderColor="primary"
-                    tableHead={["Med ID", "Med Name","Brand","Edit"]}
-                    tableData={data}
-                  /> */}
-                  
+                  <div>
+                    <FormControl fullWidth variant="outlined" size="small">
+                      <OutlinedInput
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <SearchIcon/>
+                          </InputAdornment>
+                        }
+                        onChange={(event)=>{
+                          setSearchTerm(event.target.value);
+                        }}
+                        placeholder="Search..."
+                        fontSize="small"
+                        size="sm"
+                      />
+                    </FormControl>
+                  </div>
                   <TableScrollbar rows={15} style={{}}>
-              <Table>
-                    <TableHead>
-                      <TableRow>
-                        {columns.map((column) => (
-                          <TableCell style={{color:'#213458',backgroundColor: "white"}}
-                            key={column.id}
-                            align={column.align}
-                          >
-                            {column.label}
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                    </TableHead>
-                    
-                    <TableBody >
-                    
-                      {data.map((row) => (
-                      <TableRow key={row.adminid}>
-                        <TableCell align="left">
-                          {row.medid}
-                        </TableCell>
-                        <TableCell align="left">
-                          {row.medname}
-                        </TableCell>
-                        <TableCell align="left">
-                          {row.brand}
-                        </TableCell>
-                        <TableCell align="left">
-                          <IconButton aria-label="delete" onClick={()=>handleClickOpenEdit(row.medid)}><CreateIcon /></IconButton>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                    </TableBody> 
-                    
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          {columns.map((column) => (
+                            <TableCell style={{color:'#213458',backgroundColor: "white"}}
+                              key={column.id}
+                              align={column.align}
+                            >
+                              {column.label}
+                            </TableCell>
+                          ))}
+                        </TableRow>
+                      </TableHead>
+                      
+                      <TableBody >
+                        {data.filter((row)=>{
+                          if (searchTerm == "") {
+                            return row
+                          } else if (row.medname.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          row.brand.toLowerCase().includes(searchTerm.toLowerCase())){
+                            return row
+                          }
+                        }).map((row) => {
+                          return(
+                          <TableRow>
+                            <TableCell align="left">
+                              {row.medid}
+                            </TableCell>
+                            <TableCell align="left">
+                              {row.medname}
+                            </TableCell>
+                            <TableCell align="left">
+                              {row.brand}
+                            </TableCell>
+                            <TableCell align="left">
+                              <IconButton aria-label="delete" onClick={()=>handleClickOpenEdit(row.medid)}><CreateIcon /></IconButton>
+                            </TableCell>
+                          </TableRow>
+                          );
+                        }
+                        )
+                        }
+                      </TableBody> 
+                      
 
-                  </Table>
+                    </Table>
                   </TableScrollbar>
                 </CardBody>
               </Card>
@@ -189,7 +210,6 @@ export default function Medicine() {
             <AddNewMedicine getdata={getdata}/>
           </GridItem>     
         </GridContainer>
-      {/* </GridContainer> */}
       
       <Dialog onClose={handleCloseEdit} aria-labelledby="customized-dialog-title" open={openEdit}>
         <DialogContent dividers>

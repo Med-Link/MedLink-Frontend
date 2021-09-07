@@ -1,39 +1,54 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
-import Avatar from '@material-ui/core/Avatar';
-//import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import { TextField } from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Button from '@material-ui/core/Button';
+import GridItem from "../../../components/Dashboard/Grid/GridItem.js";
+import GridContainer from "../../../components/Dashboard/Grid/GridContainer.js";
+import CustomInput from "../../../components/Dashboard/CustomInput/CustomInput.js";
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import { makeStyles } from "@material-ui/core/styles";
+
+
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+
+import Card from "../../../components/Dashboard/Card/Card.js";
+import CardHeader from "../../../components/Dashboard/Card/CardHeader.js";
+import CardAvatar from "../../../components/Dashboard/Card/CardAvatar.js";
+import CardBody from "../../../components/Dashboard/Card/CardBody.js";
+import CardFooter from "../../../components/Dashboard/Card/CardFooter.js";
+import Button from "../../../components/Dashboard/CustomButtons/Button.js";
+import avatar from "../../../assets/images/admin.png";
+
 import EditProfile from './EditProfile';
 import ResetPassword from '../password/ResetPassword'
 
-function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="/">
-          Medlink
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
+
+  const styles = {
+    cardCategoryWhite: {
+      color: "rgba(255,255,255,.62)",
+      margin: "0",
+      fontSize: "14px",
+      marginTop: "0",
+      marginBottom: "0",
+    },
+    cardTitleWhite: {
+      color: "#FFFFFF",
+      marginTop: "0px",
+      minHeight: "auto",
+      fontWeight: "300",
+      fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+      marginBottom: "3px",
+      textDecoration: "none",
+    },
+  };
+  const useStyles = makeStyles(styles);
+
 
 const Profile=()=>{
+    const classes = useStyles();
 
     const [openEdit, setOpenEdit] = React.useState(false);
     const [openReset, setOpenReset] = React.useState(false);
@@ -57,120 +72,85 @@ const Profile=()=>{
     const paperStyle={padding :20,height:'550px',width:'500px', margin:"20px auto"}
     const avatarStyle={backgroundColor: '#126e82'}
     const gridStyle={padding: 20}
-    const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0 0 0', width: '100%'}
+    const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0 0 0', width: '50%'}
     const headingStyle={color: '#126e82'}
 
+    const customer = JSON.parse(localStorage.getItem('user'));
+    const customeremail = customer[0].email;
+    const firstname = customer[0].firstname;
+    const lastname = customer[0].lastname;
     return(
-        
-        <Grid style={gridStyle}>
-             
-            <Paper elevation={10} style={paperStyle}>
-                <Grid align='center' style={gridStyle}>
-                    <Avatar style={avatarStyle}><AccountBoxIcon/></Avatar>
-                    <h1 style={headingStyle}>Kamal Perera</h1>
-                </Grid>
-
-                <Grid container spacing={2}> 
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            id="firstName"
-                            label="First Name"
-                            defaultValue="Kamal"
-                            InputProps={{
-                                readOnly: true,
+    <GridContainer>
+      <GridItem xs={12} sm={12} md={4}>
+          <Card profile>
+            <CardAvatar profile>
+                <img src={avatar} alt="..." />
+            </CardAvatar>
+            <CardBody profile>
+              <h1 className={classes.cardTitle}>Hello {firstname}</h1>
+              <p className={classes.description}>
+                Customize your profile here
+              </p>
+              
+            </CardBody>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={8}>
+            <Card>
+                <CardHeader color="success">
+                <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
+                <p className={classes.cardCategoryWhite}>Complete your profile</p>
+                </CardHeader>
+                <CardBody>
+                    <GridContainer>
+                        {/* {data.email} */}
+                        <GridItem xs={12} sm={12} md={6}>
+                        <CustomInput
+                            id="firstname"
+                            value= {firstname}
+                            formControlProps={{
+                            fullWidth: true,
                             }}
-                            variant="outlined"
                         />
-                    </Grid>
-
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            id="lastName"
-                            label="Last Name"
-                            defaultValue="Perera"
-                            InputProps={{
-                                readOnly: true,
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={6}>
+                        <CustomInput
+                            id="lastname"
+                            value = {lastname}
+                            formControlProps={{
+                            fullWidth: true,
                             }}
-                            variant="outlined"
                         />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <TextField
+                        </GridItem>
+                    </GridContainer>
+                    <GridContainer>
+                        <GridItem xs={12} sm={12} md={6}> 
+                        <CustomInput
                             id="email"
-                            label="Email"
-                            defaultValue="kamalperera@gmail.com"
-                            InputProps={{
-                                readOnly: true,
+                            value={customeremail}
+                            formControlProps={{
+                            fullWidth: true,
                             }}
-                            variant="outlined"
-                            fullWidth
-                        />
-                         
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <TextField
-                            id="address"
-                            label="Address"
-                            defaultValue="No: 2, Galle Road, Colombo"
-                            InputProps={{
-                                readOnly: true,
+                            inputProps={{
+                            disabled: true,
                             }}
-                            variant="outlined"
-                            fullWidth
                         />
-                         
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <TextField
-                            id="mobileNumber"
-                            label="Mobile Number"
-                            defaultValue="0711234567"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                            variant="outlined"
-                        />
-                    </Grid>
-                    <Grid container spacing={2}> 
-                    <Grid item xs={6}>
-                        <Button type='submit' fullWidth variant="contained" style={buttonStyle} onClick={handleClickOpen1}>Edit Profile</Button>
-                        <Dialog open={openEdit} onClose={handleClose1} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">
-                             
-                        </DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
-                                <EditProfile/>
-                            </DialogContentText>
-                        </DialogContent>
-                        </Dialog>
-                    </Grid> 
-                    <Grid item xs={6}>
-                        <Button type='submit' fullWidth variant="contained" style={buttonStyle} onClick={handleClickOpen2}>Reset Password</Button>
-                        <Dialog open={openReset} onClose={handleClose2} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">
-                             
-                        </DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={6} style={{marginTop:'30px'}}>
+                            <Button type='submit' variant="contained"  onClick={handleClickOpen2} color="info">Reset Password</Button>
+                            <Dialog open={openReset} onClose={handleClose2} aria-labelledby="form-dialog-title">
                                 <ResetPassword/>
-                            </DialogContentText>
-                        </DialogContent>
-                        </Dialog>
-                    </Grid> 
-                    </Grid>
-                </Grid> 
-
-                 
-                
-            </Paper>
-            <Box mt={5}>
-                <Copyright />
-            </Box>
-        </Grid>
+                            </Dialog>
+                        </GridItem>              
+                    </GridContainer>
+                </CardBody>
+                <CardFooter>
+                    <Button color="success">Update Profile</Button>
+                </CardFooter>
+            </Card>
+        </GridItem>
+        
+    </GridContainer>
     )
 }
 
