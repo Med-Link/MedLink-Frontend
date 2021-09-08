@@ -111,7 +111,7 @@ export default function ConfirmedOrders() {
                         onChange={(event)=>{
                           setSearchTerm(event.target.value);
                         }}
-                        placeholder="Search..."
+                        placeholder="Search...(OrderID, CustomerID, CustomerName)"
                         fontSize="small"
                         size="sm"
                       />
@@ -136,7 +136,7 @@ export default function ConfirmedOrders() {
                         {data.filter((row)=>{
                           if (searchTerm == "") {
                             return row
-                          } else if (row.orderid == searchTerm || row.customerid==searchTerm || row.firstname.toLowerCase().includes(searchTerm.toLowerCase()) || row.lastname.toLowerCase().includes(searchTerm.toLowerCase())){
+                          } else if (row.orderid.toString().toLowerCase().includes(searchTerm.toLowerCase()) || row.customerid.toString().toLowerCase().includes(searchTerm.toLowerCase()) || row.firstname.toLowerCase().includes(searchTerm.toLowerCase()) || row.lastname.toLowerCase().includes(searchTerm.toLowerCase())){
                             return row
                           }
                         }).map((row) => {

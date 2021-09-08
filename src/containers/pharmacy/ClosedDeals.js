@@ -153,7 +153,7 @@ export default function ClosedDeals() {
                         onChange={(event)=>{
                           setSearchTerm(event.target.value);
                         }}
-                        placeholder="Search..."
+                        placeholder="Search...(OrderID, CustomerID, CustomerName)"
                         fontSize="small"
                         size="sm"
                       />
@@ -178,8 +178,7 @@ export default function ClosedDeals() {
                         {data.filter((row)=>{
                           if (searchTerm == "") {
                             return row
-                          } else if (row.orderid == searchTerm || 
-                          row.customerid==searchTerm){
+                          } else if (row.orderid.toString().toLowerCase().includes(searchTerm.toLowerCase()) || row.customerid.toString().toLowerCase().includes(searchTerm.toLowerCase())){
                             return row
                           }
                         }).map((row) => {
