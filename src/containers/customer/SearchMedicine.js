@@ -14,10 +14,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import Search from "@material-ui/icons/Search";
 import StoreMallDirectoryIcon from '@material-ui/icons/StoreMallDirectory';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
@@ -30,7 +31,6 @@ import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import Button from "../../components/Dashboard/CustomButtons/Button";
 
 import Form from './form/Form';
-import MedList from "../../components/customer/MedList"
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
 
@@ -38,70 +38,88 @@ const useStyles = makeStyles(styles);
 
 const fontStyle = {fontSize: '20px',color: '#126e82'};
 const titleStyle = {fontSize: '30px',color: '#126e82'};
-// const dropDownStyle = {width: '200px'};
-// const btStyle = {width: '10px',backgroundColor: '#126e82',color: '#efe3e3'}
 const cardStyle = {backgroundColor: '#a6c6ca'}
 const searchButton = {backgroundColor: '#126e82'}
 const ftStyle = {color: '#126e82',textAlign: 'left',fontSize: '20px'}
 const cdStyle = {backgroundColor: 'rgb(226 243 242)'}
-const goButtonStyle={color: '#efe3e3',backgroundColor: '#126e82',opacity:'0.9', display:"flex", flex:"column", textAlign:"center"}
-// const shareButtonStyle={color: '#efe3e3',left: '-10%',backgroundColor: '#126e82', marginTop: '10px',width: '30%', padding: '2px', opacity:'0.9'}
-const sentenceStyle={fontSize: '16px', color: '#126e82', fontWeight: 'bold'}
-// const paperStyle={padding :20,height:'350px',width:'90%', margin:"20px auto"}
-//const locStyle={marginTop: theme.spacing(-4)}
 
 export default function Dashboard() {
   const classes = useStyles();
-
   const [searchTerm, setSearchTerm] = useState(""); //for search function
 
   const [openList, setOpenList] = React.useState(false);
-  const [openLocation, setOpenLocation] = React.useState(false);
+  const handleClickOpen1 = () => { setOpenList(true);};
+  const handleClose1 = () => { setOpenList(false);};
 
-  const handleClickOpen1 = () => {
-    setOpenList(true);
-  };
-
-  const handleClose1 = () => {
-    setOpenList(false);
-  };
-
-  const handleClickOpen2 = () => {
-    setOpenLocation(true);
-  };
-
-  const handleClose2 = () => {
-    setOpenLocation(false);
-  };
-
-  //get data from the backend
+  //get data from the backend pharmacy details
   const [data, setData] = useState([]);
-
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
+    axios.get(`${backendUrl}/order/allpharmacies`,{
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : ''
+      }
+    })
+    .then(res =>{
+      const results =  res.data.result;
+      // console.log(results);
+      setData(results);
+    })
+  }
+
+  //backend connection for medicine drop down list
+  const [meddata, setMedData] = useState([]);
+
+  const getMedData =() =>{
+    const token = window.localStorage.getItem('token');
     
-      axios.get(`${backendUrl}/order/allpharmacies`,{
+      axios.get(`${backendUrl}/order/listmedicine`,{
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         }
         })
       .then(res =>{
         const results =  res.data.result;
-        console.log(results);
-        setData(results);
+            // console.log(results);
+            setMedData(results);
       })
   }
+
   React.useEffect(()=>{
     getdata();
+    getMedData();
   },[]);
-  
+
+  // backend connection for pass the medicine id and filter the pharmacies
+  const [pharmacyData, setPharmacyData] = useState([]);
+  const onSelectMedicine = (event,value)=> {
+      const token = window.localStorage.getItem('token');
+      axios.get(`${backendUrl}/order/pharmacybymedicine?medname=${value.medname}`,{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results =  res.data.result;
+            // console.log(results);
+            setPharmacyData(results);
+      })
+  } 
+
   const columns = [
     { id: 'name', label: 'Name'},
     { id: 'contactnumber', label: 'ContactNo'},
     { id: 'city', label: 'City'},
     { id: 'Action', label: 'Order'},];
-
   const rows = data; 
+
+  const options = meddata.map((option) => {
+    const firstLetter = option.medname[0].toUpperCase();
+    return {
+      firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
+      ...option,
+    };
+  });
 
   return (
     <div>
@@ -116,9 +134,19 @@ export default function Dashboard() {
               <h3 className={classes.cardTitle} style={titleStyle}>Medicine</h3>
             </CardHeader>
             <CardFooter stats>
-            <div>
-                <MedList/>
-                </div>
+              <div>
+                <Autocomplete
+                  id="grouped-demo"
+                  options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
+                  groupBy={(option) => option.firstLetter}
+                  getOptionLabel={(option) => option.medname+" - "+option.brand}
+                  style={{ width: 300 }}
+                  renderInput={(params) => <TextField {...params} label="Medicine Names with their brands" variant="outlined" />}
+                  size="small"
+                  // getOptionSelected={(value)=> onSelectMedicine(value)}
+                  onChange={(event, value) => onSelectMedicine(event, value)}
+                />
+              </div>
               <Button style={searchButton} color="white" aria-label="edit" justIcon round>
                 <Search style={searchButton}/>
               </Button>
@@ -180,7 +208,7 @@ export default function Dashboard() {
                 </TableHead>
               
                 <TableBody>
-                  {data.filter((row)=>{
+                  { (pharmacyData<=0 ? rows : pharmacyData).filter((row)=>{
                     if (searchTerm == "") {
                       return row
                     } else if (row.name.toLowerCase().includes(searchTerm.toLowerCase())){

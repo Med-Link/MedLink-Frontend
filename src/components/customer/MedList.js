@@ -31,6 +31,7 @@ export default function MedList() {
   React.useEffect(()=>{
     getdata();
   },[]);
+
   const options = data.map((option) => {
     const firstLetter = option.medname[0].toUpperCase();
     return {
@@ -38,14 +39,15 @@ export default function MedList() {
       ...option,
     };
   });
+
   // backend connection for pass the medicine id and filter the pharmacies
 
   const [pharmacyData, setPharmacyData] = useState([]);
-  const onSelectMedicine = (event)=> {
-      console.log(event)
+  const onSelectMedicine = (event,value)=> {
+      console.log((value.medname))
       const token = window.localStorage.getItem('token');
     
-      axios.get(`${backendUrl}/order/pharmacybymedicine?medid=${event.medid}`,{
+      axios.get(`${backendUrl}/order/pharmacybymedicine?medname=${value.medname}`,{
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         }
@@ -55,10 +57,7 @@ export default function MedList() {
             console.log(results);
             setPharmacyData(results);
       })
-  }
-
-
-  
+  }  
   
   return (
     <Autocomplete
@@ -69,7 +68,8 @@ export default function MedList() {
       style={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Medicine Names with their brands" variant="outlined" />}
       size="small"
-      getOptionSelected={(value)=> onSelectMedicine(value)}
+      // getOptionSelected={(value)=> onSelectMedicine(value)}
+      onChange={(event, value) => onSelectMedicine(event, value)}
     />
   );
 }
