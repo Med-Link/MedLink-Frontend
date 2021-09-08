@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import axios from 'axios';
 import { backendUrl } from "../../urlConfig.js";
 import TableScrollbar from 'react-table-scrollbar'
+import TextField from '@material-ui/core/TextField';
 
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
@@ -77,6 +78,28 @@ export default function Dashboard() {
 
   //get data from the backend
   const [data, setData] = useState([]);
+  const [distance, setDistance] = useState('');
+
+
+  const pharmacylocation =() =>{
+    const token = window.localStorage.getItem('token');
+    const latitude = window.sessionStorage.getItem("dashlongitude");
+    const longitude = window.sessionStorage.getItem("dashlongitude");
+
+    
+      axios.post(`${backendUrl}/order/pharmacybylocation`,{latitude:latitude,longitude:longitude,distance:distance},
+      {
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results =  res.data.result;
+        console.log(results);
+        setData(results);
+        handleClose1();
+      })
+  }
 
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
@@ -89,7 +112,7 @@ export default function Dashboard() {
       .then(res =>{
         const results =  res.data.result;
         console.log(results);
-        setData(results);
+        // setData(results);
       })
   }
   React.useEffect(()=>{
@@ -138,8 +161,19 @@ export default function Dashboard() {
                         
                               zoom={7} />
                             </Grid>
+                            <Grid item xs={12} sm={12} md={12}>
+                              <TextField 
+                                  variant="outlined"
+                                  fullWidth
+                                  id="city"
+                                  label="Enter a Radius to search (km)"
+                                  onChange={(e) => setDistance(e.target.value)}
+                                  name="Radius"
+                                  size="small"
+                                  />
+                            </Grid>	
                             <Grid container justify="center" style={{marginTop:"10px"}}>
-                            <Button color="primary" justifyContent="center">OK</Button>
+                            <Button color="primary" onClick={pharmacylocation} justifyContent="center">OK</Button>
 
                             </Grid>
   
