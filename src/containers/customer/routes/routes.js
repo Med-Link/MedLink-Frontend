@@ -47,7 +47,6 @@ const dashboardRoutes = [
     icon: Person,
     component: Profile,
     layout: "/customer",
-    display:false,
   },
    
    
