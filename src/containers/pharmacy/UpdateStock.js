@@ -10,10 +10,17 @@ import FormControl from '@material-ui/core/FormControl';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Dialog from '@material-ui/core/Dialog';
+import { DialogContent } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import CustomTabs from "../../components/Dashboard/CustomTabs/CustomTabs.js";
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineOutlinedIcon from '@material-ui/icons/RemoveCircleOutlineOutlined';
 import SearchIcon from '@material-ui/icons/Search';
@@ -26,32 +33,15 @@ import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
 import Card from "../../components/Dashboard/Card/Card.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import Button from "../../components/Dashboard//CustomButtons/Button";
+import CustomInput from "../../components/Dashboard/CustomInput/CustomInput.js";
 
 import Form from './forms/AddCsv';
 import AddNewMed from './forms/AddNewMed';
-import Search from '../../components/pharmacy/Search';
 import axios from "axios";
 
 // const useStyles = makeStyles(styles);
 
-const currencies = [
-  {
-    value: 'B123',
-    label: 'B123',
-  },
-  {
-    value: 'B124',
-    label: 'B124',
-  },
-  {
-    value: 'B125',
-    label: 'B125',
-  },
-  {
-    value: 'B126',
-    label: 'B126',
-  },
-];
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -75,11 +65,7 @@ export default function OrderProcess() {
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = useState(""); //for search function
 
-  const [currency, setCurrency] = React.useState('B124');
 
-  const handleChange = (event) => {
-    setCurrency(event.target.value);
-  };
 
   const [openAccept, setOpenAccept] = React.useState(false);
 
@@ -138,6 +124,46 @@ export default function OrderProcess() {
 
   // ------------------------------------
 
+  //begining of  of update medicine details
+  const [openEdit, setOpenEdit] = React.useState(false);
+  const [batchId, setBatchId] = React.useState();
+
+  const handleClickOpenEdit = (batchid) => {
+    setOpenEdit(true);
+    setBatchId(batchid);
+  };
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
+  };
+
+  const [newQuantity, setNewQuantity ] = React.useState();
+  const [newPrice, setNewPrice] = React.useState();
+  const [newMfDate, setNewMfDate] = React.useState();
+  const [newExDate, setNewExDate] = React.useState();
+  
+  const updaterow =(e)=>{
+    const token = window.localStorage.getItem('token');
+      // console.log("hhhhhhhh")
+    axios.post(`${backendUrl}/pharmacy/updatestock`, {
+      batchid:batchId,
+      quantity:newQuantity,
+      price:newPrice,
+      expiredate:newExDate,
+      manufacdate:newMfDate,
+      }, {headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        },
+    }).then((response)=>{
+        getdata();
+        handleCloseEdit();
+    }).catch((err)=>{
+        console.log(err);
+        handleCloseEdit();
+    });
+  }
+  //end of update medicine details
+
+
   return (
     <div>
       <GridContainer>
@@ -148,7 +174,6 @@ export default function OrderProcess() {
             tabs={[
               {
                 tabName: "View Stock",
-                // tabIcon: AddShoppingCartIcon,
                 tabContent: (
                   <Card>
                     <CardBody>
@@ -163,7 +188,7 @@ export default function OrderProcess() {
                         onChange={(event)=>{
                           setSearchTerm(event.target.value);
                         }}
-                        placeholder="Search...(MedId, MedName, Brand,BatchNo)"
+                        placeholder="Search...(MedId, MedName, Brand, BatchNo)"
                         fontSize="small"
                         size="sm"
                       />
@@ -220,10 +245,10 @@ export default function OrderProcess() {
                               {row.expiredate}
                             </TableCell>
                             <TableCell align="left">
-                              <IconButton aria-label="update" onClick={()=>handleClickOpenEdit(row.medid)} color="inherit"><CreateIcon /></IconButton>
+                              <IconButton aria-label="update" onClick={()=>handleClickOpenEdit(row.batchid)} color="inherit"><CreateIcon /></IconButton>
                             </TableCell>
                             <TableCell align="left">
-                              <IconButton aria-label="delete" onClick={()=>handleClickOpenEdit(row.medid)} color="secondary"><DeleteIcon/></IconButton>
+                              <IconButton aria-label="delete" color="secondary"><DeleteIcon/></IconButton>
                             </TableCell>
                           </TableRow>
                           );
@@ -325,7 +350,78 @@ export default function OrderProcess() {
 
       {/* Update Stock -csv */}
 
+      <Dialog onClose={handleCloseEdit} aria-labelledby="customized-dialog-title" open={openEdit}>
+        <DialogContent dividers>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={6}>
+              <TextField
+                autoFocus
+                margin="dense"
+                variant="standard"
+                id="qty"
+                onChange={(e) => setNewQuantity(e.target.value)}
+                label="Quantity"
+                type="text"
+                fullWidth
+                size="small"
 
+              />
+            </GridItem>
+            <GridItem xs={12} sm={12} md={6}>
+              <TextField
+                autoFocus
+                margin="dense"
+                variant="standard"
+                id="price"
+                onChange={(e) => setNewPrice(e.target.value)}
+                label="Unit Price"
+                type="text"
+                fullWidth
+                size="small"
+
+              />
+            </GridItem>
+            <GridItem xs={12} sm={12} md={6}>
+              <TextField
+                autoFocus
+                type="date"
+                margin="dense"
+                variant="standard"
+                id="mnfdate"
+                onChange={(e) => setNewMfDate(e.target.value)}
+                label="Manufactured Date"
+                fullWidth
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                size="small"
+
+              />
+            </GridItem>
+            <GridItem xs={12} sm={12} md={6}>
+            <TextField
+                autoFocus
+                type="date"
+                margin="dense"
+                variant="standard"
+                id="expdate"
+                onChange={(e) => setNewExDate(e.target.value)}
+                label="Expire Date"
+                fullWidth
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                size="small"
+              />
+            </GridItem>
+          </GridContainer>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={()=>updaterow()} color="primary">
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
 
 
 
