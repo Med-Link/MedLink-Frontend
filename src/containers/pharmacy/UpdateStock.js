@@ -15,12 +15,7 @@ import { TextField } from "@material-ui/core";
 import CustomTabs from "../../components/Dashboard/CustomTabs/CustomTabs.js";
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
+
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineOutlinedIcon from '@material-ui/icons/RemoveCircleOutlineOutlined';
 import SearchIcon from '@material-ui/icons/Search';
@@ -422,13 +417,6 @@ export default function OrderProcess() {
           </Button>
         </DialogActions>
       </Dialog>
-
-
-
-
-
-
-
     </div>
   );
 }
