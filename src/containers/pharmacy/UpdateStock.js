@@ -4,18 +4,29 @@ import { backendUrl } from "../../urlConfig.js";
 import { makeStyles } from "@material-ui/core/styles";
 // import { createMuiTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import GridItem from "../../components/Dashboard/Grid/GridItem.js";
-import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
-import Table from "../../components/Dashboard/Table/Table.js";
-import Card from "../../components/Dashboard/Card/Card.js";
-import CardBody from "../../components/Dashboard/Card/CardBody.js";
-import Button from "../../components/Dashboard//CustomButtons/Button";
+import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
+import TableScrollbar from 'react-table-scrollbar'
+import FormControl from '@material-ui/core/FormControl';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Dialog from '@material-ui/core/Dialog';
 import CustomTabs from "../../components/Dashboard/CustomTabs/CustomTabs.js";
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
+
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineOutlinedIcon from '@material-ui/icons/RemoveCircleOutlineOutlined';
+import SearchIcon from '@material-ui/icons/Search';
+import IconButton from '@material-ui/core/IconButton';
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+import GridItem from "../../components/Dashboard/Grid/GridItem.js";
+import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
+import Card from "../../components/Dashboard/Card/Card.js";
+import CardBody from "../../components/Dashboard/Card/CardBody.js";
+import Button from "../../components/Dashboard//CustomButtons/Button";
+
 import Form from './forms/AddCsv';
 import AddNewMed from './forms/AddNewMed';
 import Search from '../../components/pharmacy/Search';
@@ -62,6 +73,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function OrderProcess() {
   const classes = useStyles();
+  const [searchTerm, setSearchTerm] = useState(""); //for search function
 
   const [currency, setCurrency] = React.useState('B124');
 
@@ -102,21 +114,27 @@ export default function OrderProcess() {
     }).then(res => {
       const results = res.data.rows;
       console.log(res);
-      let array = [];
-      results.forEach(element => {
-        let arr = [];
-        arr.push(element.medid, element.medname, element.brand, element.batchid, element.quantity, element.price, element.expiredate, element.manufacdate,
-          <Button variant="contained" color="primary"><AddCircleOutlineIcon />Update</Button>, <Button variant="contained" color="danger"><RemoveCircleOutlineOutlinedIcon /> Remove</Button>);
-        array.push(arr);
-      })
 
-      setData(array);
+      setData(results);
     })
 
   }
   React.useEffect(() => {
     getdata();
   }, []);
+
+  const columns = [
+    { id: 'medid', label: 'Medicine ID'},
+    { id: 'medname', label: 'Med Name'},
+    { id: 'brand', label: 'Brand Name'},
+    { id: 'batchno', label: 'Batch No'},
+    { id: 'qty', label: 'Current Quantity'},
+    { id: 'unitprice', label: 'Unit Price(Rs.)'},
+    { id: 'mnfdate', label: 'Manufacture Date'},
+    { id: 'expdate', label: 'Expire Date'},
+    { id: 'update', label: 'Update'},
+    { id: 'delete', label: 'Delete'},];
+  const rows = data; 
 
   // ------------------------------------
 
@@ -134,47 +152,89 @@ export default function OrderProcess() {
                 tabContent: (
                   <Card>
                     <CardBody>
-                      <Search />
-                      <Table
-                        tableHeaderColor="secondary"
-                        tableHead={["Medicine ID",
-                          "Medicine Name", "Brand Name",
-                          "Batch No", "Current Qty", "Unit Price(Rs.)", "Expire Date", "Manufacture Date", "Update", "Delete"]}
-                        tableData={data}
-                      // ["M002",
-                      //   "Panadol",
-                      //   <InputBase
-                      //     className={classes.margin}
-                      //     defaultValue="Ventalin"
-                      //     inputProps={{ 'aria-label': 'med' }}
-                      //     style={{width:100}}
-                      //   />,
-                      //   <TextField
-                      //     select
-                      //     value={currency}
-                      //     onChange={handleChange}>
-                      //     {currencies.map((option) => (
-                      //       <MenuItem key={option.value} value={option.value}>
-                      //         {option.label}
-                      //       </MenuItem>
-                      //     ))}
-                      //   </TextField>,
-                      //   <InputBase
-                      //     id="outlined-number"
-                      //     defaultValue="5"
-                      //     type="number"
-                      //     InputLabelProps={{
-                      //       shrink: true,
-                      //     }}
-                      //     variant="outlined"
-                      //     style={{width:80}}
-                      //   />,
-                      //   2,4,
-                      //   6,
-                      //   <Button variant="contained" color="primary"><AddCircleOutlineIcon />Update</Button>,
-                      //   <Button variant="contained" color="danger"><RemoveCircleOutlineOutlinedIcon /> Remove</Button>],
-
+                      <div>
+                    <FormControl fullWidth variant="outlined" size="small">
+                      <OutlinedInput
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <SearchIcon/>
+                          </InputAdornment>
+                        }
+                        onChange={(event)=>{
+                          setSearchTerm(event.target.value);
+                        }}
+                        placeholder="Search...(MedId, MedName, Brand,BatchNo)"
+                        fontSize="small"
+                        size="sm"
                       />
+                    </FormControl>
+                  </div>
+                  <TableScrollbar rows={15} style={{}}>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          {columns.map((column) => (
+                            <TableCell style={{color:'#213458',backgroundColor: "white"}}
+                              key={column.id}
+                              align={column.align}
+                            >
+                              {column.label}
+                            </TableCell>
+                          ))}
+                        </TableRow>
+                      </TableHead>
+                      
+                      <TableBody >
+                        {data.filter((row)=>{
+                          if (searchTerm == "") {
+                            return row
+                          } else if (row.medname.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          row.brand.toLowerCase().includes(searchTerm.toLowerCase()) || row.medid.toString().toLowerCase().includes(searchTerm.toLowerCase()) || row.batchid.toString().toLowerCase().includes(searchTerm.toLowerCase())){
+                            return row
+                          }
+                        }).map((row) => {
+                          return(
+                          <TableRow>
+                            <TableCell align="left">
+                              {row.medid}
+                            </TableCell>
+                            <TableCell align="left">
+                              {row.medname}
+                            </TableCell>
+                            <TableCell align="left">
+                              {row.brand}
+                            </TableCell>
+                            <TableCell align="left">
+                              {row.batchid}
+                            </TableCell>
+                            <TableCell align="left">
+                              {row.quantity}
+                            </TableCell>
+                            <TableCell align="left">
+                              {row.price}
+                            </TableCell>
+                            <TableCell align="left">
+                              {row.manufacdate}
+                            </TableCell>
+                            <TableCell align="left">
+                              {row.expiredate}
+                            </TableCell>
+                            <TableCell align="left">
+                              <IconButton aria-label="update" onClick={()=>handleClickOpenEdit(row.medid)} color="inherit"><CreateIcon /></IconButton>
+                            </TableCell>
+                            <TableCell align="left">
+                              <IconButton aria-label="delete" onClick={()=>handleClickOpenEdit(row.medid)} color="secondary"><DeleteIcon/></IconButton>
+                            </TableCell>
+                          </TableRow>
+                          );
+                        }
+                        )
+                        }
+                      </TableBody> 
+                      
+
+                    </Table>
+                  </TableScrollbar>
                     </CardBody>
                   </Card>
                 ),
