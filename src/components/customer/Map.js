@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component , useState} from 'react';
 import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 import Geocode from "react-geocode";
 import Autocomplete from 'react-google-autocomplete';
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 class Map extends React.Component{
+	// window.sessionStorage.setItem("longitude", newLng);
 
     static get propTypes() { 
 		return { 
@@ -165,6 +166,7 @@ class Map extends React.Component{
 	 * @param event
 	 */
 	onMarkerDragEnd = ( event ) => {
+
 		let newLat = event.latLng.lat(),
 		    newLng = event.latLng.lng();
 
@@ -189,8 +191,10 @@ class Map extends React.Component{
 						lng: newLng
 					},
 				} )
-				// window.sessionStorage.setItem("latitude", newLat);
-				// window.sessionStorage.setItem("longitude", newLng);
+				window.sessionStorage.setItem("dashlatitude", newLat);
+				window.sessionStorage.setItem("dashlongitude", newLng);
+				// window.sessionStorage.setItem("distance", distance);
+
 			},
 			error => {
 				console.error(error);
@@ -263,6 +267,7 @@ class Map extends React.Component{
 			)
 		);
 		let map;
+		
 		if( this.props.center.lat !== undefined ) {
 			map = <div>
 					<Grid container spacing={1}>
@@ -287,6 +292,7 @@ class Map extends React.Component{
 									fullWidth
 									id="city"
 									label="Enter a Radius to search (km)"
+									// onChange={(e) => setDistance(e.target.value)}
 									name="Radius"
 									size="small"
 									/>
