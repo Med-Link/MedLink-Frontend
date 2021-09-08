@@ -10,7 +10,7 @@ import { backendUrl } from "../../urlConfig.js";
 
 
 export default function MedList() {
-
+  
     //backend connection for medicine drop down list
   const [data, setData] = useState([]);
 
@@ -31,7 +31,6 @@ export default function MedList() {
   React.useEffect(()=>{
     getdata();
   },[]);
-
   const options = data.map((option) => {
     const firstLetter = option.medname[0].toUpperCase();
     return {
@@ -39,6 +38,27 @@ export default function MedList() {
       ...option,
     };
   });
+  // backend connection for pass the medicine id and filter the pharmacies
+
+  const [pharmacyData, setPharmacyData] = useState([]);
+  const onSelectMedicine = (event)=> {
+      console.log(event)
+      const token = window.localStorage.getItem('token');
+    
+      axios.get(`${backendUrl}/order/pharmacybymedicine?medid=${event.medid}`,{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results =  res.data.result;
+            console.log(results);
+            setPharmacyData(results);
+      })
+  }
+
+
+  
   
   return (
     <Autocomplete
@@ -49,27 +69,9 @@ export default function MedList() {
       style={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Medicine Names with their brands" variant="outlined" />}
       size="small"
-    //   getOptionSelected={(value)=> onSelectMedicine(value)}
+      getOptionSelected={(value)=> onSelectMedicine(value)}
     />
   );
 }
 
   
-// backend connection for pass the medicine id and filter the pharmacies
-
-//   const [pharmacyData, setPharmacyData] = useState([]);
-//   const onSelectMedicine = (event)=> {
-//       console.log(event)
-//       const token = window.localStorage.getItem('token');
-    
-//       await axios.get(`${backendUrl}/order/pharmacybymedicine?medid=${option.medid}`,{
-//         headers: {
-//           'Authorization': token ? `Bearer ${token}` : ''
-//         }
-//         })
-//       .then(res =>{
-//         const results =  res.data.result;
-//             console.log(results);
-//             setPharmacyData(results);
-//       })
-//   }
