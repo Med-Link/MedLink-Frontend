@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { backendUrl } from "../../urlConfig.js";
 import { makeStyles } from "@material-ui/core/styles";
 // import { createMuiTheme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
 import TableScrollbar from 'react-table-scrollbar'
 import FormControl from '@material-ui/core/FormControl';
@@ -12,12 +11,9 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Dialog from '@material-ui/core/Dialog';
 import { DialogContent } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
-import CustomTabs from "../../components/Dashboard/CustomTabs/CustomTabs.js";
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import RemoveCircleOutlineOutlinedIcon from '@material-ui/icons/RemoveCircleOutlineOutlined';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import CreateIcon from '@material-ui/icons/Create';
@@ -26,36 +22,18 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
 import Card from "../../components/Dashboard/Card/Card.js";
+import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
-import Button from "../../components/Dashboard//CustomButtons/Button";
-import CustomInput from "../../components/Dashboard/CustomInput/CustomInput.js";
+import Button from "../../components/Dashboard/CustomButtons/Button";
 
 import Form from './forms/AddCsv';
 import AddNewMed from './forms/AddNewMed';
 import axios from "axios";
+import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
-// const useStyles = makeStyles(styles);
+const useStyles = makeStyles(styles);
 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  margin: {
-    margin: theme.spacing(1),
-  },
-  withoutLabel: {
-    marginTop: theme.spacing(3),
-  },
-  sub: {
-    width: '20',
-  },
-  textField: {
-    width: '25ch',
-  },
-
-}));
 export default function OrderProcess() {
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = useState(""); //for search function
@@ -177,188 +155,133 @@ export default function OrderProcess() {
   return (
     <div>
       <GridContainer>
+      <GridItem xs={12} sm={6} md={6}>
+          <AddNewMed />
+        </GridItem>
+        <GridItem xs={12} sm={6} md={6}>
+          <Card >
+            <CardHeader color="success">
+              <h4 className={classes.cardTitleWhite}>Add New Batch</h4>
+            </CardHeader>
+            <CardBody>
+              <Form />
+              <Button variant="outlined" color="success" onClick={handleClickOpenAccept}>
+                Save
+              </Button>
+            </CardBody>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>Update Current Stock</h4>
+            </CardHeader>
+            <CardBody>
+              <div>
+                <FormControl fullWidth variant="outlined" size="small">
+                  <OutlinedInput
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <SearchIcon/>
+                      </InputAdornment>
+                    }
+                    onChange={(event)=>{
+                      setSearchTerm(event.target.value);
+                    }}
+                    placeholder="Search...(MedId, MedName, Brand, BatchNo)"
+                    fontSize="small"
+                    size="sm"
+                  />
+                </FormControl>
+              </div>
+              <TableScrollbar rows={15} style={{}}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      {columns.map((column) => (
+                        <TableCell style={{color:'#213458',backgroundColor: "white"}}
+                          key={column.id}
+                          align={column.align}
+                        >
+                          {column.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  
+                  <TableBody >
+                    {data.filter((row)=>{
+                      if (searchTerm == "") {
+                        return row
+                      } else if (row.medname.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                      row.brand.toLowerCase().includes(searchTerm.toLowerCase()) || row.medid.toString().toLowerCase().includes(searchTerm.toLowerCase()) || row.batchid.toString().toLowerCase().includes(searchTerm.toLowerCase())){
+                        return row
+                      }
+                    }).map((row) => {
+                      return(
+                      <TableRow>
+                        <TableCell align="left">
+                          {row.medid}
+                        </TableCell>
+                        <TableCell align="left">
+                          {row.medname}
+                        </TableCell>
+                        <TableCell align="left">
+                          {row.brand}
+                        </TableCell>
+                        <TableCell align="left">
+                          {row.batchid}
+                        </TableCell>
+                        <TableCell align="left">
+                          {row.quantity}
+                        </TableCell>
+                        <TableCell align="left">
+                          {row.price}
+                        </TableCell>
+                        <TableCell align="left">
+                          {row.manufacdate}
+                        </TableCell>
+                        <TableCell align="left">
+                          {row.expiredate}
+                        </TableCell>
+                        <TableCell align="left">
+                          <IconButton aria-label="update" onClick={()=>handleClickOpenEdit(row.batchid)} color="inherit"><CreateIcon /></IconButton>
+                        </TableCell>
+                        <TableCell align="left">
+                          <IconButton aria-label="delete" color="secondary" onClick={()=>deleterow(row.batchid)}><DeleteIcon/></IconButton>
+                        </TableCell>
+                      </TableRow>
+                      );
+                    }
+                    )
+                    }
+                  </TableBody> 
+                  
 
-        <GridItem xs={12} >
-          <CustomTabs
-            headerColor="primary"
-            tabs={[
-              {
-                tabName: "View Stock",
-                tabContent: (
-                  <Card>
-                    <CardBody>
-                      <div>
-                    <FormControl fullWidth variant="outlined" size="small">
-                      <OutlinedInput
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <SearchIcon/>
-                          </InputAdornment>
-                        }
-                        onChange={(event)=>{
-                          setSearchTerm(event.target.value);
-                        }}
-                        placeholder="Search...(MedId, MedName, Brand, BatchNo)"
-                        fontSize="small"
-                        size="sm"
-                      />
-                    </FormControl>
-                  </div>
-                  <TableScrollbar rows={15} style={{}}>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          {columns.map((column) => (
-                            <TableCell style={{color:'#213458',backgroundColor: "white"}}
-                              key={column.id}
-                              align={column.align}
-                            >
-                              {column.label}
-                            </TableCell>
-                          ))}
-                        </TableRow>
-                      </TableHead>
-                      
-                      <TableBody >
-                        {data.filter((row)=>{
-                          if (searchTerm == "") {
-                            return row
-                          } else if (row.medname.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          row.brand.toLowerCase().includes(searchTerm.toLowerCase()) || row.medid.toString().toLowerCase().includes(searchTerm.toLowerCase()) || row.batchid.toString().toLowerCase().includes(searchTerm.toLowerCase())){
-                            return row
-                          }
-                        }).map((row) => {
-                          return(
-                          <TableRow>
-                            <TableCell align="left">
-                              {row.medid}
-                            </TableCell>
-                            <TableCell align="left">
-                              {row.medname}
-                            </TableCell>
-                            <TableCell align="left">
-                              {row.brand}
-                            </TableCell>
-                            <TableCell align="left">
-                              {row.batchid}
-                            </TableCell>
-                            <TableCell align="left">
-                              {row.quantity}
-                            </TableCell>
-                            <TableCell align="left">
-                              {row.price}
-                            </TableCell>
-                            <TableCell align="left">
-                              {row.manufacdate}
-                            </TableCell>
-                            <TableCell align="left">
-                              {row.expiredate}
-                            </TableCell>
-                            <TableCell align="left">
-                              <IconButton aria-label="update" onClick={()=>handleClickOpenEdit(row.batchid)} color="inherit"><CreateIcon /></IconButton>
-                            </TableCell>
-                            <TableCell align="left">
-                              <IconButton aria-label="delete" color="secondary" onClick={()=>deleterow(row.batchid)}><DeleteIcon/></IconButton>
-                            </TableCell>
-                          </TableRow>
-                          );
-                        }
-                        )
-                        }
-                      </TableBody> 
-                      
-
-                    </Table>
-                  </TableScrollbar>
-                    </CardBody>
-                  </Card>
-                ),
-              },
-
-              {
-                tabName: "Add New Medicine",
-
-                tabContent: (
-                  <Card >
-                    <CardBody>
-                      <Grid xs={12} md={6} sm={6}>
-                        <Card className={classes.sub}>
-                          <CardBody>
-                            <GridContainer xs={12} md={12} sm={6}>
-                              <AddNewMed />
-                            </GridContainer>
-                          </CardBody>
-                        </Card>
-                      </Grid>
-                    </CardBody>
-                    {/* -------------------- */}
-
-                    <CardBody>
-                      <Grid xs={12} md={6} sm={6}>
-                        <Card className={classes.sub}>
-                          <CardBody>
-
-                            <GridContainer xs={12}>
-                              <GridItem xs={12} md={6} sm={6}>
-
-                                <CardBody color="primary" stats icon>
-                                  {/* <div> */}
-                                  <GridContainer>
-                                    <GridItem>
-
-                                      <Form />
-
-                                    </GridItem>
-                                    <GridItem xs={12}>
-                                      <Button variant="outlined" color="primary" onClick={handleClickOpenAccept}>
-                                        Save
-                                      </Button>
-                                      <Dialog
-                                        open={openAccept}
-                                        onClose={handleCloseAccept}
-                                        aria-labelledby="alert-dialog-title"
-                                        aria-describedby="alert-dialog-description"
-                                      >
-                                        <DialogTitle id="alert-dialog-title">{"Do you want to Save this to the stock"}</DialogTitle>
-                                        <DialogActions>
-                                          <Button onClick={handleCloseAccept} color="danger">
-                                            Cancle
-                                          </Button>
-                                          <Button onClick={handleCloseAccept} color="primary" autoFocus>
-                                            Yes
-                                          </Button>
-                                        </DialogActions>
-                                      </Dialog>
-                                    </GridItem>
-                                  </GridContainer>
-
-
-
-
-
-                                </CardBody>
-
-                              </GridItem>
-                            </GridContainer>
-                          </CardBody>
-                        </Card>
-                      </Grid>
-                    </CardBody>
-                    {/* ----------------- */}
-
-                  </Card>
-
-                ),
-              },
-
-
-
-            ]}
-          />
+                </Table>
+              </TableScrollbar>
+            </CardBody>
+          </Card>
         </GridItem>
       </GridContainer>
 
-      {/* Update Stock -csv */}
+
+      {/*upload csv dialogbox*/}
+
+      <Dialog open={openAccept} onClose={handleCloseAccept} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description" >
+        <DialogTitle id="alert-dialog-title">{"Do you want to Save this to the stock"}</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleCloseAccept} color="danger">
+            Cancle
+          </Button>
+          <Button onClick={handleCloseAccept} color="primary" autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+
+      {/*update medicine dialogbox*/}
 
       <Dialog onClose={handleCloseEdit} aria-labelledby="customized-dialog-title" open={openEdit}>
         <DialogContent dividers>
