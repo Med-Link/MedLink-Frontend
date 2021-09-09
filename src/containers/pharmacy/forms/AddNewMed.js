@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import axios from 'axios';
+import PropTypes from "prop-types";
 import { backendUrl } from "../../../urlConfig.js";
 
 import { TextField } from '@material-ui/core';
@@ -17,8 +18,9 @@ import styles from "../../../assets/jss/material-dashboard-react/views/dashboard
 const useStyles = makeStyles(styles);
 
 
-const AddNewMed=()=>{  
+const AddNewMed=(props)=>{  
     const classes = useStyles();
+    const { getdata } = props;
 
     //backend connection for medicine drop down list
     const [meddata, setMedData] = useState([]);
@@ -48,6 +50,34 @@ const AddNewMed=()=>{
         };
     });
 
+    // backend connection to add med details to the database
+      const [medid, setMedId] = useState("");
+      const [quantity, setQuantity] = useState("");
+      const [price, setPrice] = useState("");
+      const [expdate, setExpDate] = useState("");
+      const [mnfdate, setMnfDate] = useState("");
+      
+      const submit = (e) => {
+        e.preventDefault();
+        const token = window.localStorage.getItem("token");
+        axios.post(`${backendUrl}/pharmacy/addstock`, 
+        {
+        medid: medid,
+        quantity:quantity,
+        price:price,
+        expiredate:expdate,
+        manufacdate:mnfdate,
+    },{
+        headers: {
+              Authorization: token ? `Bearer ${token}` : "",
+            },
+          })
+        .then((response) => {
+            console.log(response);
+            getdata();
+          });
+      };
+
     return(
     <div>
         <Card >
@@ -58,13 +88,26 @@ const AddNewMed=()=>{
 
             <GridContainer>
                 <GridItem xs={6} sm={6} md={6}>
-                    <Autocomplete
+                    {/* <Autocomplete
                         disableClearable
                         options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
                         groupBy={(option) => option.firstLetter}
                         getOptionLabel={(option) => option.medname+" - "+option.brand}
                         renderInput={(params) => <TextField {...params} label="Medicine Name" required />}
                         size="small"
+                        value={medid}
+                        onChange={(e) => setMedId(e.target.value.medid)}
+                    /> */}
+                    <TextField
+                        id="medid"
+                        label="medid"
+                        InputProps={{
+                            readOnly: false,
+                        }}
+                        fullWidth
+                        required
+                        value={medid}
+                        onChange={(e) => setMedId(e.target.value)}
                     />
                 </GridItem>
                 <GridItem xs={3} sm={3} md={3}>
@@ -76,6 +119,8 @@ const AddNewMed=()=>{
                         }}
                         fullWidth
                         required
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
                     />
                 </GridItem>
                 <GridItem xs={3} sm={3} md={3}>
@@ -87,6 +132,8 @@ const AddNewMed=()=>{
                         }}
                         fullWidth
                         required
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
                     />
                 </GridItem>
             </GridContainer>
@@ -106,6 +153,8 @@ const AddNewMed=()=>{
                         }}
                         size="small"
                         required
+                        value={mnfdate}
+                        onChange={(e) => setMnfDate(e.target.value)}
                     />
             </GridItem>
                 <GridItem xs={6} sm={6} md={6}>
@@ -122,11 +171,15 @@ const AddNewMed=()=>{
                         }}
                         size="small"
                         required
+                        value={expdate}
+                        onChange={(e) => setExpDate(e.target.value)}
                     />
                 </GridItem>                    
             </GridContainer>   
                 <GridContainer style={{display: "flex",justifyContent: "center", alignItems: "center",}}>
-                    <Button type='submit' href="#" color="success" style={{marginTop:"20px"}}>Add</Button>
+                    <Button type='submit' href="#" color="success" style={{marginTop:"20px"}} onClick={submit}>
+                        Add
+                    </Button>
                 </GridContainer>
             </CardBody>
         </Card>
@@ -134,4 +187,8 @@ const AddNewMed=()=>{
     )
 }
 
-export default AddNewMed
+export default AddNewMed;
+
+AddNewMed.propTypes = {
+    getdata:PropTypes.func,
+  };

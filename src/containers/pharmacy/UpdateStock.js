@@ -87,7 +87,7 @@ export default function OrderProcess() {
     { id: 'medid', label: 'Medicine ID'},
     { id: 'medname', label: 'Med Name'},
     { id: 'brand', label: 'Brand Name'},
-    { id: 'batchno', label: 'Batch No'},
+    { id: 'batchid', label: 'Batch ID'},
     { id: 'qty', label: 'Current Quantity'},
     { id: 'unitprice', label: 'Unit Price(Rs.)'},
     { id: 'mnfdate', label: 'Manufacture Date'},
@@ -157,7 +157,7 @@ export default function OrderProcess() {
     <div>
       <GridContainer>
       <GridItem xs={12} sm={8} md={8}>
-          <AddNewMed />
+          <AddNewMed getdata={getdata} />
         </GridItem>
         <GridItem xs={12} sm={4} md={4}>
           <Card >
@@ -268,8 +268,6 @@ export default function OrderProcess() {
                     )
                     }
                   </TableBody> 
-                  
-
                 </Table>
               </TableScrollbar>
             </CardBody>
