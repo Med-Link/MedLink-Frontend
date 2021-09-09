@@ -158,6 +158,21 @@ export default function OrderProcess() {
   }
   //end of update medicine details
 
+  //begining of delete function
+  const deleterow=(e)=>{
+    const token = window.localStorage.getItem('token');
+    axios.delete(`${backendUrl}/pharmacy/deletestock`, {
+      batchid:e.value
+      }, {headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        },
+    }).then((response)=>{
+        getdata();
+    }).catch((err)=>{
+        console.log(err);
+    });
+  }
+
 
   return (
     <div>
@@ -243,7 +258,7 @@ export default function OrderProcess() {
                               <IconButton aria-label="update" onClick={()=>handleClickOpenEdit(row.batchid)} color="inherit"><CreateIcon /></IconButton>
                             </TableCell>
                             <TableCell align="left">
-                              <IconButton aria-label="delete" color="secondary"><DeleteIcon/></IconButton>
+                              <IconButton aria-label="delete" color="secondary" onClick={()=>deleterow(row.batchid)}><DeleteIcon/></IconButton>
                             </TableCell>
                           </TableRow>
                           );
