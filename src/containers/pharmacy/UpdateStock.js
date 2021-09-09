@@ -161,7 +161,7 @@ export default function OrderProcess() {
         <GridItem xs={12} sm={6} md={6}>
           <Card >
             <CardHeader color="success">
-              <h4 className={classes.cardTitleWhite}>Add New Batch</h4>
+              <h4 className={classes.cardTitleWhite}>Enter CSV file</h4>
             </CardHeader>
             <CardBody>
               <Form />
