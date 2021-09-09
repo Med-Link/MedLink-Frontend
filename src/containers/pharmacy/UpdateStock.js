@@ -13,11 +13,13 @@ import { DialogContent } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Typography from '@material-ui/core/Typography';
 
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
@@ -26,7 +28,6 @@ import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import Button from "../../components/Dashboard/CustomButtons/Button";
 
-import Form from './forms/AddCsv';
 import AddNewMed from './forms/AddNewMed';
 import axios from "axios";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
@@ -155,19 +156,30 @@ export default function OrderProcess() {
   return (
     <div>
       <GridContainer>
-      <GridItem xs={12} sm={6} md={6}>
+      <GridItem xs={12} sm={8} md={8}>
           <AddNewMed />
         </GridItem>
-        <GridItem xs={12} sm={6} md={6}>
+        <GridItem xs={12} sm={4} md={4}>
           <Card >
             <CardHeader color="success">
               <h4 className={classes.cardTitleWhite}>Enter CSV file</h4>
             </CardHeader>
             <CardBody>
-              <Form />
-              <Button variant="outlined" color="success" onClick={handleClickOpenAccept}>
-                Save
-              </Button>
+              <GridContainer>
+                <GridItem xs={6} sm={6} md={6}>
+                <Typography variant="body1"> Update Stock - Add (.csv) File</Typography>
+                </GridItem>
+                <GridItem xs={6} sm={6} md={6}>
+                <Button color="default" component="label" startIcon={<CloudUploadIcon />} size="sm">
+                  Upload <input type="file" hidden startIcon={<CloudUploadIcon />}/>
+                  </Button>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={12} style={{display: "flex",justifyContent: "center", alignItems: "center",}}>
+                  <Button variant="outlined" color="success" onClick={handleClickOpenAccept}>
+                    Save
+                  </Button>
+                </GridItem>
+              </GridContainer>
             </CardBody>
           </Card>
         </GridItem>
