@@ -1,11 +1,12 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { makeStyles } from '@material-ui/core/styles';
 import MuiAlert from '@material-ui/lab/Alert';
+
+import Button from '../../../components/Dashboard/CustomButtons/Button';
 
 
 function Alert(props) {
@@ -61,7 +62,7 @@ const Form = () => {
     const paperStyle = { padding: 20, height: '500px', width: '400px', margin: "20px auto" }
     const avatarStyle = { backgroundColor: '#2ab5b5' }
     const gridStyle = { padding: 20 }
-    const buttonStyle = { color: '#efe3e3', backgroundColor: '#126e82', margin: '8px 0' }
+    const buttonStyle = { color: '#efe3e3', margin: '8px 0' }
     const classes = useStyles();
     const textFeildStyle = { height: '150px', width: '390px', margin: '8px 0 16px 0' }
 
@@ -96,6 +97,7 @@ const Form = () => {
                 <Grid container>
                     <Grid item >
                         <Button
+                            color="success"
                             variant="contained"
                             component="label"
                             startIcon={<CloudUploadIcon />}

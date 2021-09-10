@@ -1,117 +1,194 @@
-import React from 'react';
-import { Grid } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
-import Avatar from '@material-ui/core/Avatar';
-//import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
+import React, {useState} from "react";
+import axios from 'axios';
+import PropTypes from "prop-types";
+import { backendUrl } from "../../../urlConfig.js";
+
 import { TextField } from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import { makeStyles } from "@material-ui/core/styles";
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
-function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="/">
-          Medlink
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
+import GridItem from "../../../components/Dashboard/Grid/GridItem.js";
+import GridContainer from "../../../components/Dashboard/Grid/GridContainer.js";
+import Card from "../../../components/Dashboard/Card/Card.js";
+import CardHeader from "../../../components/Dashboard/Card/CardHeader.js";
+import CardBody from "../../../components/Dashboard/Card/CardBody.js";
+import Button from "../../../components/Dashboard//CustomButtons/Button";
+import styles from "../../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
-const AddNewMed=()=>{
+const useStyles = makeStyles(styles);
 
-    const paperStyle={padding :20,height:'550px',width:'500px', margin:"20px auto"}
-    const avatarStyle={backgroundColor: '#126e82'}
-    const gridStyle={padding: 20}
-    const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0', width: '50%', left:'50%', opacity:'0.9'}
-     
+
+const AddNewMed=(props)=>{  
+    const classes = useStyles();
+    const { getdata } = props;
+
+    //backend connection for medicine drop down list
+    const [meddata, setMedData] = useState([]);
+
+    const getMedData =() =>{
+        const token = window.localStorage.getItem('token');
+        axios.get(`${backendUrl}/pharmacy/listmedicine`,{
+            headers: {
+            'Authorization': token ? `Bearer ${token}` : ''
+            }
+            })
+        .then(res =>{
+            const results =  res.data.result;
+            setMedData(results);
+        })
+    }
+
+    React.useEffect(()=>{
+        getMedData();
+    },[]);
+
+    const options = meddata.map((option) => {
+        const firstLetter = option.medname[0].toUpperCase();
+        return {
+            firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
+            ...option,
+        };
+    });
+
+    // backend connection to add med details to the database
+      const [medid, setMedId] = useState("");
+      const [quantity, setQuantity] = useState("");
+      const [price, setPrice] = useState("");
+      const [expdate, setExpDate] = useState("");
+      const [mnfdate, setMnfDate] = useState("");
+      
+      const submit = (e) => {
+        e.preventDefault();
+        const token = window.localStorage.getItem("token");
+        axios.post(`${backendUrl}/pharmacy/addstock`, 
+        {
+        medid: medid,
+        quantity:quantity,
+        price:price,
+        expiredate:expdate,
+        manufacdate:mnfdate,
+    },{
+        headers: {
+              Authorization: token ? `Bearer ${token}` : "",
+            },
+          })
+        .then((response) => {
+            console.log(response);
+            getdata();
+          });
+      };
+
     return(
-        
-        <Grid style={gridStyle}>
-             
-          
-                <Grid align='center' style={gridStyle}>
-                    
-                    <h1>Add New Medicine</h1>
-                </Grid>
+    <div>
+        <Card >
+            <CardHeader color="success">
+              <h4 className={classes.cardTitleWhite}>Add New Batch</h4>
+            </CardHeader>
+            <CardBody>
 
-               
-
-                <Grid container spacing={2}> 
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            id="firstName"
-                            label="Medicine Name"
-                            defaultValue=""
-                            InputProps={{
-                                readOnly: false,
-                            }}
-                            variant="outlined"
-                            fullWidth
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            id="lastName"
-                            label="Brand Name"
-                            defaultValue=""
-                            InputProps={{
-                                readOnly: false,
-                            }}
-                            variant="outlined"
-                            fullWidth
-                        />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <TextField
-                            id="email"
-                            label="Re-Order Level"
-                            defaultValue=""
-                            InputProps={{
-                                readOnly: false,
-                            }}
-                            variant="outlined"
-                            fullWidth
-                        />
-                         
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            id="address"
-                            label="Medicine ID"
-                            defaultValue="M0082"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                            variant="outlined"
-                            fullWidth
-                        />
-                         
-                    </Grid>
-                    
-
-
-                     
-                        <Button type='submit' variant="contained" style={buttonStyle} href="#">Add</Button>
-                     
-                </Grid> 
-
-                 
+            <GridContainer>
+                <GridItem xs={6} sm={6} md={6}>
+                    {/* <Autocomplete
+                        disableClearable
+                        options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
+                        groupBy={(option) => option.firstLetter}
+                        getOptionLabel={(option) => option.medname+" - "+option.brand}
+                        renderInput={(params) => <TextField {...params} label="Medicine Name" required />}
+                        size="small"
+                        value={medid}
+                        onChange={(e) => setMedId(e.target.value.medid)}
+                    /> */}
+                    <TextField
+                        id="medid"
+                        label="medid"
+                        InputProps={{
+                            readOnly: false,
+                        }}
+                        fullWidth
+                        required
+                        value={medid}
+                        onChange={(e) => setMedId(e.target.value)}
+                    />
+                </GridItem>
+                <GridItem xs={3} sm={3} md={3}>
+                    <TextField
+                        id="quantity"
+                        label="Quantity"
+                        InputProps={{
+                            readOnly: false,
+                        }}
+                        fullWidth
+                        required
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
+                    />
+                </GridItem>
+                <GridItem xs={3} sm={3} md={3}>
+                    <TextField
+                        id="price"
+                        label="UnitPrice"
+                        InputProps={{
+                            readOnly: false,
+                        }}
+                        fullWidth
+                        required
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                    />
+                </GridItem>
+            </GridContainer>
+            <GridContainer>
                 
-            
-           
-        </Grid>
+                <GridItem xs={6} sm={6} md={6}>
+                    <TextField
+                        autoFocus
+                        type="date"
+                        margin="dense"
+                        variant="standard"
+                        id="mnfdate"
+                        label="Manufactured Date"
+                        fullWidth
+                        InputLabelProps={{
+                        shrink: true,
+                        }}
+                        size="small"
+                        required
+                        value={mnfdate}
+                        onChange={(e) => setMnfDate(e.target.value)}
+                    />
+            </GridItem>
+                <GridItem xs={6} sm={6} md={6}>
+                    <TextField
+                        autoFocus
+                        type="date"
+                        margin="dense"
+                        variant="standard"
+                        id="expdate"
+                        label="Expire Date"
+                        fullWidth
+                        InputLabelProps={{
+                        shrink: true,
+                        }}
+                        size="small"
+                        required
+                        value={expdate}
+                        onChange={(e) => setExpDate(e.target.value)}
+                    />
+                </GridItem>                    
+            </GridContainer>   
+                <GridContainer style={{display: "flex",justifyContent: "center", alignItems: "center",}}>
+                    <Button type='submit' href="#" color="success" style={{marginTop:"20px"}} onClick={submit}>
+                        Add
+                    </Button>
+                </GridContainer>
+            </CardBody>
+        </Card>
+    </div>
     )
 }
 
-export default AddNewMed
+export default AddNewMed;
+
+AddNewMed.propTypes = {
+    getdata:PropTypes.func,
+  };

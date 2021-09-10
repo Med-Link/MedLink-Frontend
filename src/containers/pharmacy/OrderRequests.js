@@ -8,10 +8,11 @@ import axios from "axios";
 import { withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Link from '@material-ui/core/Link';
+import TableScrollbar from 'react-table-scrollbar'
+
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
-import Table from "../../components/Dashboard/Table/Table.js";
 import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
@@ -21,6 +22,8 @@ import Button from "../../components/Dashboard//CustomButtons/Button";
 
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
+import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
+
 // import DialogActions from '@material-ui/core/DialogActions';
 // import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -138,27 +141,24 @@ export default function OrderRequests() {
       },
     }).then(res => {
       const results = res.data.allOrders.rows;
-      console.log(res);
-      let array = [];
-      results.forEach(element => {
-        let arr = [];
-        let name = element.firstname+" "+element.lastname;
-        arr.push(element.id, element.description, element.prescription, element.customerid,name,
-          <Button variant="contained" color="primary">Update</Button>);
-        array.push(arr);
-      })
-
-      // ["Order ID", "Description", "Prescription", "Customer ID", "Customer Name","View Order"]}
-
-      setData(array);
+      console.log(results);
+      setData(results);
     })
-
   }
+
   React.useEffect(() => {
     getdata();
   }, []);
 
   // ------------------------------------
+
+  const columns = [
+    { id: 'orderid', label: 'Order ID'},
+    { id: 'description', label: 'Description'},
+    { id: 'customerid', label: 'Customer ID'},
+    { id: 'customername', label: 'Customer Name'},
+    { id: 'view', label: 'View Order'},];
+  const rows = data; 
 
   return (
     <GridContainer>
@@ -166,41 +166,52 @@ export default function OrderRequests() {
         <Card>
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Order Requests</h4>
-            {/* <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
-            </p> */}
           </CardHeader>
           <CardBody>
-            <Table
-              tableHeaderColor="primary"
-              tableHead={["Order ID", "Description", "Prescription", "Customer ID", "Customer Name","View Order"]}
-              tableData={data}
-              //   [["MO2001",
-              //     "Michelle Fernando",
-              //     <Link
-              //       variant="h6"
-              //       underline="none"
-              //       className={clsx(classes.rightLink)}
-              //       href="orderprocess/"
-              //     >
-              //     <Button id="view" color="primary" Button color="primary" onClick={handleClickOpenView}>View</Button></Link>,
-              //   ],]
-              
-            />
-
-            {/* <Dialog onClose={handleCloseView} aria-labelledby="customized-dialog-title" open={openView}>
-              <DialogTitle id="customized-dialog-title" onClose={handleCloseView}>
-                Documents
-              </DialogTitle>
-              <DialogContent dividers>
-                <PhotoSteps />
-              </DialogContent>
-              <DialogActions>
-                <Button autoFocus onClick={handleCloseView} color="primary">
-                  Okay
-                </Button>
-              </DialogActions>
-            </Dialog> */}
+            <TableScrollbar rows={18} style={{}}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    {columns.map((column) => (
+                      <TableCell style={{color:'#213458',backgroundColor: "white"}}
+                        key={column.id}
+                        align={column.align}
+                      >
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                      
+                <TableBody >
+                  {rows.map((row)=>{
+                    return(
+                    <TableRow>
+                      <TableCell align="left">
+                        {row.id}
+                      </TableCell>
+                      <TableCell align="left">
+                        {row.description}
+                      </TableCell>
+                      <TableCell align="left">
+                        {row.customerid}
+                      </TableCell>
+                      <TableCell align="left">
+                        {row.firstname} {row.lastname}
+                      </TableCell>
+                      <TableCell align="left">
+                        <Link variant="h6" underline="none" className={clsx(classes.rightLink)} href="orderprocess/">
+                          <Button id="view" color="primary" Button color="primary" size="sm" >View</Button>
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                    );
+                  }
+                  )
+                  }
+                </TableBody> 
+              </Table>
+            </TableScrollbar>
           </CardBody>
         </Card>
       </GridItem>
