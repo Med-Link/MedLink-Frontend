@@ -28,6 +28,8 @@ import Button from "../../components/Dashboard//CustomButtons/Button";
 import PhotoSteps from "../../components/pharmacy/PhotoSteps"
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
+import CustomInput from "../../components/Dashboard/CustomInput/CustomInput.js";
+
 import SimpleSelect from '../../components/pharmacy/DropDown';
 
 
@@ -87,7 +89,7 @@ export default function OrderProcess() {
     { id: 'batchid', label: 'Batch ID'},
     { id: 'qty', label: 'Current Qty'},
     { id: 'unitprice', label: 'Unit Price(Rs.)'},
-    { id: 'addquantity', label: 'Add to cart'},
+    { id: 'addquantity', label: 'Add Quantity'},
     { id: 'confirm', label: 'Confirm'},];
   const rows = data; 
 
@@ -155,25 +157,12 @@ export default function OrderProcess() {
                         onChange={(event)=>{
                           setSearchTerm(event.target.value);
                         }}
-                        placeholder="Search..."
+                        placeholder="Search...(MedId, MedName, BrandName, BatchId)"
                         fontSize="small"
                         size="sm"
                       />
                     </FormControl>
                   </div>
-              {/* <Table
-                tableHeaderColor="secondary"
-                tableHead={["Med Id", "Batch Id", "Med Name", "Current Qty", "Unit Price(Rs.)", "Add to cart", "Confirm"]}
-                tableData={[
-                  ["001",
-                    <SimpleSelect/>,
-                    "Panadol",
-                    "100",
-                    "1.00",
-                    <TextField id="standard-basic" label="Qty" size='small' />,
-                    <Button color="primary" round>Add</Button>],
-                ]}
-              /> */}
               <TableScrollbar rows={15} style={{}}>
                 <Table>
                   <TableHead>
@@ -210,7 +199,7 @@ export default function OrderProcess() {
                           {row.brand}
                         </TableCell>
                         <TableCell align="left">
-                          <SimpleSelect/>
+                          {row.batchid}
                         </TableCell>
                         <TableCell align="left">
                           {row.quantity}
@@ -295,6 +284,11 @@ export default function OrderProcess() {
                 </Table>
               </TableScrollbar>
             </CardBody>
+            <CardFooter>
+            <Button variant="outlined" color="primary" onClick={handleClickOpenAccept} justifyContent="center">
+                  Send Bill
+                </Button>
+            </CardFooter>
           </Card>          
         </GridItem>
       </GridContainer>
