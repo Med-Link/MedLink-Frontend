@@ -1,14 +1,15 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/jsx-no-duplicate-props */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { backendUrl } from "../../urlConfig.js";
-import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-// @material-ui/core components
-import { withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import Link from '@material-ui/core/Link';
 import TableScrollbar from 'react-table-scrollbar'
+
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+import Link from '@material-ui/core/Link';
+import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
 
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
@@ -16,34 +17,7 @@ import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
 import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
-
-import Switch from "../../components/Dashboard/CustomButtons/Switch";
-import Button from "../../components/Dashboard//CustomButtons/Button";
-
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
-
-// import DialogActions from '@material-ui/core/DialogActions';
-// import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-// import DialogTitle from '@material-ui/core/DialogTitle';
-
-
-
-
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
-// core components
-
-
-
-
-import PhotoSteps from "../../components/admin/dialogbox/PhotoSteps";
+import Button from "../../components/Dashboard/CustomButtons/Button";
 
 const styles = {
   cardCategoryWhite: {
@@ -75,59 +49,10 @@ const styles = {
   },
 };
 
-
-const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
-
-const DialogContent = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
-
-
 const useStyles = makeStyles(styles);
 
 export default function OrderRequests() {
   const classes = useStyles();
-
-  const [open, setOpen] = React.useState(false);
-  const [openView, setOpenView] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleClickOpenView = () => {
-    setOpenView(true);
-  };
-
-  const handleCloseView = () => {
-    setOpenView(false);
-  };
-
 
   // --------------------------------
 
