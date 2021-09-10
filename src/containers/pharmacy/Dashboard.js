@@ -1,5 +1,4 @@
 import React from "react";
-// react plugin for creating charts
 
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,39 +7,24 @@ import { makeStyles } from "@material-ui/core/styles";
 import CheckIcon from '@material-ui/icons/Check';
 import DateRange from "@material-ui/icons/DateRange";
 import Update from "@material-ui/icons/Update";
-
-import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
-
-
-import Accessibility from "@material-ui/icons/Accessibility";
-import Link  from "@material-ui/core/Link";
-
+import ReceiptIcon from '@material-ui/icons/Receipt';
 
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
-import Table from "../../components/Dashboard/Table/Table.js";
-
-import CustomTabs from "../../components/Dashboard/CustomTabs/CustomTabs.js";
 import Card from "../../components/Dashboard/Card/Card";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardIcon from "../../components/Dashboard/Card/CardIcon.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
-import Button from "../../components/Dashboard//CustomButtons/Button";
-import ReceiptIcon from '@material-ui/icons/Receipt';
-
-
-// import {
-//   dailySalesChart,
-//   emailsSubscriptionChart,
-//   completedTasksChart,
-// } from "../../variables/charts.js";
 
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
+import OutOfStockTable from "../../components/pharmacy/OutOfStockTable.js";
+
 const useStyles = makeStyles(styles);
+
 
 export default function Dashboard() {
   const classes = useStyles();
@@ -99,71 +83,21 @@ export default function Dashboard() {
           </Card>
         </GridItem>
       </GridContainer>
+
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
-          <CustomTabs
-            headerColor="primary"
-            tabs={[
-              {
-                tabName: "Re-Order Items",
-                // tabIcon: BugReport,
-                tabContent: (
-                  <Card>
-                    <CardBody>
-                      <Table
-                        tableHeaderColor="warning"
-                        tableHead={["MedID", "Med Name", "Current Quantity"]}
-                        tableData={[
-                          ["M004", "Panadene 10mg", "20" ],
-                          ["M008", "Domperidone 5mg", "20" ],
-                          ["M010", "Siddalepa 50ml", "5" ],
-                        ]}
-                      />
-                    </CardBody>
-                  </Card>
-                ),
-              },
-              {
-                tabName: "Out of Stock Items",
-                // tabIcon: BugReport,
-                tabContent: (
-                  <Card>
-                    <CardBody>
-                      <Table
-                        tableHeaderColor="warning"
-                        tableHead={["MedID", "Med Name"]}
-                        tableData={[
-                          ["M003", "Ventoline 2mg"],
-                          ["M005", "Bandage"],
-                          ["M006", "Insuline Syringes 40 ui"],
-                        ]}
-                      />
-                    </CardBody>
-                  </Card>
-                ),
-              },
-            ]}
-          />
+          <OutOfStockTable/>
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>New Orders</h4>
+              <h4 className={classes.cardTitleWhite}>Monthly Sales Chart</h4>
               <p className={classes.cardCategoryWhite}>
-                Today
+              {new Date().toLocaleString("en-US", { month: "long" })}
               </p>
             </CardHeader>
             <CardBody>
-              <Table
-                tableHeaderColor="primary"
-                tableHead={["Order ID", "CustomerName"]}
-                tableData={[
-                  ["MO2001",
-                    "Michelle Fernando",
-                    
-                  ],
-                ]}
-              />
+              
             </CardBody>
           </Card>
         </GridItem>
