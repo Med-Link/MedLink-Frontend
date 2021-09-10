@@ -138,17 +138,17 @@ export default function OrderProcess() {
   //end of update medicine details
 
   //begining of delete function
-  const deleterow=(e)=>{
+  const deleterow=(batchId)=>{
     const token = window.localStorage.getItem('token');
-    axios.delete(`${backendUrl}/pharmacy/deletestock`, {
-      batchid:e.value
+    axios.post(`${backendUrl}/pharmacy/deletestock`, {
+      batchid:batchId,
       }, {headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         },
     }).then((response)=>{
         getdata();
     }).catch((err)=>{
-        console.log(err);
+      console.log(err);
     });
   }
 
