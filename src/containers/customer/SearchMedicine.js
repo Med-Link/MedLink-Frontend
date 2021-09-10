@@ -54,6 +54,8 @@ export default function Dashboard() {
   //get data from the backend pharmacy details
   const [data, setData] = useState([]);
   const getdata =() =>{
+    setToggle(false);
+
     const token = window.localStorage.getItem('token');
     axios.get(`${backendUrl}/order/allpharmacies`,{
       headers: {
@@ -92,6 +94,8 @@ export default function Dashboard() {
 
   // backend connection for pass the medicine id and filter the pharmacies
   const [pharmacyData, setPharmacyData] = useState([]);
+  const [toggle, setToggle] = useState(false);
+
   const onSelectMedicine = (event,value)=> {
       const token = window.localStorage.getItem('token');
       axios.get(`${backendUrl}/order/pharmacybymedicine?medname=${value.medname}`,{
@@ -102,7 +106,9 @@ export default function Dashboard() {
       .then(res =>{
         const results =  res.data.result;
             // console.log(results);
+            setToggle(true);
             setPharmacyData(results);
+            
       })
   } 
 
@@ -208,7 +214,7 @@ export default function Dashboard() {
                 </TableHead>
               
                 <TableBody>
-                  { (pharmacyData<=0 ? rows : pharmacyData).filter((row)=>{
+                  { (pharmacyData <=0 && toggle==false ? rows : pharmacyData).filter((row)=>{
                     if (searchTerm == "") {
                       return row
                     } else if (row.name.toLowerCase().includes(searchTerm.toLowerCase())){

@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-key */
-import React from "react";
+import React,{useEffect} from "react";
 import { backendUrl } from "../../../urlConfig.js";
+// import axios from 'axios'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -19,6 +20,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import ViewHistoryDetails from './ViewHistoryDetails'
+import axios from "axios";
  
 
 const styles = {
@@ -53,7 +55,9 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
+
 export default function BuyingHistory() {
+  const [data, setData] = React.useState([]);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -66,6 +70,30 @@ export default function BuyingHistory() {
 
   const classes = useStyles();
   
+  const getdata =() =>{
+    const token = window.localStorage.getItem('token');
+    
+      axios.get(`${backendUrl}/buyinghistory`,{
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+      }).then(res =>{
+        const results =  res.data.getorderhistory.rows;
+        console.log(results);
+
+        let array =[];
+        results.forEach(element=>{
+         let arr=[];
+         arr.push(element.orderid,element.address,element.deliverycost,element.servicecost,element.totalcost,element.name,element.city,<Button variant="outlined"  color="primary" onClick={handleClickOpen} round>View</Button>);
+           array.push(arr);
+        })         
+       setData(array); 
+        // setData(results);
+      })        
+  }
+  React.useEffect(()=>{
+    getdata();
+  },[]);
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
@@ -79,14 +107,8 @@ export default function BuyingHistory() {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Date","Time","Pharmacy Name", "District", "City", ""]}
-              tableData={[
-                ["10-07-2021","20:55","Pharma", "Colombo", "Nugegoda", 
-                  <Button variant="outlined"  color="primary" onClick={handleClickOpen} round>View</Button>
-                   
-                ],
-                 
-              ]}
+              tableHead={["Order Number", "Delivery Address","Delivery Cost", "Service Cost", "Total Cost", "Pharmacy","City","View more" ]}
+              tableData={data}
             />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">
