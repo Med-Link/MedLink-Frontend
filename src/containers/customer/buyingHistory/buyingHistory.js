@@ -60,8 +60,9 @@ export default function BuyingHistory() {
   const [data, setData] = React.useState([]);
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (medlistid) => {
     setOpen(true);
+    getorderdata(medlistid);
   };
 
   const handleClose = () => {
@@ -84,10 +85,32 @@ export default function BuyingHistory() {
         let array =[];
         results.forEach(element=>{
          let arr=[];
-         arr.push(element.orderid,element.address,element.deliverycost,element.servicecost,element.totalcost,element.name,element.city,<Button variant="outlined"  color="primary" onClick={handleClickOpen} round>View</Button>);
+         arr.push(element.orderid,element.address,element.deliverycost,element.servicecost,element.totalcost,element.name,element.city,<Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.medlistid)} round>View</Button>);
            array.push(arr);
         })         
        setData(array); 
+        // setData(results);
+      })        
+  }
+  const getorderdata =async(medlistid) =>{
+    const token = window.localStorage.getItem('token');
+    console.log(medlistid)
+
+      axios.post(`${backendUrl}/order/singleorderbill`,{melistid:medlistid},{
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+      }).then(res =>{
+        const results =  res;
+        console.log(results);
+
+        // let array =[];
+        // results.forEach(element=>{
+        //  let arr=[];
+        //  arr.push(element.orderid,element.address,element.deliverycost,element.servicecost,element.totalcost,element.name,element.city,<Button variant="outlined"  color="primary" onClick={handleClickOpen(element.medlistid)} round>View</Button>);
+        //    array.push(arr);
+        // })         
+      //  setData(array); 
         // setData(results);
       })        
   }
