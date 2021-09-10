@@ -33,6 +33,7 @@ export default function SimpleSelect() {
           id="demo-simple-select"
           value={age}
           onChange={handleChange}
+          size="small"
         >
           <MenuItem value={10}>456</MenuItem>
           <MenuItem value={20}>457</MenuItem>
