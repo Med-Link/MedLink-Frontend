@@ -46,9 +46,13 @@ const cdStyle = {backgroundColor: 'rgb(226 243 242)'}
 export default function Dashboard() {
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = useState(""); //for search function
+  const [pharmacyid, setPharmacyid] = useState();
 
   const [openList, setOpenList] = React.useState(false);
-  const handleClickOpen1 = () => { setOpenList(true);};
+  const handleClickOpen1 = (pharmacyid) => {
+     setOpenList(true);
+    setPharmacyid(pharmacyid);
+    };
   const handleClose1 = () => { setOpenList(false);};
 
   //get data from the backend pharmacy details
@@ -252,7 +256,7 @@ export default function Dashboard() {
                 </DialogTitle>
                 <DialogContent>
                   <DialogContentText>
-                  <Form/>
+                  <Form pharmacy={pharmacyid}/>
                   </DialogContentText>
                 </DialogContent>
               </Dialog>
