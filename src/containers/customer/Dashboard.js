@@ -59,9 +59,13 @@ export default function Dashboard() {
 
   const [openList, setOpenList] = React.useState(false);
   const [openLocation, setOpenLocation] = React.useState(false);
+  const [pharmacyid, setPharmacyid] = useState();
 
-  const handleClickOpen1 = () => {
+
+  const handleClickOpen1 = (pharmacyid) => {
     setOpenList(true);
+    setPharmacyid(pharmacyid);
+    
   };
 
   const handleClose1 = () => {
@@ -279,7 +283,7 @@ export default function Dashboard() {
                 </DialogTitle>
                 <DialogContent>
                   <DialogContentText>
-                  <Form/>
+                  <Form pharmacy={pharmacyid}/>
                   </DialogContentText>
                 </DialogContent>
               </Dialog>
