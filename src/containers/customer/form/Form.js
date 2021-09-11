@@ -1,4 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import { backendUrl } from '../../../urlConfig';
+
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { TextField } from '@material-ui/core';
@@ -62,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Form=()=>{
+export default function Form(props){
 
    
     const paperStyle={padding :20, height:'500px',width:'400px', margin:"20px auto"}
@@ -75,19 +79,53 @@ const Form=()=>{
     const headerStyle = {color: '#126e82' }
     const [open, setOpen] = React.useState(false);
     
-
+    
+    
     const handleClick = () => {
       setOpen(true);
     };
-  
+    
     const handleClose = (event, reason) => {
       if (reason === 'clickaway') {
         return;
       }
-  
+      
       setOpen(false);
     };
+  const [prescription, setPrescription] = useState([]);
 
+  const [description, setDescription] = useState('');
+  
+  const prescriptionsend = async (e) => {
+    const token = window.localStorage.getItem('token');
+
+      // e.preventDefault();
+      const form = new FormData();
+      form.append("description", description);
+      form.append("pharmacyid", props.pharmacy);
+      // console.log(description)
+      for (let pic of prescription) {
+        form.append("prescription", pic);
+      }
+        // if(checked){
+        axios.post(`${backendUrl}/order/create`, form,{headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        },}).then((response)=>{
+        console.log(response);
+        console.log("aaaaa")
+
+            // setSignedUp(true);
+
+        }).catch((err)=>{
+            console.log(err);
+            // setError("Signup Failed");
+        });
+        
+     
+    };
+    const handlePrescriptionDocs = (e) => {
+      setPrescription([...prescription, e.target.files[0]]);
+    };
     return(               
                 <Grid container spacing={2}> 
                   <Grid item xs={12}>
@@ -99,7 +137,9 @@ const Form=()=>{
                         <TextareaAutosize 
                           aria-label="Description" 
                           style={textFeildStyle} 
-                          minRows={3} 
+                          onChange={(e) => setDescription(e.target.value) }
+
+                          // minRows={3} 
                           placeholder="Description" 
                         />
                       </Grid>
@@ -118,6 +158,8 @@ const Form=()=>{
                               <input
                                   type="file"
                                   hidden
+                                  onChange={handlePrescriptionDocs}
+
                                   startIcon={<CloudUploadIcon />}
                                   
                               />
@@ -125,7 +167,7 @@ const Form=()=>{
                         </Grid> 
                         <Grid item xs={12} sm={12} >
                           <div className={classes.root}>
-                            <Button variant="contained" onClick={handleClick} style={sendButtonStyle} startIcon={ <SendIcon/>}>
+                            <Button variant="contained" onClick={prescriptionsend} style={sendButtonStyle} startIcon={ <SendIcon/>}>
                               
                               Send 
                              
@@ -143,4 +185,9 @@ const Form=()=>{
     )
 }
 
-export default Form ;
+Form.propTypes = {
+  pharmacy: PropTypes.any,
+  // costs:PropTypes.any,
+  // children: PropTypes.node.isRequired,
+  // classes: PropTypes.object.isRequired,
+};
