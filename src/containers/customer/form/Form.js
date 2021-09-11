@@ -112,7 +112,7 @@ export default function Form(props){
           'Authorization': token ? `Bearer ${token}` : ''
         },}).then((response)=>{
         console.log(response);
-        console.log("aaaaa")
+        // console.log("aaaaa")
 
             // setSignedUp(true);
 
