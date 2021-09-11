@@ -2,6 +2,8 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
+import PropTypes from 'prop-types';
+
 //import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import { TextField } from '@material-ui/core';
@@ -45,7 +47,7 @@ function Copyright() {
     );
   }
 
-const BuyingHistory=()=>{
+export default function BuyingHistory(props){
 
     const classes = useStyles();
     const paperStyle={padding :20,height:'850px',width:'400px', margin:"10px auto"}
@@ -65,7 +67,7 @@ const BuyingHistory=()=>{
                 </Grid>
 
                 <Grid container spacing={2}> 
-                    <Grid item xs={12} sm={6}>
+                    {/* <Grid item xs={12} sm={6}>
                         <TextField
                             id="fullName"
                             label="Full Name"
@@ -105,9 +107,9 @@ const BuyingHistory=()=>{
                             fullWidth
                         />
                          
-                    </Grid>
+                    </Grid> */}
 
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                         <TextField
                             id="mobileNumber"
                             label="Mobile Number"
@@ -117,23 +119,23 @@ const BuyingHistory=()=>{
                             }}
                             variant="outlined"
                         />
-                    </Grid>
+                    </Grid> */}
 
                     <Grid item xs={12}>
                         <Typography variant="h6" gutterBottom style={headerStyle}>
                             Order summary
                         </Typography>
                         <List disablePadding>
-                            {products.map((product) => (
-                            <ListItem className={classes.listItem} key={product.name}>
-                                <ListItemText primary={product.name} secondary={product.desc} />
+                            {props.products.map((product) => (
+                            <ListItem className={classes.listItem} key={product.medname}>
+                                <ListItemText primary={product.name} secondary={product.quantity} />
                                 <Typography variant="body2">{product.price}</Typography>
                             </ListItem>
                             ))}
                             <ListItem className={classes.listItem}>
                             <ListItemText primary="Total" />
                             <Typography variant="subtitle1" className={classes.total}>
-                            Rs.270.00
+                            {products[0].totalprice}
                             </Typography>
                             </ListItem>
                         </List>
@@ -152,5 +154,10 @@ const BuyingHistory=()=>{
         </Grid>
     )
 }
-
-export default BuyingHistory
+BuyingHistory.propTypes = {
+    products: PropTypes.any,
+    // costs:PropTypes.any,
+    // children: PropTypes.node.isRequired,
+    // classes: PropTypes.object.isRequired,
+  };
+// export default BuyingHistory

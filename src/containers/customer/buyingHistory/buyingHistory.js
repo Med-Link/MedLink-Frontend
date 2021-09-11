@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import { backendUrl } from "../../../urlConfig.js";
 // import axios from 'axios'
 // @material-ui/core components
@@ -92,28 +92,27 @@ export default function BuyingHistory() {
         // setData(results);
       })        
   }
-  const getorderdata =async(medlistid) =>{
+  const [vieworderdata, setVieworderdata] = useState([]);
+
+  const getorderdata = (medlistid) => {
+    // console.log(typeof(medlistid))
     const token = window.localStorage.getItem('token');
-    console.log(medlistid)
-
-      axios.post(`${backendUrl}/order/singleorderbill`,{melistid:medlistid},{
+  
+    // console.log('kkkk')
+    axios.post(`${backendUrl}/order/singleorderbill`, {medlistid: medlistid}, {
       headers: {
-        Authorization: token ? `Bearer ${token}` : "",
+        'Authorization': token ? `Bearer ${token}` : ''
       },
-      }).then(res =>{
-        const results =  res;
-        console.log(results);
-
-        // let array =[];
-        // results.forEach(element=>{
-        //  let arr=[];
-        //  arr.push(element.orderid,element.address,element.deliverycost,element.servicecost,element.totalcost,element.name,element.city,<Button variant="outlined"  color="primary" onClick={handleClickOpen(element.medlistid)} round>View</Button>);
-        //    array.push(arr);
-        // })         
-      //  setData(array); 
-        // setData(results);
-      })        
-  }
+  }).then((response)=>{
+      console.log(response);
+      setVieworderdata(response.data.rows);
+  
+  }).catch((err)=>{
+      console.log(err);
+ 
+  });
+  
+  };
   React.useEffect(()=>{
     getdata();
   },[]);
@@ -139,7 +138,7 @@ export default function BuyingHistory() {
                         </DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                              <ViewHistoryDetails/>
+                              <ViewHistoryDetails products={vieworderdata}/>
                             </DialogContentText>
                         </DialogContent>
                   </Dialog>
