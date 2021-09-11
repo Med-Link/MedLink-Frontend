@@ -128,17 +128,20 @@ export default function BuyingHistory(props){
                         <List disablePadding>
                             {props.products.map((product) => (
                             <ListItem className={classes.listItem} key={product.medname}>
-                                <ListItemText primary={product.name} secondary={product.quantity} />
+                                <ListItemText primary={product.medname} secondary={product.quantity} />
                                 <Typography variant="body2">{product.price}</Typography>
                             </ListItem>
                             ))}
-                            <ListItem className={classes.listItem}>
-                            <ListItemText primary="Total" />
-                            <Typography variant="subtitle1" className={classes.total}>
-                            {products[0].totalprice}
-                            </Typography>
-                            </ListItem>
-                        </List>
+                             {/* {products.map((product) => ( */}
+                                {products.length>0 ? <ListItem className={classes.listItem} key={products[0].totalprice}>
+          <ListItemText primary="Total (Without Delivery Charges)" />
+          <Typography variant="subtitle1" className={classes.total}>
+            {products[0].totalprice}
+          </Typography>
+        </ListItem>:<></>}
+
+        {/* ))}  */}
+      </List>
                     </Grid>
                      
                         <Button type='submit' variant="contained" style={buttonStyle} href="/customer/buyingHistory">Back</Button>
