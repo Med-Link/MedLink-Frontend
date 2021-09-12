@@ -45,6 +45,8 @@ class Map extends React.Component{
 				lng: this.props.center.lng
 			}
 		}
+		window.sessionStorage.setItem("dashlatitude", this.props.center.lat);
+		window.sessionStorage.setItem("dashlongitude", this.props.center.lng);
 	}
 	/**
 	 * Get the current address from the default map position and set those values in the state
