@@ -44,6 +44,8 @@ class Map extends React.Component{
 				lng: this.props.center.lng
 			}
 		}
+		window.sessionStorage.setItem("pharmacylatitude",this.props.center.lat );
+		window.sessionStorage.setItem("pharmacylongitude", this.props.center.lng);
 	}
 	/**
 	 * Get the current address from the default map position and set those values in the state
@@ -56,7 +58,7 @@ class Map extends React.Component{
 				      city = this.getCity( addressArray ),
 				      area = this.getArea( addressArray ),
 				      state = this.getState( addressArray );
-				// console.log( 'city', city, area, state );
+				console.log( 'city', city, area, state );
 
 				this.setState( {
 					address: ( address ) ? address : '',
@@ -189,6 +191,8 @@ class Map extends React.Component{
 						lng: newLng
 					},
 				} )
+				window.sessionStorage.setItem("pharmacylatitude", newLat );
+				window.sessionStorage.setItem("pharmacylongitude", newLng );
 			},
 			error => {
 				console.error(error);
