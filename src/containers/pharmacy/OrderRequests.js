@@ -125,7 +125,7 @@ export default function OrderRequests() {
                         {row.firstname} {row.lastname}
                       </TableCell>
                       <TableCell align="left">
-                        <Link variant="h6" underline="none" className={clsx(classes.rightLink)} href="orderprocess/">
+                        <Link variant="h6" underline="none" className={clsx(classes.rightLink)} href={`orderprocess/${row.id}`}>
                           <Button id="view" color="primary" Button color="primary" size="sm" >View</Button>
                         </Link>
                       </TableCell>
