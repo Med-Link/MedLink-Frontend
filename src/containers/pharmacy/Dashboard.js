@@ -47,7 +47,21 @@ export default function Dashboard() {
    })
  }
 
- 
+ //count confirmed orders backend connection
+ const [acceptedOrders, setAcceptedOrders] = useState([]);
+
+const getAcceptedOrders = () => {
+  const token = window.localStorage.getItem('token');
+  axios.get(`${backendUrl}/pharmacy/countacceptedorders`, {
+    headers: {
+      Authorization: token ? `Bearer ${token}` : "",
+    },
+  }).then(res => {
+    const results = res.data.acceptcount.rows[0];
+    console.log(results);
+    setAcceptedOrders(results);
+  })
+}
 //count complete orders backend connection
 const [completeOrders, setCompleteOrders] = useState([]);
 
@@ -67,6 +81,7 @@ const getCompleteOrders = () => {
 
 React.useEffect(() => {
   getNewOrders();
+  getAcceptedOrders();
   getCompleteOrders();
 }, []);
 
@@ -114,7 +129,7 @@ React.useEffect(() => {
                 <CheckIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Confirmed Orders</p>
-              <h3 className={classes.cardTitle}>+2</h3>
+              <h3 className={classes.cardTitle}>{acceptedOrders.count}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
