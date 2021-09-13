@@ -1,5 +1,9 @@
 import React, {useState} from 'react';
 import { Redirect,useHistory } from 'react-router-dom';
+import { backendUrl } from "../../urlConfig.js";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -86,6 +90,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUpPharmacy=()=>{
+  const notify = () => toast.error(' Signup Error!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
   let history = useHistory();
 
   const classes = useStyles();
@@ -104,14 +117,24 @@ const SignUpPharmacy=()=>{
   const [signedUp, setSignedUp] = useState(false);
   
   const Signup =async(e)=>{
+    
+
       e.preventDefault();
+    const latitude = window.sessionStorage.getItem("pharmacylatitude");
+    const longitude = window.sessionStorage.getItem("pharmacylongitude");
+    const city = window.sessionStorage.getItem("pharmacycity");
+
+
       let form ={
         name: name,
         email:email,
         contactNumber:contactNumber,
         password:password,
-        location:location,
-        registrationDocs:registrationDocs,
+        latitude:latitude,
+        longitude:longitude,
+        city:city,
+
+        // registrationDocs:registrationDocs,
       };
       const isValid = await pharmacySchema.isValid(form);
       if(isValid===true){
@@ -121,7 +144,10 @@ const SignUpPharmacy=()=>{
           form.append("email", email);
           form.append("contactNumber", contactNumber);
           form.append("password", password );
-          // form.append("category", categoryId);
+          form.append("latitude", latitude);
+          form.append("longitude", longitude);
+          form.append("city", city);
+
 
           for (let pic of registrationDocs) {
             form.append("registrationDocs", pic);
@@ -133,6 +159,7 @@ const SignUpPharmacy=()=>{
                 history.push("/pharmacysignin");
             }).catch((err)=>{
                 console.log(err);
+                notify();
                 setError("Signup Failed");
             });
             
@@ -141,6 +168,7 @@ const SignUpPharmacy=()=>{
         }
       }else{
         console.log('signup error');
+        notify()
       }  
   }
 
@@ -423,7 +451,18 @@ const SignUpPharmacy=()=>{
       <Box xs={12} sm={12} md={12} >
         <Footer />
       </Box>
+      <ToastContainer position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover  
+      /> 
     </div>
+
   );
 }
 export default SignUpPharmacy ;
