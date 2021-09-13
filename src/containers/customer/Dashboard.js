@@ -87,7 +87,7 @@ export default function Dashboard() {
 
   const pharmacylocation =() =>{
     const token = window.localStorage.getItem('token');
-    const latitude = window.sessionStorage.getItem("dashlongitude");
+    const latitude = window.sessionStorage.getItem("dashlatitude");
     const longitude = window.sessionStorage.getItem("dashlongitude");
 
     
