@@ -1,5 +1,6 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { backendUrl } from "../../urlConfig.js";
+import axios from "axios";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -26,24 +27,82 @@ import OutOfStockTable from "../../components/pharmacy/OutOfStockTable.js";
 const useStyles = makeStyles(styles);
 
 
+
 export default function Dashboard() {
   const classes = useStyles();
+
+ //count order requests backend connection
+ const [newOrders, setNewOrders] = useState([]);
+
+ const getNewOrders= () => {
+   const token = window.localStorage.getItem('token');
+   axios.get(`${backendUrl}/pharmacy/getOrderReqs`, {
+     headers: {
+       Authorization: token ? `Bearer ${token}` : "",
+     },
+   }).then(res => {
+     const results = res.data.allOrders.rows;
+    //  console.log(results);
+     setNewOrders(results.length);
+   })
+ }
+
+ 
+//count complete orders backend connection
+const [completeOrders, setCompleteOrders] = useState([]);
+
+const getCompleteOrders = () => {
+  const token = window.localStorage.getItem('token');
+  axios.get(`${backendUrl}/pharmacy/countcloseddeals`, {
+    headers: {
+      Authorization: token ? `Bearer ${token}` : "",
+    },
+  }).then(res => {
+    const results = res.data.result[0];
+    // console.log(results);
+    setCompleteOrders(results);
+  })
+}
+
+
+React.useEffect(() => {
+  getNewOrders();
+  getCompleteOrders();
+}, []);
+
   return (
     <div>
       <GridContainer>
+      <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="success" stats icon>
+              <CardIcon color="warning">
+                <ReceiptIcon />
+              </CardIcon>
+              <p className={classes.cardCategory}>Monthly Income</p>
+              <h3 className={classes.cardTitle}></h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <DateRange />
+                {new Date().toLocaleString("en-US", { month: "long" })}
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="success" stats icon>
               <CardIcon color="danger">
                 <ReceiptIcon />
               </CardIcon>
-              <p className={classes.cardCategory}>Orders</p>
-              <h3 className={classes.cardTitle}>1</h3>
+              <p className={classes.cardCategory}>New Orders</p>
+              <h3 className={classes.cardTitle}>{newOrders}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
                 <DateRange />
-                Last 24 Hours
+                Just Updated
               </div>
             </CardFooter>
           </Card>
@@ -54,7 +113,7 @@ export default function Dashboard() {
               <CardIcon color="info">
                 <CheckIcon />
               </CardIcon>
-              <p className={classes.cardCategory}>Confirmed</p>
+              <p className={classes.cardCategory}>Confirmed Orders</p>
               <h3 className={classes.cardTitle}>+2</h3>
             </CardHeader>
             <CardFooter stats>
@@ -72,7 +131,7 @@ export default function Dashboard() {
                 <CancelPresentationIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Closed Deals</p>
-              <h3 className={classes.cardTitle}>3</h3>
+              <h3 className={classes.cardTitle}>{completeOrders.count}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -85,10 +144,7 @@ export default function Dashboard() {
       </GridContainer>
 
       <GridContainer>
-        <GridItem xs={12} sm={12} md={6}>
-          <OutOfStockTable/>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
+        <GridItem xs={12} sm={8} md={8}>
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Monthly Sales Chart</h4>
@@ -100,6 +156,9 @@ export default function Dashboard() {
               
             </CardBody>
           </Card>
+        </GridItem>
+        <GridItem xs={12} sm={4} md={4}>
+          <OutOfStockTable/>
         </GridItem>
       </GridContainer>
     </div>
