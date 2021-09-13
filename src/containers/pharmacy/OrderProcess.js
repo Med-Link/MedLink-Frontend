@@ -4,6 +4,7 @@ import React, {useState } from "react";
 import { backendUrl } from "../../urlConfig.js";
 import axios from "axios";
 import TableScrollbar from 'react-table-scrollbar'
+import { useParams } from 'react-router-dom'
 
 import { makeStyles } from "@material-ui/core/styles";
 import DateRange from "@material-ui/icons/DateRange";
@@ -37,6 +38,8 @@ const useStyles = makeStyles(styles);
 
 
 export default function OrderProcess() {
+  const { id } = useParams();
+  console.log(id)
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = useState(""); //for search function
 

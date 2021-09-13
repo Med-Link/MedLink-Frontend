@@ -69,7 +69,7 @@ const dashboardRoutes = [
     display:false,
   },
   {
-    path: "/orderprocess",
+    path: "/orderprocess/:id",
     name: "Order Process",
     icon: AddShoppingCartIcon,
     component: OrderProcess,
