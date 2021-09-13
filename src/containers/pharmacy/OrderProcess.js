@@ -39,7 +39,7 @@ const useStyles = makeStyles(styles);
 
 export default function OrderProcess() {
   const { id } = useParams();
-  console.log(id)
+  // console.log(id)
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = useState(""); //for search function
 
@@ -81,8 +81,27 @@ export default function OrderProcess() {
     })
 
   }
+  const [orderdata, setOrderData] = useState([]);
+
+  const getorderreq = () => {
+    const token = window.localStorage.getItem('token');
+    // console.log(id)
+    axios.post(`${backendUrl}/pharmacy/getOrderReq`,{orderreqid:id}, {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+    }).then(res => {
+      const results = res.data.singleOrder.rows[0];
+      console.log(results);
+
+      setOrderData(results);
+      // console.log(orderdata.description)
+    })
+
+  }
   React.useEffect(() => {
     getdata();
+    getorderreq();
   }, []);
 
   const columns = [
@@ -105,6 +124,7 @@ export default function OrderProcess() {
     { id: 'price', label: 'Total Price'},
     ];
   const rows2=["001","he he"]
+  
   return (
     <div>
       <GridContainer>
@@ -115,8 +135,8 @@ export default function OrderProcess() {
               </CardHeader>
               <CardBody color="primary" stats icon>
                 <div>
-                  <h2>Michelle Fernando - 0768757722</h2>
-                  <p>I Need this medicine except Codein Zulphet</p>
+                  {/* <h2>Michelle Fernando - 0768757722</h2> */}
+                  {orderdata.description}
                 </div>
 
                 <Button id="reject" variant="outlined" color="danger" onClick={handleClickOpen}>Reject</Button>
