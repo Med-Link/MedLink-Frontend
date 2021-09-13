@@ -12,14 +12,11 @@ import Dialog from '@material-ui/core/Dialog';
 import { DialogContent } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
 import DialogActions from '@material-ui/core/DialogActions';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Typography from '@material-ui/core/Typography';
 
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
@@ -29,6 +26,8 @@ import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import Button from "../../components/Dashboard/CustomButtons/Button";
 
 import AddNewMed from './forms/AddNewMed';
+import AddCsv from "./forms/AddCsv"
+
 import axios from "axios";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
@@ -39,17 +38,6 @@ export default function OrderProcess() {
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = useState(""); //for search function
 
-
-
-  const [openAccept, setOpenAccept] = React.useState(false);
-
-  const handleClickOpenAccept = () => {
-    setOpenAccept(true);
-  };
-
-  const handleCloseAccept = () => {
-    setOpenAccept(false);
-  };
 
   const [openAddMeds, setOpenAddMeds] = React.useState(false);
 
@@ -160,28 +148,7 @@ export default function OrderProcess() {
           <AddNewMed getdata={getdata} />
         </GridItem>
         <GridItem xs={12} sm={4} md={4}>
-          <Card >
-            <CardHeader color="success">
-              <h4 className={classes.cardTitleWhite}>Enter CSV file</h4>
-            </CardHeader>
-            <CardBody>
-              <GridContainer>
-                <GridItem xs={6} sm={6} md={6}>
-                <Typography variant="body1"> Update Stock - Add (.csv) File</Typography>
-                </GridItem>
-                <GridItem xs={6} sm={6} md={6}>
-                <Button color="default" component="label" startIcon={<CloudUploadIcon />} size="sm">
-                  Upload <input type="file" hidden startIcon={<CloudUploadIcon />}/>
-                  </Button>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={12} style={{display: "flex",justifyContent: "center", alignItems: "center",}}>
-                  <Button variant="outlined" color="success" onClick={handleClickOpenAccept}>
-                    Save
-                  </Button>
-                </GridItem>
-              </GridContainer>
-            </CardBody>
-          </Card>
+          <AddCsv/>
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
@@ -274,22 +241,6 @@ export default function OrderProcess() {
           </Card>
         </GridItem>
       </GridContainer>
-
-
-      {/*upload csv dialogbox*/}
-
-      <Dialog open={openAccept} onClose={handleCloseAccept} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description" >
-        <DialogTitle id="alert-dialog-title">{"Do you want to Save this to the stock"}</DialogTitle>
-        <DialogActions>
-          <Button onClick={handleCloseAccept} color="danger">
-            Cancle
-          </Button>
-          <Button onClick={handleCloseAccept} color="primary" autoFocus>
-            Yes
-          </Button>
-        </DialogActions>
-      </Dialog>
-
 
       {/*update medicine dialogbox*/}
 
