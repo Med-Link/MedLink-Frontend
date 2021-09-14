@@ -1,123 +1,148 @@
-import React from 'react';
-import { Grid } from '@material-ui/core';
-import Link from '@material-ui/core/Link';
+import React, {useState} from "react";
+import csvtojson from "csvtojson";
 import Typography from '@material-ui/core/Typography';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { makeStyles } from '@material-ui/core/styles';
 import MuiAlert from '@material-ui/lab/Alert';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
-import Button from '../../../components/Dashboard/CustomButtons/Button';
+import Card from "../../../components/Dashboard/Card/Card.js";
+import CardHeader from "../../../components/Dashboard/Card/CardHeader.js";
+import CardBody from "../../../components/Dashboard/Card/CardBody.js";
+import Button from "../../../components/Dashboard/CustomButtons/Button";
+import GridItem from "../../../components/Dashboard/Grid/GridItem.js";
+import GridContainer from "../../../components/Dashboard/Grid/GridContainer.js";
+import styles from "../../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
 
+const useStyles = makeStyles(styles);
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="/">
-                Medlink
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
-
-const useStyles = makeStyles((theme) => ({
-
-    root: {
-        width: '100%',
-        '& > * + *': {
-            marginTop: theme.spacing(2),
-        },
-    },
-
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(3),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-    /*label:{
-      marginLeft:theme.spacing(0),
-    },*/
-    back: {
-        backgroundColor: "#eee",
-        marginTop: theme.spacing(1),
-    },
-    input: {
-        display: 'none',
-    },
-
-}));
-
 
 const Form = () => {
-
-
-    const paperStyle = { padding: 20, height: '500px', width: '400px', margin: "20px auto" }
-    const avatarStyle = { backgroundColor: '#2ab5b5' }
-    const gridStyle = { padding: 20 }
-    const buttonStyle = { color: '#efe3e3', margin: '8px 0' }
     const classes = useStyles();
-    const textFeildStyle = { height: '150px', width: '390px', margin: '8px 0 16px 0' }
+  
+    // save button
+  const [openAccept, setOpenAccept] = React.useState(false);
+  const handleClickOpenAccept = () => {
+    setOpenAccept(true);
+  };
+  const handleCloseAccept = () => {
+    setOpenAccept(false);
+  };
 
-    const headerStyle = { color: '#126e82' }
-    const [open, setOpen] = React.useState(false);
+// backend connection to add med details to the database
+const [medid, setMedId] = useState("");
+const [quantity, setQuantity] = useState("");
+const [price, setPrice] = useState("");
+const [expdate, setExpDate] = useState("");
+const [mnfdate, setMnfDate] = useState("");
 
+// const submit = (e) => {
+//   e.preventDefault();
+//   const token = window.localStorage.getItem("token");
+//   axios.post(`${backendUrl}/pharmacy/addstock`, 
+//   {
+//   medid: medid,
+//   quantity:quantity,
+//   price:price,
+//   expiredate:expdate,
+//   manufacdate:mnfdate,
+// },{
+//   headers: {
+//         Authorization: token ? `Bearer ${token}` : "",
+//       },
+//     })
+//   .then((response) => {
+//       console.log(response);
+//       getdata();
+//     });
+// };
 
-    const handleClick = () => {
-        setOpen(true);
-    };
+function handleChange(event) {
 
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
+    // get file name
+    const fileName = event.target.files[0].name;
+    console.log(fileName);
 
-        setOpen(false);
-    };
+    // database ekata yawanna data eka eka gamu ganata
+    csvtojson().fromFile(fileName).then(source => {
+  
+    // Fetching the data from each row 
+    for (var i = 0; i < source.length; i++) {
+        setMedId(source[i]["MedId"]);
+        setQuantity(source[i]["Quantity"]);
+        setPrice(source[i]["price"]);
+        setExpDate(source[i]["expdate"]);
+        setMnfDate(source[i]["mnfdate"]);
+
+        e.preventDefault();
+        const token = window.localStorage.getItem("token");
+        axios.post(`${backendUrl}/pharmacy/addstock`, 
+        {
+        medid: medid,
+        quantity:quantity,
+        price:price,
+        expiredate:expdate,
+        manufacdate:mnfdate,
+    },{
+        headers: {
+              Authorization: token ? `Bearer ${token}` : "",
+            },
+          })
+        .then((response) => {
+            console.log(response);
+            getdata();
+          });
+    }
+    console.log("mish you did it!! All items stored into database successfully");
+    });
+}
 
     return (
+        <div>
+        <Card >
+            <CardHeader color="success">
+              <h4 className={classes.cardTitleWhite}>Enter CSV file</h4>
+            </CardHeader>
+            <CardBody>
+              <GridContainer>
+                <GridItem xs={6} sm={6} md={6}>
+                <Typography variant="body1"> Update Stock - Add (.csv) File</Typography>
+                </GridItem>
+                <GridItem xs={6} sm={6} md={6}>
+                <Button color="default" component="label" startIcon={<CloudUploadIcon />} size="sm">
+                  Upload <input type="file" hidden startIcon={<CloudUploadIcon />} onChange={handleChange}/>
+                  </Button>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={12} style={{display: "flex",justifyContent: "center", alignItems: "center",}}>
+                  <Button variant="outlined" color="success" onClick={handleClickOpenAccept}>
+                    Save
+                  </Button>
+                </GridItem>
+              </GridContainer>
+            </CardBody>
+          </Card>
+
         
-            <Grid container sm={12} >
+        {/*upload csv dialogbox*/}
+        <Dialog open={openAccept} onClose={handleCloseAccept} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description" >
+        <DialogTitle id="alert-dialog-title">{"Do you want to Save this to the stock"}</DialogTitle>
+        <DialogActions>
+            <Button onClick={handleCloseAccept} color="danger">
+            Cancle
+            </Button>
+            <Button onClick={handleCloseAccept} color="primary" autoFocus>
+            Yes
+            </Button>
+        </DialogActions>
+        </Dialog>
 
-
-                <Grid item xs={6} md={12}>
-
-                    <Typography variant="body1"> Update Stock - Add (.csv) File</Typography>
-                    <br></br>
-
-
-                </Grid>
-                <Grid container>
-                    <Grid item >
-                        <Button
-                            color="success"
-                            variant="contained"
-                            component="label"
-                            startIcon={<CloudUploadIcon />}
-                            style={buttonStyle}
-                        >
-                            Upload
-                            <input
-                                type="file"
-                                hidden
-                                startIcon={<CloudUploadIcon />}
-
-                            />
-                        </Button>
-                    </Grid>
-                    <Grid item md={3} >
-                        
-                    </Grid>
-                </Grid>
-            </Grid>
-        
+    </div>
     )
 }
 
