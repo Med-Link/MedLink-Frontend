@@ -8,7 +8,6 @@ import { Redirect, Route } from 'react-router-dom';
 
 const PrivateRoute2 = ({component: Component, ...rest}) => {
     return <Route {...rest} component={(props) => {
-        console.log('hiiii')
         const token = window.localStorage.getItem('token');
         if(token){
             return <Component {...props} />
