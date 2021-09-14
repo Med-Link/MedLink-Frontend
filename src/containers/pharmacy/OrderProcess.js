@@ -81,6 +81,9 @@ export default function OrderProcess() {
     })
 
   }
+  // const [doc1,setDoc1]= React.useState('');
+  // const [doc2,setDoc2]= React.useState('');
+  // const [doc3,setDoc3]= React.useState('');
   const [orderdata, setOrderData] = useState([]);
 
   const getorderreq = () => {
@@ -92,13 +95,30 @@ export default function OrderProcess() {
       },
     }).then(res => {
       const results = res.data.singleOrder.rows[0];
-      console.log(results);
+      console.log(results.prescription);
 
       setOrderData(results);
       // console.log(orderdata.description)
     })
 
   }
+  const [rejectmessage, setRejectmessage] = useState([]);
+
+  const rejectorder = () => {
+    const token = window.localStorage.getItem('token');
+    console.log('p')
+    axios.post(`${backendUrl}/pharmacy/rejectOrderReq`,{ orderreqid:id, rejectmessage:rejectmessage}, {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+    }).then(res => {
+      const results = res;
+      handleClose();
+      console.log(res);
+
+      // setData(results);
+    })
+  } 
   React.useEffect(() => {
     getdata();
     getorderreq();
@@ -156,7 +176,7 @@ export default function OrderProcess() {
               <h4 className={classes.cardTitleWhite}>Prescription</h4>
               </CardHeader>
               <CardBody color="primary" stats icon>
-                <PhotoSteps />        
+                <PhotoSteps documents={orderdata.prescription}/>        
               </CardBody>
             </Card>
         </GridItem>
@@ -338,11 +358,11 @@ export default function OrderProcess() {
             {"2. This is not a valid prescription"}<br></br>
             {"3. Prescription is too old."}<br></br>
           </DialogContentText>
-          <TextField autoFocus margin="dense" id="name" label="State the reason" type="email" fullWidth />
+          <TextField autoFocus margin="dense" id="name" label="State the reason" onChange={(e) => setRejectmessage(e.target.value)} type="email" fullWidth />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">Cancel</Button>
-          <Button onClick={handleClose} color="primary">Send</Button>
+          <Button onClick={()=>rejectorder()} color="primary">Send</Button>
         </DialogActions>
       </Dialog>
                
