@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from "prop-types";
+
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Paper from '@material-ui/core/Paper';
@@ -46,11 +48,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TextMobileStepper() {
+export default function TextMobileStepper(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = tutorialSteps.length;
+  let maxSteps = 2;
+  let imagesarray = [];
+  console.log(props.documents)
+  if(props.documents){
+    // imagesarray = JSON.stringify(props.documents.replace("{","").replace("}","").split('"').join(''));
+    imagesarray = props.documents.replace("{","").replace("}","").replace(/['"]+/g, '').split(",")
+    console.log(imagesarray[0])
+
+    maxSteps = imagesarray.length ;
+  }
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -59,7 +70,7 @@ export default function TextMobileStepper() {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
+  // console.log(props.documents)
   return (
     <div className={classes.root}>
       <Paper square elevation={0} className={classes.header}>
@@ -67,8 +78,8 @@ export default function TextMobileStepper() {
       </Paper>
       <img
         className={classes.img}
-        src={tutorialSteps[activeStep].imgPath}
-        alt={tutorialSteps[activeStep].label}
+        src={imagesarray[activeStep]}
+        alt={imagesarray[activeStep]}
       />
       <MobileStepper
         steps={maxSteps}
@@ -91,3 +102,9 @@ export default function TextMobileStepper() {
     </div>
   );
 }
+TextMobileStepper.propTypes = {
+  documents: PropTypes.any,
+  // doc2: PropTypes.string,
+  // doc3: PropTypes.string,
+
+};
