@@ -9,7 +9,7 @@ import CheckIcon from '@material-ui/icons/Check';
 // core components/views for Admin layout
 import DashboardPage from "../Dashboard.js";
 import OrderRequest from "../OrderRequests.js";
-import ConfirmedOrders from "../ConfirmedOrders.js";
+// import ConfirmedOrders from "../ConfirmedOrders.js";
 import ClosedDeals from "../ClosedDeals.js";
 import UpdateStock from "../UpdateStock.js";
 import ClosedDealsDetails from "../ClosedDealsDetails.js";
@@ -32,13 +32,13 @@ const dashboardRoutes = [
     component: OrderRequest,
     layout: "/pharmacy",
   },
-  {
-    path: "/confirmedorders",
-    name: "Confirmed Orders",
-    icon: CheckIcon,
-    component: ConfirmedOrders,
-    layout: "/pharmacy",
-  },
+  // {
+  //   path: "/confirmedorders",
+  //   name: "Confirmed Orders",
+  //   icon: CheckIcon,
+  //   component: ConfirmedOrders,
+  //   layout: "/pharmacy",
+  // },
   {
     path: "/closeddeals",
     name: "Closed Deals",
