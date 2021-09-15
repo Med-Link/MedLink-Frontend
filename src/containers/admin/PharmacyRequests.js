@@ -276,7 +276,7 @@ export default function PharmacyRequests() {
                             <Button size='sm' color="primary" onClick={()=>handleClickOpen(row.document1,row.document2,row.document3)}>View</Button>
                             </TableCell>
                             <TableCell>
-                            <Button size='sm' color="primary" onClick={()=>acceptPharmacy(row.pharmacyid)}>Accept</Button>
+                           <Button size='sm' color="primary" onClick={()=>acceptPharmacy(row.pharmacyid)}>Accept</Button>
                             </TableCell>
                             <TableCell align="left">
                             <Button size='sm' color="default" onClick={()=>handleClickOpenReject(row.pharmacyid)}>Reject</Button>

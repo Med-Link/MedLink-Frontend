@@ -107,6 +107,8 @@ export default function ClosedDeals() {
     setOpen(false);
   };
 
+ 
+
   //backend connection
   const [data, setData] = useState([]);
   const getdata =() =>{
@@ -123,6 +125,29 @@ export default function ClosedDeals() {
             setData(results);
       })    
   }
+
+  const handleClickViewDeal = (pharmacyid) => {
+    const token = window.localStorage.getItem('token');
+
+    // console.log('kkkk')
+    axios.post(`${backendUrl}/pharmacy/acceptpharmacy/orderprocess`, {pharmacyid:pharmacyid}, {
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : ''
+      },
+  }).then((response)=>{
+      console.log(response);
+      getdata();
+      // setSignedUp(true);
+
+  }).catch((err)=>{
+      console.log(err);
+      // console.log("kkkkkk");
+
+      // setError("Password must be atleast 6 characters long");
+  });
+  // console.log(token)
+};
+
   React.useEffect(()=>{
     getdata();
   },[]);
@@ -195,7 +220,7 @@ export default function ClosedDeals() {
                             </TableCell>
                             <TableCell align="left">
                               <Link variant="h6" underline="none" className={clsx(classes.rightLink)} href="closeddealsdetails/">
-                                <Button color="primary" >View</Button>
+                                <Button color="primary" onClick={()=>handleClickViewDeal(row.customerid)}>View</Button>
                               </Link>
                             </TableCell>
                           </TableRow>

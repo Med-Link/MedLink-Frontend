@@ -1,10 +1,14 @@
-import React from "react";
+/* eslint-disable react/jsx-key */
+import React, { useState } from "react";
+import { backendUrl } from "../../urlConfig.js";
+import axios from "axios";
+
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
 
 import { makeStyles } from "@material-ui/core/styles";
-
+import { Table, TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
 import DateRange from "@material-ui/icons/DateRange";
 
 import { Button } from "@material-ui/core";
@@ -23,21 +27,13 @@ import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Paper from '@material-ui/core/Paper';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import AddressForm from '../customer/payment/AddressForm';
 import PaymentForm from '../customer/payment/PaymentForm';
 
 import Review from '../customer/payment/Review';
 import { Grid } from '@material-ui/core';
+
 
 
 const useStyles = makeStyles(styles);
@@ -60,12 +56,12 @@ function getStepContent(step) {
 export default function ClosedDealsDetails() {
   const classes = useStyles();
 
-  const toolBarStyle = {backgroundColor: '#126e82' }
+  const toolBarStyle = { backgroundColor: '#126e82' }
 
   const [activeStep, setActiveStep] = React.useState(0);
-  const headerStyle = {color: '#efe3e3',fontWeigth: 'bold'}
-  const btStyle = {color: '#efe3e3',backgroundColor: '#126e82'}
-  const subHeaderStyle = {color: '#126e82',fontWeigth: 'bold'}
+  const headerStyle = { color: '#efe3e3', fontWeigth: 'bold' }
+  const btStyle = { color: '#efe3e3', backgroundColor: '#126e82' }
+  const subHeaderStyle = { color: '#126e82', fontWeigth: 'bold' }
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -75,6 +71,36 @@ export default function ClosedDealsDetails() {
     setActiveStep(activeStep - 1);
   };
 
+  // --------------------------------
+
+  const [data, setData] = useState([]);
+  const getdata = () => {
+    const token = window.localStorage.getItem('token');
+
+    axios.get(`${backendUrl}/pharmacy/viewallcloseddeals`, {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+    }).then(res => {
+      const results = res.data.result;
+      console.log(results);
+      setData(results);
+    })
+  }
+
+  React.useEffect(() => {
+    getdata();
+  }, []);
+
+  // ------------------------------------
+
+  const columns = [
+    { id: 'medname', label: 'Order ID' },
+    { id: 'quanity', label: 'Description' },
+    { id: 'price', label: 'Customer ID' },
+  ];
+  const rows = data;
+
   return (
     <div>
       <GridContainer>
@@ -82,17 +108,20 @@ export default function ClosedDealsDetails() {
 
           <Card>
             <CardBody color="secondary" stats icon >
+
               <div className={classes.stats}>
-                <h1>Michelle Fernando - 0768757722</h1>
+                <h1>{data.orderid}</h1>
+
+
               </div>
-              <div className={classes.stats} style={{fontSize:20}}>
-                <p>I Need this medicine except Codein Zulphet</p>
+              <div className={classes.stats} style={{ fontSize: 20 }}>
+                <p>{data.description}</p>
               </div>
             </CardBody>
             <CardFooter stats>
               <div className={classes.stats}>
                 <DateRange />
-                36 mins Ago
+                {data.date}
               </div>
             </CardFooter>
           </Card>
@@ -103,7 +132,7 @@ export default function ClosedDealsDetails() {
         <GridItem xs={12} sm={12} md={6}>
           <Card>
             <CardBody color="primary" stats icon>
-              <React.Fragment  padding={2}>
+              <React.Fragment padding={2}>
                 <React.Fragment>
                   <GridItem>
                     <Typography component="h1" variant="h4" align="center" style={subHeaderStyle}>
@@ -118,114 +147,80 @@ export default function ClosedDealsDetails() {
                         Date :
                       </Typography>
                       <Typography variant="h7" gutterBottom>
-                        14/07/2021
+                        {data.date}
                       </Typography>
                     </Grid>
                   </Grid>
-                </React.Fragment>  
+                </React.Fragment>
                 <React.Fragment>
                   <Grid item >
                     <Typography variant="h6" gutterBottom style={subHeaderStyle}>
                       Order Summary :
                     </Typography>
                   </Grid>
-                </React.Fragment>  
-                <React.Fragment>
-                  <Grid container>
-                    <Grid item md={6} sm={6} xs={6} >
-                      <Typography variant="body1">
-                        Penadol
-                      </Typography>
-                    </Grid>
-                    <Grid item md={6} sm={6} xs={6} >
-                      <Typography variant="body1">
-                        Rs.20.00
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                  <Grid container>
-                    <Grid item md={6} sm={6} xs={6} >
-                      <Typography variant="body2" gutterBottom>
-                        Card 1
-                      </Typography>
-                    </Grid>
-                  </Grid>
                 </React.Fragment>
                 <React.Fragment>
+
                   <Grid container>
                     <Grid item md={6} sm={6} xs={6} >
-                      <Typography variant="body1">
-                        Amoxiline
-                      </Typography>
-                    </Grid>
-                    <Grid item md={6} sm={6} xs={6} >
-                      <Typography variant="body1">
-                        Rs.50.00
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                  <Grid container>
-                    <Grid item md={6} sm={6} xs={6} >
-                      <Typography variant="body2" gutterBottom>
-                        Card 2
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </React.Fragment>
-                <React.Fragment>
-                  <Grid container>
-                    <Grid item md={6} sm={6} xs={6} >
-                      <Typography variant="body1">
-                        Sitrizine
-                      </Typography>
-                    </Grid>
-                    <Grid item md={6} sm={6} xs={6} >
-                      <Typography variant="body1" >
-                        Rs.50.00
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                  <Grid container>
-                    <Grid item md={6} sm={6} xs={6} >
-                      <Typography variant="body2" gutterBottom>
-                        14 tablets
-                      </Typography>
+                      <Table>
+                        <TableHead>
+                          <TableRow>
+                            {columns.map((column) => (
+                              <TableCell style={{ color: '#213458', backgroundColor: "white" }}
+                                key={column.id}
+                                align={column.align}
+                              >
+                                {column.label}
+                              </TableCell>
+                            ))}
+                          </TableRow>
+                        </TableHead>
+                        <TableBody >
+                          {data.map((row) => {
+                            return (
+                              <TableRow>
+                                <TableCell align="left">
+                                  {row.name}
+                                </TableCell>
+                                <TableCell align="left">
+                                  {row.email}
+                                </TableCell>
+                                <TableCell align="left">
+                                  {row.contactnumber}
+                                </TableCell>
+
+                              </TableRow>
+                            );
+                          }
+                          )
+                          }
+                        </TableBody>
+
+                      </Table>
                     </Grid>
                   </Grid>
                 </React.Fragment>
               </React.Fragment>
-              <React.Fragment >
-                <Grid container  >
-                  <Grid item md={6} sm={6} xs={6} >
-                    <Typography variant="h6" gutterBottom>
-                      Total
-                    </Typography>
-                  </Grid>
-                  <Grid item md={6} sm={6} xs={6} >
-                    <Typography variant="h6" gutterBottom>
-                      Rs.120.00
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </React.Fragment>
+
               <React.Fragment>
                 <Grid container>
                   <Grid item md={6} sm={6} xs={6} >
                     <Typography variant="h6" gutterBottom style={subHeaderStyle}>
                       Delivery To :
                     </Typography>
-                  {/* </Grid>
+                    {/* </Grid>
                   <Grid item md={6} sm={6} xs={6} > */}
-                  <Typography variant="body2">
-                      Michelle Fernando
+                    <Typography variant="body2">
+                      {data.firstname+" "+data.lastname}
                     </Typography>
                     <Typography variant="body2" >
-                      Chapel Road, Colombo 04
+                      {data.location}
                     </Typography>
                   </Grid>
                 </Grid>
               </React.Fragment>
-              
+
 
 
             </CardBody>
