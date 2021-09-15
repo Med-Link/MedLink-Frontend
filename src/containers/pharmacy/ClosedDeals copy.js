@@ -69,15 +69,10 @@ export default function ClosedDeals() {
     setOpen(false);
   };
 
-<<<<<<< HEAD
  
 
   //backend connection
   const [data, setData] = useState([]);
-=======
-  const classes = useStyles();
-  
->>>>>>> 27720b58ad124406fb317cdd79b9876877d31973
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
     
@@ -99,29 +94,17 @@ export default function ClosedDeals() {
         // setData(results);
       })        
   }
-<<<<<<< HEAD
 
   const handleClickViewDeal = (pharmacyid) => {
     const token = window.localStorage.getItem('token');
 
     // console.log('kkkk')
     axios.post(`${backendUrl}/pharmacy/acceptpharmacy/orderprocess`, {pharmacyid:pharmacyid}, {
-=======
-  const [vieworderdata, setVieworderdata] = useState([]);
-
-  const getorderdata = (medlistid) => {
-    // console.log(typeof(medlistid))
-    const token = window.localStorage.getItem('token');
-  
-    // console.log('kkkk')
-    axios.post(`${backendUrl}/order/singleorderbill`, {medlistid: medlistid}, {
->>>>>>> 27720b58ad124406fb317cdd79b9876877d31973
       headers: {
         'Authorization': token ? `Bearer ${token}` : ''
       },
   }).then((response)=>{
       console.log(response);
-<<<<<<< HEAD
       getdata();
       // setSignedUp(true);
 
@@ -134,16 +117,6 @@ export default function ClosedDeals() {
   // console.log(token)
 };
 
-=======
-      setVieworderdata(response.data.rows);
-  
-  }).catch((err)=>{
-      console.log(err);
- 
-  });
-  
-  };
->>>>>>> 27720b58ad124406fb317cdd79b9876877d31973
   React.useEffect(()=>{
     getdata();
   },[]);
@@ -158,7 +131,6 @@ export default function ClosedDeals() {
             </p> */}
           </CardHeader>
           <CardBody>
-<<<<<<< HEAD
           <div>
                     <FormControl fullWidth variant="outlined" size="small">
                       <OutlinedInput
@@ -225,23 +197,6 @@ export default function ClosedDeals() {
 
                     </Table>
                   </TableScrollbar>
-=======
-            <Table
-              tableHeaderColor="primary"
-              tableHead={["Order Number", "Delivery Address","Delivery Cost", "Service Cost", "Total Cost", "Pharmacy","City","View more" ]}
-              tableData={data}
-            />
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">
-                             
-                        </DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
-                              <ViewHistoryDetails products={vieworderdata}/>
-                            </DialogContentText>
-                        </DialogContent>
-                  </Dialog>
->>>>>>> 27720b58ad124406fb317cdd79b9876877d31973
           </CardBody>
         </Card>
       </GridItem>
