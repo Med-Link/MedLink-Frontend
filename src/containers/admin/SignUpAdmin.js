@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import { backendUrl } from '../../urlConfig';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -36,6 +38,17 @@ function Copyright() {
   }
 
 const SignUpAdmin=()=>{
+
+    const notify = () => toast.error(' Admin Signup Error!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -59,11 +72,13 @@ const SignUpAdmin=()=>{
 
         }).catch((err)=>{
             console.log(err);
+            notify();
             setError("Password must be atleast 6 characters long");
         });
         
     }else{
         console.log("Unchecked");
+        notify();
     }
     }
 
@@ -135,6 +150,16 @@ const SignUpAdmin=()=>{
             <Box mt={5}>
                 <Copyright />
             </Box>
+            <ToastContainer position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover  
+      /> 
         </Grid>
     )
 }

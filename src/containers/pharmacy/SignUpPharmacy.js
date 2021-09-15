@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUpPharmacy=()=>{
   const notify = () => toast.error(' Signup Error!', {
-    position: "top-right",
+    position: "top-center",
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
