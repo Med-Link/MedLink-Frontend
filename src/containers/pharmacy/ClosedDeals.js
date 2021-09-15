@@ -1,36 +1,27 @@
-/* eslint-disable react/jsx-key */
-import React, {useState} from "react";
-import axios from 'axios';
-import clsx from 'clsx';
-import { backendUrl } from "../../urlConfig.js";
-import TableScrollbar from 'react-table-scrollbar'
 
+import React,{useEffect,useState} from "react";
+import { backendUrl } from "../../urlConfig.js";
+// import axios from 'axios'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import Link from '@material-ui/core/Link';
-import { withStyles } from '@material-ui/core/styles';
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
-import FormControl from '@material-ui/core/FormControl';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-
-import SearchIcon from '@material-ui/icons/Search';
-import CloseIcon from '@material-ui/icons/Close';
-
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
+import Table from "../../components/Dashboard/Table/Table.js";
 import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
-import Button from "../../components/Dashboard//CustomButtons/Button";
-import PhotoSteps from "../../components/admin/dialogbox/PhotoSteps";
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Link from '@material-ui/core/Link';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import ViewHistoryDetails from "../customer/buyingHistory/ViewHistoryDetails"
+import axios from "axios";
+ 
 
 const styles = {
   cardCategoryWhite: {
@@ -62,193 +53,99 @@ const styles = {
   },
 };
 
-const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
-
-const DialogContent = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
-
-
-
-
 const useStyles = makeStyles(styles);
 
 export default function ClosedDeals() {
-  const [searchTerm, setSearchTerm] = useState(""); //for search function
 
-  const classes = useStyles();
+  const [data, setData] = React.useState([]);
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (medlistid) => {
     setOpen(true);
+    getorderdata(medlistid);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
 
- 
-
-  //backend connection
-  const [data, setData] = useState([]);
+  const classes = useStyles();
+  
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
     
-      axios.get(`${backendUrl}/pharmacy/viewallcloseddeals`,{
-        headers: {
-          'Authorization': token ? `Bearer ${token}` : ''
-        }
-        })
-      .then(res =>{
-        const results =  res.data.result;
-            console.log(results);
-            setData(results);
-      })    
+      axios.get(`${backendUrl}/pharmacy/closeddeals`,{
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+      }).then(res =>{
+        const results =  res.data.getorderhistory.rows;
+        console.log(results);
+
+        let array =[];
+        results.forEach(element=>{
+         let arr=[];
+         arr.push(element.orderid,element.address,element.deliverycost,element.servicecost,element.totalcost,element.name,element.city,<Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.medlistid)} round>View</Button>);
+           array.push(arr);
+        })         
+       setData(array); 
+        // setData(results);
+      })        
   }
+  const [vieworderdata, setVieworderdata] = useState([]);
 
-  const handleClickViewDeal = (pharmacyid) => {
+  const getorderdata = (medlistid) => {
+    // console.log(typeof(medlistid))
     const token = window.localStorage.getItem('token');
-
+  
     // console.log('kkkk')
-    axios.post(`${backendUrl}/pharmacy/acceptpharmacy/orderprocess`, {pharmacyid:pharmacyid}, {
+    axios.post(`${backendUrl}/order/singleorderbill`, {medlistid: medlistid}, {
       headers: {
         'Authorization': token ? `Bearer ${token}` : ''
       },
   }).then((response)=>{
       console.log(response);
-      getdata();
-      // setSignedUp(true);
-
+      setVieworderdata(response.data.rows);
+  
   }).catch((err)=>{
       console.log(err);
-      // console.log("kkkkkk");
-
-      // setError("Password must be atleast 6 characters long");
+ 
   });
-  // console.log(token)
-};
-
+  
+  };
   React.useEffect(()=>{
     getdata();
   },[]);
-
-  const columns = [
-    { id: 'orderid', label: 'Order ID'},
-    { id: 'customerid', label: 'Customer ID'},
-    { id: 'date', label: 'Date and Time'},
-    { id: 'details', label: 'Details'},];
-  const rows = data; 
-
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Closed Deals</h4>
+            <h4 className={classes.cardTitleWhite}>Order History</h4>
+            {/* <p className={classes.cardCategoryWhite}>
+              Here is a subtitle for this table
+            </p> */}
           </CardHeader>
           <CardBody>
-          <div>
-                    <FormControl fullWidth variant="outlined" size="small">
-                      <OutlinedInput
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <SearchIcon/>
-                          </InputAdornment>
-                        }
-                        onChange={(event)=>{
-                          setSearchTerm(event.target.value);
-                        }}
-                        placeholder="Search...(OrderID, CustomerID, CustomerName)"
-                        fontSize="small"
-                        size="sm"
-                      />
-                    </FormControl>
-                  </div>          
-                  <TableScrollbar rows={15} style={{}}>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          {columns.map((column) => (
-                            <TableCell style={{color:'#213458',backgroundColor: "white"}}
-                              key={column.id}
-                              align={column.align}
-                            >
-                              {column.label}
-                            </TableCell>
-                          ))}
-                        </TableRow>
-                      </TableHead>
-                      
-                      <TableBody >
-                        {data.filter((row)=>{
-                          if (searchTerm == "") {
-                            return row
-                          } else if (row.orderid.toString().toLowerCase().includes(searchTerm.toLowerCase()) || row.customerid.toString().toLowerCase().includes(searchTerm.toLowerCase())){
-                            return row
-                          }
-                        }).map((row) => {
-                          return(
-                          <TableRow>
-                            <TableCell align="left">
-                              {row.orderid}
-                            </TableCell>
-                            <TableCell align="left">
-                              {row.customerid}
-                            </TableCell>
-                            <TableCell align="left">
-                              {row.date}
-                            </TableCell>
-                            <TableCell align="left">
-                              <Link variant="h6" underline="none" className={clsx(classes.rightLink)} href="closeddealsdetails/">
-                                <Button color="primary" onClick={()=>handleClickViewDeal(row.customerid)}>View</Button>
-                              </Link>
-                            </TableCell>
-                          </TableRow>
-                          );
-                        }
-                        )
-                        }
-                      </TableBody> 
-                      
-
-                    </Table>
-                  </TableScrollbar>
+            <Table
+              tableHeaderColor="primary"
+              tableHead={["Order Number", "Delivery Address","Delivery Cost", "Service Cost", "Total Cost", "Pharmacy","City","View more" ]}
+              tableData={data}
+            />
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">
+                             
+                        </DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                              <ViewHistoryDetails products={vieworderdata}/>
+                            </DialogContentText>
+                        </DialogContent>
+                  </Dialog>
           </CardBody>
         </Card>
       </GridItem>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Documents
-        </DialogTitle>
-        <DialogContent dividers>
-          <PhotoSteps/>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            Okay
-          </Button>
-        </DialogActions>
-      </Dialog>
+      
     </GridContainer>
   );
 }

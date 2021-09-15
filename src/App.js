@@ -13,6 +13,7 @@ import BuyingHistory from './containers/customer/buyingHistory/ViewHistoryDetail
 import EditProfile from './containers/customer/profile/EditProfile.js'
 import ResetPassword from './containers/customer/password/ResetPassword.js'
 import ForgotPassword from './containers/customer/password/ForgotPassword.js'
+import PasswordReset from './containers/customer/password/ResetPasswordPage.js'
 
 
 import Admin from './containers/admin/layouts/Admin.js'
@@ -48,6 +49,7 @@ function App() {
           <Route path="/EditProfile" component={EditProfile} />
           <Route path="/ResetPassword" component={ResetPassword} />
           <Route path="/ForgotPassword" component={ForgotPassword} />
+          <Route path="/PasswordReset" component={PasswordReset} />
            
 
           <PrivateRoute path="/admin" component={Admin} />

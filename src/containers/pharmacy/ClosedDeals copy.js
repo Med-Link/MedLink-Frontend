@@ -1,28 +1,27 @@
-/* eslint-disable react/jsx-key */
-import React, {useState} from "react";
-import axios from 'axios';
-import clsx from 'clsx';
-import { backendUrl } from "../../urlConfig.js";
-import TableScrollbar from 'react-table-scrollbar'
 
+import React,{useEffect,useState} from "react";
+import { backendUrl } from "../../urlConfig.js";
+// import axios from 'axios'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import Link from '@material-ui/core/Link';
-import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
-import FormControl from '@material-ui/core/FormControl';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-
-import SearchIcon from '@material-ui/icons/Search';
-
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
+import Table from "../../components/Dashboard/Table/Table.js";
 import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
-import Switch from "../../components/Dashboard/CustomButtons/Switch";
-import Button from "../../components/Dashboard//CustomButtons/Button";
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Link from '@material-ui/core/Link';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import ViewHistoryDetails from "../customer/buyingHistory/ViewHistoryDetails"
+import axios from "axios";
+ 
 
 const styles = {
   cardCategoryWhite: {
@@ -56,51 +55,111 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function ConfirmedOrders() {
-  const [searchTerm, setSearchTerm] = useState(""); //for search function
+export default function ClosedDeals() {
 
-  const classes = useStyles();
+  const [data, setData] = React.useState([]);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = (medlistid) => {
+    setOpen(true);
+    getorderdata(medlistid);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+<<<<<<< HEAD
+ 
+
   //backend connection
   const [data, setData] = useState([]);
+=======
+  const classes = useStyles();
+  
+>>>>>>> 27720b58ad124406fb317cdd79b9876877d31973
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
     
-      axios.get(`${backendUrl}/pharmacy/viewallcloseddeals`,{
-        headers: {
-          'Authorization': token ? `Bearer ${token}` : ''
-        }
-        })
-      .then(res =>{
-        const results =  res.data.result;
-            console.log(results);
-            setData(results);
-      })    
+      axios.get(`${backendUrl}/pharmacy/closeddeals`,{
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+      }).then(res =>{
+        const results =  res.data.getorderhistory.rows;
+        console.log(results);
+
+        let array =[];
+        results.forEach(element=>{
+         let arr=[];
+         arr.push(element.orderid,element.address,element.deliverycost,element.servicecost,element.totalcost,element.name,element.city,<Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.medlistid)} round>View</Button>);
+           array.push(arr);
+        })         
+       setData(array); 
+        // setData(results);
+      })        
   }
+<<<<<<< HEAD
+
+  const handleClickViewDeal = (pharmacyid) => {
+    const token = window.localStorage.getItem('token');
+
+    // console.log('kkkk')
+    axios.post(`${backendUrl}/pharmacy/acceptpharmacy/orderprocess`, {pharmacyid:pharmacyid}, {
+=======
+  const [vieworderdata, setVieworderdata] = useState([]);
+
+  const getorderdata = (medlistid) => {
+    // console.log(typeof(medlistid))
+    const token = window.localStorage.getItem('token');
+  
+    // console.log('kkkk')
+    axios.post(`${backendUrl}/order/singleorderbill`, {medlistid: medlistid}, {
+>>>>>>> 27720b58ad124406fb317cdd79b9876877d31973
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : ''
+      },
+  }).then((response)=>{
+      console.log(response);
+<<<<<<< HEAD
+      getdata();
+      // setSignedUp(true);
+
+  }).catch((err)=>{
+      console.log(err);
+      // console.log("kkkkkk");
+
+      // setError("Password must be atleast 6 characters long");
+  });
+  // console.log(token)
+};
+
+=======
+      setVieworderdata(response.data.rows);
+  
+  }).catch((err)=>{
+      console.log(err);
+ 
+  });
+  
+  };
+>>>>>>> 27720b58ad124406fb317cdd79b9876877d31973
   React.useEffect(()=>{
     getdata();
   },[]);
-
-  const columns = [
-    { id: 'orderid', label: 'Order ID'},
-    { id: 'customerid', label: 'Customer ID'},
-    { id: 'customername', label: 'Customer Name'},
-    { id: 'date', label: 'Date and Time'},
-    { id: 'details', label: 'Details'},
-    { id: 'action', label: 'Packed for Delivery'},];
-  const rows = data; 
-
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Order Requests</h4>
+            <h4 className={classes.cardTitleWhite}>Order History</h4>
             {/* <p className={classes.cardCategoryWhite}>
               Here is a subtitle for this table
             </p> */}
           </CardHeader>
           <CardBody>
-            <div>
+<<<<<<< HEAD
+          <div>
                     <FormControl fullWidth variant="outlined" size="small">
                       <OutlinedInput
                         endAdornment={
@@ -136,7 +195,7 @@ export default function ConfirmedOrders() {
                         {data.filter((row)=>{
                           if (searchTerm == "") {
                             return row
-                          } else if (row.orderid.toString().toLowerCase().includes(searchTerm.toLowerCase()) || row.customerid.toString().toLowerCase().includes(searchTerm.toLowerCase()) || row.firstname.toLowerCase().includes(searchTerm.toLowerCase()) || row.lastname.toLowerCase().includes(searchTerm.toLowerCase())){
+                          } else if (row.orderid.toString().toLowerCase().includes(searchTerm.toLowerCase()) || row.customerid.toString().toLowerCase().includes(searchTerm.toLowerCase())){
                             return row
                           }
                         }).map((row) => {
@@ -149,18 +208,12 @@ export default function ConfirmedOrders() {
                               {row.customerid}
                             </TableCell>
                             <TableCell align="left">
-                              {row.firstname} {row.lastname}
-                            </TableCell>
-                            <TableCell align="left">
                               {row.date}
                             </TableCell>
                             <TableCell align="left">
                               <Link variant="h6" underline="none" className={clsx(classes.rightLink)} href="closeddealsdetails/">
-                                <Button color="primary" >View</Button>
+                                <Button color="primary" onClick={()=>handleClickViewDeal(row.customerid)}>View</Button>
                               </Link>
-                            </TableCell>
-                            <TableCell align="left">
-                              <Switch color="secondary" inputProps={{ 'aria-label': 'primary checkbox' }} />
                             </TableCell>
                           </TableRow>
                           );
@@ -172,6 +225,23 @@ export default function ConfirmedOrders() {
 
                     </Table>
                   </TableScrollbar>
+=======
+            <Table
+              tableHeaderColor="primary"
+              tableHead={["Order Number", "Delivery Address","Delivery Cost", "Service Cost", "Total Cost", "Pharmacy","City","View more" ]}
+              tableData={data}
+            />
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">
+                             
+                        </DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                              <ViewHistoryDetails products={vieworderdata}/>
+                            </DialogContentText>
+                        </DialogContent>
+                  </Dialog>
+>>>>>>> 27720b58ad124406fb317cdd79b9876877d31973
           </CardBody>
         </Card>
       </GridItem>
