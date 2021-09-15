@@ -2,6 +2,8 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
+import GridItem from "../../../components/Dashboard/Grid/GridItem.js";
+import GridContainer from "../../../components/Dashboard/Grid/GridContainer.js";
 //import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import { TextField } from '@material-ui/core';
@@ -81,12 +83,14 @@ const ForgotPassword=()=>{
     const paperStyle={padding :20,height:'500px',width:'340px', margin:"20px auto"}
     const avatarStyle={backgroundColor: '#126e82'}
     const gridStyle={padding: 20}
-    const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0', width:'340px'}
+    const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '10px 0', width:'340px'}
     const headingStyle = {color: '#126e82',fontSize: '20px'};
-    const paragraphStyle = {color: '#126e82'};
+    const paragraphStyle = {color: '#126e82',margin: '50px 0 0 0'};
+    const paragraphStyle1 = {color: '#126e82'};
     const inputStyle = {width: '700px'}
     const grid2Style={padding: 10}
     const iconStyle = {color: '#126e82',height:'50px',width:'50px'}
+    const textFeildStyle = {height: '50px'}
 
     return(
         
@@ -98,15 +102,30 @@ const ForgotPassword=()=>{
                     <h1 style={headingStyle}>Forgot Your Password?</h1>
                 </Grid>
 
+                <GridContainer>
+                  <GridItem xs={12}>
+                    <p style={paragraphStyle1}>Enter Your Email Address Which Is Send The Verification Code :</p>
+                  </GridItem>
+                  <GridItem xs={12}>
+                  <TextField
+                            id="email"
+                            label="email"
+                            style={textFeildStyle}
+                            InputProps={{
+                                readOnly: false,
+                            }}
+                            variant="outlined"
+                            fullWidth
+                        />
+                  </GridItem>
+                </GridContainer>
+
                 <Grid align='center' style={grid2Style}>
                      
                     <p style={paragraphStyle}>Click here to send password reset link to your email.</p>
                 </Grid>
 
                  
-                     
-                     
-
                     <Grid item xs={6}>
                         <Button type='submit' variant="contained" style={buttonStyle} href="">Send Recovery Link</Button>
                     </Grid>
