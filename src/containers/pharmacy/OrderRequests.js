@@ -66,7 +66,7 @@ export default function OrderRequests() {
       },
     }).then(res => {
       const results = res.data.allOrders.rows;
-      console.log(results);
+      // console.log(results);
       setData(results);
     })
   }
