@@ -1,6 +1,8 @@
 import React,{useState} from 'react';
 import axios from 'axios';
 import { backendUrl } from '../../../urlConfig.js';
+import { Redirect } from 'react-router-dom';
+
 
 
 import { Grid } from '@material-ui/core';
@@ -109,7 +111,8 @@ const ForgotPassword=()=>{
         },
     }).then((response)=>{
         console.log(response);
-    
+        return <Redirect to="/" />;
+
     }).catch((err)=>{
         console.log(err);
    
