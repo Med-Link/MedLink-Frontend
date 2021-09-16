@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
@@ -6,6 +6,8 @@ import Avatar from '@material-ui/core/Avatar';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import { TextField } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
+import axios from 'axios';
+import { backendUrl } from '../../../urlConfig';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
@@ -56,7 +58,7 @@ function Copyright() {
 
 const ResetPassword=()=>{
 
-    const classes = useStyles();
+  const classes = useStyles();
   const [values, setValues] = React.useState({
     amount: '',
     password: '',
@@ -64,6 +66,43 @@ const ResetPassword=()=>{
     weightRange: '',
     showPassword: false,
   });
+
+   
+  //const [currentPassword, setCurrentPassword] = useState('');
+  //const [newPassword, setNewPassword] = useState('');
+  const [password, setPassword] = useState('');
+  const [checked, setChecked] = useState(false);
+  const [error, setError] = useState('');
+  const [rstPassword, setResetPassword] = useState(false);
+
+  const resetPassword = async (e) => {
+    e.preventDefault();
+    if (checked) {
+      const form = {
+         
+        password,
+      };
+      const isValid = await customerSchema.isValid(form);
+      if (isValid === true) {
+        axios.post(`${backendUrl}/resetpassword`, {
+          
+          password,
+        }).then((response) => {
+          console.log(response);
+          setResetPassword(true);
+        }).catch((err) => {
+          if (err.response && err.response.data) {
+            console.log(err);// some reason error message
+          }
+        });
+      } else {
+        // console.log(err);
+        setError('Password Reset Failed');
+      }
+    } //else {
+      //console.log('Unchecked');
+    //}
+  };
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -101,7 +140,7 @@ const ResetPassword=()=>{
                             type='password'
                             variant="outlined"
                             fullWidth
-                        />*/}
+                        /> 
                         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                             <InputLabel style={inputStyle} htmlFor="outlined-adornment-password">Current Password</InputLabel>
                             <OutlinedInput
@@ -124,7 +163,7 @@ const ResetPassword=()=>{
                             }
                             labelWidth={200}
                         />
-                        </FormControl>
+                        </FormControl>*/}
                     </Grid>
 
                     <Grid item xs={12}>
@@ -173,8 +212,8 @@ const ResetPassword=()=>{
                             <OutlinedInput
                             id="outlined-adornment-password"
                             type={values.showPassword ? 'text' : 'password'}
-                            value={values.password}
-                            onChange={handleChange('password')}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             
                             endAdornment={
                                 <InputAdornment position="end">
@@ -197,7 +236,7 @@ const ResetPassword=()=>{
                      
 
                     <Grid item xs={6}>
-                        <Button type='submit' variant="contained" style={buttonStyle} href="">Submit</Button>
+                        <Button type='submit' variant="contained" onClick={resetPassword} style={buttonStyle} href="">Submit</Button>
                     </Grid>
 
                      
