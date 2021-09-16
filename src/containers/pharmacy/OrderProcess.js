@@ -68,6 +68,8 @@ export default function OrderProcess() {
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = useState(""); //for search function
   const [cartproducts, setCartproducts] = useState([]); 
+  // const [total, setTotal] = useState(0); //for search function
+
 
   const [open, setOpen] = React.useState(false);
 
@@ -95,6 +97,8 @@ export default function OrderProcess() {
     if(parseInt(medicinerow.quantity)>=parseInt(quantity)){
     const data = {
       medid:medicinerow.medid,
+      batchid:medicinerow.batchid,
+      amount:medicinerow.quantity,
       medname:medicinerow.medname,
       brand:medicinerow.brand,
       unitprice:medicinerow.price,
@@ -106,7 +110,8 @@ export default function OrderProcess() {
 const getSumColumn = () => {
   let sum = 0
   cartproducts.forEach(el => sum += (el.unitprice*el.quantity))
-  return sum
+  // setTotal(sum)
+  return sum;
 }  
 // medicine list backend connection
 
@@ -126,9 +131,24 @@ const getSumColumn = () => {
     })
 
   }
-  // const [doc1,setDoc1]= React.useState('');
-  // const [doc2,setDoc2]= React.useState('');
-  // const [doc3,setDoc3]= React.useState('');
+  const sendorderbill = () => {
+    const token = window.localStorage.getItem('token');
+    const tot = getSumColumn();
+    console.log(cartproducts);
+    axios.post(`${backendUrl}/pharmacy/sendorderbill`, {orderreqid:id,totalprice:tot,customerid:orderdata.customerid,medlist:cartproducts}, {
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : ''
+      },
+  }).then((response)=>{
+      console.log(response);
+      handleCloseAccept();
+      
+  }).catch((err)=>{
+      console.log(err);
+      
+  });
+ 
+};
   const [orderdata, setOrderData] = useState([]);
 
   const getorderreq = () => {
@@ -143,7 +163,7 @@ const getSumColumn = () => {
       // console.log(results.prescription);
 
       setOrderData(results);
-      // console.log(orderdata.description)
+      // console.log(orderdata.customerid)
     })
 
   }
@@ -365,7 +385,7 @@ const getSumColumn = () => {
                     }
                     <TableRow>
                       <TableCell>
-                        Total =
+                        Total 
                       </TableCell>
                       <TableCell>
                         {getSumColumn()}
@@ -393,7 +413,7 @@ const getSumColumn = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseAccept} color="secondary">Cancle</Button>
-          <Button onClick={handleCloseAccept} color="primary" autoFocus>Send</Button>
+          <Button onClick={()=>sendorderbill()} color="primary" autoFocus>Send</Button>
         </DialogActions>
       </Dialog>
 
