@@ -54,11 +54,11 @@ export default function TextMobileStepper(props) {
   const [activeStep, setActiveStep] = React.useState(0);
   let maxSteps = 2;
   let imagesarray = [];
-  console.log(props.documents)
+  // console.log(props.documents)
   if(props.documents){
     // imagesarray = JSON.stringify(props.documents.replace("{","").replace("}","").split('"').join(''));
     imagesarray = props.documents.replace("{","").replace("}","").replace(/['"]+/g, '').split(",")
-    console.log(imagesarray[0])
+    // console.log(imagesarray[0])
 
     maxSteps = imagesarray.length ;
   }

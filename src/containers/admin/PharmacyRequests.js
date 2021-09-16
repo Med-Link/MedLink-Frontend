@@ -113,7 +113,7 @@ export default function PharmacyRequests() {
   const [rejectreason, setRejectreason] = useState();
   const rejectPharmacy = () => {
     const token = window.localStorage.getItem('token');
-    console.log(pharmacyid);
+    // console.log(pharmacyid);
     // console.log('kkkk')
     axios.post(`${backendUrl}/admin/rejectpharmacy`, {pharmacyid:pharmacyid,rejectreason:rejectreason}, {
       headers: {
