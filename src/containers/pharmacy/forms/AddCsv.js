@@ -2,6 +2,7 @@ import React, {useState } from "react";
 import { backendUrl } from "../../../urlConfig.js";
 import axios from "axios";
 import Papa from "papaparse";
+import { Link } from "react-router-dom";
 
 import Typography from '@material-ui/core/Typography';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
@@ -76,6 +77,11 @@ const AddCsv = () => {
         <Card >
             <CardHeader color="success">
               <h4 className={classes.cardTitleWhite}>Enter CSV file</h4>
+              <p>
+                <h5 className={classes.cardTitleWhite}>CSV File Format *   
+                <Link to="./medlink-csvfileformat.xlsx" target="_blank" download style={{color:"white"}}> Download here</Link>
+                </h5>
+              </p>
             </CardHeader>
             <CardBody>
               <GridContainer>
