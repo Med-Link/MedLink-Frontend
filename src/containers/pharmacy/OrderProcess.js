@@ -5,6 +5,9 @@ import { backendUrl } from "../../urlConfig.js";
 import axios from "axios";
 import TableScrollbar from 'react-table-scrollbar'
 import { useParams } from 'react-router-dom'
+import Typography from '@material-ui/core/Typography';
+import Modal from '@material-ui/core/Modal';
+import Box from '@material-ui/core/Box';
 
 import { makeStyles } from "@material-ui/core/styles";
 import DateRange from "@material-ui/icons/DateRange";
@@ -32,16 +35,39 @@ import styles from "../../assets/jss/material-dashboard-react/views/dashboardSty
 import CustomInput from "../../components/Dashboard/CustomInput/CustomInput.js";
 
 import SimpleSelect from '../../components/pharmacy/DropDown';
+import { parse } from "dotenv";
 
 
 const useStyles = makeStyles(styles);
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function OrderProcess() {
+  const [openquantity, setOpenquantity] = React.useState(false);
+  const [medicinerow, setMedicinerow] = React.useState(null);
+  const [quantity, setQuanity] = useState(0);
+
+
+  const handleOpenquantity = (row) =>{ 
+    setMedicinerow(row);
+    setOpenquantity(true);
+  }
+  const handleClosequantity = () => setOpenquantity(false);
   const { id } = useParams();
   // console.log(id)
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = useState(""); //for search function
+  const [cartproducts, setCartproducts] = useState([]); 
 
   const [open, setOpen] = React.useState(false);
 
@@ -63,7 +89,26 @@ export default function OrderProcess() {
     setOpenAccept(false);
   };
 
-  // medicine list backend connection
+  const addtotable = ()=>{
+    // console.log(medicinerow.price)
+    handleClosequantity();
+    if(parseInt(medicinerow.quantity)>=parseInt(quantity)){
+    const data = {
+      medid:medicinerow.medid,
+      medname:medicinerow.medname,
+      brand:medicinerow.brand,
+      unitprice:medicinerow.price,
+      quantity:quantity
+    }
+    setCartproducts([...cartproducts,data]);
+  }
+}
+const getSumColumn = () => {
+  let sum = 0
+  cartproducts.forEach(el => sum += (el.unitprice*el.quantity))
+  return sum
+}  
+// medicine list backend connection
 
   const [data, setData] = useState([]);
   const getdata = () => {
@@ -95,7 +140,7 @@ export default function OrderProcess() {
       },
     }).then(res => {
       const results = res.data.singleOrder.rows[0];
-      console.log(results.prescription);
+      // console.log(results.prescription);
 
       setOrderData(results);
       // console.log(orderdata.description)
@@ -106,7 +151,7 @@ export default function OrderProcess() {
 
   const rejectorder = () => {
     const token = window.localStorage.getItem('token');
-    console.log('p')
+    // console.log('p')
     axios.post(`${backendUrl}/pharmacy/rejectOrderReq`,{ orderreqid:id, rejectmessage:rejectmessage}, {
       headers: {
         Authorization: token ? `Bearer ${token}` : "",
@@ -131,7 +176,7 @@ export default function OrderProcess() {
     { id: 'batchid', label: 'Batch ID'},
     { id: 'qty', label: 'Current Qty'},
     { id: 'unitprice', label: 'Unit Price(Rs.)'},
-    { id: 'addquantity', label: 'Add Quantity'},
+    // { id: 'addquantity', label: 'Add Quantity'},
     { id: 'confirm', label: 'Confirm'},];
   const rows = data; 
 
@@ -143,8 +188,11 @@ export default function OrderProcess() {
     { id: 'unitprice', label: 'Unit Price(Rs.)'},
     { id: 'price', label: 'Total Price'},
     ];
-  const rows2=["001","he he"]
+  // const rows2=["001","he he"]
   
+
+
+
   return (
     <div>
       <GridContainer>
@@ -250,11 +298,11 @@ export default function OrderProcess() {
                         <TableCell align="left">
                           {row.price}
                         </TableCell>
-                        <TableCell align="left">
+                        {/* <TableCell align="left">
                           <TextField id="standard-basic" label="Qty" size='small' />
-                        </TableCell>
+                        </TableCell> */}
                         <TableCell align="left">
-                          <Button color="primary" round size="sm">Add</Button>
+                          <Button color="primary" onClick={()=>handleOpenquantity(row)} round size="sm">Add</Button>
                         </TableCell>
                       </TableRow>
                       );
@@ -289,26 +337,26 @@ export default function OrderProcess() {
                   </TableHead>
                   
                   <TableBody >
-                    {rows2.map((row) => {
+                    {cartproducts.map((row) => {
                       return(
                       <TableRow>
                         <TableCell align="left">
-                          {/* {row.medid} */}
+                          {row.medid}
                         </TableCell>
                         <TableCell align="left">
-                          {/* {row.medname} */}
+                          {row.medname}
                         </TableCell>
                         <TableCell align="left">
-                          {/* {row.brand} */}
+                          {row.brand}
                         </TableCell>
                         <TableCell align="left">
-                          {/* {row.quantity} */}
+                          {parseInt(row.quantity)}
                         </TableCell>
                         <TableCell align="left">
-                          {/* {row.price} */}
+                          {parseInt(row.unitprice)}
                         </TableCell>
                         <TableCell align="left">
-                          {/* {row.price}*{row.quantity} */}
+                         {row.unitprice*row.quantity}
                         </TableCell>
                       </TableRow>
                       );
@@ -317,10 +365,10 @@ export default function OrderProcess() {
                     }
                     <TableRow>
                       <TableCell>
-                        Total is
+                        Total =
                       </TableCell>
                       <TableCell>
-                        5000/=
+                        {getSumColumn()}
                       </TableCell>
                     </TableRow>
                   </TableBody> 
@@ -366,6 +414,21 @@ export default function OrderProcess() {
         </DialogActions>
       </Dialog>
                
+      <Modal
+        open={openquantity}
+        onClose={handleClosequantity}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Add Quantity
+          </Typography>
+          <TextField id="standard-basic" onChange={(e) => setQuanity(e.target.value)} label="Qty" size='small' />
+          <Button onClick={()=>addtotable()}  color="primary">Add Quantity</Button>
+        </Box>
+      </Modal>
     </div>
   );
 }
