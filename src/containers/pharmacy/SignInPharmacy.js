@@ -112,14 +112,13 @@ const SignInPharmacy = () => {
     }
     console.log(user);
     dispatch(login(user));
-    notify();
+
   }
 
   if (auth.authenticate) {
-
-    
+    notify();
     return <Redirect to={'/pharmacy'} />
-
+    
   }
 
   return (
@@ -210,7 +209,7 @@ const SignInPharmacy = () => {
         rtl={false}
         pauseOnFocusLoss
         draggable
-        pauseOnHover 
+        pauseOnHover
       />
     </div>
   )

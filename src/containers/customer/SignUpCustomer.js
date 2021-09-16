@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { backendUrl } from '../../urlConfig';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -79,6 +81,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUpCustomer = () => {
+  const notify = () => toast.error(' Signup Error!', {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+
+  const notify2 = () => toast.success(' Signup Sucess!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
   const classes = useStyles();
 
   const [firstName, setFirstName] = useState('');
@@ -115,15 +136,19 @@ const SignUpCustomer = () => {
         });
       } else {
         // console.log(err);
+        notify();
         setError('Signup Failed');
       }
     } else {
       console.log('Unchecked');
+      notify();
     }
   };
 
   if (signedUp) {
+    
     return <Redirect to="/customersignin" />;
+    notify2();
   }
 
   return (
@@ -257,7 +282,7 @@ const SignUpCustomer = () => {
                 <Grid item>
                   <Link href="/customersignin" variant="body2">
                     Already have an account? Sign in
-                </Link>
+                  </Link>
                 </Grid>
               </Grid>
 
@@ -270,6 +295,30 @@ const SignUpCustomer = () => {
       <Box xs={12} sm={12} md={12}>
         <Copyright />
       </Box>
+      <ToastContainer position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      {/* Same as */}
+      <ToastContainer />
     </div>
   );
 };
