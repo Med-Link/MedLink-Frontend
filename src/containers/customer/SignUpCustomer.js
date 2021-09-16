@@ -91,15 +91,7 @@ const SignUpCustomer = () => {
     progress: undefined,
   });
 
-  const notify2 = () => toast.success(' Signup Sucess!', {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
+  
   const classes = useStyles();
 
   const [firstName, setFirstName] = useState('');
@@ -148,7 +140,7 @@ const SignUpCustomer = () => {
   if (signedUp) {
     
     return <Redirect to="/customersignin" />;
-    notify2();
+    
   }
 
   return (
@@ -306,19 +298,7 @@ const SignUpCustomer = () => {
         pauseOnHover
       />
 
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      {/* Same as */}
-      <ToastContainer />
+
     </div>
   );
 };

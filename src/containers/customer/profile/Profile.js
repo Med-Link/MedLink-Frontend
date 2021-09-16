@@ -9,10 +9,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 
 import Card from "../../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../../components/Dashboard/Card/CardHeader.js";
@@ -22,36 +18,42 @@ import CardFooter from "../../../components/Dashboard/Card/CardFooter.js";
 import Button from "../../../components/Dashboard/CustomButtons/Button.js";
 import avatar from "../../../assets/images/admin.png";
 
+import { DialogContent } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
+import DialogActions from '@material-ui/core/DialogActions';
+
 import EditProfile from './EditProfile';
 import ResetPassword from '../password/ResetPassword'
+import AddBankDetails from '../bankdetails/AddBankDetails'
 
 
-  const styles = {
+const styles = {
     cardCategoryWhite: {
-      color: "rgba(255,255,255,.62)",
-      margin: "0",
-      fontSize: "14px",
-      marginTop: "0",
-      marginBottom: "0",
+        color: "rgba(255,255,255,.62)",
+        margin: "0",
+        fontSize: "14px",
+        marginTop: "0",
+        marginBottom: "0",
     },
     cardTitleWhite: {
-      color: "#FFFFFF",
-      marginTop: "0px",
-      minHeight: "auto",
-      fontWeight: "300",
-      fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-      marginBottom: "3px",
-      textDecoration: "none",
+        color: "#FFFFFF",
+        marginTop: "0px",
+        minHeight: "auto",
+        fontWeight: "300",
+        fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+        marginBottom: "3px",
+        textDecoration: "none",
     },
-  };
-  const useStyles = makeStyles(styles);
+};
+const useStyles = makeStyles(styles);
 
 
-const Profile=()=>{
+const Profile = () => {
     const classes = useStyles();
 
     const [openEdit, setOpenEdit] = React.useState(false);
     const [openReset, setOpenReset] = React.useState(false);
+    const [openResetBank, setOpenResetBank] = React.useState(false);
 
     const handleClickOpen1 = () => {
         setOpenEdit(true);
@@ -64,93 +66,110 @@ const Profile=()=>{
     const handleClickOpen2 = () => {
         setOpenReset(true);
     };
-    
+
     const handleClose2 = () => {
         setOpenReset(false);
     };
+    const handleClickOpenBankDetails = () => {
+        setOpenResetBank(true);
+    };
 
-    const paperStyle={padding :20,height:'550px',width:'500px', margin:"20px auto"}
-    const avatarStyle={backgroundColor: '#126e82'}
-    const gridStyle={padding: 20}
-    const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0 0 0', width: '50%'}
-    const headingStyle={color: '#126e82'}
+    const handleCloseBankDetails = () => {
+        setOpenResetBank(false);
+    };
+    const paperStyle = { padding: 20, height: '550px', width: '500px', margin: "20px auto" }
+    const avatarStyle = { backgroundColor: '#126e82' }
+    const gridStyle = { padding: 20 }
+    const buttonStyle = { color: '#efe3e3', backgroundColor: '#126e82', margin: '30px 0 0 0', width: '50%' }
+    const headingStyle = { color: '#126e82' }
 
     const customer = JSON.parse(localStorage.getItem('user'));
     const customeremail = customer[0].email;
     const firstname = customer[0].firstname;
     const lastname = customer[0].lastname;
-    return(
-    <GridContainer>
-      <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-                <img src={avatar} alt="..." />
-            </CardAvatar>
-            <CardBody profile>
-              <h1 className={classes.cardTitle}>Hello {firstname}</h1>
-              <p className={classes.description}>
-                Customize your profile here
-              </p>
-              
-            </CardBody>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={8}>
-            <Card>
-                <CardHeader color="success">
-                <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
-                <p className={classes.cardCategoryWhite}>Complete your profile</p>
-                </CardHeader>
-                <CardBody>
-                    <GridContainer>
-                        {/* {data.email} */}
-                        <GridItem xs={12} sm={12} md={6}>
-                        <CustomInput
-                            id="firstname"
-                            value= {firstname}
-                            formControlProps={{
-                            fullWidth: true,
-                            }}
-                        />
-                        </GridItem>
-                        <GridItem xs={12} sm={12} md={6}>
-                        <CustomInput
-                            id="lastname"
-                            value = {lastname}
-                            formControlProps={{
-                            fullWidth: true,
-                            }}
-                        />
-                        </GridItem>
-                    </GridContainer>
-                    <GridContainer>
-                        <GridItem xs={12} sm={12} md={6}> 
-                        <CustomInput
-                            id="email"
-                            value={customeremail}
-                            formControlProps={{
-                            fullWidth: true,
-                            }}
-                            inputProps={{
-                            disabled: true,
-                            }}
-                        />
-                        </GridItem>
-                        <GridItem xs={12} sm={12} md={6} style={{marginTop:'30px'}}>
-                            <Button type='submit' variant="contained"  onClick={handleClickOpen2} color="info">Reset Password</Button>
-                            <Dialog open={openReset} onClose={handleClose2} aria-labelledby="form-dialog-title">
-                                <ResetPassword/>
-                            </Dialog>
-                        </GridItem>              
-                    </GridContainer>
-                </CardBody>
-                <CardFooter>
-                    <Button color="success">Update Profile</Button>
-                </CardFooter>
-            </Card>
-        </GridItem>
-        
-    </GridContainer>
+    return (
+        <GridContainer>
+            <GridItem xs={12} sm={12} md={4}>
+                <Card profile>
+                    <CardAvatar profile>
+                        <img src={avatar} alt="..." />
+                    </CardAvatar>
+                    <CardBody profile>
+                        <h1 className={classes.cardTitle}>Hello {firstname}</h1>
+                        <p className={classes.description}>
+                            Customize your profile here
+                        </p>
+
+                    </CardBody>
+                </Card>
+            </GridItem>
+            <GridItem xs={12} sm={12} md={8}>
+                <Card>
+                    <CardHeader color="success">
+                        <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
+                        <p className={classes.cardCategoryWhite}>Complete your profile</p>
+                    </CardHeader>
+                    <CardBody>
+                        <GridContainer>
+                            {/* {data.email} */}
+                            <GridItem xs={12} sm={12} md={6}>
+                                <CustomInput
+                                    id="firstname"
+                                    value={firstname}
+                                    formControlProps={{
+                                        fullWidth: true,
+                                    }}
+                                />
+                            </GridItem>
+                            <GridItem xs={12} sm={12} md={6}>
+                                <CustomInput
+                                    id="lastname"
+                                    value={lastname}
+                                    formControlProps={{
+                                        fullWidth: true,
+                                    }}
+                                />
+                            </GridItem>
+                        </GridContainer>
+                        <GridContainer>
+                            <GridItem xs={12} sm={12} md={6}>
+                                <CustomInput
+                                    id="email"
+                                    value={customeremail}
+                                    formControlProps={{
+                                        fullWidth: true,
+                                    }}
+                                    inputProps={{
+                                        disabled: true,
+                                    }}
+                                />
+
+                                <Button type='submit' variant="contained" onClick={handleClickOpen2} color="info">Reset Password</Button>
+                                <Dialog open={openReset} onClose={handleClose2} aria-labelledby="form-dialog-title">
+                                    <ResetPassword />
+                                </Dialog>
+
+                                <Button type='submit' variant="contained" onClick={handleClickOpenBankDetails} color="info">Add Bank Details</Button>
+
+                                <Dialog open={openResetBank} onClose={handleCloseBankDetails} aria-labelledby="form-dialog-title">
+                                    <AddBankDetails />
+                                </Dialog>
+                            </GridItem>
+                            <GridItem xs={12} sm={12} md={6} style={{ marginTop: '30px' }}>
+
+                            </GridItem>
+
+                        </GridContainer>
+                    </CardBody>
+                    <CardFooter >
+
+
+                        <Button color="success">Update Profile</Button>
+                    </CardFooter>
+                </Card>
+            </GridItem>
+
+        </GridContainer>
     )
 }
 
