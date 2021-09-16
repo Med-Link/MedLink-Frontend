@@ -146,6 +146,7 @@ export default function Dashboard() {
             <CardFooter stats>
               <div>
                 <Autocomplete
+                  disableClearable
                   id="grouped-demo"
                   options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
                   groupBy={(option) => option.firstLetter}
