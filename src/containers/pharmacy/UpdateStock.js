@@ -61,7 +61,7 @@ export default function OrderProcess() {
       },
     }).then(res => {
       const results = res.data.rows;
-      console.log(res);
+      // console.log(res);
 
       setData(results);
     })

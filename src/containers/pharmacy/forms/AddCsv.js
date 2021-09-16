@@ -1,5 +1,8 @@
-import React, {useState} from "react";
-import csvtojson from "csvtojson";
+import React, {useState } from "react";
+import { backendUrl } from "../../../urlConfig.js";
+import axios from "axios";
+import Papa from "papaparse";
+
 import Typography from '@material-ui/core/Typography';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,10 +26,10 @@ function Alert(props) {
 }
 
 
-const Form = () => {
-    const classes = useStyles();
+const AddCsv = () => {
+  const classes = useStyles();
   
-    // save button
+  // save button states
   const [openAccept, setOpenAccept] = React.useState(false);
   const handleClickOpenAccept = () => {
     setOpenAccept(true);
@@ -35,75 +38,40 @@ const Form = () => {
     setOpenAccept(false);
   };
 
-// backend connection to add med details to the database
-const [medid, setMedId] = useState("");
-const [quantity, setQuantity] = useState("");
-const [price, setPrice] = useState("");
-const [expdate, setExpDate] = useState("");
-const [mnfdate, setMnfDate] = useState("");
+  // add csv
+  const[csv,setCSV] = useState(null);
 
-// const submit = (e) => {
-//   e.preventDefault();
-//   const token = window.localStorage.getItem("token");
-//   axios.post(`${backendUrl}/pharmacy/addstock`, 
-//   {
-//   medid: medid,
-//   quantity:quantity,
-//   price:price,
-//   expiredate:expdate,
-//   manufacdate:mnfdate,
-// },{
-//   headers: {
-//         Authorization: token ? `Bearer ${token}` : "",
-//       },
-//     })
-//   .then((response) => {
-//       console.log(response);
-//       getdata();
-//     });
-// };
+	const handleChange = event => {
+		setCSV(event.target.files[0]);
+	};
 
-function handleChange(event) {
+	const importCSV = () => {
+		const csvfile = csv;
+		Papa.parse(csvfile, {
+			complete: updateData,
+			header: true
+		});
+	};
 
-    // get file name
-    const fileName = event.target.files[0].name;
-    console.log(fileName);
-
-    // database ekata yawanna data eka eka gamu ganata
-    csvtojson().fromFile(fileName).then(source => {
-  
-    // Fetching the data from each row 
-    for (var i = 0; i < source.length; i++) {
-        setMedId(source[i]["MedId"]);
-        setQuantity(source[i]["Quantity"]);
-        setPrice(source[i]["price"]);
-        setExpDate(source[i]["expdate"]);
-        setMnfDate(source[i]["mnfdate"]);
-
-        e.preventDefault();
-        const token = window.localStorage.getItem("token");
-        axios.post(`${backendUrl}/pharmacy/addstock`, 
-        {
-        medid: medid,
-        quantity:quantity,
-        price:price,
-        expiredate:expdate,
-        manufacdate:mnfdate,
+	const updateData =(result)=> {
+		var data = result.data;
+    const token = window.localStorage.getItem("token");
+    axios.post(`${backendUrl}/pharmacy/addcsv`, 
+    {
+      csvarray:data
     },{
-        headers: {
-              Authorization: token ? `Bearer ${token}` : "",
-            },
-          })
-        .then((response) => {
-            console.log(response);
-            getdata();
-          });
-    }
-    console.log("mish you did it!! All items stored into database successfully");
-    });
-}
+    headers: {
+          Authorization: token ? `Bearer ${token}` : "",
+        },
+      })
+    .then((response) => {
+        console.log(response.data.message);
+      });
+	};
 
-    return (
+
+
+  return (
         <div>
         <Card >
             <CardHeader color="success">
@@ -136,7 +104,9 @@ function handleChange(event) {
             <Button onClick={handleCloseAccept} color="danger">
             Cancle
             </Button>
-            <Button onClick={handleCloseAccept} color="primary" autoFocus>
+            <Button onClick={(()=>{
+                importCSV();
+                handleCloseAccept();})} color="primary" autoFocus>
             Yes
             </Button>
         </DialogActions>
@@ -146,4 +116,5 @@ function handleChange(event) {
     )
 }
 
-export default Form;
+export default AddCsv;
+
