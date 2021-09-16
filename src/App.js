@@ -5,6 +5,8 @@ import Index from './containers/mainLandingPage/Home'
 
 import Admin from './containers/admin/layouts/Admin.js'
 import SignInAdmin from './containers/admin/SignInAdmin'
+import VerifyEmail from './containers/customer/VerifyEmail'
+import VerifyEmailPharmacy from './containers/pharmacy/VerifyEmail'
 
 import Customer from './containers/customer/layouts/Customer.js'
 import CustomerSignup from './containers/customer/SignUpCustomer'
@@ -28,6 +30,7 @@ function App() {
         <Switch>
           
           <Route path="/" exact component={Index} />           
+ 
 
           <PrivateRoute path="/admin" component={Admin} />
           <Route path="/adminsignin" component={SignInAdmin} />
@@ -41,6 +44,8 @@ function App() {
           <PrivateRoute2 path="/pharmacy" component={Pharmacy} />
           <Route path="/pharmacysignup" component={SignUpPharmacy} />
           <Route path="/pharmacysignin" component={SignInPharmacy} />
+          <Route path="/VerifyEmail" component={VerifyEmail} />
+          <Route path="/VerifyEmailPharmacy" component={VerifyEmailPharmacy} />
 
         </Switch>
       </Router>

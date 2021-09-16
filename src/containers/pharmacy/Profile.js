@@ -53,7 +53,7 @@ export default function UserProfile() {
         })
       .then(res =>{
         const results =  res.data.result[0];
-         console.log(results);
+        //  console.log(results);
         setData(results);
       })
     
