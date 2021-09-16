@@ -80,7 +80,7 @@ export default function ClosedDeals() {
       },
       }).then(res =>{
         const results =  res.data.getorderhistory.rows;
-        console.log(results);
+        // console.log(results);
 
         let array =[];
         results.forEach(element=>{

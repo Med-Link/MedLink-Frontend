@@ -1,4 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
+import axios from 'axios';
+import { backendUrl } from '../../../urlConfig.js';
+
+
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
@@ -92,6 +96,27 @@ const ForgotPassword=()=>{
     const iconStyle = {color: '#126e82',height:'50px',width:'50px'}
     const textFeildStyle = {height: '50px'}
 
+    const [email, setEmail] = useState("");
+
+    const forgotpassword = (medlistid) => {
+
+      const token = window.localStorage.getItem('token');
+    
+      // console.log('kkkk')
+      axios.post(`${backendUrl}/forgotpassword`, {email:email}, {
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        },
+    }).then((response)=>{
+        console.log(response);
+    
+    }).catch((err)=>{
+        console.log(err);
+   
+    });
+    
+    };
+
     return(
         
         <Grid style={gridStyle}>
@@ -114,6 +139,7 @@ const ForgotPassword=()=>{
                             InputProps={{
                                 readOnly: false,
                             }}
+                            onChange={(e) => setEmail(e.target.value)}
                             variant="outlined"
                             fullWidth
                         />
@@ -127,7 +153,7 @@ const ForgotPassword=()=>{
 
                  
                     <Grid item xs={6}>
-                        <Button type='submit' variant="contained" style={buttonStyle} href="">Send Recovery Link</Button>
+                        <Button type='submit' onClick={()=>forgotpassword()} variant="contained" style={buttonStyle} href="">Send Recovery Link</Button>
                     </Grid>
 
                      
