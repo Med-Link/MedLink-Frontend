@@ -58,7 +58,7 @@ const getAcceptedOrders = () => {
     },
   }).then(res => {
     const results = res.data.acceptcount.rows[0];
-    console.log(results);
+    // console.log(results);
     setAcceptedOrders(results);
   })
 }
@@ -72,7 +72,7 @@ const getCompleteOrders = () => {
       Authorization: token ? `Bearer ${token}` : "",
     },
   }).then(res => {
-    const results = res.data.result[0];
+    const results = res.data.alldeals.rows[0];
     // console.log(results);
     setCompleteOrders(results);
   })
