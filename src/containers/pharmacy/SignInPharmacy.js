@@ -178,7 +178,7 @@ const SignInPharmacy = () => {
               <Grid container justify="flex-end">
                 <Grid item>
                   <Typography>
-                    <Link href="#">
+                    <Link href="/ForgotPasswordPharmacy">
                       Forgot Password ?
                     </Link>
                   </Typography>

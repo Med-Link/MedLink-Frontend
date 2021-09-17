@@ -100,12 +100,12 @@ const ForgotPassword=()=>{
 
     const [email, setEmail] = useState("");
 
-    const forgotpassword = (medlistid) => {
+    const forgotpassword = () => {
 
       const token = window.localStorage.getItem('token');
     
       // console.log('kkkk')
-      axios.post(`${backendUrl}/forgotpassword`, {email:email}, {
+      axios.post(`${backendUrl}/pharmacy/forgotpassword`, {email:email}, {
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         },
