@@ -13,6 +13,15 @@ import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/co
 
 import SearchIcon from '@material-ui/icons/Search';
 
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
+
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
@@ -24,6 +33,32 @@ import Button from "../../components/Dashboard/CustomButtons/Button";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
 const useStyles = makeStyles(styles);
+const DialogTitle = withStyles(styles)((props) => {
+  const { children, classes, onClose, ...other } = props;
+  return (
+    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="h6">{children}</Typography>
+      {onClose ? (
+        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+});
+
+const DialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(MuiDialogContent);
+
+const DialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+  },
+}))(MuiDialogActions);
 
 export default function PharmacyPayble() {
   const classes = useStyles();
@@ -39,6 +74,14 @@ export default function PharmacyPayble() {
 
   // const rows = data; 
   const [data, setData] = useState([]);
+  const [openpay, setOpenpay] = React.useState(false);
+  const handleClickOpen = (pharmacyid) => {
+    setOpenpay(true);
+    setPharmacyid(pharmacyid);
+  };
+  const handleClosepay = () => {
+    setOpenpay(false);
+  };
 
   const getpayablepharmacy = () => {
 
@@ -49,23 +92,21 @@ export default function PharmacyPayble() {
       headers: {
         'Authorization': token ? `Bearer ${token}` : ''
       },
-       }).then((response)=>{
-      console.log(response);
-      setData(results);
-
-      // return <Redirect to="/" />;
-      console.log("jjjjjj")
-
-  }).catch((err)=>{
-      console.log(err);
+    }).then((res)=>{
+          console.log(res);
+          const results =  res.data.result;
+          setData(results);
+          // console.log("jjjjjj");
+        }).catch((err)=>{
+          console.log(err);
  
-  });
-  
+      });
+  };
   useEffect(() => {
     getpayablepharmacy();
   }, []);
 
-  };
+  
   return (
     
     <GridContainer>
@@ -114,13 +155,13 @@ export default function PharmacyPayble() {
                               {row.pharmacyid}
                             </TableCell>
                             <TableCell align="left">
+                              hhhhh
+                            </TableCell>
+                            <TableCell align="left">
                               {row.sum}
                             </TableCell>
                             <TableCell align="left">
-                              {row.brand}
-                            </TableCell>
-                            <TableCell align="left">
-                              <Button aria-label="pay" onClick={()=>handleClickOpenEdit(row.pharmacyid)} />
+                              <Button aria-label="pay" onClick={()=>handleClickOpen(row.pharmacyid)} />
                             </TableCell>
                           </TableRow>
                           );
@@ -134,6 +175,19 @@ export default function PharmacyPayble() {
           </CardBody>
         </Card>
       </GridItem>
+      <Dialog open={openpay} onClose={handleClosepay} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">pay the pharmacy</DialogTitle>
+        
+          
+        <DialogActions>
+          <Button onClick={handleClosepay} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={()=>rejectPharmacy()} color="primary">
+            confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
       
       
     </GridContainer>
