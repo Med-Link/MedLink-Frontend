@@ -6,14 +6,16 @@ import Notifications from "@material-ui/icons/Notifications";
 import Unarchive from "@material-ui/icons/Unarchive";
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import PaymentIcon from '@material-ui/icons/Payment';
+
 import DashboardPage from "../Dashboard.js";
 import UserProfile from "../UserProfile.js";
 import PharmacyRequests from "../PharmacyRequests.js";
-// import AdminRequests from "../AdminRequests.js";
 import NotificationsPage from "../Notifications.js";
 import Report from "../Reports.js";
 import Employees from "../Employees"
 import Medicine from "../Medicine"
+import PharmacyPayble from "../PharmacyPayble.js";
 
 const dashboardRoutes = [
   {
@@ -49,6 +51,13 @@ const dashboardRoutes = [
     name: "Medicine",
     icon: LocalHospitalIcon,
     component: Medicine,
+    layout: "/admin",
+  },
+  {
+    path: "/pharmacypayble",
+    name: "Pharmacy Payble",
+    icon: PaymentIcon,
+    component: PharmacyPayble,
     layout: "/admin",
   },
   {
