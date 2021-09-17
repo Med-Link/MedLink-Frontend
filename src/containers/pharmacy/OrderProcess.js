@@ -59,6 +59,10 @@ export default function OrderProcess() {
 
 
   const handleOpenquantity = (row) =>{ 
+    const item =cartproducts.filter((element)=>element.batchid==row.batchid)
+    if(item.length>0){
+      return;
+    }
     setMedicinerow(row);
     setOpenquantity(true);
   }
@@ -121,7 +125,16 @@ const getSumColumn = () => {
   return sum;
 }  
 // medicine list backend connection
-
+const removeitem=(batchid)=>{
+  const removeArray = cartproducts.filter(function( obj ) {
+    return obj.batchid !== batchid;
+});
+setCartproducts(removeArray);
+const removemedlist = orderbill.filter(function( obj ) {
+  return obj.batchid !== batchid;
+});
+setOrderbill(removemedlist);
+}
   const [data, setData] = useState([]);
   const getdata = () => {
     const token = window.localStorage.getItem('token');
@@ -140,11 +153,9 @@ const getSumColumn = () => {
   }
   
   const sendorderbill = () => {
-    console.log(orderbill)
    
     const token = window.localStorage.getItem('token');
     const tot = getSumColumn();
-    console.log(cartproducts);
     axios.post(`${backendUrl}/pharmacy/sendorderbill`, {orderreqid:id,totalprice:tot,customerid:orderdata.customerid,medlist:orderbill}, {
       headers: {
         'Authorization': token ? `Bearer ${token}` : ''
@@ -387,6 +398,10 @@ const getSumColumn = () => {
                         </TableCell>
                         <TableCell align="left">
                          {row.unitprice*row.quantity}
+                        </TableCell>
+                        <TableCell align="left">
+                          <Button onClick={()=>removeitem(row.batchid)} color="secondary">remove</Button>
+
                         </TableCell>
                       </TableRow>
                       );
