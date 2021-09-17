@@ -7,6 +7,8 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import { TextField } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
+import { useParams } from 'react-router-dom'
+
 import { backendUrl } from '../../../urlConfig';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
@@ -57,6 +59,7 @@ function Copyright() {
   }));
 
 const ResetPassword=()=>{
+  const { resetlink } = useParams();
 
   const classes = useStyles();
   const [values, setValues] = React.useState({
@@ -70,36 +73,27 @@ const ResetPassword=()=>{
    
   //const [currentPassword, setCurrentPassword] = useState('');
   //const [newPassword, setNewPassword] = useState('');
-  const [password, setPassword] = useState('');
+  const [newpassword, setNewpassword] = useState('');
   const [checked, setChecked] = useState(false);
   const [error, setError] = useState('');
   const [rstPassword, setResetPassword] = useState(false);
 
-  const resetPassword = async (e) => {
-    e.preventDefault();
-    if (checked) {
-      const form = {
-         
-        password,
-      };
-      const isValid = await customerSchema.isValid(form);
-      if (isValid === true) {
-        axios.post(`${backendUrl}/resetpassword`, {
-          
-          password,
+  const resetPassword = async () => {
+    // e.preventDefault();
+      console.log(resetlink,newpassword)
+        axios.post(`${backendUrl}/resetcustomerpassword`,{ 
+          resetlink,
+          newpassword,
         }).then((response) => {
           console.log(response);
-          setResetPassword(true);
+          // setResetPassword(true);
         }).catch((err) => {
           if (err.response && err.response.data) {
             console.log(err);// some reason error message
           }
         });
-      } else {
-        // console.log(err);
-        setError('Password Reset Failed');
-      }
-    } //else {
+      
+    //else {
       //console.log('Unchecked');
     //}
   };
@@ -174,29 +168,21 @@ const ResetPassword=()=>{
                             variant="outlined"
                             fullWidth
                         />*/}
-                        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+                        {/* <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined"> */}
                             <InputLabel style={inputStyle} htmlFor="outlined-adornment-password">New Password</InputLabel>
-                            <OutlinedInput
-                            id="outlined-adornment-password"
-                            type={values.showPassword ? 'text' : 'password'}
-                            value={values.password}
-                            onChange={handleChange('password')}
-                            
-                            endAdornment={
-                                <InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                    edge="end"
-                                >
-                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                </IconButton>
-                                </InputAdornment>
-                            }
-                            labelWidth={200}
-                        />
-                        </FormControl>
+                            <TextField
+                              variant="outlined"
+                              // value={password}
+                              onChange={(e) => setNewpassword(e.target.value)}
+                              required
+                              fullWidth
+                              name="password"
+                              label="Password"
+                              type="password"
+                              id="password"
+                              size="small"
+                            />
+                        {/* </FormControl> */}
                     </Grid>
 
                     <Grid item xs={12}>
@@ -207,13 +193,13 @@ const ResetPassword=()=>{
                             variant="outlined"
                             fullWidth
                         />*/}
-                        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+                        {/* <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                             <InputLabel style={inputStyle} htmlFor="outlined-adornment-password">Confirm New Password</InputLabel>
                             <OutlinedInput
                             id="outlined-adornment-password"
                             type={values.showPassword ? 'text' : 'password'}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            // value={password}
+                            // onChange={(e) => setNewpassword(e.target.value)}
                             
                             endAdornment={
                                 <InputAdornment position="end">
@@ -229,7 +215,7 @@ const ResetPassword=()=>{
                             }
                             labelWidth={200}
                         />
-                        </FormControl>
+                        </FormControl> */}
                     </Grid>
 
                      

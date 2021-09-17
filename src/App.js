@@ -39,7 +39,7 @@ function App() {
           <Route path="/customersignup" component={CustomerSignup} />
           <Route path="/customersignin" component={CustomerSignin} />
           <Route path="/ForgotPassword" component={ForgotPassword} />
-          <Route path="/PasswordReset" component={PasswordReset} />
+          <Route path='/ResetPassword/:resetlink' component={PasswordReset} />
 
           <PrivateRoute2 path="/pharmacy" component={Pharmacy} />
           <Route path="/pharmacysignup" component={SignUpPharmacy} />
