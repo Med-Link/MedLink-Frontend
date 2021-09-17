@@ -46,7 +46,7 @@ class Map extends React.Component{
 		}
 		window.sessionStorage.setItem("latitude", this.props.center.lat);
 		window.sessionStorage.setItem("longitude", this.props.center.lng);
-		window.sessionStorage.setItem("address", address);
+		// window.sessionStorage.setItem("address", address);
 	}
 	/**
 	 * Get the current address from the default map position and set those values in the state
@@ -67,6 +67,8 @@ class Map extends React.Component{
 					city: ( city ) ? city : '',
 					state: ( state ) ? state : '',
 				} )
+				window.sessionStorage.setItem("address", address);
+
 			},
 			error => {
 				console.error( error );

@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
-import React,{useState} from "react";
-// import axios from 'axios';
-// import { backendUrl } from "../../urlConfig.js";
+import React,{useState, useEffect} from "react";
+import axios from 'axios';
+import { backendUrl } from "../../urlConfig.js";
 import TableScrollbar from 'react-table-scrollbar'
 
 // @material-ui/core components
@@ -38,7 +38,34 @@ export default function PharmacyPayble() {
     { id: 'total', label: 'Payment'}];
 
   // const rows = data; 
+  const [data, setData] = useState([]);
+
+  const getpayablepharmacy = () => {
+
+    const token = window.localStorage.getItem('token');
   
+    console.log('kkkk')
+    axios.get(`${backendUrl}/admin/payablepharmacy`, {
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : ''
+      },
+       }).then((response)=>{
+      console.log(response);
+      setData(results);
+
+      // return <Redirect to="/" />;
+      console.log("jjjjjj")
+
+  }).catch((err)=>{
+      console.log(err);
+ 
+  });
+  
+  useEffect(() => {
+    getpayablepharmacy();
+  }, []);
+
+  };
   return (
     
     <GridContainer>
@@ -79,40 +106,29 @@ export default function PharmacyPayble() {
                           ))}
                         </TableRow>
                       </TableHead>
-                      <TableBody>he hee</TableBody>
-                      {/* <TableBody >
-                        {rows.filter((row)=>{
-                          if (searchTerm == "") {
-                            return row
-                          } else if (row.name.toLowerCase().includes(searchTerm.toLowerCase()) || row.email.toLowerCase().includes(searchTerm.toLowerCase()) 
-                          // || row.location.toLowerCase().includes(searchTerm.toLowerCase())
-                          ){
-                            return row
-                          }
-                        }).map((row) => {
+                      <TableBody>
+                      {data.map((row) => {
                           return(
                           <TableRow>
                             <TableCell align="left">
-                              // {row.pharmacyid}
+                              {row.pharmacyid}
                             </TableCell>
                             <TableCell align="left">
-                              {row.name}
+                              {row.sum}
                             </TableCell>
                             <TableCell align="left">
-                              {row.Total}
+                              {row.brand}
                             </TableCell>
                             <TableCell align="left">
-                              {row.location}
-                            </TableCell>
-                            <TableCell>
-                           <Button size='sm' color="primary">Done</Button>
+                              <Button aria-label="pay" onClick={()=>handleClickOpenEdit(row.pharmacyid)} />
                             </TableCell>
                           </TableRow>
                           );
                         }
                         )
                         }
-                      </TableBody> */}
+                      </TableBody>
+                      
                     </Table>
                   </TableScrollbar>
           </CardBody>

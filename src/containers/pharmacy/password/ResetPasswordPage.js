@@ -81,7 +81,7 @@ const ResetPassword=()=>{
   const resetPassword = async () => {
     // e.preventDefault();
       console.log(resetlink,newpassword)
-        axios.post(`${backendUrl}/resetcustomerpassword`,{ 
+        axios.post(`${backendUrl}/pharmacy/resetpassword`,{ 
           resetlink,
           newpassword,
         }).then((response) => {

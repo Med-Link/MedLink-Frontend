@@ -159,7 +159,7 @@ export default function Form(props){
                                   type="file"
                                   hidden
                                   onChange={handlePrescriptionDocs}
-
+                                  multiple
                                   startIcon={<CloudUploadIcon />}
                                   
                               />
