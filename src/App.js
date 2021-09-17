@@ -45,7 +45,7 @@ function App() {
           <PrivateRoute2 path="/pharmacy" component={Pharmacy} />
           <Route path="/pharmacysignup" component={SignUpPharmacy} />
           <Route path="/pharmacysignin" component={SignInPharmacy} />
-          <Route path="/VerifyEmailPharmacy" component={VerifyEmailPharmacy} />
+          <Route path="/VerifyEmailPharmacy/:token" component={VerifyEmailPharmacy} />
 
         </Switch>
       </Router>
