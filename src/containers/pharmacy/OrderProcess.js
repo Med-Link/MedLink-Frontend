@@ -68,6 +68,8 @@ export default function OrderProcess() {
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = useState(""); //for search function
   const [cartproducts, setCartproducts] = useState([]); 
+  const [orderbill, setOrderbill] = useState([]); 
+
   // const [total, setTotal] = useState(0); //for search function
 
 
@@ -105,6 +107,11 @@ export default function OrderProcess() {
       quantity:quantity
     }
     setCartproducts([...cartproducts,data]);
+    const orderlistdata = {
+      batchid:medicinerow.batchid,
+      amount:quantity,
+    }
+    setOrderbill([...orderbill,orderlistdata]);
   }
 }
 const getSumColumn = () => {
@@ -131,11 +138,14 @@ const getSumColumn = () => {
     })
 
   }
+  
   const sendorderbill = () => {
+    console.log(orderbill)
+   
     const token = window.localStorage.getItem('token');
     const tot = getSumColumn();
     console.log(cartproducts);
-    axios.post(`${backendUrl}/pharmacy/sendorderbill`, {orderreqid:id,totalprice:tot,customerid:orderdata.customerid,medlist:cartproducts}, {
+    axios.post(`${backendUrl}/pharmacy/sendorderbill`, {orderreqid:id,totalprice:tot,customerid:orderdata.customerid,medlist:orderbill}, {
       headers: {
         'Authorization': token ? `Bearer ${token}` : ''
       },
