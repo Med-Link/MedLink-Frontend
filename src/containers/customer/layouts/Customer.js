@@ -15,7 +15,7 @@ import routes from "../../../containers/customer/routes/routes"
 
 import styles from "../../../assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
-import bgImage from "../../../assets/images/pharmacy.png";
+import bgImage from "../../../assets/images/customer-bg.jpg";
 import logo from "../../../assets/images/logo.jpg";
 
 let ps;

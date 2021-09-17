@@ -15,7 +15,7 @@ import routes from "../../../containers/admin/routes/routes"
 
 import styles from "../../../assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
-import bgImage from "../../../assets/images/pharmacy.png";
+import bgImage from "../../../assets/images/admin-bg.jpg";
 import logo from "../../../assets/images/medLink.jpg";
 
 let ps;
@@ -96,7 +96,7 @@ export default function Admin({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={"MedLink- Admin"}
+        logoText={"Admin"}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}
