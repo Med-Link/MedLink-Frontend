@@ -130,7 +130,7 @@ const VerifyEmail=()=>{
 
                 <Grid align='center' style={grid2Style}>
                      
-                    <p style={paragraphStyle}>Click here to send verification link to your email.</p>
+                    <p style={paragraphStyle}>Click to verify your email.</p>
                 </Grid>
 
                  
