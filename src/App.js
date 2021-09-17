@@ -40,11 +40,11 @@ function App() {
           <Route path="/customersignin" component={CustomerSignin} />
           <Route path="/ForgotPassword" component={ForgotPassword} />
           <Route path='/ResetPassword/:resetlink' component={PasswordReset} />
+          <Route path="/VerifyEmail/:token" component={VerifyEmail} />
 
           <PrivateRoute2 path="/pharmacy" component={Pharmacy} />
           <Route path="/pharmacysignup" component={SignUpPharmacy} />
           <Route path="/pharmacysignin" component={SignInPharmacy} />
-          <Route path="/VerifyEmail" component={VerifyEmail} />
           <Route path="/VerifyEmailPharmacy" component={VerifyEmailPharmacy} />
 
         </Switch>
