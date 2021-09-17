@@ -1,4 +1,8 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { backendUrl } from '../../urlConfig';
+
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
@@ -59,6 +63,7 @@ function Copyright() {
   }));
 
 const VerifyEmail=()=>{
+  const { token } = useParams();
 
     const classes = useStyles();
 /*const [values, setValues] = React.useState({
@@ -93,6 +98,24 @@ const VerifyEmail=()=>{
     const iconStyle = {color: '#126e82',height:'50px',width:'50px'}
     const textFeildStyle = {height: '50px'}
 
+    const verifyemail = async () => {
+      // e.preventDefault();
+        // console.log(resetlink,newpassword)
+          axios.post(`${backendUrl}/pharmacy/verifyemail`,{ 
+            token
+          }).then((response) => {
+            console.log(response);
+            // setResetPassword(true);
+          }).catch((err) => {
+            if (err.response && err.response.data) {
+              console.log(err);// some reason error message
+            }
+          });
+        
+      //else {
+        //console.log('Unchecked');
+      //}
+    };
     return(
         
         <Grid style={gridStyle}>
@@ -107,12 +130,12 @@ const VerifyEmail=()=>{
 
                 <Grid align='center' style={grid2Style}>
                      
-                    <p style={paragraphStyle}>Click here to send verification link to your email.</p>
+                    <p style={paragraphStyle}>Click to verify your email.</p>
                 </Grid>
 
                  
                     <Grid item xs={6}>
-                        <Button type='submit' variant="contained" style={buttonStyle} href="">Send Verification Link</Button>
+                        <Button type='submit' onClick={verifyemail} variant="contained" style={buttonStyle} href="">Verify</Button>
                     </Grid>
 
                      
