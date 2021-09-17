@@ -5,6 +5,8 @@ import Index from './containers/mainLandingPage/Home'
 
 import Admin from './containers/admin/layouts/Admin.js'
 import SignInAdmin from './containers/admin/SignInAdmin'
+import ForgotPasswordAdmin from './containers/admin/password/ForgotPassword.js'
+import PasswordResetAdmin from './containers/admin/password/ResetPasswordPage.js'
 import VerifyEmail from './containers/customer/VerifyEmail'
 import VerifyEmailPharmacy from './containers/pharmacy/VerifyEmail'
 
@@ -17,6 +19,8 @@ import PasswordReset from './containers/customer/password/ResetPasswordPage.js'
 import Pharmacy from './containers/pharmacy/layouts/Pharmacy'
 import SignUpPharmacy from './containers/pharmacy/SignUpPharmacy'
 import SignInPharmacy from './containers/pharmacy/SignInPharmacy'
+import ForgotPasswordPharmacy from './containers/pharmacy/password/ForgotPassword.js'
+import PasswordResetPharmacy from './containers/pharmacy/password/ResetPasswordPage.js'
 
 import PrivateRoute from './components/HOC/privateRoute';
 import PrivateRoute1 from './components/HOC/privateRoute1';
@@ -29,11 +33,13 @@ function App() {
        <Router>
         <Switch>
           
-          <Route path="/" exact component={Index} />           
- 
+          <Route path="/" exact component={Index} />          
+
 
           <PrivateRoute path="/admin" component={Admin} />
           <Route path="/adminsignin" component={SignInAdmin} />
+          <Route path="/ForgotPasswordAdmin" component={ForgotPasswordAdmin} />
+          <Route path="/PasswordResetAdmin" component={PasswordResetAdmin} />
 
           <PrivateRoute1 path="/Customer" component={Customer} />
           <Route path="/customersignup" component={CustomerSignup} />
@@ -42,10 +48,15 @@ function App() {
           <Route path='/ResetPassword/:resetlink' component={PasswordReset} />
           <Route path="/VerifyEmail/:token" component={VerifyEmail} />
 
+
           <PrivateRoute2 path="/pharmacy" component={Pharmacy} />
           <Route path="/pharmacysignup" component={SignUpPharmacy} />
           <Route path="/pharmacysignin" component={SignInPharmacy} />
           <Route path="/VerifyEmailPharmacy/:token" component={VerifyEmailPharmacy} />
+          <Route path="/ForgotPasswordPharmacy" component={ForgotPasswordPharmacy} />
+          <Route path="/PasswordResetPharmacy" component={PasswordResetPharmacy} />
+
+           
 
         </Switch>
       </Router>
