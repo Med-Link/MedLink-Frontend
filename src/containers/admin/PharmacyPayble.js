@@ -5,22 +5,16 @@ import { backendUrl } from "../../urlConfig.js";
 import TableScrollbar from 'react-table-scrollbar'
 
 // @material-ui/core components
-import { makeStyles,withStyles } from "@material-ui/core/styles";
+import { makeStyles} from "@material-ui/core/styles";
 import FormControl from '@material-ui/core/FormControl';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
 
 import SearchIcon from '@material-ui/icons/Search';
-
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
 
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
@@ -33,49 +27,13 @@ import Button from "../../components/Dashboard/CustomButtons/Button";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
 const useStyles = makeStyles(styles);
-const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
 
-const DialogContent = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
 
 export default function PharmacyPayble() {
   const classes = useStyles();
-
   const [searchTerm, setSearchTerm] = useState(""); //for search function
 
-
-  const columns = [
-    { id: 'pid', label: 'PharmacyId'},
-    { id: 'pharmacyname', label: 'Pharmacy Name'},
-    { id: 'total', label: 'Total Amount'},
-    { id: 'total', label: 'Payment'}];
-
-  // const rows = data; 
-  const [pharmacyid, setPharmacyid] = useState('');
-
-  const [data, setData] = useState([]);
+  //POPUP DIALOGBOX
   const [openpay, setOpenpay] = React.useState(false);
   const handleClickOpen = (pharmacyid) => {
     setOpenpay(true);
@@ -85,27 +43,10 @@ export default function PharmacyPayble() {
     setOpenpay(false);
   };
 
-  const paypharmacy = () => {
-    const token = window.localStorage.getItem('token');
-
-    axios.post(`${backendUrl}/admin/paypharmacy`,{pharmacyid:pharmacyid}, {
-      headers: {
-        Authorization: token ? `Bearer ${token}` : "",
-      },
-    }).then(res => {
-      console.log(res);
-      // setData(results);
-    }).catch((err)=>{
-      console.log(err);
-
-    })
-  };
-
+  //backend connection for view payble pharmacies
+  const [data, setData] = useState([]);
   const getpayablepharmacy = () => {
-
     const token = window.localStorage.getItem('token');
-  
-    console.log('kkkk')
     axios.get(`${backendUrl}/admin/payablepharmacy`, {
       headers: {
         'Authorization': token ? `Bearer ${token}` : ''
@@ -114,16 +55,36 @@ export default function PharmacyPayble() {
           console.log(res);
           const results =  res.data.result;
           setData(results);
-          // console.log("jjjjjj");
         }).catch((err)=>{
           console.log(err);
- 
       });
   };
   useEffect(() => {
     getpayablepharmacy();
   }, []);
 
+  const columns = [
+    { id: 'pid', label: 'PharmacyId'},
+    { id: 'pharmacyname', label: 'Pharmacy Name'},
+    { id: 'total', label: 'Total Amount'},
+    { id: 'total', label: 'Payment'}];
+  const rows = data; 
+
+
+  //BACKEND CONNECTION FOR SET PAYMENT STATUS TRUE
+  const [pharmacyid, setPharmacyid] = useState('');
+  const paypharmacy = () => {
+    const token = window.localStorage.getItem('token');
+    axios.post(`${backendUrl}/admin/paypharmacy`,{pharmacyid:pharmacyid}, {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+    }).then(res => {
+      console.log("PAMENT STATES SET TO TRUE");
+    }).catch((err)=>{
+      console.log(err);
+    })
+  };
   
   return (
     
@@ -166,7 +127,13 @@ export default function PharmacyPayble() {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                      {data.map((row) => {
+                      {rows.filter((row)=>{
+                          if (searchTerm == "") {
+                            return row
+                          } else if (row.pharmacyid.toString().toLowerCase().includes(searchTerm.toLowerCase())){
+                            return row
+                          }
+                        }).map((row) => {
                           return(
                           <TableRow>
                             <TableCell align="left">
@@ -179,34 +146,30 @@ export default function PharmacyPayble() {
                               {row.sum}
                             </TableCell>
                             <TableCell align="left">
-                              <Button aria-label="pay" onClick={()=>handleClickOpen(row.pharmacyid)} />
-                            </TableCell>
+                              <Button aria-label="pay" onClick={()=>handleClickOpen(row.pharmacyid)} color="primary">Pay</Button>                            </TableCell>
                           </TableRow>
                           );
                         }
                         )
                         }
                       </TableBody>
-                      
                     </Table>
                   </TableScrollbar>
           </CardBody>
         </Card>
       </GridItem>
+      
       <Dialog open={openpay} onClose={handleClosepay} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">pay the pharmacy</DialogTitle>
-        
-          
         <DialogActions>
           <Button onClick={handleClosepay} color="primary">
             Cancel
           </Button>
-          <Button onClick={()=>paypharmacy()} color="primary">
+          <Button onClick={()=>{paypharmacy();handleClosepay();}} color="primary">
             confirm
           </Button>
         </DialogActions>
       </Dialog>
-      
       
     </GridContainer>
   );
