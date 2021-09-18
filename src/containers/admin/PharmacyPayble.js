@@ -64,7 +64,7 @@ export default function PharmacyPayble() {
   }, []);
 
   const columns = [
-    { id: 'pid', label: 'PharmacyId'},
+    { id: 'pid', label: 'Pharmacy Id'},
     { id: 'pharmacyname', label: 'Pharmacy Name'},
     { id: 'total', label: 'Total Amount'},
     { id: 'total', label: 'Payment'}];
