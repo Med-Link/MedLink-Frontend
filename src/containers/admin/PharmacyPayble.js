@@ -124,7 +124,6 @@ export default function PharmacyPayble() {
                           {columns.map((column) => (
                             <TableCell style={{color:'#213458',backgroundColor: "white"}}
                               key={column.id}
-                              align={column.align}
                             >
                               {column.label}
                             </TableCell>
