@@ -6,6 +6,7 @@ import TableScrollbar from 'react-table-scrollbar'
 import TextField from '@material-ui/core/TextField';
 
 // @material-ui/core
+// import { createTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid} from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
@@ -133,7 +134,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <GridContainer item spacing={3}>
+      <GridContainer item={true} spacing={3}>
         <GridItem xs={12} sm={6} md={6}>
           <Card style={cardStyle}>
             <CardHeader color="info" stats icon>
@@ -153,11 +154,11 @@ export default function Dashboard() {
                       </DialogTitle>
                       <DialogContent>
                         <DialogContentText>
-                          <GridContainer item spacing={1}>
+                          <GridContainer item={true} spacing={1}>
                             <GridItem xs={12}>
                               <p style={sentenceStyle}>Select an Area to Get the Nearest Pharmacies in Order :</p>
                             </GridItem>
-                            <Grid container xs={12} >
+                            <Grid item={true} container xs={12} >
                             <Map
                               center={{lat: 6.9271, lng: 79.8612}}
                               height='230px'
@@ -165,7 +166,7 @@ export default function Dashboard() {
                         
                               zoom={7} />
                             </Grid>
-                            <Grid item xs={12} sm={12} md={12}>
+                            <Grid item={true} xs={12} sm={12} md={12}>
                               <TextField 
                                   variant="outlined"
                                   fullWidth
@@ -191,7 +192,7 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>  
-        <GridItem xs={12} sm={6} md={6}>
+        <GridItem item={true} xs={12} sm={6} md={6}>
           <Card style={cardStyle}>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
@@ -209,7 +210,7 @@ export default function Dashboard() {
                   }}
                   placeholder="Search..."
                   fontSize="small"
-                  size="sm"
+                  // size="sm"
                 />
               </FormControl>
             </div>
@@ -221,10 +222,10 @@ export default function Dashboard() {
         </GridItem> 
       </GridContainer>
       
-      <GridContainer xs={12} sm={12} md={12}>
+      <GridContainer item={true} xs={12} sm={12} md={12}>
         <Card style={cdStyle}>  
           <CardHeader color="success" stats icon>
-            <Grid item xs={12}>
+            <Grid item={true} xs={12}>
               <p style={ftStyle}>Result</p>
             </Grid>
           </CardHeader>
@@ -276,7 +277,7 @@ export default function Dashboard() {
 
               </Table>
             </TableScrollbar>
-            <Grid item xs={12}>
+            <Grid item={true} xs={12}>
               <Dialog open={openList} onClose={handleClose1} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">
                   Send Prescription
