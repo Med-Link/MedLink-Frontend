@@ -145,7 +145,7 @@ export default function PharmacyPayble() {
                               {row.pharmacyid}
                             </TableCell>
                             <TableCell align="left">
-                              hhhhh
+                              {row.name}
                             </TableCell>
                             <TableCell align="left">
                               {row.sum}
