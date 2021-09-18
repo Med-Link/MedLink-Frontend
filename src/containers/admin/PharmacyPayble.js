@@ -80,12 +80,17 @@ export default function PharmacyPayble() {
         Authorization: token ? `Bearer ${token}` : "",
       },
     }).then(res => {
-      console.log("PAMENT STATES SET TO TRUE");
+      console.log("pharmacy paid");
+      getpayablepharmacy();
     }).catch((err)=>{
       console.log(err);
     })
   };
-  
+
+  useEffect(()=>{
+    getpayablepharmacy();
+  },[]);
+
   return (
     
     <GridContainer>
