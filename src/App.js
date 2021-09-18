@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-
+ 
 import Index from './containers/mainLandingPage/Home'
 
 import Admin from './containers/admin/layouts/Admin.js'
@@ -15,6 +15,7 @@ import CustomerSignup from './containers/customer/SignUpCustomer'
 import CustomerSignin from './containers/customer/SignInCustomer'
 import ForgotPassword from './containers/customer/password/ForgotPassword.js'
 import PasswordReset from './containers/customer/password/ResetPasswordPage.js'
+import TermsAndConditions from './containers/customer/TermsAndConditions.js'
 
 import Pharmacy from './containers/pharmacy/layouts/Pharmacy'
 import SignUpPharmacy from './containers/pharmacy/SignUpPharmacy'
@@ -47,6 +48,8 @@ function App() {
           <Route path="/ForgotPassword" component={ForgotPassword} />
           <Route path='/ResetPassword/:resetlink' component={PasswordReset} />
           <Route path="/VerifyEmail/:token" component={VerifyEmail} />
+          <Route path="/TermsAndConditions" component={TermsAndConditions} />
+          
 
 
           <PrivateRoute2 path="/pharmacy" component={Pharmacy} />
