@@ -73,6 +73,8 @@ export default function PharmacyPayble() {
     { id: 'total', label: 'Payment'}];
 
   // const rows = data; 
+  const [pharmacyid, setPharmacyid] = useState('');
+
   const [data, setData] = useState([]);
   const [openpay, setOpenpay] = React.useState(false);
   const handleClickOpen = (pharmacyid) => {
@@ -81,6 +83,22 @@ export default function PharmacyPayble() {
   };
   const handleClosepay = () => {
     setOpenpay(false);
+  };
+
+  const paypharmacy = () => {
+    const token = window.localStorage.getItem('token');
+
+    axios.post(`${backendUrl}/admin/paypharmacy`,{pharmacyid:pharmacyid}, {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+    }).then(res => {
+      console.log(res);
+      // setData(results);
+    }).catch((err)=>{
+      console.log(err);
+
+    })
   };
 
   const getpayablepharmacy = () => {
@@ -183,7 +201,7 @@ export default function PharmacyPayble() {
           <Button onClick={handleClosepay} color="primary">
             Cancel
           </Button>
-          <Button onClick={()=>rejectPharmacy()} color="primary">
+          <Button onClick={()=>paypharmacy()} color="primary">
             confirm
           </Button>
         </DialogActions>
