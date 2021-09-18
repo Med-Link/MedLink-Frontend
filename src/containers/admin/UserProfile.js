@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { backendUrl } from "../../urlConfig.js";
 
 // @material-ui/core components
@@ -16,57 +16,32 @@ import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 
 import avatar from "../../assets/images/admin.png";
 import axios from "axios";
-import reactDom from "react-dom";
+import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
-const styles = {
-  cardCategoryWhite: {
-    color: "rgba(255,255,255,.62)",
-    margin: "0",
-    fontSize: "14px",
-    marginTop: "0",
-    marginBottom: "0",
-  },
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none",
-  },
-};
 
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
+  const classes = useStyles();
+
   const [data, setData] = useState([]);
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
-    
-      axios.get(`${backendUrl}/admin/viewprofile`,{
-        headers: {
-          'Authorization': token ? `Bearer ${token}` : ''
-        }
-        })
-      .then(res =>{
-        const results =  res.data.result[0];
-         console.log(results);
-        setData(results);
+    axios.get(`${backendUrl}/admin/viewprofile`,{
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : ''
+      }
       })
-      // .then(data =>{
-      //   // console.log(data.message);
-      //   // const s= res.data.result[0];
-      //   // console.log(s);
-      // })
-    
+    .then(res =>{
+      const results =  res.data.result[0];
+      setData(results);
+    })
   }
   React.useEffect(()=>{
     getdata();
   },[]);
-  const classes = useStyles();
+
   return (
-    <div>
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
           <Card>
@@ -76,22 +51,31 @@ export default function UserProfile() {
             </CardHeader>
             <CardBody>
               <GridContainer>
-                {/* {data.email} */}
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     id="firstname"
+                    name="firstname"
                     value= {data.firstname}
                     formControlProps={{
                       fullWidth: true,
+                    }}
+                    
+                    inputProps={{
+                      disabled: true,
                     }}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     id="lastname"
+                    name="lastname"
                     value = {data.lastname}
                     formControlProps={{
                       fullWidth: true,
+                    }}
+                    
+                    inputProps={{
+                      disabled: true,
                     }}
                   />
                 </GridItem>
@@ -100,6 +84,7 @@ export default function UserProfile() {
                 <GridItem xs={12} sm={12} md={6}> 
                   <CustomInput
                     id="email"
+                    name="email"
                     value={data.email}
                     formControlProps={{
                       fullWidth: true,
@@ -117,7 +102,8 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    id="newpswd1"
+                    id="oldpswd"
+                    name="oldpswd"
                     labelText="Current Password"
                     formControlProps={{
                       fullWidth: true,
@@ -127,6 +113,7 @@ export default function UserProfile() {
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     id="newpswd1"
+                    name="newpaswd1"
                     labelText="Enter New Password"
                     formControlProps={{
                       fullWidth: true,
@@ -136,6 +123,7 @@ export default function UserProfile() {
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     id="newpswd2"
+                    name="newpaswd2"
                     labelText="Re-enter New Password"                    
                     formControlProps={{
                       fullWidth: true,
@@ -166,6 +154,5 @@ export default function UserProfile() {
           </Card>
         </GridItem>
       </GridContainer>
-    </div>
   );
 }
