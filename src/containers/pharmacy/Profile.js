@@ -86,7 +86,7 @@ export default function UserProfile() {
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Pharmacy Profile</h4>
-              <p className={classes.cardCategoryWhite}>Update your profile</p>
+              {/* <p className={classes.cardCategoryWhite}>Update your profile</p> */}
             </CardHeader>
             <CardBody>
               <GridContainer>
@@ -131,7 +131,7 @@ export default function UserProfile() {
               </GridContainer>
             </CardBody>
             <CardFooter>
-              <Button color="primary">Update Profile</Button>
+              
             </CardFooter>
           </Card>
         </GridItem>

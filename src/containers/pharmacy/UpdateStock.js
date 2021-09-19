@@ -227,7 +227,7 @@ export default function OrderProcess() {
                           <IconButton aria-label="update" onClick={()=>handleClickOpenEdit(row.batchid)} color="inherit"><CreateIcon /></IconButton>
                         </TableCell>
                         <TableCell align="left">
-                          <IconButton aria-label="delete" color="secondary" onClick={()=>deleterow(row.batchid)}><DeleteIcon/></IconButton>
+                          <IconButton aria-label="delete" style={{color:"#ff0000"}} onClick={()=>deleterow(row.batchid)}><DeleteIcon/></IconButton>
                         </TableCell>
                       </TableRow>
                       );

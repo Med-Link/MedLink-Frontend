@@ -20,7 +20,6 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import Search from "@material-ui/icons/Search";
 import StoreMallDirectoryIcon from '@material-ui/icons/StoreMallDirectory';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
-
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
 import Card from "../../components/Dashboard/Card/Card";
@@ -29,7 +28,6 @@ import CardIcon from "../../components/Dashboard/Card/CardIcon.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import Button from "../../components/Dashboard/CustomButtons/Button";
-
 import Form from './form/Form';
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
@@ -38,10 +36,11 @@ const useStyles = makeStyles(styles);
 
 const fontStyle = {fontSize: '20px',color: '#126e82'};
 const titleStyle = {fontSize: '30px',color: '#126e82'};
-const cardStyle = {backgroundColor: '#ffffff',boxShadow: `2px 2px 3px 3px #ccc`}
+const cardStyle = {backgroundColor: '#a6c6ca'}
 const searchButton = {backgroundColor: '#126e82'}
 const ftStyle = {color: '#126e82',textAlign: 'left',fontSize: '20px'}
-const cdStyle = {backgroundColor: 'rgb(226 243 242)'}
+const cdStyle = {backgroundColor: '#ffffff'}
+
 
 export default function Dashboard() {
   const classes = useStyles();
@@ -197,11 +196,10 @@ export default function Dashboard() {
       
       <GridContainer xs={12} sm={12} md={12}>
         <Card style={cdStyle}>  
-          <CardHeader color="success" stats icon>
-            <Grid item xs={12}>
-              <p style={ftStyle}>Result</p>
-            </Grid>
+        <CardHeader color="primary">
+            <h4 className={classes.cardTitleWhite}>Results</h4>
           </CardHeader>
+          
           <CardBody>
             <TableScrollbar rows={15}>
               <Table>

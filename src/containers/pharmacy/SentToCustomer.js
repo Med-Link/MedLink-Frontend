@@ -12,10 +12,7 @@ import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Link from '@material-ui/core/Link';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -132,10 +129,18 @@ export default function ClosedDeals() {
               tableHead={["Date", "Order Number", "Delivery Address", "Delivery Cost", "Service Cost", "Total Cost", "Pharmacy", "City", "View more", "Payment"]}
               tableData={data}
             />
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
-              <ViewHistoryDetails products={vieworderdata} />
+           
 
-            </Dialog>
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">
+                             
+                        </DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                              <ViewHistoryDetails products={vieworderdata}/>
+                            </DialogContentText>
+                        </DialogContent>
+                  </Dialog>
 
           </CardBody>
         </Card>
