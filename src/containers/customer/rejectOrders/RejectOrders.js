@@ -19,7 +19,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import ViewRejectOrderDetails from './ViewRejectOrderDetails'
 import axios from "axios";
  
 
@@ -114,7 +113,7 @@ export default function RejectOrders() {
           <CardBody>
           <Table
               tableHeaderColor="primary"
-              tableHead={["Date","Order No","Pharmacy No", "Pharmacy Name", "City", "View"]}
+              tableHead={["Date","Order No","Pharmacy No", "Pharmacy Name", "City", "Reject Reason"]}
               tableData={data}
             />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
