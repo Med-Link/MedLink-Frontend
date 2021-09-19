@@ -43,7 +43,7 @@ const fontStyle = {fontSize: '20px',color: '#126e82'};
 const titleStyle = {fontSize: '30px',color: '#126e82'};
 // const dropDownStyle = {width: '200px'};
 // const btStyle = {width: '10px',backgroundColor: '#126e82',color: '#efe3e3'}
-const cardStyle = {backgroundColor: '#ffffff',boxShadow: `2px 2px 3px 3px #ccc`}
+const cardStyle = {backgroundColor: '#a6c6ca'}
 // a6c6ca
 const searchButton = {backgroundColor: '#126e82'}
 const ftStyle = {color: '#126e82',textAlign: 'left',fontSize: '20px'}
