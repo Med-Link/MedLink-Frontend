@@ -249,6 +249,19 @@ class Map extends React.Component{
 					           defaultZoom={ this.props.zoom }
 					           defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
 					>
+						<Grid item xs={12} sm={12} md={12} style={{marginTop:"5px"}}>
+						{/* For Auto complete Search Box */}
+							<Autocomplete
+								style={{
+									width: '95%',
+									height: '40px',
+									paddingLeft: '16px',
+									marginBottom: '10px',
+								}}
+								onPlaceSelected={ this.onPlaceSelected }
+								types={['(regions)']}
+							/>
+						</Grid>
 						{/* InfoWindow on top of marker */}
 						<InfoWindow
 							onClose={this.onInfoWindowClose}
@@ -275,21 +288,7 @@ class Map extends React.Component{
 		let map;
 		if( this.props.center.lat !== undefined ) {
 			map = <div>
-					<Grid container spacing={1}>
-						<Grid item xs={12} sm={12} md={12}>
-						{/* For Auto complete Search Box */}
-							<Autocomplete
-								style={{
-									width: '95%',
-									height: '40px',
-									paddingLeft: '16px',
-									marginBottom: '10px',
-								}}
-								onPlaceSelected={ this.onPlaceSelected }
-								types={['(regions)']}
-							/>
-						</Grid>
-					</Grid>	
+					
 					<Grid container spacing={1} style={{marginBottom: '10px'}}>
 						<Grid item xs={12} sm={4} md={4}>
 							{/* <TextField 
