@@ -130,9 +130,9 @@ export default function UserProfile() {
                 
               </GridContainer>
             </CardBody>
-            <CardFooter>
+            {/* <CardFooter>
               <Button color="primary">Update Profile</Button>
-            </CardFooter>
+            </CardFooter> */}
           </Card>
         </GridItem>
       </GridContainer>
