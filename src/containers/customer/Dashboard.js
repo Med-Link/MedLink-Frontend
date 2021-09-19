@@ -221,16 +221,19 @@ export default function Dashboard() {
       </GridContainer>
       
       <GridContainer item={true} xs={12} sm={12} md={12}>
-        <Card style={cdStyle}>  
-          <CardHeader color="success" stats icon>
-            <Grid item={true} xs={12}>
-              <p style={ftStyle}>Result</p>
-            </Grid>
+        <Card > 
+
+        <CardHeader color="primary">
+            <h4 className={classes.cardTitleWhite}>Results</h4>
           </CardHeader>
+
+        
           <CardBody>
             <TableScrollbar rows={15}>
-              <Table>
-                <TableHead>
+              <Table
+              tableHeaderColor="primary"
+              >
+                {/* <TableHead> */}
                   <TableRow>
                     {columns.map((column) => (
                       <TableCell style={{color:'#213458',backgroundColor: "white"}}
@@ -241,9 +244,8 @@ export default function Dashboard() {
                       </TableCell>
                     ))}
                   </TableRow>
-                </TableHead>
-              
                 <TableBody>
+                {/* </TableHead> */}
                   {data.filter((row)=>{
                     if (searchTerm == "") {
                       return row

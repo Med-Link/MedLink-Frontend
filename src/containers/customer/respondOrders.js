@@ -126,6 +126,7 @@ export default function RespondOrders() {
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Responding Order Details</h4>
           </CardHeader>
+          
           <CardBody>
             <Table
               tableHeaderColor="primary"
