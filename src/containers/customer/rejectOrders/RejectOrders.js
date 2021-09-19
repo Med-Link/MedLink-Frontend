@@ -1,21 +1,25 @@
+/* eslint-disable react/jsx-key */
 import React,{useEffect,useState} from "react";
-import { backendUrl } from "../../urlConfig.js";
+import { backendUrl } from "../../../urlConfig.js";
 // import axios from 'axios'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import GridItem from "../../components/Dashboard/Grid/GridItem.js";
-import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
-import Table from "../../components/Dashboard/Table/Table.js";
-import Card from "../../components/Dashboard/Card/Card.js";
-import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
-import CardBody from "../../components/Dashboard/Card/CardBody.js";
+import GridItem from "../../../components/Dashboard/Grid/GridItem.js";
+import GridContainer from "../../../components/Dashboard/Grid/GridContainer.js";
+import Table from "../../../components/Dashboard/Table/Table.js";
+import Card from "../../../components/Dashboard/Card/Card.js";
+import CardHeader from "../../../components/Dashboard/Card/CardHeader.js";
+import CardBody from "../../../components/Dashboard/Card/CardBody.js";
 import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Link from '@material-ui/core/Link';
 import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import ViewHistoryDetails from "../customer/buyingHistory/ViewHistoryDetails"
+import ViewRejectOrderDetails from './ViewRejectOrderDetails'
 import axios from "axios";
  
 
@@ -51,14 +55,14 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function ClosedDeals() {
 
-  const [data, setData] = React.useState([]);
+export default function RejectOrders() {
+  //const [data, setData] = React.useState([]);
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = (medlistid) => {
+  const handleClickOpen = () => {
     setOpen(true);
-    getorderdata(medlistid);
+    
   };
 
   const handleClose = () => {
@@ -67,51 +71,51 @@ export default function ClosedDeals() {
 
   const classes = useStyles();
   
-  const getdata =() =>{
+  {/*const getdata =() =>{
     const token = window.localStorage.getItem('token');
     
-      axios.get(`${backendUrl}/pharmacy/shippeddeals`,{
+      axios.get(`${backendUrl}/buyinghistory`,{
       headers: {
         Authorization: token ? `Bearer ${token}` : "",
       },
       }).then(res =>{
-        const results =  res.data.getshippedorders.rows;
-        // console.log(results);
+        const results =  res.data.getorderhistory.rows;
+        console.log(results);
 
         let array =[];
         results.forEach(element=>{
          let arr=[];
-         arr.push(element.date,element.orderid,element.address,element.deliverycost,element.servicecost,element.totalcost, <Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.medlistid)} round>View</Button>);
+         arr.push(element.orderid,element.address,element.deliverycost,element.servicecost,element.totalcost,element.name,element.city,<Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.medlistid)} round>View</Button>);
            array.push(arr);
         })         
        setData(array); 
         // setData(results);
       })        
   }
-  const [vieworderdata, setVieworderdata] = useState([]);
+const [vieworderdata, setVieworderdata] = useState([]);*/}
 
-  const getorderdata = (medlistid) => {
+  //const getorderdata = (medlistid) => {
     // console.log(typeof(medlistid))
-    const token = window.localStorage.getItem('token');
+    //const token = window.localStorage.getItem('token');
   
     // console.log('kkkk')
-    axios.post(`${backendUrl}/order/singleorderbill`, {medlistid: medlistid}, {
-      headers: {
-        'Authorization': token ? `Bearer ${token}` : ''
-      },
-  }).then((response)=>{
-      console.log(response);
-      setVieworderdata(response.data.rows);
+    //axios.post(`${backendUrl}/order/singleorderbill`, {medlistid: medlistid}, {
+      //headers: {
+        //'Authorization': token ? `Bearer ${token}` : ''
+      //},
+  //}).then((response)=>{
+      //console.log(response);
+      //setVieworderdata(response.data.rows);
   
-  }).catch((err)=>{
-      console.log(err);
+  //}).catch((err)=>{
+     // console.log(err);
  
-  });
+  //});
   
-  };
-  React.useEffect(()=>{
-    getdata();
-  },[]);
+  //};
+  //React.useEffect(()=>{
+    //getdata();
+  //},[]);
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
@@ -123,10 +127,16 @@ export default function ClosedDeals() {
             </p> */}
           </CardHeader>
           <CardBody>
-            <Table
+          <Table
               tableHeaderColor="primary"
-              tableHead={["Date","Order Number", "Delivery Address","Delivery Cost", "Service Cost", "Total Cost","View more" ]}
-              tableData={data}
+              tableHead={["Date","Time","Pharmacy Name", "District", "City", ""]}
+              tableData={[
+                ["10-07-2021","20:55","Pharma", "Colombo", "Nugegoda", 
+                  <Button variant="outlined"  color="primary" onClick={handleClickOpen} round>View</Button>
+                   
+                ],
+                 
+              ]}
             />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">
@@ -134,7 +144,8 @@ export default function ClosedDeals() {
                         </DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                              <ViewHistoryDetails products={vieworderdata}/>
+                              {/*<ViewHistoryDetails products={vieworderdata}/>*/}
+                              <ViewRejectOrderDetails/>
                             </DialogContentText>
                         </DialogContent>
                   </Dialog>
