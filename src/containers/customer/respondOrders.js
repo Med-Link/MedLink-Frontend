@@ -2,6 +2,7 @@
 import React,{useState} from "react";
 import axios from 'axios';
 import { backendUrl } from "../../urlConfig.js";
+import TableScrollbar from 'react-table-scrollbar'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
@@ -11,6 +12,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+// import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
@@ -133,6 +135,25 @@ export default function RespondOrders() {
               tableHead={["Date","List number","Order Request","Total Price", "Pharmacy", "Accept/Reject"]}
               tableData={data}
             />
+
+            {/* <TableScrollbar rows={15}>
+              <Table
+              tableHeaderColor="primary"
+              >
+                <TableHead tableHead={["Date","List number","Order Request","Total Price", "Pharmacy", "Accept/Reject"]} />
+                  
+                <TableBody>
+                
+                 
+                    <TableRow tableData={data}/>
+                      
+                  
+                </TableBody> 
+                
+
+              </Table>
+            </TableScrollbar>
+             */}
           </CardBody>
         </Card>
       </GridItem>

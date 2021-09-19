@@ -41,18 +41,14 @@ const useStyles = makeStyles(styles);
 
 const fontStyle = {fontSize: '20px',color: '#126e82'};
 const titleStyle = {fontSize: '30px',color: '#126e82'};
-// const dropDownStyle = {width: '200px'};
-// const btStyle = {width: '10px',backgroundColor: '#126e82',color: '#efe3e3'}
 const cardStyle = {backgroundColor: '#a6c6ca'}
-// a6c6ca
 const searchButton = {backgroundColor: '#126e82'}
 const ftStyle = {color: '#126e82',textAlign: 'left',fontSize: '20px'}
-const cdStyle = {backgroundColor: 'rgb(226 243 242)'}
+const cdStyle = {backgroundColor: '#ffffff'}
 const goButtonStyle={color: '#ffffff',backgroundColor: '#126e82',opacity:'0.9', display:"flex", flex:"column", textAlign:"center"}
-// const shareButtonStyle={color: '#efe3e3',left: '-10%',backgroundColor: '#126e82', marginTop: '10px',width: '30%', padding: '2px', opacity:'0.9'}
+
 const sentenceStyle={fontSize: '16px', color: '#126e82', fontWeight: 'bold'}
-// const paperStyle={padding :20,height:'350px',width:'90%', margin:"20px auto"}
-//const locStyle={marginTop: theme.spacing(-4)}
+
 
 export default function Dashboard() {
   const classes = useStyles();
@@ -221,7 +217,7 @@ export default function Dashboard() {
       </GridContainer>
       
       <GridContainer item={true} xs={12} sm={12} md={12}>
-        <Card > 
+        <Card style={cdStyle}> 
 
         <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Results</h4>
@@ -233,7 +229,7 @@ export default function Dashboard() {
               <Table
               tableHeaderColor="primary"
               >
-                {/* <TableHead> */}
+                <TableHead>
                   <TableRow>
                     {columns.map((column) => (
                       <TableCell style={{color:'#213458',backgroundColor: "white"}}
@@ -244,8 +240,9 @@ export default function Dashboard() {
                       </TableCell>
                     ))}
                   </TableRow>
+                  </TableHead>
                 <TableBody>
-                {/* </TableHead> */}
+                
                   {data.filter((row)=>{
                     if (searchTerm == "") {
                       return row

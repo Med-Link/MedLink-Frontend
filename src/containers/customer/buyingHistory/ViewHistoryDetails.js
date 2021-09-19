@@ -1,19 +1,10 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
-import Avatar from '@material-ui/core/Avatar';
 import PropTypes from 'prop-types';
-
-//import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import { TextField } from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -52,15 +43,15 @@ export default function BuyingHistory(props){
     const classes = useStyles();
     const paperStyle={padding :20,height:'850px',width:'400px', margin:"10px auto"}
     const avatarStyle={backgroundColor: '#126e82'}
-    const gridStyle={padding: 20}
-    const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0', width: '50%', left:'50%', opacity:'0.9'}
+    const gridStyle={padding: 20, width:'500px',margin:"auto" }
+    const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0', width: '25%', left:'75%', opacity:'0.9'}
     const headerStyle={color: '#126e82'}
 
     return(
         
         <Grid style={gridStyle}>
              
-            <Paper elevation={10} style={paperStyle}>
+            {/* <Paper elevation={10} style={paperStyle}> */}
                 <Grid align='center' style={gridStyle}>
                      
                     <h1 style={headerStyle}>Order History</h1>
@@ -150,7 +141,7 @@ export default function BuyingHistory(props){
 
                  
                 
-            </Paper>
+            {/* </Paper> */}
             <Box mt={5}>
                 <Copyright />
             </Box>

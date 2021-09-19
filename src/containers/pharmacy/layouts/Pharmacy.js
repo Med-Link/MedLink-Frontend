@@ -6,7 +6,7 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import Navbar from "../../../components/Dashboard/Navbars/Navbar.js";
+import Navbar from "../../../components/Dashboard/Navbars/pharmacy/PharmacyNavbar";
 import Footer from "../../../components/Dashboard/Footer/Footer.js";
 import Sidebar from "../../../components/Dashboard/Sidebar/Sidebar.js";
 //import FixedPlugin from "../../../components/Dashboard/FixedPlugin/FixedPlugin.js";

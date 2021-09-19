@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
 const VerifyEmail = () => {
 
   const notify = () => toast.success(' Email Verified!', {
-    position: "top-center",
+    position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -127,7 +127,7 @@ const VerifyEmail = () => {
       if (err.response && err.response.data) {
         console.log(err);// some reason error message
       }
-      
+
     });
 
     //else {
@@ -166,7 +166,7 @@ const VerifyEmail = () => {
         <Copyright />
       </Box>
       <ToastContainer
-        position="top-center"
+        position="top-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
