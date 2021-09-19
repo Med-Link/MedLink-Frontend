@@ -147,7 +147,7 @@ export default function ViewEmployees() {
   return (
     <Grid>
     <Card>
-      <CardHeader color="primary">
+      <CardHeader color="success">
                 <h4 className={classes.cardTitleWhite}>Registered Admin Accounts</h4>
       </CardHeader>
       <CardBody>

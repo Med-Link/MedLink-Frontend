@@ -84,7 +84,7 @@ export default function UpgradeToPro() {
     <GridContainer justifyContent="center">
       <GridItem xs={12} sm={12} md={8}>
         <Card>
-          <CardHeader color="primary">
+          <CardHeader color="success">
             <h4 className={classes.cardTitleWhite}>
               Monthly Income of MedLink
             </h4>
@@ -155,13 +155,8 @@ export default function UpgradeToPro() {
                   <tr>
                     <td />
                     <td className={classes.center}>
-                      <Button color="success">
-                        View Full Report
-                      </Button>
-                    </td>
-                    <td className={classes.center}>
                       <Button
-                        color="primary"
+                        color="info"
                       >
                         Download
                       </Button>
