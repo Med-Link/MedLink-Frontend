@@ -267,7 +267,7 @@ const SignUpPharmacy=()=>{
             return (
                 <div>
                     {/* <form className={classes.form} noValidate> */}
-                        <Grid container sm={12} className={classes.loc}>
+                        <Grid container sm={12} className={classes.loc} style={{marginBottom:"60px"}}>
                                 <Map
                                 center={{lat: 6.9271, lng: 79.8612}}
                                 height='230px'
