@@ -78,6 +78,7 @@ export default function OrderRequests() {
   // ------------------------------------
 
   const columns = [
+    { id: 'Date', label: 'Date'},
     { id: 'orderid', label: 'Order ID'},
     { id: 'description', label: 'Description'},
     { id: 'customerid', label: 'Customer ID'},
