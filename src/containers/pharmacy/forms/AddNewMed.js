@@ -51,18 +51,22 @@ const AddNewMed=(props)=>{
     });
 
     // backend connection to add med details to the database
-      const [medid, setMedId] = useState("");
+      const [medId, setMedId] = useState("");
       const [quantity, setQuantity] = useState("");
       const [price, setPrice] = useState("");
       const [expdate, setExpDate] = useState("");
       const [mnfdate, setMnfDate] = useState("");
       
+      const handlechange = (event,value) => {
+          setMedId(value.medid);
+      }
+
       const submit = (e) => {
         e.preventDefault();
         const token = window.localStorage.getItem("token");
         axios.post(`${backendUrl}/pharmacy/addstock`, 
         {
-        medid: medid,
+        medid: medId,
         quantity:quantity,
         price:price,
         expiredate:expdate,
@@ -88,17 +92,16 @@ const AddNewMed=(props)=>{
 
             <GridContainer>
                 <GridItem xs={6} sm={6} md={6}>
-                    {/* <Autocomplete
+                    <Autocomplete
                         disableClearable
                         options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
                         groupBy={(option) => option.firstLetter}
                         getOptionLabel={(option) => option.medname+" - "+option.brand}
                         renderInput={(params) => <TextField {...params} label="Medicine Name" required />}
                         size="small"
-                        value={medid}
-                        onChange={(e) => setMedId(e.target.value.medid)}
-                    /> */}
-                    <TextField
+                        onChange={(event, value) => handlechange(event, value)}
+                    />
+                    {/* <TextField
                         id="medid"
                         label="medid"
                         InputProps={{
@@ -108,7 +111,7 @@ const AddNewMed=(props)=>{
                         required
                         value={medid}
                         onChange={(e) => setMedId(e.target.value)}
-                    />
+                    /> */}
                 </GridItem>
                 <GridItem xs={3} sm={3} md={3}>
                     <TextField
