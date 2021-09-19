@@ -86,7 +86,7 @@ const AddCsv = () => {
             <CardHeader color="success">
               <h4 className={classes.cardTitleWhite}>Enter CSV file</h4>
                 <h5 className={classes.cardTitleWhite}>Download CSV File Format *   
-                <TextButton size="small" onClick={download} color="inherit" justifyContent="Right">
+                <TextButton size="small" onClick={download} color="inherit">
                  Click Here
                 </TextButton>
                 </h5>
@@ -97,8 +97,8 @@ const AddCsv = () => {
                 <Typography variant="body1"> Update Stock - Add (.csv) File</Typography>
                 </GridItem>
                 <GridItem xs={6} sm={6} md={6}>
-                <Button color="default" component="label" startIcon={<CloudUploadIcon />} size="sm">
-                  Upload <input type="file" hidden startIcon={<CloudUploadIcon />} onChange={handleChange}/>
+                <Button component="label" startIcon={<CloudUploadIcon />} size="sm">
+                  Upload <input type="file" hidden  onChange={handleChange}/>
                   </Button>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={12} style={{display: "flex",justifyContent: "center", alignItems: "center",}}>
