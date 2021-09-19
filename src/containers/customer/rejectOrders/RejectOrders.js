@@ -57,65 +57,50 @@ const useStyles = makeStyles(styles);
 
 
 export default function RejectOrders() {
-  //const [data, setData] = React.useState([]);
+  const [data, setData] = React.useState([]);
+  const [rejectreason, setRejectreason] = React.useState('');
+
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (rejectmessage) => {
     setOpen(true);
-    
+    setRejectreason(rejectmessage);
   };
 
   const handleClose = () => {
     setOpen(false);
+    setRejectreason('');
+
   };
 
   const classes = useStyles();
   
-  {/*const getdata =() =>{
+  const getdata =() =>{
     const token = window.localStorage.getItem('token');
     
-      axios.get(`${backendUrl}/buyinghistory`,{
+      axios.get(`${backendUrl}/order/rejectedorders`,{
       headers: {
         Authorization: token ? `Bearer ${token}` : "",
       },
       }).then(res =>{
-        const results =  res.data.getorderhistory.rows;
-        console.log(results);
+        const results =  res.data.rows;
 
         let array =[];
         results.forEach(element=>{
          let arr=[];
-         arr.push(element.orderid,element.address,element.deliverycost,element.servicecost,element.totalcost,element.name,element.city,<Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.medlistid)} round>View</Button>);
+         arr.push(element.date,element.id,element.pharmacyid,element.name,element.city,<Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.rejectmessage)} round>View</Button>);
            array.push(arr);
         })         
        setData(array); 
-        // setData(results);
-      })        
+      }).catch((err)=>{
+        console.log(err);
+   
+    });    
   }
-const [vieworderdata, setVieworderdata] = useState([]);*/}
 
-  //const getorderdata = (medlistid) => {
-    // console.log(typeof(medlistid))
-    //const token = window.localStorage.getItem('token');
-  
-    // console.log('kkkk')
-    //axios.post(`${backendUrl}/order/singleorderbill`, {medlistid: medlistid}, {
-      //headers: {
-        //'Authorization': token ? `Bearer ${token}` : ''
-      //},
-  //}).then((response)=>{
-      //console.log(response);
-      //setVieworderdata(response.data.rows);
-  
-  //}).catch((err)=>{
-     // console.log(err);
- 
-  //});
-  
-  //};
-  //React.useEffect(()=>{
-    //getdata();
-  //},[]);
+  React.useEffect(()=>{
+    getdata();
+  },[]);
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
@@ -129,23 +114,16 @@ const [vieworderdata, setVieworderdata] = useState([]);*/}
           <CardBody>
           <Table
               tableHeaderColor="primary"
-              tableHead={["Date","Time","Pharmacy Name", "District", "City", ""]}
-              tableData={[
-                ["10-07-2021","20:55","Pharma", "Colombo", "Nugegoda", 
-                  <Button variant="outlined"  color="primary" onClick={handleClickOpen} round>View</Button>
-                   
-                ],
-                 
-              ]}
+              tableHead={["Date","Order No","Pharmacy No", "Pharmacy Name", "City", "View"]}
+              tableData={data}
             />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">
-                             
-                        </DialogTitle>
+                <DialogTitle id="alert-dialog-title">{"Order Request reject reason"}</DialogTitle>
+
                         <DialogContent>
                             <DialogContentText>
-                              {/*<ViewHistoryDetails products={vieworderdata}/>*/}
-                              <ViewRejectOrderDetails/>
+                              {rejectreason}
+                              
                             </DialogContentText>
                         </DialogContent>
                   </Dialog>
