@@ -85,7 +85,7 @@ export default function ClosedDeals() {
         let array =[];
         results.forEach(element=>{
          let arr=[];
-         arr.push(element.orderid,element.address,element.deliverycost,element.servicecost,element.totalcost,element.name,element.city,<Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.medlistid)} round>View</Button>);
+         arr.push(element.date,element.orderid,element.address,element.deliverycost,element.servicecost,element.totalcost,element.name,element.city,<Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.medlistid)} round>View</Button>);
            array.push(arr);
         })         
        setData(array); 
@@ -129,7 +129,7 @@ export default function ClosedDeals() {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Order Number", "Delivery Address","Delivery Cost", "Service Cost", "Total Cost", "Pharmacy","City","View more" ]}
+              tableHead={["Date","Order Number", "Delivery Address","Delivery Cost", "Service Cost", "Total Cost", "Pharmacy","City","View more" ]}
               tableData={data}
             />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">

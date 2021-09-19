@@ -31,28 +31,16 @@ import { Redirect } from 'react-router-dom';
 import pharmacist from '../../assets/images/cust.jpg';
 
 
-function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright ©️ '}
-        <Link color="inherit" href="/">
-          Medlink
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
   const useStyles = makeStyles((theme) => ({
     root: {
-      backgroundColor : '#eee',
+      backgroundColor: '#eee',
     },
     paper: {
       marginTop: theme.spacing(15),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      padding:theme.spacing(4),
+      padding: theme.spacing(4),
       borderRadius: '25px',
       boxShadow: `2px 2px 2px 2px #ccc`,
     },
@@ -66,36 +54,40 @@ function Copyright() {
     },
     submit: {
       backgroundColor: theme.palette.primary.main,
-
+  
       margin: theme.spacing(3, 0, 1),
-      width:'70%',
+      width: '70%',
     },
-    /*label:{
-      marginLeft:theme.spacing(0),
-    // },*/
-    // back:{
-    //   backgroundColor: "#eee",
-    //   marginTop:theme.spacing(1),
-    //   margin:theme.spacing(1,1,1),
-    //   height:'small',
-    // },
     input: {
       display: 'none',
     },
     image: {
       alignItems: 'center',
       justifyContent: 'center',
-      width:"75%",
-      // height:'auto',
-      // maxHeight:'400px',
-      
-      padding:theme.spacing(4),
-      marginTop:theme.spacing(5),
-      maxWidth:'600px',
+      width: "75%",
+      marginLeft: theme.spacing(8),
+      padding: theme.spacing(2),
+      marginTop: theme.spacing(3),
+      maxWidth: '600px',
     },
-    
+  
   
   }));
+  
+
+  
+function Copyright() {
+    return (
+      <Typography variant="body2" color="textSecondary" align="center">
+        {'Copyright ©️ '}
+        <Link color="inherit" href="/">
+          Medlink
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
 
 const SignInCustomer=()=>{
   const classes = useStyles();
@@ -131,13 +123,13 @@ const SignInCustomer=()=>{
       }
 
       
-    // const paperStyle={padding :20,height:'450px',width:'300px', margin:"20px auto"}
+    // const paperStyle={padding :20,height:'450px',width:'400px', margin:"20px auto"}
     // const avatarStyle={backgroundColor: '#2ab5b5'}
-    // // const gridStyle={padding: 20}
+    // const gridStyle={padding: 20}
     // const buttonStyle={backgroundColor: '#2ab5b5', margin: '8px 0'}
 
     return(
-        <div>
+         <div style={{ overflow: "hidden" }}>
         <GridContainer spacing={0}>
           <Hidden smDown>
               <GridItem xs={12} sm={12} md={7}>
@@ -146,8 +138,8 @@ const SignInCustomer=()=>{
           </Hidden>
         <GridItem xs={12} sm={12} md={4} spacing={3}  borderRadius={10}>
 
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
+          <div className={classes.paper} >
+            <Avatar className={classes.avatar} >
               <LockOpenOutlinedIcon />
             </Avatar>
           

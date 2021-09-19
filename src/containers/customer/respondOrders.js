@@ -100,8 +100,8 @@ export default function RespondOrders() {
          let array =[];
          results.forEach(element=>{
           let arr=[];
-          arr.push(element.medlistid,element.order_reqid,element.totalprice,element.name,
-          <ButtonGroup color="primary" aria-label="outlined primary button group">
+          arr.push(element.date,element.medlistid,element.order_reqid,element.totalprice,element.name,<ButtonGroup color="primary" aria-label="outlined primary button group">
+          
           <Button onClick={()=>handleClickOpen2(element.medlistid)}>View Order</Button>
           <div>
           <Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.medlistid)}>
@@ -126,10 +126,11 @@ export default function RespondOrders() {
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Responding Order Details</h4>
           </CardHeader>
+          
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["List number","Order Request","Total Price", "Pharmacy", "Accept/Reject"]}
+              tableHead={["Date","List number","Order Request","Total Price", "Pharmacy", "Accept/Reject"]}
               tableData={data}
             />
           </CardBody>

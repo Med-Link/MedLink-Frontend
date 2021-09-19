@@ -66,7 +66,7 @@ export default function OrderRequests() {
       },
     }).then(res => {
       const results = res.data.allOrders.rows;
-      // console.log(results);
+      console.log(results);
       setData(results);
     })
   }
@@ -112,6 +112,9 @@ export default function OrderRequests() {
                   {rows.map((row)=>{
                     return(
                     <TableRow>
+                      <TableCell align="left">
+                        {row.date}
+                      </TableCell>
                       <TableCell align="left">
                         {row.id}
                       </TableCell>
