@@ -1,6 +1,13 @@
-import React from "react";
+/* eslint-disable react/jsx-key */
+import React, {useState} from "react";
+import axios from 'axios';
+import { backendUrl } from "../../urlConfig.js";
+import TableScrollbar from 'react-table-scrollbar'
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
+
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
@@ -80,6 +87,33 @@ const useStyles = makeStyles(styles);
 
 export default function UpgradeToPro() {
   const classes = useStyles();
+
+  // get monthly income from each pharmacy transactions
+  const [data, setData] = useState([]);
+  const getdata =() =>{
+    const token = window.localStorage.getItem('token');
+      axios.get(`${backendUrl}/admin/viewmonthlyincome`,{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results =  res.data.result;
+            console.log(results);
+            setData(results);
+      })
+  }
+
+  React.useEffect(()=>{
+    getdata();
+  },[]);
+
+  const columns = [
+    { id: 'pharmacyname', label: 'Pharmacy Name'},
+    { id: 'income', label: 'Income'},];
+
+  const rows = data; 
+
   return (
     <GridContainer justifyContent="center">
       <GridItem xs={12} sm={12} md={8}>
@@ -93,78 +127,57 @@ export default function UpgradeToPro() {
             </p>
           </CardHeader>
           <CardBody>
-            <div className={classes.tableUpgradeWrapper}>
-              <table className={classes.table}>
-                <thead>
-                  <tr>
-                    <th />
-                    <th className={classes.center}>Expences</th>
-                    <th className={classes.center}>Income</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Subscriptions</td>
-                    <td className={classes.center}>-</td>
-                    <td className={classes.center}>568200</td>
-                  </tr>
-                  <tr>
-                    <td>Advertiesments</td>
-                    <td className={classes.center}>200000</td>
-                    <td className={classes.center}>-</td>
-                  </tr>
-                  <tr>
-                    <td>Hosting Fee</td>
-                    <td className={classes.center}>7578.23</td>
-                    <td className={classes.center}>-</td>
-                  </tr>
-                  <tr>
-                    <td>Login, Register, Pricing, Lock Pages</td>
-                    <td className={classes.center}>
-                    </td>
-                    <td className={classes.center}>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      ReactTables, ReactVectorMap, ReactSweetAlert, Wizard,
-                      Validation, ReactBigCalendar etc...
-                    </td>
-                    <td className={classes.center}>
-                    </td>
-                    <td className={classes.center}>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Mini Sidebar</td>
-                    <td className={classes.center}>
-                    </td>
-                    <td className={classes.center}>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Premium Support</td>
-                    <td className={classes.center}>90000</td>
-                    <td className={classes.center}>-</td>
-                  </tr>
-                  <tr>
-                    <td>Electricity</td>
-                    <td className={classes.center}>7853</td>
-                    <td className={classes.center}>-</td>
-                  </tr>
-                  <tr>
-                    <td />
-                    <td className={classes.center}>
-                      <Button
+          <TableScrollbar rows={15} style={{}}>
+                    <Table>
+                      <TableHead>
+                        <TableRow >
+                          {columns.map((column) => (
+                            <TableCell className={classes.center} style={{color:'#213458',backgroundColor: "white"}}
+                              key={column.id}
+                              align={column.align}
+                            >
+                              {column.label}
+                            </TableCell>
+                          ))}
+                        </TableRow>
+                      </TableHead>
+                      <TableBody >
+                        {data.filter((row)=>{
+                          if (searchTerm == "") {
+                            return row
+                          } else if (row.medname.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          row.brand.toLowerCase().includes(searchTerm.toLowerCase())){
+                            return row
+                          }
+                        }).map((row) => {
+                          return(
+                          <TableRow>
+                            <TableCell align="left">
+                              {row.name}
+                            </TableCell>
+                            <TableCell align="left">
+                              {row.sum}
+                            </TableCell>
+                          </TableRow>
+                          );
+                        }
+                        )
+                        }
+                          <TableRow>
+                              <TableCell align="left">
+                              
+                              </TableCell>
+                              <TableCell align="left">
+                              <Button
                         color="info"
                       >
                         Download
                       </Button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                              </TableCell>
+                            </TableRow>
+                        </TableBody> 
+                    </Table>
+                  </TableScrollbar>
           </CardBody>
         </Card>
       </GridItem>
