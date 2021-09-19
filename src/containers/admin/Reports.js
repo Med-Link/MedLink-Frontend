@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import axios from 'axios';
 import { backendUrl } from "../../urlConfig.js";
 import TableScrollbar from 'react-table-scrollbar'
-
+import FileDownload from 'js-file-download'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
@@ -15,6 +15,7 @@ import Button from "../../components/Dashboard/CustomButtons/Button.js";
 import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
+import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 
 const styles = {
   cardCategoryWhite: {
@@ -110,9 +111,14 @@ export default function UpgradeToPro() {
 
   const columns = [
     { id: 'pharmacyname', label: 'Pharmacy Name'},
-    { id: 'income', label: 'Income'},];
+    { id: 'income', label: 'Income (Rs.)'},];
 
   const rows = data; 
+
+  const download=()=>
+  {
+    FileDownload(data, 'report.pdf');
+  }
 
   return (
     <GridContainer justifyContent="center">
@@ -127,58 +133,48 @@ export default function UpgradeToPro() {
             </p>
           </CardHeader>
           <CardBody>
-          <TableScrollbar rows={15} style={{}}>
-                    <Table>
-                      <TableHead>
-                        <TableRow >
-                          {columns.map((column) => (
-                            <TableCell className={classes.center} style={{color:'#213458',backgroundColor: "white"}}
-                              key={column.id}
-                              align={column.align}
-                            >
-                              {column.label}
-                            </TableCell>
-                          ))}
-                        </TableRow>
-                      </TableHead>
-                      <TableBody >
-                        {data.filter((row)=>{
-                          if (searchTerm == "") {
-                            return row
-                          } else if (row.medname.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          row.brand.toLowerCase().includes(searchTerm.toLowerCase())){
-                            return row
-                          }
-                        }).map((row) => {
-                          return(
-                          <TableRow>
-                            <TableCell align="left">
-                              {row.name}
-                            </TableCell>
-                            <TableCell align="left">
-                              {row.sum}
-                            </TableCell>
-                          </TableRow>
-                          );
-                        }
-                        )
-                        }
-                          <TableRow>
-                              <TableCell align="left">
-                              
-                              </TableCell>
-                              <TableCell align="left">
-                              <Button
-                        color="info"
+            <TableScrollbar rows={15} style={{}}>
+              <Table>
+                <TableHead>
+                  <TableRow >
+                    {columns.map((column) => (
+                      <TableCell className={classes.center} style={{color:'#213458',backgroundColor: "white"}}
+                        key={column.id}
                       >
-                        Download
-                      </Button>
-                              </TableCell>
-                            </TableRow>
-                        </TableBody> 
-                    </Table>
-                  </TableScrollbar>
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody >
+                  {data.filter((row)=>{
+                    if (searchTerm == "") {
+                      return row
+                    } else if (row.medname.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                    row.brand.toLowerCase().includes(searchTerm.toLowerCase())){
+                      return row
+                    }
+                  }).map((row) => {
+                    return(
+                    <TableRow>
+                      <TableCell className={classes.center}>
+                        {row.name}
+                      </TableCell>
+                      <TableCell className={classes.center}>
+                        {row.sum}
+                      </TableCell>
+                    </TableRow>
+                    );
+                  }
+                  )
+                  }
+                  </TableBody> 
+              </Table>
+            </TableScrollbar>
           </CardBody>
+          <CardFooter style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+            <Button color="info" onClick={download}>Download</Button>
+          </CardFooter>
         </Card>
       </GridItem>
     </GridContainer>
