@@ -43,11 +43,12 @@ const fontStyle = {fontSize: '20px',color: '#126e82'};
 const titleStyle = {fontSize: '30px',color: '#126e82'};
 // const dropDownStyle = {width: '200px'};
 // const btStyle = {width: '10px',backgroundColor: '#126e82',color: '#efe3e3'}
-const cardStyle = {backgroundColor: '#a6c6ca'}
+const cardStyle = {backgroundColor: '#ffffff',boxShadow: `2px 2px 3px 3px #ccc`}
+// a6c6ca
 const searchButton = {backgroundColor: '#126e82'}
 const ftStyle = {color: '#126e82',textAlign: 'left',fontSize: '20px'}
 const cdStyle = {backgroundColor: 'rgb(226 243 242)'}
-const goButtonStyle={color: '#efe3e3',backgroundColor: '#126e82',opacity:'0.9', display:"flex", flex:"column", textAlign:"center"}
+const goButtonStyle={color: '#ffffff',backgroundColor: '#126e82',opacity:'0.9', display:"flex", flex:"column", textAlign:"center"}
 // const shareButtonStyle={color: '#efe3e3',left: '-10%',backgroundColor: '#126e82', marginTop: '10px',width: '30%', padding: '2px', opacity:'0.9'}
 const sentenceStyle={fontSize: '16px', color: '#126e82', fontWeight: 'bold'}
 // const paperStyle={padding :20,height:'350px',width:'90%', margin:"20px auto"}
@@ -211,7 +212,7 @@ export default function Dashboard() {
                 />
               </FormControl>
             </div>
-              <Button style={searchButton} color="white" aria-label="edit" justIcon round>
+              <Button style={searchButton} color="ffffff" aria-label="edit" justIcon round>
                 <Search style={searchButton}/>
               </Button>
             </CardFooter>

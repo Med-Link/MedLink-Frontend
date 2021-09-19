@@ -38,7 +38,7 @@ const useStyles = makeStyles(styles);
 
 const fontStyle = {fontSize: '20px',color: '#126e82'};
 const titleStyle = {fontSize: '30px',color: '#126e82'};
-const cardStyle = {backgroundColor: '#a6c6ca'}
+const cardStyle = {backgroundColor: '#ffffff',boxShadow: `2px 2px 3px 3px #ccc`}
 const searchButton = {backgroundColor: '#126e82'}
 const ftStyle = {color: '#126e82',textAlign: 'left',fontSize: '20px'}
 const cdStyle = {backgroundColor: 'rgb(226 243 242)'}
@@ -158,7 +158,7 @@ export default function Dashboard() {
                   onChange={(event, value) => onSelectMedicine(event, value)}
                 />
               </div>
-              <Button style={searchButton} color="white" aria-label="edit" justIcon round>
+              <Button style={searchButton} color="ffffff" aria-label="edit" justIcon round>
                 <Search style={searchButton}/>
               </Button>
               
@@ -187,7 +187,7 @@ export default function Dashboard() {
                 />
               </FormControl>
             </div>
-              <Button style={searchButton} color="white" aria-label="edit" justIcon round>
+              <Button style={searchButton} color="ffffff" aria-label="edit" justIcon round>
                 <Search style={searchButton}/>
               </Button>
             </CardFooter>
