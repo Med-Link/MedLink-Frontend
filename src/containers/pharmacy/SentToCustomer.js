@@ -56,6 +56,7 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 export default function ClosedDeals() {
+  const classes = useStyles();
 
   const [data, setData] = React.useState([]);
   const [open, setOpen] = React.useState(false);
@@ -68,9 +69,34 @@ export default function ClosedDeals() {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const classes = useStyles();
-
+  const [opensend, setOpensend] = React.useState(false);
+  const [shiporderid, setShiporderid] = useState('');
+  
+  const handlesend = (orderid) => {
+    setOpensend(true);
+    setShiporderid(orderid);
+  };
+  const handlesendClose = () => {
+    setOpensend(false);
+    setShiporderid('');
+    
+  };
+  const ordershipping = () => {
+    const token = window.localStorage.getItem('token');
+    axios.post(`${backendUrl}/pharmacy/markshipped`, {orderid: shiporderid}, {
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : ''
+      },
+    }).then((response)=>{
+        console.log(response);
+        // setVieworderdata(response.data.rows);
+        getdata();
+      }).catch((err)=>{
+        console.log(err);
+        
+      });
+      handlesendClose();
+  };
   const getdata = () => {
     const token = window.localStorage.getItem('token');
 
@@ -85,7 +111,7 @@ export default function ClosedDeals() {
       let array = [];
       results.forEach(element => {
         let arr = [];
-        arr.push(element.date, element.orderid, element.address, element.deliverycost, element.servicecost, element.totalcost, element.name, element.city, <Button variant="outlined" color="primary" onClick={() => handleClickOpen(element.medlistid)} round>View</Button>,<Button variant="outlined" color="Secondary"  round>Send</Button>);
+        arr.push(element.date, element.orderid, element.address, element.deliverycost, element.servicecost, element.totalcost, <Button variant="outlined" color="primary" onClick={() => handleClickOpen(element.medlistid)} round>View</Button>,<Button variant="outlined" color="Secondary" onClick={() => handlesend(element.orderid)}  round>Send</Button>);
         array.push(arr);
       })
       setData(array);
@@ -129,14 +155,29 @@ export default function ClosedDeals() {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Date", "Order Number", "Delivery Address", "Delivery Cost", "Service Cost", "Total Cost", "Pharmacy", "City", "View more", "Payment"]}
+              tableHead={["Date", "Order Number", "Delivery Address", "Delivery Cost", "Service Cost", "Total Cost", "View more", "Payment"]}
               tableData={data}
             />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
               <ViewHistoryDetails products={vieworderdata} />
 
             </Dialog>
-
+            <Dialog open={opensend} onClose={handlesendClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+            <DialogTitle id="alert-dialog-title">{"Are you sure set order as shipped?"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                If yes, the order will be marked as shipped.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={()=>ordershipping()} color="primary">
+                Yes
+              </Button>
+              <Button onClick={handlesendClose} color="primary" autoFocus>
+                No
+              </Button>
+            </DialogActions>
+          </Dialog>
           </CardBody>
         </Card>
       </GridItem>
