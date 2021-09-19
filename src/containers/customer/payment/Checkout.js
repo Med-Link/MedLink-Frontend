@@ -10,6 +10,9 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
@@ -36,21 +39,6 @@ const addScript = (src, callback) => {
 export const addressAtom = atom('');
 export const contactnumberAtom = atom('');
 
-
-
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="">
-        MedLink
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -86,6 +74,10 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.primary.main,
   },
 }));
 
@@ -285,28 +277,13 @@ const Completeorder = async () => {
 
   return (
     <React.Fragment>
-      <CssBaseline />
-      <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar style={toolBarStyle}>
-          <Grid container>
-          <Grid item xs={6} align='left'>
-          <Typography variant="h6" style={headerStyle} noWrap>
-            MedLink
-          </Typography>
-           
-          </Grid>
-
-          <Grid item xs={6} align='right'>
-            <Button variant="outlined" href="/customer/RespondingOrders/" style={btStyle}>Back</Button>
-          </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
-      <main className={classes.layout}>
-        <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" align="center" style={subHeaderStyle}>
+      <div style={{display: 'flex',flexDirection: 'column', alignItems: 'center'}}>
+          <Avatar className={classes.avatar}>
+            <ShoppingCartOutlinedIcon/>
+          </Avatar>
+        </div>
+          <Typography component="h1" variant="h5" align="center" style={subHeaderStyle}>
             Checkout
-            {/* {addressline1} */}
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map((label) => (
@@ -348,9 +325,6 @@ const Completeorder = async () => {
               </React.Fragment>
             )}
           </React.Fragment>
-        </Paper>
-        <Copyright />
-      </main>
     </React.Fragment>
   );
 }

@@ -60,13 +60,13 @@ const dashboardRoutes = [
     component: PharmacyPayble,
     layout: "/admin",
   },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: Notifications,
-    component: NotificationsPage,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/notifications",
+  //   name: "Notifications",
+  //   icon: Notifications,
+  //   component: NotificationsPage,
+  //   layout: "/admin",
+  // },
   {
     path: "/report",
     name: "Income Report",

@@ -58,21 +58,21 @@ export default function TotalBill(props) {
         ))} */}
 
         {<ListItem className={classes.listItem}>
-          <ListItemText primary="Total (Without Delivery Charges" />
+          <ListItemText primary="Total Amount for Medicine (Rs.)" />
           <Typography variant="subtitle1" className={classes.total}>
             {costs.totalprice}
           </Typography>
           
         </ListItem>}
         <ListItem className={classes.listItem}>
-          <ListItemText primary="Delivery Charges" />
+          <ListItemText primary="Delivery Charges (Rs.)" />
           <Typography variant="subtitle1" className={classes.total}>
           {costs.deliverycost}
           </Typography>
           
         </ListItem>
         <ListItem className={classes.listItem}>
-          <ListItemText primary="Service Charges" />
+          <ListItemText primary="Service Charges (Rs.)" />
           <Typography variant="subtitle1" className={classes.total}>
           {costs.servicecost}
           </Typography>
@@ -80,7 +80,7 @@ export default function TotalBill(props) {
         </ListItem>
 
         <ListItem className={classes.listItem}>
-          <ListItemText primary="Total" />
+          <ListItemText primary="Total (Rs.)" />
           <Typography variant="subtitle1" className={classes.total}>
           {costs.totalcost}
           </Typography>

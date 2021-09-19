@@ -3,6 +3,7 @@ import { backendUrl } from "../../../urlConfig.js";
 import axios from "axios";
 import Papa from "papaparse";
 import { Link } from "react-router-dom";
+import FileSaver from 'file-saver';
 
 import Typography from '@material-ui/core/Typography';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
@@ -70,6 +71,11 @@ const AddCsv = () => {
       });
 	};
 
+  const download=()=>{
+    FileSaver.saveAs(
+      process.env.PUBLIC_URL + "/files/medlink-csvfileformat.xlsx",
+      "medlink-csvfileformat.xlsx");
+  } 
 
 
   return (
@@ -77,11 +83,11 @@ const AddCsv = () => {
         <Card >
             <CardHeader color="success">
               <h4 className={classes.cardTitleWhite}>Enter CSV file</h4>
-              <p>
                 <h5 className={classes.cardTitleWhite}>CSV File Format *   
-                <Link to="./medlink-csvfileformat.xlsx" target="_blank" download style={{color:"white"}}> Download here</Link>
+                <Button color="info" size="sm"  round variant="outlined" onClick={download}>
+                 Download
+                </Button>
                 </h5>
-              </p>
             </CardHeader>
             <CardBody>
               <GridContainer>

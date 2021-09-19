@@ -5,21 +5,18 @@ import { backendUrl } from "../../urlConfig.js";
 import TableScrollbar from 'react-table-scrollbar'
 
 // @material-ui/core components
-import { makeStyles,withStyles } from "@material-ui/core/styles";
+import { makeStyles} from "@material-ui/core/styles";
 import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
 
-import CloseIcon from '@material-ui/icons/Close';
 import SearchIcon from '@material-ui/icons/Search';
 
 // core components
@@ -31,68 +28,7 @@ import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import Button from "../../components/Dashboard/CustomButtons/Button";
 import PhotoSteps from "../../components/admin/dialogbox/PhotoSteps";
 
-const styles = {
-  cardCategoryWhite: {
-    "&,& a,& a:hover,& a:focus": {
-      color: "rgba(255,255,255,.62)",
-      margin: "0",
-      fontSize: "14px",
-      marginTop: "0",
-      marginBottom: "0",
-    },
-    "& a,& a:hover,& a:focus": {
-      color: "#FFFFFF",
-    },
-  },
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none",
-    "& small": {
-      color: "#777",
-      fontSize: "65%",
-      fontWeight: "400",
-      lineHeight: "1",
-    },
-    button:{
-      maxHeight: '4px',
-    }
-  },
-};
-
-const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
-
-const DialogContent = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
-
-
-
+import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
 const useStyles = makeStyles(styles);
 
@@ -100,6 +36,7 @@ export default function PharmacyRequests() {
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = useState(""); //for search function
 
+  //popup dialogbox
   const [openReject, setOpenReject] = React.useState(false);
   const handleClickOpenReject = (pharmacyid) => {
     setOpenReject(true);
@@ -109,12 +46,11 @@ export default function PharmacyRequests() {
     setOpenReject(false);
   };
   
+  //backend connection for reject pharmacy
   const [pharmacyid,setPharmacyid] = useState();
   const [rejectreason, setRejectreason] = useState();
   const rejectPharmacy = () => {
     const token = window.localStorage.getItem('token');
-    // console.log(pharmacyid);
-    // console.log('kkkk')
     axios.post(`${backendUrl}/admin/rejectpharmacy`, {pharmacyid:pharmacyid,rejectreason:rejectreason}, {
       headers: {
         'Authorization': token ? `Bearer ${token}` : ''
@@ -123,21 +59,14 @@ export default function PharmacyRequests() {
       console.log(response);
       getdata();
       handleCloseReject();
-      // setSignedUp(true);
-
   }).catch((err)=>{
       console.log(err);
-      // console.log("kkkkkk");
-
-      // setError("Password must be atleast 6 characters long");
   });
-  // console.log(token)
 };
-
+  
+  //backend connection for accept pharmacy
   const acceptPharmacy = (pharmacyid) => {
       const token = window.localStorage.getItem('token');
-  
-      // console.log('kkkk')
       axios.post(`${backendUrl}/admin/acceptpharmacy`, {pharmacyid:pharmacyid}, {
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
@@ -145,45 +74,30 @@ export default function PharmacyRequests() {
     }).then((response)=>{
         console.log(response);
         getdata();
-        // setSignedUp(true);
-  
     }).catch((err)=>{
         console.log(err);
-        // console.log("kkkkkk");
-  
-        // setError("Password must be atleast 6 characters long");
     });
-    // console.log(token)
   };
   const [open, setOpen] = React.useState(false);
   const [doc1,setDoc1]= React.useState('');
   const [doc2,setDoc2]= React.useState('');
   const [doc3,setDoc3]= React.useState('');
 
-
-
-
   const handleClickOpen = (document1,document2,document3) => {
     setDoc1(document1);
     setDoc2(document2);
     setDoc3(document3);
-  
-    // console.log(document1)
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
 
- 
-
+ //backend connection
   const [data, setData] = useState([]);
-
   const getdata =() =>{
-    
     const token = window.localStorage.getItem('token');
-    
-      axios.get(`${backendUrl}/admin/viewpharmacyrequests`,{
+    axios.get(`${backendUrl}/admin/viewpharmacyrequests`,{
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         }
@@ -238,9 +152,8 @@ export default function PharmacyRequests() {
                       <TableHead>
                         <TableRow>
                           {columns.map((column) => (
-                            <TableCell style={{color:'#213458',backgroundColor: "white"}}
+                            <TableCell style={{color:'primary',backgroundColor: "white"}}
                               key={column.id}
-                              align={column.align}
                             >
                               {column.label}
                             </TableCell>
@@ -249,7 +162,7 @@ export default function PharmacyRequests() {
                       </TableHead>
                       
                       <TableBody >
-                        {data.filter((row)=>{
+                        {rows.filter((row)=>{
                           if (searchTerm == "") {
                             return row
                           } else if (row.name.toLowerCase().includes(searchTerm.toLowerCase()) || row.email.toLowerCase().includes(searchTerm.toLowerCase()) 
@@ -279,7 +192,7 @@ export default function PharmacyRequests() {
                            <Button size='sm' color="primary" onClick={()=>acceptPharmacy(row.pharmacyid)}>Accept</Button>
                             </TableCell>
                             <TableCell align="left">
-                            <Button size='sm' color="default" onClick={()=>handleClickOpenReject(row.pharmacyid)}>Reject</Button>
+                            <Button size='sm' color="danger" onClick={()=>handleClickOpenReject(row.pharmacyid)}>Reject</Button>
                             </TableCell>
                           </TableRow>
                           );
@@ -292,6 +205,8 @@ export default function PharmacyRequests() {
           </CardBody>
         </Card>
       </GridItem>
+            
+      {/* view documents dialogbox */}
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           Documents
@@ -325,7 +240,6 @@ export default function PharmacyRequests() {
             id="name"
             onChange={(e) => setRejectreason(e.target.value)}
             label="State the reason"
-            // type="email"
             fullWidth
           />
         </DialogContent>

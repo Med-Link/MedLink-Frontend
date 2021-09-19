@@ -150,23 +150,13 @@ export default function Dashboard() {
                   <Grid>
                     <Button variant="contained" style={goButtonStyle} onClick={handleClickOpen2}>Select Area to search</Button> 
                     <Dialog open={openLocation} onClose={handleClose2} aria-labelledby="form-dialog-title">
-                      <DialogTitle id="form-dialog-title">          
+                      <DialogTitle id="form-dialog-title">  
+                        Enter Radius to Search Pharmacies in an Area        
                       </DialogTitle>
                       <DialogContent>
                         <DialogContentText>
-                          <GridContainer item={true} spacing={1}>
-                            <GridItem xs={12}>
-                              <p style={sentenceStyle}>Select an Area to Get the Nearest Pharmacies in Order :</p>
-                            </GridItem>
-                            <Grid item={true} container xs={12} >
-                            <Map
-                              center={{lat: 6.9271, lng: 79.8612}}
-                              height='230px'
-                              width='95%'
-                        
-                              zoom={7} />
-                            </Grid>
-                            <Grid item={true} xs={12} sm={12} md={12}>
+                          <GridContainer spacing={1}>
+                            <GridItem xs={12} sm={12} md={12} style={{marginBottom:"10px"}}>
                               <TextField 
                                   variant="outlined"
                                   fullWidth
@@ -176,10 +166,17 @@ export default function Dashboard() {
                                   name="Radius"
                                   size="small"
                                   />
-                            </Grid>	
+                            </GridItem>	
+                            <GridItem xs={12} sm={12} md={12} >
+                              <Map
+                                center={{lat: 7.2906, lng: 80.6337}}
+                                height='350px'
+                                width='100%'
+                                zoom={8} />
+                            </GridItem>
+                            
                             <Grid container justify="center" style={{marginTop:"10px"}}>
-                            <Button color="primary" onClick={pharmacylocation} justifyContent="center">OK</Button>
-
+                              <Button color="primary" onClick={pharmacylocation} justifyContent="center">OK</Button>
                             </Grid>
   
                           </GridContainer>

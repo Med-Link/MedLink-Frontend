@@ -272,33 +272,8 @@ class Map extends React.Component{
 		
 		if( this.props.center.lat !== undefined ) {
 			map = <div>
-					<Grid container spacing={1}>
-						<Grid item xs={12} sm={12} md={12}>
-						{/* For Auto complete Search Box */}
-							<Autocomplete
-								style={{
-									width: '95%',
-									height: '40px',
-									paddingLeft: '16px',
-									marginBottom: '10px',
-								}}
-								onPlaceSelected={ this.onPlaceSelected }
-								types={['(regions)']}
-							/>
-						</Grid>
-					</Grid>	
+					
 					<Grid container spacing={1} style={{marginBottom: '10px'}}>
-						<Grid item xs={12} sm={12} md={12}>
-							<TextField 
-									variant="outlined"
-									fullWidth
-									id="city"
-									label="Enter a Radius to search (km)"
-									// onChange={(e) => setDistance(e.target.value)}
-									name="Radius"
-									size="small"
-									/>
-						</Grid>	
 						<Grid item xs={6} sm={6} md={6}>
 							<TextField 
 								variant="outlined"
