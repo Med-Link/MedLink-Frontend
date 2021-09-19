@@ -97,7 +97,7 @@ const Profile = () => {
                     <CardBody profile>
                         <h1 className={classes.cardTitle}>Hello {firstname}</h1>
                         <p className={classes.description}>
-                            Customize your profile here
+                            We care you always
                         </p>
 
                     </CardBody>
@@ -143,29 +143,9 @@ const Profile = () => {
                                         disabled: true,
                                     }}
                                 />
-
-                                <Button type='submit' variant="contained" onClick={handleClickOpen2} color="info">Reset Password</Button>
-                                <Dialog open={openReset} onClose={handleClose2} aria-labelledby="form-dialog-title">
-                                    <ResetPassword />
-                                </Dialog>
-
-                                <Button type='submit' variant="contained" onClick={handleClickOpenBankDetails} color="info">Add Bank Details</Button>
-
-                                <Dialog open={openResetBank} onClose={handleCloseBankDetails} aria-labelledby="form-dialog-title">
-                                    <AddBankDetails />
-                                </Dialog>
                             </GridItem>
-                            <GridItem xs={12} sm={12} md={6} style={{ marginTop: '30px' }}>
-
-                            </GridItem>
-
                         </GridContainer>
                     </CardBody>
-                    <CardFooter >
-
-
-                        <Button color="success">Update Profile</Button>
-                    </CardFooter>
                 </Card>
             </GridItem>
 
