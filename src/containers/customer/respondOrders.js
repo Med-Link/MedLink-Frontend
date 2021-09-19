@@ -142,7 +142,7 @@ const rejectOrder = () => {
          let array =[];
          results.forEach(element=>{
           let arr=[];
-          arr.push(element.medlistid,element.order_reqid,element.totalprice,element.name,<ButtonGroup color="primary" aria-label="outlined primary button group">
+          arr.push(element.date,element.medlistid,element.order_reqid,element.totalprice,element.name,<ButtonGroup color="primary" aria-label="outlined primary button group">
           
           <Button onClick={()=>handleClickOpen2(element.medlistid)}>View Order</Button>
            
@@ -181,7 +181,7 @@ const rejectOrder = () => {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["List number","Order Request","Total Price", "Pharmacy", "Accept/Reject"]}
+              tableHead={["Date","List number","Order Request","Total Price", "Pharmacy", "Accept/Reject"]}
               tableData={data}
               //   ["10-07-2021","20:55","Pharma", "Colombo", "Nugegoda", "Panadol is out of stock now", 
               //   <ButtonGroup color="primary" aria-label="outlined primary button group">
