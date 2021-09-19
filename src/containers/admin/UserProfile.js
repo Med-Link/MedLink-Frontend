@@ -43,11 +43,22 @@ export default function UserProfile() {
 
   return (
       <GridContainer>
+        <GridItem xs={12} sm={12} md={4}>
+          <Card profile>
+            <CardAvatar profile>
+                <img src={avatar} alt="..." />
+            </CardAvatar>
+            <CardBody profile>
+              <h4 className={classes.cardCategory}>Administrator</h4>
+              <h1 className={classes.cardTitle}>{data.firstname} {data.lastname}</h1>         
+            </CardBody>
+          </Card>
+        </GridItem>
         <GridItem xs={12} sm={12} md={8}>
           <Card>
             <CardHeader color="success">
-              <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
-              <p className={classes.cardCategoryWhite}>Complete your profile</p>
+              <h4 className={classes.cardTitleWhite}>User Profile</h4>
+              <p className={classes.cardCategoryWhite}>View Admin profile</p>
             </CardHeader>
             <CardBody>
               <GridContainer>
@@ -95,61 +106,6 @@ export default function UserProfile() {
                   />
                 </GridItem>                
               </GridContainer>
-          
-              <GridContainer>
-              <GridItem xs={12} sm={12} md={12}>
-                <h4 className={classes.cardCategory} style={{marginTop:'35px',marginBottom:'0px'}}>Reset your Password here:</h4>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    id="oldpswd"
-                    name="oldpswd"
-                    labelText="Current Password"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    id="newpswd1"
-                    name="newpaswd1"
-                    labelText="Enter New Password"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    id="newpswd2"
-                    name="newpaswd2"
-                    labelText="Re-enter New Password"                    
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-            </CardBody>
-            <CardFooter>
-              <Button color="success">Update Profile</Button>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-                <img src={avatar} alt="..." />
-            </CardAvatar>
-            <CardBody profile>
-              <h4 className={classes.cardCategory}>Administrator</h4>
-              <h1 className={classes.cardTitle}>{data.firstname} {data.lastname}</h1>
-              <p className={classes.description}>
-                Don{"'"}t be scared of the truth because we need to restart the
-                human foundation in truth.
-              </p>
-              
             </CardBody>
           </Card>
         </GridItem>

@@ -12,6 +12,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import TextButton from '@mui/material/Button';
 
 import Card from "../../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../../components/Dashboard/Card/CardHeader.js";
@@ -57,6 +58,7 @@ const AddCsv = () => {
 
 	const updateData =(result)=> {
 		var data = result.data;
+    console.log(data);
     const token = window.localStorage.getItem("token");
     axios.post(`${backendUrl}/pharmacy/addcsv`, 
     {
@@ -83,10 +85,10 @@ const AddCsv = () => {
         <Card >
             <CardHeader color="success">
               <h4 className={classes.cardTitleWhite}>Enter CSV file</h4>
-                <h5 className={classes.cardTitleWhite}>CSV File Format *   
-                <Button color="info" size="sm"  round variant="outlined" onClick={download}>
-                 Download
-                </Button>
+                <h5 className={classes.cardTitleWhite}>Download CSV File Format *   
+                <TextButton size="small" onClick={download} color="inherit" justifyContent="Right">
+                 Click Here
+                </TextButton>
                 </h5>
             </CardHeader>
             <CardBody>

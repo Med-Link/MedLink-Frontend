@@ -12,6 +12,7 @@ import RespondOrders from "../respondOrders.js";
 import Profile from "../profile/Profile.js"
 import BuyingHistory from "../buyingHistory/buyingHistory.js";
 import SearchMedicine from "../SearchMedicine"
+import RejectOrders from "../rejectOrders/RejectOrders"
 const dashboardRoutes = [
   {
     path: "/dashboard",
@@ -39,6 +40,13 @@ const dashboardRoutes = [
     name: "Buying History",
     icon: LibraryBooks,
     component: BuyingHistory,
+    layout: "/customer",
+  },
+  {
+    path: "/rejectOrders",
+    name: "Reject Orders",
+    icon: LibraryBooks,
+    component: RejectOrders,
     layout: "/customer",
   },
   {
