@@ -14,6 +14,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextButton from '@mui/material/Button';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Card from "../../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../../components/Dashboard/Card/CardBody.js";
@@ -78,7 +81,15 @@ const AddCsv = () => {
       process.env.PUBLIC_URL + "https://medlinkpharmacy.s3.ap-south-1.amazonaws.com/pharmacyDocuments/medlink-csvfileformat.xlsx",
       "medlink-csvfileformat.xlsx");
   }
-
+  const notify = () => toast.success('CSV file added successfully !!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
 
   return (
     <div>
@@ -120,13 +131,24 @@ const AddCsv = () => {
           </Button>
           <Button onClick={(() => {
             importCSV();
+            notify();
             handleCloseAccept();
           })} color="primary" autoFocus>
             Yes
           </Button>
         </DialogActions>
       </Dialog>
-
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   )
 }
