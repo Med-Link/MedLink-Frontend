@@ -64,6 +64,7 @@ function AppAppBar(props) {
             
             <img src={medLink} className={classes.image} />
           <Link
+          id="RouterNavLink"
             variant="h6"
             underline="none"
             color="inherit"
@@ -75,6 +76,7 @@ function AppAppBar(props) {
             </Link>
 
             <Link
+            id="RouterNavLink"
             variant="h6"
             underline="none"
             color="inherit"
@@ -87,6 +89,7 @@ function AppAppBar(props) {
           
           <div className={classes.right}>
             <Link
+            id="RouterNavLink"
               color="inherit"
               variant="h6"
               underline="none"
@@ -103,24 +106,7 @@ function AppAppBar(props) {
               </Button>
             </Link>
 
-            {/* <Link
-              variant="h6"
-              underline="none"
-              className={clsx(classes.rightLink)}
-              
-              href="pharmacysignup/"
-            >
-              {'Pharmacy Sign Up'}
-            </Link>
-
-            <Link
-              variant="h6"
-              underline="none"
-              className={clsx(classes.rightLink)}
-              href="SignupUser/"
-            >
-              {'Sign Up'}
-            </Link> */}
+            
           </div>
         </Toolbar>
       </AppBar>

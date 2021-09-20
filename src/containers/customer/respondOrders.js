@@ -2,7 +2,7 @@
 import React,{useState} from "react";
 import axios from 'axios';
 import { backendUrl } from "../../urlConfig.js";
-import TableScrollbar from 'react-table-scrollbar'
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';

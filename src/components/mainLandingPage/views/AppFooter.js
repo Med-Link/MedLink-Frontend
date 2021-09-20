@@ -4,11 +4,10 @@ import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
 import Typography from '../../mainLandingPage/Typography';
-import TextField from '../../mainLandingPage/TextField';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
-import Button from '../../mainLandingPage/Button';
+import medLink from '../../../assets/images/medLink.jpg';
 
 function Copyright() {
   return (
@@ -31,6 +30,22 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(8),
     display: 'flex',
+    
+  },
+  
+  image:{
+    height:45,
+    width:45,
+  },
+  link:{
+    fontSize: 45,
+    color: theme.palette.secondary.main,
+  },
+  title: {
+    
+    fontSize: 45,
+    color:theme.palette.primary.dark,
+    
   },
   iconsWrapper: {
     height: 120,
@@ -38,17 +53,14 @@ const useStyles = makeStyles((theme) => ({
   icons: {
     display: 'flex',
   },
-  icon: {
-    width: 48,
-    height: 48,
-    display: 'flex',
+  icons: {
+    width: 30,
+    height:30,
+    // display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme.palette.warning.main,
     marginRight: theme.spacing(1),
-    '&:hover': {
-      backgroundColor: theme.palette.warning.dark,
-    },
+    
   },
   list: {
     margin: 0,
@@ -67,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     width: '75%',
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
-    
+
   },
   subButton: {
     padding: theme.spacing(1, 2),
@@ -76,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
 
-  
+
 }));
 
 const LANGUAGES = [
@@ -109,10 +121,35 @@ export default function AppFooter() {
       <Container className={classes.container}>
 
         <Grid container spacing={10}>
-       
-        <Grid item xs={12} md={6} className={classes.cardWrapper}>
-          <div className={classes.card}>
-            <form onSubmit={handleSubmit} className={classes.cardContent}>
+
+          <Grid item xs={12} md={6} className={classes.cardWrapper}>
+            <div className={classes.card}>
+            <img src={medLink} className={classes.image} />
+          <Link
+          id="RouterNavLink"
+            variant="h6"
+            underline="none"
+            color="inherit"
+            className={classes.title}
+            href="/"
+            
+          >
+            {'Med'}
+            </Link>
+
+            <Link
+            id="RouterNavLink"
+            variant="h6"
+            underline="none"
+            color="inherit"
+            className={classes.link}
+            href="/"
+          >
+            {'Link'}
+            </Link>
+          
+            
+              {/* <form onSubmit={handleSubmit} className={classes.cardContent}>
               <Typography variant="h4" component="h2" gutterBottom>
                 Subscribe
               </Typography>
@@ -123,10 +160,10 @@ export default function AppFooter() {
               <Button type="submit" color="primary" variant="contained" className={classes.subButton}>
                 Keep me updated
               </Button>
-            </form>
-          </div>
+            </form> */}
+            </div>
           </Grid>
-          <Grid item xs={6} sm={4} md={2}>
+          {/* <Grid item xs={6} sm={4} md={2}>
             <Typography variant="h6" marked="left" gutterBottom>
               Legal
             </Typography>
@@ -138,7 +175,7 @@ export default function AppFooter() {
                 <Link href="/premium-themes/onepirate/privacy/">Privacy</Link>
               </li>
             </ul>
-          </Grid>
+          </Grid> */}
 
           <Grid item xs={6} sm={4} md={3} >
             <Grid
@@ -148,7 +185,7 @@ export default function AppFooter() {
               className={classes.iconsWrapper}
               spacing={0}
             >
-              <Grid item className={classes.icons} >
+              {/* <Grid item className={classes.icons} >
               <ul className={classes.list}>
               <li className={classes.listItem}>
                 <FacebookIcon/> Facebook 
@@ -161,15 +198,15 @@ export default function AppFooter() {
                 Twitter
               </li>
             </ul>
-               </Grid>
-              
+               </Grid> */}
+
             </Grid>
-           
+
           </Grid>
-          <Grid listItem>
+          {/* <Grid listItem>
                 <Copyright />
-              </Grid>
-          
+              </Grid> */}
+
           {/* <Grid item xs={6} sm={8} md={4}>
             <Typography variant="h6" marked="left" gutterBottom>
               Language
@@ -188,28 +225,22 @@ export default function AppFooter() {
               ))}
             </TextField>
           </Grid> */}
-         
-          {/* <Grid item>
+
+          <Grid item>
+          <Grid>
+              <FacebookIcon className={classes.icons}/>
+              <InstagramIcon className={classes.icons} />
+              <TwitterIcon className={classes.icons} />
+              </Grid>
+            <Grid item>
+              <Copyright />
+            </Grid>
             <Typography variant="caption">
-              {'Icons made by '}
-              <Link href="https://www.freepik.com" rel="sponsored" title="Freepik">
-                Freepik
-              </Link>
-              {' from '}
-              <Link href="https://www.flaticon.com" rel="sponsored" title="Flaticon">
-                www.flaticon.com
-              </Link>
-              {' is licensed by '}
-              <Link
-                href="https://creativecommons.org/licenses/by/3.0/"
-                title="Creative Commons BY 3.0"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                CC 3.0 BY
-              </Link>
+              {' by Group 49 for UCSC third year group project'}
+              
             </Typography>
-          </Grid> */}
+            
+          </Grid>
         </Grid>
       </Container>
     </Typography>

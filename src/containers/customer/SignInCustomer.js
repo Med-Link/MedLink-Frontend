@@ -1,16 +1,8 @@
 import React, {useEffect, useState} from 'react';
-
-
-
-
 import { Grid } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
 import Hidden from '@material-ui/core/Hidden';
 import LockOpenOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
-
-//import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
 import { TextField } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -19,15 +11,11 @@ import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
-
 import GridContainer from '../../components/Dashboard/Grid/GridContainer';
 import GridItem from '../../components/Dashboard/Grid/GridItem';
-
-import axios from 'axios';
 import {isuserLoggedIn, login} from '../../actions/auth.actionscustomer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
 import pharmacist from '../../assets/images/cust.jpg';
 
 

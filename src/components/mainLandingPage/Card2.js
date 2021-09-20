@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
  
     backgroundColor : theme.palette.secondary.light,
- 
+    boxShadow:10,
   },
 
   color1:{
