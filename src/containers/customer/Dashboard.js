@@ -113,7 +113,7 @@ export default function Dashboard() {
         })
       .then(res =>{
         const results =  res.data.result;
-        console.log(results);
+        // console.log(results);
         // setData(results);
       })
   }
