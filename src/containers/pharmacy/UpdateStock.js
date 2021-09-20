@@ -180,7 +180,6 @@ export default function OrderProcess() {
                       {columns.map((column) => (
                         <TableCell style={{color:'#213458',backgroundColor: "white"}}
                           key={column.id}
-                          align={column.align}
                         >
                           {column.label}
                         </TableCell>
@@ -196,9 +195,9 @@ export default function OrderProcess() {
                       row.brand.toLowerCase().includes(searchTerm.toLowerCase()) || row.medid.toString().toLowerCase().includes(searchTerm.toLowerCase()) || row.batchid.toString().toLowerCase().includes(searchTerm.toLowerCase())){
                         return row
                       }
-                    }).map((row) => {
+                    }).map((row,id) => {
                       return(
-                      <TableRow>
+                      <TableRow key={id}>
                         <TableCell align="left">
                           {row.medid}
                         </TableCell>

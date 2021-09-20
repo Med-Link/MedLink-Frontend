@@ -85,7 +85,7 @@ export default function BuyingHistory() {
         let array =[];
         results.forEach(element=>{
          let arr=[];
-         arr.push(Date(element.date).toString(),element.orderid,element.address,element.deliverycost,element.servicecost,element.totalcost,element.name,element.city,<Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.medlistid)} round>View</Button>);
+         arr.push(Date(element.date).toString(),element.orderid,element.address,element.deliverycost,element.servicecost,element.totalcost,element.name,element.city,<Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.medlistid)} round='true'>View</Button>);
            array.push(arr);
         })         
        setData(array); 

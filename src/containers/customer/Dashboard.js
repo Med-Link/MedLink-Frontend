@@ -45,7 +45,6 @@ const cardStyle = {backgroundColor: '#a6c6ca'}
 const searchButton = {backgroundColor: '#126e82'}
 const ftStyle = {color: '#126e82',textAlign: 'left',fontSize: '20px'}
 const cdStyle = {backgroundColor: '#ffffff'}
-const goButtonStyle={color: '#ffffff',backgroundColor: '#126e82',opacity:'0.9', display:"flex", flex:"column", textAlign:"center"}
 
 const sentenceStyle={fontSize: '16px', color: '#126e82', fontWeight: 'bold'}
 
@@ -145,7 +144,7 @@ export default function Dashboard() {
               <div> 
                 <FormControl className={classes.formControl}>
                   <Grid>
-                    <Button variant="contained" style={goButtonStyle} onClick={handleClickOpen2}>Select Area to search</Button> 
+                    <Button variant="contained" color="primary" onClick={handleClickOpen2}>Select Area to search</Button> 
                     <Dialog open={openLocation} onClose={handleClose2} aria-labelledby="form-dialog-title">
                       <DialogTitle id="form-dialog-title">  
                         Enter Radius to Search Pharmacies in an Area        
@@ -208,7 +207,7 @@ export default function Dashboard() {
                 />
               </FormControl>
             </div>
-              <Button style={searchButton} color="ffffff" aria-label="edit" justIcon round>
+              <Button  color="primary" aria-label="edit" justIcon round disabled>
                 <Search style={searchButton}/>
               </Button>
             </CardFooter>
@@ -226,9 +225,7 @@ export default function Dashboard() {
         
           <CardBody>
             <TableScrollbar rows={15}>
-              <Table
-              tableHeaderColor="primary"
-              >
+              <Table>
                 <TableHead>
                   <TableRow>
                     {columns.map((column) => (

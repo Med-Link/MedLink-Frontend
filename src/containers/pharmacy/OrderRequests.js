@@ -110,9 +110,9 @@ export default function OrderRequests() {
                 </TableHead>
                       
                 <TableBody >
-                  {rows.map((row)=>{
+                  {rows.map((row,id)=>{
                     return(
-                    <TableRow>
+                    <TableRow key={id}>
                       <TableCell align="left">
                         {row.date}
                       </TableCell>
