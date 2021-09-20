@@ -91,6 +91,8 @@ export default function Reports() {
 
   // get monthly income from each pharmacy transactions
   const [data, setData] = useState([]);
+  const [totalIncome, setTotalIncome]= useState();
+
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
       axios.get(`${backendUrl}/admin/viewmonthlyincome`,{
@@ -100,9 +102,13 @@ export default function Reports() {
         })
       .then(res =>{
         const results =  res.data.result;
-            console.log(results);
-            setData(results);
-            getSumincome(data);
+        console.log(results);
+        setData(results);
+        let total=0;
+        for (var i = 0; i < (results.length); i++){
+          total=total+parseInt(results[i].sum);
+        }
+        setTotalIncome(total)
       })
   }
 
@@ -116,14 +122,6 @@ export default function Reports() {
 
   const rows = data; 
   
-  const [totalIncome, setTotalIncome]= useState();
-  const getSumincome = (rows) => {
-    let total = 0
-    for (var i = 0; i < (rows.length); i++){
-      total=total+parseInt(rows[i].sum);
-    }
-    setTotalIncome(total)
-  } 
   const download=()=>
   {
     FileDownload(data, 'report.pdf');
