@@ -157,7 +157,7 @@ React.useEffect(() => {
       </GridContainer>
 
       <GridContainer>
-        <GridItem xs={12} sm={4} md={4}>
+        <GridItem xs={12} sm={3} md={3}>
           <OutOfStockTable/>
         </GridItem>
         <GridItem xs={12} sm={6} md={4}>
