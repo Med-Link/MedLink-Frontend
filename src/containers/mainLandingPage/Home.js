@@ -16,18 +16,10 @@ function Index() {
       <AppAppBar />
       <ProductHero />
       <WhyMedLink />
-      {/* <ProductCategories /> */}
       <ProductValues />
-      {/* <ProductHowItWorks /> */}
       <ProductCTA />
-      {/* <ProductSmokingHero /> */}
       <AppFooter />
     </React.Fragment>
-
-
-
-
-
   );
 }
 

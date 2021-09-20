@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { backendUrl } from "../../../urlConfig.js";
 import axios from "axios";
 import Papa from "papaparse";
@@ -25,13 +25,13 @@ import styles from "../../../assets/jss/material-dashboard-react/views/dashboard
 
 const useStyles = makeStyles(styles);
 function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 
 const AddCsv = () => {
   const classes = useStyles();
-  
+
   // save button states
   const [openAccept, setOpenAccept] = React.useState(false);
   const handleClickOpenAccept = () => {
@@ -42,92 +42,93 @@ const AddCsv = () => {
   };
 
   // add csv
-  const[csv,setCSV] = useState(null);
+  const [csv, setCSV] = useState(null);
 
-	const handleChange = event => {
-		setCSV(event.target.files[0]);
-	};
+  const handleChange = event => {
+    setCSV(event.target.files[0]);
+  };
 
-	const importCSV = () => {
-		const csvfile = csv;
-		Papa.parse(csvfile, {
-			complete: updateData,
-			header: true
-		});
-	};
+  const importCSV = () => {
+    const csvfile = csv;
+    Papa.parse(csvfile, {
+      complete: updateData,
+      header: true
+    });
+  };
 
-	const updateData =(result)=> {
-		var data = result.data;
+  const updateData = (result) => {
+    var data = result.data;
     console.log(data);
     const token = window.localStorage.getItem("token");
-    axios.post(`${backendUrl}/pharmacy/addcsv`, 
-    {
-      csvarray:data
-    },{
-    headers: {
-          Authorization: token ? `Bearer ${token}` : "",
-        },
-      })
-    .then((response) => {
+    axios.post(`${backendUrl}/pharmacy/addcsv`,
+      {
+        csvarray: data
+      }, {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+    })
+      .then((response) => {
         console.log(response.data.message);
       });
-	};
+  };
 
-  const download=()=>{
+  const download = () => {
     FileSaver.saveAs(
       process.env.PUBLIC_URL + "/files/medlink-csvfileformat.xlsx",
       "medlink-csvfileformat.xlsx");
-  } 
+  }
 
 
   return (
-        <div>
-        <Card >
-            <CardHeader color="success">
-              <h4 className={classes.cardTitleWhite}>Enter CSV file</h4>
-                <h5 className={classes.cardTitleWhite}>Download CSV File Format *   
-                <TextButton size="small" onClick={download} color="inherit">
-                 Click Here
-                </TextButton>
-                </h5>
-            </CardHeader>
-            <CardBody>
-              <GridContainer>
-                <GridItem xs={6} sm={6} md={6}>
-                <Typography variant="body1"> Update Stock - Add (.csv) File</Typography>
-                </GridItem>
-                <GridItem xs={6} sm={6} md={6}>
-                <Button component="label" startIcon={<CloudUploadIcon />} size="sm">
-                  Upload <input type="file" hidden  onChange={handleChange}/>
-                  </Button>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={12} style={{display: "flex",justifyContent: "center", alignItems: "center",}}>
-                  <Button variant="outlined" color="success" onClick={handleClickOpenAccept}>
-                    Save
-                  </Button>
-                </GridItem>
-              </GridContainer>
-            </CardBody>
-          </Card>
+    <div>
+      <Card >
+        <CardHeader color="success">
+          <h4 className={classes.cardTitleWhite}>Enter CSV file</h4>
+          <h5 className={classes.cardTitleWhite}>Download CSV File Format *
+            <TextButton size="small" onClick={download} color="inherit">
+              Click Here
+            </TextButton>
+          </h5>
+        </CardHeader>
+        <CardBody>
+          <GridContainer>
+            <GridItem xs={6} sm={6} md={6}>
+              <Typography variant="body1"> Update Stock - Add (.csv) File</Typography>
+            </GridItem>
+            <GridItem xs={6} sm={6} md={6}>
+              <Button component="label" startIcon={<CloudUploadIcon />} size="sm">
+                Upload <input type="file" hidden onChange={handleChange} />
+              </Button>
+            </GridItem>
+            <GridItem xs={12} sm={12} md={12} style={{ display: "flex", justifyContent: "center", alignItems: "center", }}>
+              <Button variant="outlined" color="success" onClick={handleClickOpenAccept}>
+                Save
+              </Button>
+            </GridItem>
+          </GridContainer>
+        </CardBody>
+      </Card>
 
-        
-        {/*upload csv dialogbox*/}
-        <Dialog open={openAccept} onClose={handleCloseAccept} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description" >
+
+      {/*upload csv dialogbox*/}
+      <Dialog open={openAccept} onClose={handleCloseAccept} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description" >
         <DialogTitle id="alert-dialog-title">{"Do you want to Save this to the stock"}</DialogTitle>
         <DialogActions>
-            <Button onClick={handleCloseAccept} color="danger">
+          <Button onClick={handleCloseAccept} color="danger">
             Cancle
-            </Button>
-            <Button onClick={(()=>{
-                importCSV();
-                handleCloseAccept();})} color="primary" autoFocus>
+          </Button>
+          <Button onClick={(() => {
+            importCSV();
+            handleCloseAccept();
+          })} color="primary" autoFocus>
             Yes
-            </Button>
+          </Button>
         </DialogActions>
-        </Dialog>
+      </Dialog>
 
     </div>
-    )
+  )
 }
 
 export default AddCsv;

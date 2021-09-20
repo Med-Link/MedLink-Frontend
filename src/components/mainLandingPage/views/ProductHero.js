@@ -7,9 +7,7 @@ import CustomerCard from '../Card2';
 // import { minHeight } from '@material-ui/system';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-
 import medLink from '../../../assets/images/medLink.jpg';
-
 
 const backgroundImage =
   'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';

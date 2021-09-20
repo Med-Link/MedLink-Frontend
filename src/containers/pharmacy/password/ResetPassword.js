@@ -128,13 +128,6 @@ const ResetPassword=()=>{
                     </Grid>
 
                     <Grid item xs={12}>
-                        {/*<TextField
-                            id="currentPassword"
-                            label="Current Password"
-                            type='password'
-                            variant="outlined"
-                            fullWidth
-                        />*/}
                         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                             <InputLabel style={inputStyle} htmlFor="outlined-adornment-password">New Password</InputLabel>
                             <OutlinedInput
@@ -161,13 +154,6 @@ const ResetPassword=()=>{
                     </Grid>
 
                     <Grid item xs={12}>
-                        {/*<TextField
-                            id="currentPassword"
-                            label="Current Password"
-                            type='password'
-                            variant="outlined"
-                            fullWidth
-                        />*/}
                         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                             <InputLabel style={inputStyle} htmlFor="outlined-adornment-password">Confirm New Password</InputLabel>
                             <OutlinedInput

@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { backendUrl } from '../../urlConfig';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -15,14 +13,9 @@ import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-
 import Hidden from '@material-ui/core/Hidden';
-
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-import * as yup from 'yup';
 import cust from '../../assets/images/cust.jpg';
 import GridItem from '../../components/Dashboard/Grid/GridItem';
 import GridContainer from '../../components/Dashboard/Grid/GridContainer';
@@ -226,20 +219,6 @@ const SignUpCustomer = () => {
                   />
                 </Grid>
                 <p>{Error}</p>
-
-                {/* <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                value ={location} onChange={(e) => setLocation(e.target.value)}
-                required
-                fullWidth
-                id="location"
-                label="Location URL"
-                name="location"
-                size="small"
-              />
-            </Grid> */}
-
                 <Grid item xs={12}>
                   <FormControlLabel
                     onChange={(e) => setChecked(e.target.checked)}
