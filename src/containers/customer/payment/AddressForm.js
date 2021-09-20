@@ -55,7 +55,6 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12}>
           <TextField
-            required
             id="address1"
             name="address1"
             label="Address line 1"
@@ -91,10 +90,10 @@ export default function AddressForm() {
         </Grid> */}
          
         <Grid item xs={12}>
-          <FormControlLabel
+         {/* <FormControlLabel
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
             label="Use this address for payment details"
-          />
+          />  */}
         </Grid>
       </Grid>
     </React.Fragment>
