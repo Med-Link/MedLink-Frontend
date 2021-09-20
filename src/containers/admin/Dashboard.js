@@ -35,6 +35,7 @@ export default function Dashboard() {
   const [data, setData] = useState();
   const [datapharm, setDatapharm] = useState();
   const [datapharmreq, setDatapharmReq] = useState();
+  const [totalIncome, setTotalIncome] = useState();
 
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
@@ -79,11 +80,25 @@ export default function Dashboard() {
       },[])
     
   }
+  const gettotalincome =() =>{
+    const token = window.localStorage.getItem('token');
+      axios.get(`${backendUrl}/admin/totalmonthlyincome`,{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results =res.data.result[0];
+        console.log(results);
+        setTotalIncome(results.sum);
+      })
+  }
   
   React.useEffect(()=>{
     getdata();
     getdata1();
     getdata2();
+    gettotalincome();
   });
   
   return (
@@ -96,12 +111,12 @@ export default function Dashboard() {
                 <MonetizationOnIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Revenue</p>
-              <h3 className={classes.cardTitle}>$34,245</h3>
+              <h3 className={classes.cardTitle}>Rs.{totalIncome}/=</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
                 <DateRange />
-                Last 24 Hours
+                {new Date().toLocaleString("en-US", { month: "long" })}
               </div>
             </CardFooter>
           </Card>
