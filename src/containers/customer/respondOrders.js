@@ -2,7 +2,8 @@
 import React,{useState} from "react";
 import axios from 'axios';
 import { backendUrl } from "../../urlConfig.js";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
@@ -27,6 +28,16 @@ import styles from "../../assets/jss/material-dashboard-react/views/dashboardSty
 const useStyles = makeStyles(styles);
 
 export default function RespondOrders() {
+  const notify = () => toast.success('Medicine List Rejected!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
+
   const classes = useStyles();
   const [data, setData] = useState([]);
   const [rejectRowid, setRejectRowid] = useState("");
@@ -80,6 +91,7 @@ export default function RespondOrders() {
       },
   }).then((response)=>{
       console.log(response);
+      notify();
       getdata();
       handleClose();
   }).catch((err)=>{
@@ -122,6 +134,7 @@ export default function RespondOrders() {
   },[])
 
   return (
+    <div>
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
@@ -185,6 +198,17 @@ export default function RespondOrders() {
       </Dialog>
 
     </GridContainer>
+     <ToastContainer position="top-right"
+     autoClose={5000}
+     hideProgressBar={false}
+     newestOnTop={false}
+     closeOnClick
+     rtl={false}
+     pauseOnFocusLoss
+     draggable
+     pauseOnHover
+/> 
+</div>
   );
 }
 
