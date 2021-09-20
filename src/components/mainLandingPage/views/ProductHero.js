@@ -105,22 +105,19 @@ function ProductHero(props) {
           <Grid container spacing={4}>
             <Grid item xs={12} md={4} className={classes.mainGrid}>
               <div className={classes.item}>
-                
-                
                 <PharmacyCard />
-
               </div>
             </Grid>
+
             <Grid item xs={12} md={4} className={classes.mainGrid}>
               <div className={classes.item}>
                
                 <CustomerCard />
               </div>
             </Grid>
-            <Grid item xs={20} md={4}> 
-            
-              <div className={classes.item}>
 
+            <Grid item xs={20} md={4}> 
+              <div className={classes.item}>
                 {/* <img src={land} className={classes.image} /> */}
                 <Typography className={classes.color} variant="h5" >
                   <img src={medLink} className={classes.image2} />
