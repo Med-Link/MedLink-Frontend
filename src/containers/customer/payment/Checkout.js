@@ -139,7 +139,7 @@ export default function Checkout(props) {
       city : 'matara',
       country : 'Sri Lanka',
       order_id : medlistid,
-      items : '2',
+      items : ' ',
       currency : 'LKR',
       amount : totalcost}
     payhere.startPayment(payment);
@@ -299,8 +299,8 @@ const Completeorder = async () => {
                   Thank you for your order.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order confirmation, and will
-                  send you an update when your order has delivered.
+                  Your order has been placed successfully. You will
+                  recieve an update when your order has delivered.
                 </Typography>
               </React.Fragment>
             ) : (

@@ -2,7 +2,6 @@
 import React,{useState} from "react";
 import axios from 'axios';
 import { backendUrl } from "../../urlConfig.js";
-import ChartistGraph from "react-chartist";
 
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,21 +10,18 @@ import Store from "@material-ui/icons/Store";
 import DateRange from "@material-ui/icons/DateRange";
 import Update from "@material-ui/icons/Update";
 import Accessibility from "@material-ui/icons/Accessibility";
-import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import AccessTime from "@material-ui/icons/AccessTime";
-import AnnouncementIcon from '@material-ui/icons/Announcement';
+import Notifications from "@material-ui/icons/Notifications";
+
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
-import Table from "../../components/Dashboard/Table/Table.js";
 import Card from "../../components/Dashboard/Card/Card";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardIcon from "../../components/Dashboard/Card/CardIcon.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
-import Button from "../../components/Dashboard/CustomButtons/Button";
-import {dailySalesChart} from "../../components/admin/DailySalesChart";
+import SalesChart from "../../components/admin/SalesChart.js";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
 const useStyles = makeStyles(styles);
@@ -89,7 +85,7 @@ export default function Dashboard() {
         })
       .then(res =>{
         const results =res.data.result[0];
-        console.log(results);
+        // console.log(results);
         setTotalIncome(results.sum);
       })
   }
@@ -159,7 +155,7 @@ export default function Dashboard() {
           <Card>
             <CardHeader color="success" stats icon>
               <CardIcon color="rose">
-                <AnnouncementIcon />
+                <Notifications />
               </CardIcon>
               <p className={classes.cardCategory}>New Pharmacy Requests</p>
               <h3 className={classes.cardTitle}>{datapharmreq}</h3>
@@ -174,19 +170,25 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
       <GridContainer>
-      <GridItem xs={12} sm={6} md={6}>
+      <GridItem xs={12} sm={5} md={5}>
           <Card>
-            <CardHeader color="success" stats icon>
-            <ChartistGraph
-                className="ct-chart"
-                data={dailySalesChart.data}
-                type="Line"
-                options={dailySalesChart.options}
-                listener={dailySalesChart.animation}
-              />
+            <CardHeader>
+            <h4 className={classes.cardTitle}>Monthly Sales of Each Registered Pharmacy</h4>
+
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Daily Sales</h4>
+            <SalesChart/>
+
+            </CardBody>
+          </Card>
+        </GridItem>
+        {/* <GridItem xs={12} sm={6} md={6}>
+          <Card>
+            <CardHeader color="success" stats icon>
+            <SalesChart/>
+            </CardHeader>
+            <CardBody>
+              <h4 className={classes.cardTitle}>Monthly Sales</h4>
               <p className={classes.cardCategory}>
                 <span className={classes.successText}>
                   <ArrowUpward className={classes.upArrowCardCategory} /> 55%
@@ -200,7 +202,7 @@ export default function Dashboard() {
               </div>
             </CardFooter>
           </Card>
-        </GridItem>
+        </GridItem> */}
       </GridContainer>
     </div>
   );

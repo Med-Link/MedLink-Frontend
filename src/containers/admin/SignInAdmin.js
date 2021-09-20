@@ -1,7 +1,4 @@
 import React, {useEffect, useState} from 'react';
-
-
-
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
@@ -20,22 +17,6 @@ import {isuserLoggedIn, login} from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Footer from "../../components/Dashboard/Footer/Footer.js";
-
-
-// function Copyright() {
-    
-
-//     return (
-//       <Typography variant="body2" color="textSecondary" align="center" style={foot}>
-//         {'Copyright © '}
-//         <Link color="inherit" href="/">
-//           Medlink
-//         </Link>{' '}
-//         {new Date().getFullYear()}
-//         {'.'}
-//       </Typography>
-//     );
-//   }
 
 const SignIn=(props)=>{
    

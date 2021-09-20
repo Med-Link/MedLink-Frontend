@@ -5,8 +5,6 @@ import Index from './containers/mainLandingPage/Home'
 
 import Admin from './containers/admin/layouts/Admin.js'
 import SignInAdmin from './containers/admin/SignInAdmin'
-import ForgotPasswordAdmin from './containers/admin/password/ForgotPassword.js'
-import PasswordResetAdmin from './containers/admin/password/ResetPasswordPage.js'
 import VerifyEmail from './containers/customer/VerifyEmail'
 import VerifyEmailPharmacy from './containers/pharmacy/VerifyEmail'
 
@@ -39,8 +37,6 @@ function App() {
 
           <PrivateRoute path="/admin" component={Admin} />
           <Route path="/adminsignin" component={SignInAdmin} />
-          <Route path="/ForgotPasswordAdmin" component={ForgotPasswordAdmin} />
-          <Route path="/PasswordResetAdmin" component={PasswordResetAdmin} />
 
           <PrivateRoute1 path="/Customer" component={Customer} />
           <Route path="/customersignup" component={CustomerSignup} />
