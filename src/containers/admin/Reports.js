@@ -102,6 +102,7 @@ export default function UpgradeToPro() {
         const results =  res.data.result;
             console.log(results);
             setData(results);
+            getSumincome(data);
       })
   }
 
@@ -114,12 +115,21 @@ export default function UpgradeToPro() {
     { id: 'income', label: 'Income (Rs.)'},];
 
   const rows = data; 
-
+  
+  const [totalIncome, setTotalIncome]= useState();
+  const getSumincome = (rows) => {
+    let total = 0
+    for (var i = 0; i < (rows.length); i++){
+      total=total+parseInt(rows[i].sum);
+    }
+    setTotalIncome(total)
+  } 
   const download=()=>
   {
     FileDownload(data, 'report.pdf');
   }
 
+  
   return (
     <GridContainer justifyContent="center">
       <GridItem xs={12} sm={12} md={8}>
@@ -129,7 +139,7 @@ export default function UpgradeToPro() {
               Monthly Income of MedLink
             </h4>
             <p className={classes.cardCategoryWhite}>
-              June
+            {new Date().toLocaleString("en-US", { month: "long" })}
             </p>
           </CardHeader>
           <CardBody>
@@ -138,23 +148,16 @@ export default function UpgradeToPro() {
                 <TableHead>
                   <TableRow >
                     {columns.map((column) => (
-                      <TableCell className={classes.center} style={{color:'#213458',backgroundColor: "white"}}
+                      <TableCell className={classes.center} style={{color:'#33568a',backgroundColor: "white"}}
                         key={column.id}
                       >
-                        {column.label}
+                        <b>{column.label}</b>
                       </TableCell>
                     ))}
                   </TableRow>
                 </TableHead>
                 <TableBody >
-                  {data.filter((row)=>{
-                    if (searchTerm == "") {
-                      return row
-                    } else if (row.medname.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                    row.brand.toLowerCase().includes(searchTerm.toLowerCase())){
-                      return row
-                    }
-                  }).map((row) => {
+                  {data.map((row) => {
                     return(
                     <TableRow>
                       <TableCell className={classes.center}>
@@ -168,6 +171,14 @@ export default function UpgradeToPro() {
                   }
                   )
                   }
+                  <TableRow style={{background:"rgb(153, 204, 255,0.2)"}}>
+                      <TableCell className={classes.center}  >
+                        <b>Total Income of the month</b>
+                      </TableCell>
+                      <TableCell className={classes.center}>
+                        {totalIncome}
+                      </TableCell>
+                    </TableRow>
                   </TableBody> 
               </Table>
             </TableScrollbar>
