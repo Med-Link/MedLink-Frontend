@@ -98,7 +98,7 @@ export default function PharmacyCard(props) {
             </Grid>
             <Grid container spacing={3} justifyContent='center'>
               <Grid item>
-                <Link href="/pharmacysignup">                    
+                <Link id="RouterNavLink" href="/pharmacysignup">                    
                   <Button  color="secondary"
                     variant="contained"
                     size="large"
@@ -109,7 +109,7 @@ export default function PharmacyCard(props) {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/pharmacysignin">                    
+                <Link id="RouterNavLink" href="/pharmacysignin">                    
                   <Button  color="secondary"
                     variant="contained"
                     size="large"

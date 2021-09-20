@@ -19,12 +19,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 class Map extends React.Component{
-	// window.sessionStorage.setItem("longitude", newLng);
 
     static get propTypes() { 
 		return { 
 			center: PropTypes.any,
-			// google: PropTypes.any, 
 			height: PropTypes.any, 
 			zoom: PropTypes.any,  
 		}; 

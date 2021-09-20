@@ -10,10 +10,10 @@ import WhyMedLink from '../../components/mainLandingPage/views/WhyMedLink';
 
 function Index() {
   return (
-  
+
 
     <React.Fragment>
-    <AppAppBar />
+      <AppAppBar />
       <ProductHero />
       <WhyMedLink />
       {/* <ProductCategories /> */}
@@ -23,11 +23,11 @@ function Index() {
       {/* <ProductSmokingHero /> */}
       <AppFooter />
     </React.Fragment>
-    
-   
-    
-      
-    
+
+
+
+
+
   );
 }
 

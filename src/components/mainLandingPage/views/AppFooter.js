@@ -4,11 +4,9 @@ import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
 import Typography from '../../mainLandingPage/Typography';
-import TextField from '../../mainLandingPage/TextField';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
-import Button from '../../mainLandingPage/Button';
 import medLink from '../../../assets/images/medLink.jpg';
 
 function Copyright() {
@@ -128,6 +126,7 @@ export default function AppFooter() {
             <div className={classes.card}>
             <img src={medLink} className={classes.image} />
           <Link
+          id="RouterNavLink"
             variant="h6"
             underline="none"
             color="inherit"
@@ -139,6 +138,7 @@ export default function AppFooter() {
             </Link>
 
             <Link
+            id="RouterNavLink"
             variant="h6"
             underline="none"
             color="inherit"

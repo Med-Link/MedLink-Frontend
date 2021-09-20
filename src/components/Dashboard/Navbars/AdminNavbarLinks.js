@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import {signout} from '../../../actions/auth.actions';
 import classNames from "classnames";
 import { Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -18,11 +17,8 @@ import Poppers from "@material-ui/core/Popper";
 import Divider from "@material-ui/core/Divider";
 // @material-ui/icons
 import Person from "@material-ui/icons/Person";
-import Notifications from "@material-ui/icons/Notifications";
 import Dashboard from "@material-ui/icons/Dashboard";
-import Search from "@material-ui/icons/Search";
 // core components
-import CustomInput from "../CustomInput/CustomInput.js";
 import Button from "../CustomButtons/Button.js";
 import Link from "@material-ui/core/Link"
 
