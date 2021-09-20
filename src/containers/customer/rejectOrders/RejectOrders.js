@@ -87,7 +87,7 @@ export default function RejectOrders() {
         let array =[];
         results.forEach(element=>{
          let arr=[];
-         arr.push(element.date,element.id,element.pharmacyid,element.name,element.city,<Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.rejectmessage)} round>View</Button>);
+         arr.push(element.date,(element.id).toString(),(element.pharmacyid).toString(),element.name,element.city,<Button variant="outlined"  color="primary" onClick={()=>handleClickOpen(element.rejectmessage)} >View</Button>);
            array.push(arr);
         })         
        setData(array); 
