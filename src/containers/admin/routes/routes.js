@@ -26,13 +26,6 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/user",
-    name: "User Profile",
-    icon: Person,
-    component: UserProfile,
-    layout: "/admin",
-  },
-  {
     path: "/pharmacyrequests",
     name: "Pharmacy Requests",
     icon: LibraryBooks,
@@ -72,6 +65,13 @@ const dashboardRoutes = [
     name: "Income Report",
     icon: Unarchive,
     component: Report,
+    layout: "/admin",
+  },
+  {
+    path: "/user",
+    name: "User Profile",
+    icon: Person,
+    component: UserProfile,
     layout: "/admin",
   },
   

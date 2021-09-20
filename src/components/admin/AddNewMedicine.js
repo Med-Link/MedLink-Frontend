@@ -9,7 +9,6 @@ import { Redirect } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -22,6 +21,7 @@ import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
 import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
+import Button from "../../components/Dashboard/CustomButtons/Button"
 import CustomInput from "../../components/Dashboard/CustomInput/CustomInput.js";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
@@ -75,7 +75,7 @@ const AddNewMedicine = (props) => {
   return (
     <Grid>
       <Card>
-        <CardHeader color="primary">
+        <CardHeader color="success">
           <h4 className={classes.cardTitleWhite}>Add New Medicine</h4>
         </CardHeader>
         <CardBody>
@@ -114,8 +114,7 @@ const AddNewMedicine = (props) => {
               type="submit"
               onClick={submit}
               variant="contained"
-              style={buttonStyle}
-              fullWidth
+              color="success"
             >
               Add
             </Button>

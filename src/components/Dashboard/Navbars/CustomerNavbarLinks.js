@@ -108,68 +108,7 @@ export default function CustomerNavbarLinks() {
       </Button>
 
       </Link>
-      <div className={classes.manager}>
-        
-        <Poppers
-          open={Boolean(openNotification)}
-          anchorEl={openNotification}
-          transition
-          disablePortal
-          className={
-            classNames({ [classes.popperClose]: !openNotification }) +
-            " " +
-            classes.popperNav
-          }
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              id="notification-menu-list-grow"
-              style={{
-                transformOrigin:
-                  placement === "bottom" ? "center top" : "center bottom",
-              }}
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={handleCloseNotification}>
-                  <MenuList role="menu">
-                    <MenuItem
-                      onClick={handleCloseNotification}
-                      className={classes.dropdownItem}
-                    >
-                      Pharma is responding your request
-                    </MenuItem>
-                    <MenuItem
-                      onClick={handleCloseNotification}
-                      className={classes.dropdownItem}
-                    >
-                      Aruna phamrmacy is accept your order
-                    </MenuItem>
-                    {/*<MenuItem
-                      onClick={handleCloseNotification}
-                      className={classes.dropdownItem}
-                    >
-                      You{"'"}re now friend with Andrew
-                    </MenuItem>
-                    <MenuItem
-                      onClick={handleCloseNotification}
-                      className={classes.dropdownItem}
-                    >
-                      Another Notification
-                    </MenuItem>
-                    <MenuItem
-                      onClick={handleCloseNotification}
-                      className={classes.dropdownItem}
-                    >
-                      Another One
-                    </MenuItem>*/}
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Poppers>
-      </div>
+      
       <div className={classes.manager}>
         <Button
           color={window.innerWidth > 959 ? "transparent" : "white"}
@@ -208,19 +147,14 @@ export default function CustomerNavbarLinks() {
               <Paper>
                 <ClickAwayListener onClickAway={handleCloseProfile}>
                   <MenuList role="menu">
-                    <MenuItem
-                      onClick={handleCloseProfile}
-                      className={classes.dropdownItem}
-                    >
-                      Profile
-                    </MenuItem>
-                    <MenuItem
-                      onClick={handleCloseProfile}
-                      className={classes.dropdownItem}
-                      
-                    >
-                      Settings
-                    </MenuItem>
+                    <Link href="/customer/profile" color="inherit" underline='none'>
+                      <MenuItem
+                        onClick={handleCloseProfile}
+                        className={classes.dropdownItem}
+                      >
+                        Profile
+                      </MenuItem>
+                    </Link>                    
                     <Divider light />
                     <MenuItem
                       onClick={logout}
