@@ -52,7 +52,6 @@ export default function OutOfStockTable() {
             <Card>
                 <CardHeader color="success">
                     <h4 className={classes.cardTitleWhite}>Out of Stock Items</h4>
-                    <p className={classes.cardCategoryWhite}>Need to Re-order</p>
                 </CardHeader>
                 <CardBody>
                   <TableScrollbar rows={10} style={{}}>
