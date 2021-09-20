@@ -170,9 +170,9 @@ export default function PharmacyRequests() {
                           ){
                             return row
                           }
-                        }).map((row) => {
+                        }).map((row,id) => {
                           return(
-                          <TableRow>
+                          <TableRow key={id}>
                             <TableCell align="left">
                               {row.name}
                             </TableCell>

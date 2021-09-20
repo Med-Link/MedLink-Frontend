@@ -86,7 +86,7 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function UpgradeToPro() {
+export default function Reports() {
   const classes = useStyles();
 
   // get monthly income from each pharmacy transactions
@@ -157,9 +157,9 @@ export default function UpgradeToPro() {
                   </TableRow>
                 </TableHead>
                 <TableBody >
-                  {data.map((row) => {
+                  {data.map((row,id) => {
                     return(
-                    <TableRow>
+                    <TableRow key={id}>
                       <TableCell className={classes.center}>
                         {row.name}
                       </TableCell>

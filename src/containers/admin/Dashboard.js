@@ -38,7 +38,6 @@ export default function Dashboard() {
 
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
-    
       axios.get(`${backendUrl}/admin/countcustomer`,{
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
@@ -80,12 +79,13 @@ export default function Dashboard() {
       },[])
     
   }
+  
   React.useEffect(()=>{
     getdata();
     getdata1();
     getdata2();
-
   });
+  
   return (
     <div>
       <GridContainer>
@@ -190,33 +190,3 @@ export default function Dashboard() {
     </div>
   );
 }
-
-
-
-
-// <GridItem xs={12} sm={12} md={6}>
-//           <Card>
-//             <CardHeader color="primary">
-//               <h4 className={classes.cardTitleWhite}>Pharmacy Registration Requests</h4>
-//               <p className={classes.cardCategoryWhite}>
-//                 on July 2021
-//               </p>
-//             </CardHeader>
-//             <CardBody>
-//               <Table
-//                 tableHeaderColor="primary"
-//                 tableHead={["ID", "Name", "District", "Action"]}
-//                 tableData={[
-//                   ["1", "Micael Medcare", "Colombo",
-//                   <Link variant="h6" underline="none" href="pharmacyrequests/">
-//                     <Button color="primary" >View</Button>
-//                   </Link> ],
-//                   ["2", "Minerva Pharmacy", "Puttalam",
-//                   <Link variant="h6" underline="none" href="pharmacyrequests/">
-//                     <Button color="primary">View</Button>
-//                   </Link> ],
-//                 ]}
-//               />
-//             </CardBody>
-//           </Card>
-//         </GridItem>

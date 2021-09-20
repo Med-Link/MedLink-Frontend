@@ -67,7 +67,7 @@ export default function PharmacyPayble() {
     { id: 'pid', label: 'Pharmacy Id'},
     { id: 'pharmacyname', label: 'Pharmacy Name'},
     { id: 'total', label: 'Total Amount'},
-    { id: 'total', label: 'Payment'}];
+    { id: 'payment', label: 'Payment'}];
   const rows = data; 
 
 
@@ -137,9 +137,9 @@ export default function PharmacyPayble() {
                           } else if (row.pharmacyid.toString().toLowerCase().includes(searchTerm.toLowerCase())){
                             return row
                           }
-                        }).map((row) => {
+                        }).map((row,id) => {
                           return(
-                          <TableRow>
+                          <TableRow key={id}>
                             <TableCell align="left">
                               {row.pharmacyid}
                             </TableCell>
@@ -150,7 +150,8 @@ export default function PharmacyPayble() {
                               {row.sum}
                             </TableCell>
                             <TableCell align="left">
-                              <Button aria-label="pay" onClick={()=>handleClickOpen(row.pharmacyid)} color="primary">Pay</Button>                            </TableCell>
+                              <Button aria-label="pay" onClick={()=>handleClickOpen(row.pharmacyid)} color="primary">Pay</Button>                            
+                            </TableCell>
                           </TableRow>
                           );
                         }
