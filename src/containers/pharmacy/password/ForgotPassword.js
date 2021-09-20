@@ -45,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ForgotPassword = () => {
 
-  const classes = useStyles();
   const paperStyle = { padding: 20, height: '500px', width: '340px', margin: "20px auto" }
   const gridStyle = { padding: 20 }
   const buttonStyle = { color: '#efe3e3', backgroundColor: '#126e82', margin: '10px 0', width: '340px' }

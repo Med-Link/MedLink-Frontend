@@ -8,12 +8,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
 import CustomInput from "../../components/Dashboard/CustomInput/CustomInput.js";
-import Button from "../../components/Dashboard/CustomButtons/Button.js";
 import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardAvatar from "../../components/Dashboard/Card/CardAvatar.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
-import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 
 import avatar from "../../assets/images/admin.png";
 
