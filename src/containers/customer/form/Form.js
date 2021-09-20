@@ -2,15 +2,13 @@ import React,{useState} from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { backendUrl } from '../../../urlConfig';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Grid } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
-import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { makeStyles } from '@material-ui/core/styles';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
@@ -67,8 +65,24 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Form(props){
-
-   
+  const notify = () => toast.success('Order Request Sent Success!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
+    const notify1=()=>toast.error('Error!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
     const paperStyle={padding :20, height:'500px',width:'400px', margin:"20px auto"}
     const avatarStyle={backgroundColor: '#2ab5b5'}
     const gridStyle={padding: 20}
@@ -103,22 +117,24 @@ export default function Form(props){
       const form = new FormData();
       form.append("description", description);
       form.append("pharmacyid", props.pharmacy);
-      console.log(prescription)
+      // console.log(prescription)
       for (let pic of prescription) {
         form.append("prescription", pic);
       }
-        // if(checked){
+        // if(description=='' || prescription==[]){
           console.log(form);
         axios.post(`${backendUrl}/order/create`, form,{headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         },}).then((response)=>{
         console.log(response);
         // console.log("aaaaa")
-
+        notify();
+        setOpen(false);
             // setSignedUp(true);
 
         }).catch((err)=>{
             console.log(err);
+            notify1();
             // setError("Signup Failed");
         });
         
@@ -128,7 +144,8 @@ export default function Form(props){
      
         setPrescription(e.target.files);
     };
-    return(               
+    return(  
+      <div>             
                 <Grid container spacing={2}> 
                   <Grid item xs={12}>
                     <form> 
@@ -184,6 +201,17 @@ export default function Form(props){
                     </form>
                   </Grid>   
                 </Grid>
+                <ToastContainer position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+            /> 
+            </div>
     )
 }
 
