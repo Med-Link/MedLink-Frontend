@@ -3,6 +3,8 @@
 import React, {useState } from "react";
 import { backendUrl } from "../../urlConfig.js";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import TableScrollbar from 'react-table-scrollbar'
 import { useParams } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography';
@@ -53,6 +55,16 @@ const style = {
 };
 
 export default function OrderProcess() {
+  const notify = () => toast.success('Medicine List Sent Success!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
+
   const [openquantity, setOpenquantity] = React.useState(false);
   const [medicinerow, setMedicinerow] = React.useState(null);
   const [quantity, setQuanity] = useState(0);
@@ -161,7 +173,8 @@ setOrderbill(removemedlist);
         'Authorization': token ? `Bearer ${token}` : ''
       },
   }).then((response)=>{
-      console.log(response);
+      // console.log(response);
+      notify();
       handleCloseAccept();
       
   }).catch((err)=>{
@@ -474,6 +487,16 @@ setOrderbill(removemedlist);
           <Button onClick={()=>addtotable()}  color="primary">Add Quantity</Button>
         </Box>
       </Modal>
+      <ToastContainer position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+            /> 
     </div>
   );
 }
