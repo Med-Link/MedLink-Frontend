@@ -26,6 +26,7 @@ import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import Button from "../../components/Dashboard/CustomButtons/Button";
 import {dailySalesChart} from "../../components/admin/DailySalesChart";
+import SalesChart from "../../components/admin/SalesChart.js";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
 const useStyles = makeStyles(styles);
@@ -89,7 +90,7 @@ export default function Dashboard() {
         })
       .then(res =>{
         const results =res.data.result[0];
-        console.log(results);
+        // console.log(results);
         setTotalIncome(results.sum);
       })
   }
@@ -174,19 +175,25 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
       <GridContainer>
-      <GridItem xs={12} sm={6} md={6}>
+      <GridItem xs={12} sm={5} md={5}>
           <Card>
-            <CardHeader color="success" stats icon>
-            <ChartistGraph
-                className="ct-chart"
-                data={dailySalesChart.data}
-                type="Line"
-                options={dailySalesChart.options}
-                listener={dailySalesChart.animation}
-              />
+            <CardHeader>
+            <h4 className={classes.cardTitle}>Monthly Sales of Each Registered Pharmacy</h4>
+
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Daily Sales</h4>
+            <SalesChart/>
+
+            </CardBody>
+          </Card>
+        </GridItem>
+        {/* <GridItem xs={12} sm={6} md={6}>
+          <Card>
+            <CardHeader color="success" stats icon>
+            <SalesChart/>
+            </CardHeader>
+            <CardBody>
+              <h4 className={classes.cardTitle}>Monthly Sales</h4>
               <p className={classes.cardCategory}>
                 <span className={classes.successText}>
                   <ArrowUpward className={classes.upArrowCardCategory} /> 55%
@@ -200,7 +207,7 @@ export default function Dashboard() {
               </div>
             </CardFooter>
           </Card>
-        </GridItem>
+        </GridItem> */}
       </GridContainer>
     </div>
   );
