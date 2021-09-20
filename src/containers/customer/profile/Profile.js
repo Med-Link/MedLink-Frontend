@@ -24,7 +24,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 
 import EditProfile from './EditProfile';
 import ResetPassword from '../password/ResetPassword'
-import AddBankDetails from '../bankdetails/AddBankDetails'
+//import AddBankDetails from '../bankdetails/AddBankDetails'
 
 
 const styles = {

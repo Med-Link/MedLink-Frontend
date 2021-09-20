@@ -1,26 +1,14 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
-import Avatar from '@material-ui/core/Avatar';
-//import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import { TextField } from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
-import Input from '@material-ui/core/Input';
-import FilledInput from '@material-ui/core/FilledInput';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -95,13 +83,7 @@ const ResetPassword=()=>{
 
                 <Grid container spacing={2}> 
                     <Grid item xs={12}>
-                        {/*<TextField
-                            id="currentPassword"
-                            label="Current Password"
-                            type='password'
-                            variant="outlined"
-                            fullWidth
-                        />*/}
+                         
                         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                             <InputLabel style={inputStyle} htmlFor="outlined-adornment-password">Current Password</InputLabel>
                             <OutlinedInput
@@ -128,13 +110,7 @@ const ResetPassword=()=>{
                     </Grid>
 
                     <Grid item xs={12}>
-                        {/*<TextField
-                            id="currentPassword"
-                            label="Current Password"
-                            type='password'
-                            variant="outlined"
-                            fullWidth
-                        />*/}
+                         
                         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                             <InputLabel style={inputStyle} htmlFor="outlined-adornment-password">New Password</InputLabel>
                             <OutlinedInput
@@ -161,13 +137,7 @@ const ResetPassword=()=>{
                     </Grid>
 
                     <Grid item xs={12}>
-                        {/*<TextField
-                            id="currentPassword"
-                            label="Current Password"
-                            type='password'
-                            variant="outlined"
-                            fullWidth
-                        />*/}
+                         
                         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                             <InputLabel style={inputStyle} htmlFor="outlined-adornment-password">Confirm New Password</InputLabel>
                             <OutlinedInput
