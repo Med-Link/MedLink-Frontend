@@ -31,7 +31,6 @@ console.log(PNames);
         <div>
             <Bar
               data={{labels:PNames,
-                
                 datasets: [
                   {
                     label: "Income",
@@ -46,7 +45,6 @@ console.log(PNames);
                   },
                 ],
               }}
-              
             />
           </div>
     );
