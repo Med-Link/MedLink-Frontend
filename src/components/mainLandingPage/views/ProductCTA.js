@@ -23,6 +23,7 @@ const styles = (theme) => ({
     justifyContent: 'center',
     backgroundColor: theme.palette.warning.main,
     padding: theme.spacing(8, 3),
+    
   },
   cardContent: {
     maxWidth: 400,

@@ -3,12 +3,13 @@
 import React, {useState } from "react";
 import { backendUrl } from "../../urlConfig.js";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import TableScrollbar from 'react-table-scrollbar'
 import { useParams } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Box from '@material-ui/core/Box';
-
 import { makeStyles } from "@material-ui/core/styles";
 import DateRange from "@material-ui/icons/DateRange";
 import TextField from '@material-ui/core/TextField';
@@ -33,7 +34,6 @@ import PhotoSteps from "../../components/pharmacy/PhotoSteps"
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 import CustomInput from "../../components/Dashboard/CustomInput/CustomInput.js";
-
 import SimpleSelect from '../../components/pharmacy/DropDown';
 import { parse } from "dotenv";
 
@@ -53,6 +53,16 @@ const style = {
 };
 
 export default function OrderProcess() {
+  const notify = () => toast.success('Medicine List Sent Success!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
+
   const [openquantity, setOpenquantity] = React.useState(false);
   const [medicinerow, setMedicinerow] = React.useState(null);
   const [quantity, setQuanity] = useState(0);
@@ -75,8 +85,6 @@ export default function OrderProcess() {
   const [orderbill, setOrderbill] = useState([]); 
 
   // const [total, setTotal] = useState(0); //for search function
-
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -161,7 +169,8 @@ setOrderbill(removemedlist);
         'Authorization': token ? `Bearer ${token}` : ''
       },
   }).then((response)=>{
-      console.log(response);
+      // console.log(response);
+      notify();
       handleCloseAccept();
       
   }).catch((err)=>{
@@ -339,9 +348,6 @@ setOrderbill(removemedlist);
                         <TableCell align="left">
                           {row.price}
                         </TableCell>
-                        {/* <TableCell align="left">
-                          <TextField id="standard-basic" label="Qty" size='small' />
-                        </TableCell> */}
                         <TableCell align="left">
                           <Button color="primary" onClick={()=>handleOpenquantity(row)} round size="sm">Add</Button>
                         </TableCell>
@@ -474,6 +480,16 @@ setOrderbill(removemedlist);
           <Button onClick={()=>addtotable()}  color="primary">Add Quantity</Button>
         </Box>
       </Modal>
+      <ToastContainer position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+            /> 
     </div>
   );
 }

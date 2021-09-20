@@ -19,10 +19,9 @@ import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardIcon from "../../components/Dashboard/Card/CardIcon.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
-
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
-
 import OutOfStockTable from "../../components/pharmacy/OutOfStockTable.js";
+import IncomeGrowthChart from "../../components/pharmacy/IncomeGrowthChart.js";
 
 const useStyles = makeStyles(styles);
 
@@ -77,7 +76,6 @@ const getCompleteOrders = () => {
     setCompleteOrders(results);
   })
 }
-
 
 React.useEffect(() => {
   getNewOrders();
@@ -159,21 +157,21 @@ React.useEffect(() => {
       </GridContainer>
 
       <GridContainer>
-        <GridItem xs={12} sm={8} md={8}>
+        <GridItem xs={12} sm={3} md={3}>
+          <OutOfStockTable/>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={4}>
           <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Monthly Sales Chart</h4>
-              <p className={classes.cardCategoryWhite}>
-              {new Date().toLocaleString("en-US", { month: "long" })}
-              </p>
+            <CardHeader >
             </CardHeader>
             <CardBody>
-              
+              <IncomeGrowthChart/>
             </CardBody>
+            <CardFooter chart>
+            <h4 className={classes.cardTitle}>
+            Transaction Growth during the Month {new Date().toLocaleString("en-US", { month: "long" })}</h4>
+            </CardFooter>
           </Card>
-        </GridItem>
-        <GridItem xs={12} sm={4} md={4}>
-          <OutOfStockTable/>
         </GridItem>
       </GridContainer>
     </div>

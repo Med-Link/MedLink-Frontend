@@ -5,8 +5,7 @@ import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import Notifications from "@material-ui/icons/Notifications";
 import Unarchive from "@material-ui/icons/Unarchive";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import MarkunreadMailboxIcon from '@material-ui/icons/MarkunreadMailbox';
-import CheckIcon from '@material-ui/icons/Check';
+import DeliveryDiningRoundedIcon from '@mui/icons-material/DeliveryDiningRounded';
 // core components/views for Admin layout
 import DashboardPage from "../Dashboard.js";
 import OrderRequest from "../OrderRequests.js";
@@ -52,7 +51,7 @@ const dashboardRoutes = [
   {
     path: "/sendtodelivery",
     name: "Send To Delivery",
-    icon: MarkunreadMailboxIcon,
+    icon: DeliveryDiningRoundedIcon,
     component: SentToCustomer,
     layout: "/pharmacy",
   },

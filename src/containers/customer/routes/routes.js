@@ -3,9 +3,6 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
-
-import Notifications from "@material-ui/icons/Notifications";
-import Unarchive from "@material-ui/icons/Unarchive";
 // core components/views for Admin layout
 import DashboardPage from "../Dashboard.js";
 import RespondOrders from "../respondOrders.js"; 

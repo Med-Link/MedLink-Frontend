@@ -55,20 +55,14 @@ export default function PharmacyNavbarLinks() {
     setOpenProfile(null);
   };
   const logout = async ()=>{
-    // console.log("gggggggllll");
-    // localStorage.clear();
     const res = await axios.post(`${backendUrl}/pharmacy/signout`);
     if(res.status === 200){
       localStorage.clear();
       history.push("/");
 
-      // return <Redirect to={'/'} />
-      // <Redirect to={'/'} />
+      
     }
 
-    // dispatch(signout);
-    // signout);
-  
   };
 
   return (

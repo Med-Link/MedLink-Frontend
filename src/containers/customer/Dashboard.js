@@ -20,7 +20,6 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Search from "@material-ui/icons/Search";
 import StoreMallDirectoryIcon from '@material-ui/icons/StoreMallDirectory';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../components/Dashboard/Grid/GridContainer.js";
@@ -33,7 +32,6 @@ import Button from "../../components/Dashboard/CustomButtons/Button";
 
 import Form from './form/Form';
 import Map from '../../components/customer/Map';
-import MedList from "../../components/customer/MedList"
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
 

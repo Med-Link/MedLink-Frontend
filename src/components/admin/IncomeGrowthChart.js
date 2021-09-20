@@ -3,13 +3,13 @@ import axios from 'axios';
 import { backendUrl } from "../../urlConfig.js";
 import { Bar, Pie, Doughnut, Line, Bubble, Radar } from "react-chartjs-2";
 
-export default function SalesChart() {
+export default function IncomeGrowthChart() {
 
-    // get monthly income from each pharmacy transactions
+    // get income growth of each month
     const [chartData, setChartData] = useState([]);
     const getChartData =() =>{
      const token = window.localStorage.getItem('token');
-       axios.get(`${backendUrl}/admin/viewmonthlyincome`,{
+       axios.get(`${backendUrl}/admin/incomegrowth`,{
          headers: {
            'Authorization': token ? `Bearer ${token}` : ''
          }
@@ -23,23 +23,22 @@ export default function SalesChart() {
    React.useEffect(()=>{
     getChartData();
   },[]);
-    const PNames = chartData.map(d=>d.name);
+    const Months = chartData.map(d=>d.month);
     const Incomes = chartData.map(d=>d.sum);
 
-console.log(PNames);
     return (
         <div>
-            <Bar
-              data={{labels:PNames,
+            <Line
+              data={{labels:Months,
                 datasets: [
                   {
                     label: "Income",
                     data: Incomes,
                     backgroundColor: [
-                        'rgba(181, 150, 242)',
+                        'rgba(54, 162, 235)',
                     ],
                     borderColor: [
-                        'rgba(181, 150, 242)',
+                      'rgba(54, 162, 235)',
                     ],
                     borderWidth: 1,
                   },

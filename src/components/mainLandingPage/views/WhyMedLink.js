@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '../../mainLandingPage/Typography';
+import Link from '@material-ui/core/Link';
 import SearchIcon from '@material-ui/icons/Search';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
@@ -13,8 +14,18 @@ const styles = (theme) => ({
     display: 'flex',
     overflow: 'hidden',
     backgroundColor: theme.palette.secondary.light,
-    
-    
+
+    link2: {
+      fontSize: 45,
+      color: theme.palette.secondary.main,
+    },
+    title2: {
+
+      fontSize: 45,
+      color: theme.palette.primary.dark,
+
+    },
+
   },
   container: {
     marginTop: theme.spacing(15),
@@ -34,7 +45,7 @@ const styles = (theme) => ({
   title: {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(5),
-    color:theme.palette.primary.main,
+    color: theme.palette.primary.main,
   },
   curvyLines: {
     pointerEvents: 'none',
@@ -49,30 +60,38 @@ function ProductValues(props) {
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
-        
+
         <Grid container spacing={5}>
-        <Typography variant="h4" className={classes.title}>
-        Why MedLink?
-      </Typography>
-        <p>
-      
-      <Typography variant="h5">  
-      
-      MedLink is a web-based platform which connects pharmacies and their customers. 
+          <Typography variant="h4" className={classes.title}>
+            Why MedLink ?
 
-It  is established to manage sales and inventories of the pharmacies.
+          </Typography>
+          {/* <Typography styles={{color:"#ff0000"}} >
+            Med
+          </Typography>
 
-This is the platform for the customers to find the medicines they need.
+          <Typography className={classes.link2}>
+            Link
+          </Typography> */}
+          <p>
 
-Customers can use MedLink to find the nearest pharmacies that can fulfill their needs.
+            <Typography variant="h5">
 
-This application will help people to order and get their medicine delivered to wherever they want.
+              MedLink is a web-based platform which connects pharmacies and their customers.
 
-This is a platform that minimize the difficulties people face, during emergencies.
+              It  is established to manage sales and inventories of the pharmacies.
 
-      </Typography>
-      </p>
-          </Grid>
+              This is the platform for the customers to find the medicines they need.
+
+              Customers can use MedLink to find the nearest pharmacies that can fulfill their needs.
+
+              This application will help people to order and get their medicine delivered to wherever they want.
+
+              This is a platform that minimize the difficulties people face, during emergencies.
+
+            </Typography>
+          </p>
+        </Grid>
       </Container>
     </section>
   );

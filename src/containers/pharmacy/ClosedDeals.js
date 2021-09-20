@@ -1,6 +1,5 @@
 import React,{useEffect,useState} from "react";
 import { backendUrl } from "../../urlConfig.js";
-// import axios from 'axios'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components

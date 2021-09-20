@@ -7,9 +7,7 @@ import CustomerCard from '../Card2';
 // import { minHeight } from '@material-ui/system';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-
 import medLink from '../../../assets/images/medLink.jpg';
-
 
 const backgroundImage =
   'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
@@ -105,22 +103,19 @@ function ProductHero(props) {
           <Grid container spacing={4}>
             <Grid item xs={12} md={4} className={classes.mainGrid}>
               <div className={classes.item}>
-                
-                
                 <PharmacyCard />
-
               </div>
             </Grid>
+
             <Grid item xs={12} md={4} className={classes.mainGrid}>
               <div className={classes.item}>
                
                 <CustomerCard />
               </div>
             </Grid>
-            <Grid item xs={20} md={4}> 
-            
-              <div className={classes.item}>
 
+            <Grid item xs={20} md={4}> 
+              <div className={classes.item}>
                 {/* <img src={land} className={classes.image} /> */}
                 <Typography className={classes.color} variant="h5" >
                   <img src={medLink} className={classes.image2} />
