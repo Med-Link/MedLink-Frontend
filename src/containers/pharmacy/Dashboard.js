@@ -19,9 +19,7 @@ import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardIcon from "../../components/Dashboard/Card/CardIcon.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
-
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
-
 import OutOfStockTable from "../../components/pharmacy/OutOfStockTable.js";
 
 const useStyles = makeStyles(styles);
@@ -77,7 +75,6 @@ const getCompleteOrders = () => {
     setCompleteOrders(results);
   })
 }
-
 
 React.useEffect(() => {
   getNewOrders();

@@ -41,14 +41,6 @@ export default function OrderProcess() {
 
   const [openAddMeds, setOpenAddMeds] = React.useState(false);
 
-  const handleClickOpenAddMeds = () => {
-    setOpenAddMeds(true);
-  };
-
-  const handleCloseAddMeds = () => {
-    setOpenAddMeds(false);
-  };
-
   // --------------------------------
 
   const [data, setData] = useState([]);
@@ -123,7 +115,6 @@ export default function OrderProcess() {
         handleCloseEdit();
     });
   }
-  //end of update medicine details
 
   //begining of delete function
   const deleterow=(batchId)=>{

@@ -11,9 +11,7 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-
 import { makeStyles } from '@material-ui/core/styles';
-
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 
 function Copyright() {
@@ -46,8 +44,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
 const VerifyEmail = () => {
 
   const notify = () => toast.success(' Email Verified!', {
@@ -63,25 +59,24 @@ const VerifyEmail = () => {
   const { token } = useParams();
 
   const classes = useStyles();
+  
 
   const paperStyle = { padding: 20, height: '400px', width: '340px', margin: "20px auto" }
   const gridStyle = { padding: 20 }
   const buttonStyle = { color: '#efe3e3', backgroundColor: '#126e82', margin: '10px 0', width: '340px' }
   const headingStyle = { color: '#126e82', fontSize: '20px' };
   const paragraphStyle = { color: '#126e82', margin: '50px 0 0 0' };
- 
   const grid2Style = { padding: 10 }
   const iconStyle = { color: '#126e82', height: '50px', width: '50px' }
 
+
   const verifyemail = async () => {
-    // e.preventDefault();
-    // console.log(resetlink,newpassword)
     axios.post(`${backendUrl}/pharmacy/verifyemail`, {
       token
     }).then((response) => {
       notify();
       console.log(response);
-      // setResetPassword(true);
+      
     }).catch((err) => {
       if (err.response && err.response.data) {
         console.log(err);// some reason error message
@@ -89,9 +84,6 @@ const VerifyEmail = () => {
 
     });
 
-    //else {
-    //console.log('Unchecked');
-    //}
   };
   return (
 
@@ -114,11 +106,6 @@ const VerifyEmail = () => {
         <Grid item xs={6}>
           <Button type='submit' onClick={verifyemail} variant="contained" style={buttonStyle} href="">Verify</Button>
         </Grid>
-
-
-
-
-
 
       </Paper>
       <Box mt={5}>

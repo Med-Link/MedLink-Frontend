@@ -10,7 +10,6 @@ import { useParams } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Box from '@material-ui/core/Box';
-
 import { makeStyles } from "@material-ui/core/styles";
 import DateRange from "@material-ui/icons/DateRange";
 import TextField from '@material-ui/core/TextField';
@@ -35,7 +34,6 @@ import PhotoSteps from "../../components/pharmacy/PhotoSteps"
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 import CustomInput from "../../components/Dashboard/CustomInput/CustomInput.js";
-
 import SimpleSelect from '../../components/pharmacy/DropDown';
 import { parse } from "dotenv";
 
@@ -87,8 +85,6 @@ export default function OrderProcess() {
   const [orderbill, setOrderbill] = useState([]); 
 
   // const [total, setTotal] = useState(0); //for search function
-
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -352,9 +348,6 @@ setOrderbill(removemedlist);
                         <TableCell align="left">
                           {row.price}
                         </TableCell>
-                        {/* <TableCell align="left">
-                          <TextField id="standard-basic" label="Qty" size='small' />
-                        </TableCell> */}
                         <TableCell align="left">
                           <Button color="primary" onClick={()=>handleOpenquantity(row)} round size="sm">Add</Button>
                         </TableCell>

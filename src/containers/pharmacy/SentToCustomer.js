@@ -146,9 +146,6 @@ export default function ClosedDeals() {
         <Card>
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Order History</h4>
-            {/* <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
-            </p> */}
           </CardHeader>
           <CardBody>
             <Table
