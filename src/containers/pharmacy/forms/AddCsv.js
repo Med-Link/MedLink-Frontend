@@ -75,7 +75,7 @@ const AddCsv = () => {
 
   const download=()=>{
     FileSaver.saveAs(
-      process.env.PUBLIC_URL + "/files/medlink-csvfileformat.xlsx",
+      process.env.PUBLIC_URL + "https://medlinkpharmacy.s3.ap-south-1.amazonaws.com/pharmacyDocuments/medlink-csvfileformat.xlsx",
       "medlink-csvfileformat.xlsx");
   } 
 
