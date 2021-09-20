@@ -3,8 +3,6 @@ import { backendUrl } from '../../urlConfig';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
 //material ui imports
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
@@ -21,8 +19,6 @@ import Box from '@material-ui/core/Box';
 
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-
-//import { AST_SymbolBlockDeclaration } from 'terser';
 
 function Copyright() {
     return (
@@ -115,10 +111,6 @@ const SignUpAdmin=()=>{
                     <Grid item xs={12}>
                         <TextField value ={password} onChange={(e) => setPassword(e.target.value)}id="password" variant="outlined" label="Password" placeholder="Enter Password" type='password' fullWidth required/>
                     </Grid>
-
-                    {/* <Grid item xs={12}> 
-                        <TextField id="confirmPassword" variant="outlined" label="Confirm Password" placeholder="Re Enter Your Password" type='password' fullWidth required/>
-                    </Grid> */}
                 </Grid>
 
                 <Grid item xs={12}> 

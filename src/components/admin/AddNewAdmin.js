@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { backendUrl } from '../../urlConfig.js';
+import axios from 'axios';
 
 // material ui imports
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,9 +18,6 @@ import CardBody from '../Dashboard/Card/CardBody.js';
 
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
-import axios from 'axios';
-
-// import { AST_SymbolBlockDeclaration } from 'terser';
 
 const useStyles = makeStyles(styles);
 

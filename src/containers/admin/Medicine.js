@@ -82,23 +82,17 @@ export default function Medicine() {
 
   const updatemedicine =(e)=>{
     const token = window.localStorage.getItem('token');
-        
-    // e.preventDefault();
-    console.log("hhhhhhhh")
     axios.post(`${backendUrl}/admin/updatemedicine`, {
         medid:medid,
         newmedname:medicinename}, {headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         },
     }).then((response)=>{
-        // console.log(response);
-        // setSignedUp(true);
         getdata();
         handleCloseEdit();
     }).catch((err)=>{
         console.log(err);
         handleCloseEdit();
-        // setError("Password must be atleast 6 characters long");
     });
   }
   const getdata =() =>{
@@ -114,9 +108,6 @@ export default function Medicine() {
             console.log(results);
             setData(results);
       })
-  
-    
-    
   }
   React.useEffect(()=>{
     getdata();
@@ -198,8 +189,6 @@ export default function Medicine() {
                         )
                         }
                       </TableBody> 
-                      
-
                     </Table>
                   </TableScrollbar>
                 </CardBody>
