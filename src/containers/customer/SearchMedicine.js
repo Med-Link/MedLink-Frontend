@@ -233,7 +233,7 @@ export default function Dashboard() {
                         {row.contactnumber}
                       </TableCell>
                       <TableCell align="left">
-                        {row.location}
+                        {row.city}
                       </TableCell>
                       <TableCell align="left">
                         <Button size='sm' color="primary" onClick={()=>handleClickOpen1(row.pharmacyid)}>Order Now</Button>
