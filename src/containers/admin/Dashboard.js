@@ -11,6 +11,8 @@ import DateRange from "@material-ui/icons/DateRange";
 import Update from "@material-ui/icons/Update";
 import Accessibility from "@material-ui/icons/Accessibility";
 import Notifications from "@material-ui/icons/Notifications";
+import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import AccessTime from "@material-ui/icons/AccessTime";
 
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 // core components
@@ -32,6 +34,8 @@ export default function Dashboard() {
   const [datapharm, setDatapharm] = useState();
   const [datapharmreq, setDatapharmReq] = useState();
   const [totalIncome, setTotalIncome] = useState();
+  const [maxSalesPharmacy, setMaxSalesPharmacy] = useState();
+  const [averageorders,setAverageOrders] = useState();
 
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
@@ -41,7 +45,6 @@ export default function Dashboard() {
         }
         })
       .then(res =>{
-
         const results =  res.data.row;
         //  console.log(results);
         setData(results);
@@ -89,12 +92,42 @@ export default function Dashboard() {
         setTotalIncome(results.sum);
       })
   }
+
+  const getmaxsalespharmacy =() =>{
+    const token = window.localStorage.getItem('token');
+      axios.get(`${backendUrl}/admin/maxsalespharmacy`,{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results=res.data.result[0];
+        // console.log(results);
+        setMaxSalesPharmacy(results.name);
+      })
+  }
+
+  const averageorderspermonth =() =>{
+    const token = window.localStorage.getItem('token');
+      axios.get(`${backendUrl}/admin/averageorderspermonth`,{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results=res.data.result[0];
+        // console.log(results);
+        setAverageOrders(results.count);
+      })
+  }
   
   React.useEffect(()=>{
     getdata();
     getdata1();
     getdata2();
     gettotalincome();
+    getmaxsalespharmacy();
+    averageorderspermonth();
   });
   
   return (
@@ -170,19 +203,19 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
       <GridContainer>
-      <GridItem xs={12} sm={5} md={5}>
-          <Card>
-            <CardHeader>
-            <h4 className={classes.cardTitle}>Monthly Sales of Each Registered Pharmacy</h4>
+        <GridItem xs={12} sm={6} md={5}>
+            <Card>
+              <CardHeader>
+              <h4 className={classes.cardTitle}>Monthly Sales of Each Registered Pharmacy</h4>
 
-            </CardHeader>
-            <CardBody>
-            <SalesChart/>
+              </CardHeader>
+              <CardBody>
+              <SalesChart/>
 
-            </CardBody>
-          </Card>
-        </GridItem>
-        {/* <GridItem xs={12} sm={6} md={6}>
+              </CardBody>
+            </Card>
+          </GridItem>
+        {/* <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="success" stats icon>
             <SalesChart/>
@@ -196,13 +229,39 @@ export default function Dashboard() {
                 increase in today sales.
               </p>
             </CardBody>
-            <CardFooter chart>
-              <div className={classes.stats}>
-                <AccessTime /> updated 4 minutes ago
-              </div>
+            <CardFooter chart>2
             </CardFooter>
           </Card>
         </GridItem> */}
+        <GridItem xs={12} sm={12} md={3}>
+          <GridItem sm={6} md={12}>
+            <Card>
+              <CardHeader color="primary" stats icon>
+                <CardIcon color="warning">
+                <ArrowUpward />
+                </CardIcon>
+                <p className={classes.cardCategory}>Most Outstanding Pharmacy of the Month</p>
+                <h3 className={classes.cardTitle}>{maxSalesPharmacy}</h3>
+              </CardHeader>
+              <CardFooter stats>
+              </CardFooter>
+            </Card>
+          </GridItem>
+          <GridItem sm={6} md={12}>
+            <Card>
+              <CardHeader color="primary" stats icon>
+                <CardIcon color="primary">
+                  <MonetizationOnIcon />
+                </CardIcon>
+                <p className={classes.cardCategory}>Average Orders  Through MedLink</p>
+                <h3 className={classes.cardTitle}>{averageorders}</h3>
+              </CardHeader>
+              <CardFooter stats>
+                <div className={classes.stats}>Per day</div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+        </GridItem>
       </GridContainer>
     </div>
   );
