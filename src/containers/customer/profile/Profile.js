@@ -1,29 +1,17 @@
 import React from 'react';
+import { makeStyles } from "@material-ui/core/styles";
+
 import GridItem from "../../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../../components/Dashboard/Grid/GridContainer.js";
 import CustomInput from "../../../components/Dashboard/CustomInput/CustomInput.js";
-import { makeStyles } from "@material-ui/core/styles";
-
-
 import Card from "../../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../../components/Dashboard/Card/CardHeader.js";
 import CardAvatar from "../../../components/Dashboard/Card/CardAvatar.js";
 import CardBody from "../../../components/Dashboard/Card/CardBody.js";
 import avatar from "../../../assets/images/admin.png";
 
-
-import { DialogContent } from "@material-ui/core";
-import { TextField } from "@material-ui/core";
-import DialogActions from '@material-ui/core/DialogActions';
-
-import EditProfile from './EditProfile';
-import ResetPassword from '../password/ResetPassword'
-import AddBankDetails from '../bankdetails/AddBankDetails'
-
-
- 
 const styles = {
-    cardCategory White: {
+    cardCategoryWhite: {
         color: "rgba(255,255,255,.62)",
         margin: "0",
         fontSize: "14px",
