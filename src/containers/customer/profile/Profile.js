@@ -88,8 +88,8 @@ const Profile = () => {
     const firstname = customer[0].firstname;
     const lastname = customer[0].lastname;
     return (
-        <GridContainer>
-            <GridItem xs={12} sm={12} md={4}>
+        <GridContainer justifyContent="center">
+            <GridItem xs={12} sm={10} md={3}>
                 <Card profile>
                     <CardAvatar profile>
                         <img src={avatar} alt="..." />
@@ -103,7 +103,7 @@ const Profile = () => {
                     </CardBody>
                 </Card>
             </GridItem>
-            <GridItem xs={12} sm={12} md={8}>
+            <GridItem xs={12} sm={10} md={6}>
                 <Card>
                     <CardHeader color="success">
                         <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
@@ -138,9 +138,6 @@ const Profile = () => {
                                     value={customeremail}
                                     formControlProps={{
                                         fullWidth: true,
-                                    }}
-                                    inputProps={{
-                                        disabled: true,
                                     }}
                                 />
                             </GridItem>

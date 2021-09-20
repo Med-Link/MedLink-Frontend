@@ -26,6 +26,7 @@ import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import Button from "../../components/Dashboard/CustomButtons/Button";
 import {dailySalesChart} from "../../components/admin/DailySalesChart";
+import SalesChart from "../../components/admin/SalesChart.js";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
 const useStyles = makeStyles(styles);
@@ -35,10 +36,10 @@ export default function Dashboard() {
   const [data, setData] = useState();
   const [datapharm, setDatapharm] = useState();
   const [datapharmreq, setDatapharmReq] = useState();
+  const [totalIncome, setTotalIncome] = useState();
 
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
-    
       axios.get(`${backendUrl}/admin/countcustomer`,{
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
@@ -80,12 +81,27 @@ export default function Dashboard() {
       },[])
     
   }
+  const gettotalincome =() =>{
+    const token = window.localStorage.getItem('token');
+      axios.get(`${backendUrl}/admin/totalmonthlyincome`,{
+        headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+        })
+      .then(res =>{
+        const results =res.data.result[0];
+        // console.log(results);
+        setTotalIncome(results.sum);
+      })
+  }
+  
   React.useEffect(()=>{
     getdata();
     getdata1();
     getdata2();
-
+    gettotalincome();
   });
+  
   return (
     <div>
       <GridContainer>
@@ -96,12 +112,12 @@ export default function Dashboard() {
                 <MonetizationOnIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Revenue</p>
-              <h3 className={classes.cardTitle}>$34,245</h3>
+              <h3 className={classes.cardTitle}>Rs.{totalIncome}/=</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
                 <DateRange />
-                Last 24 Hours
+                {new Date().toLocaleString("en-US", { month: "long" })}
               </div>
             </CardFooter>
           </Card>
@@ -159,19 +175,25 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
       <GridContainer>
-      <GridItem xs={12} sm={6} md={6}>
+      <GridItem xs={12} sm={5} md={5}>
           <Card>
-            <CardHeader color="success" stats icon>
-            <ChartistGraph
-                className="ct-chart"
-                data={dailySalesChart.data}
-                type="Line"
-                options={dailySalesChart.options}
-                listener={dailySalesChart.animation}
-              />
+            <CardHeader>
+            <h4 className={classes.cardTitle}>Monthly Sales of Each Registered Pharmacy</h4>
+
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Daily Sales</h4>
+            <SalesChart/>
+
+            </CardBody>
+          </Card>
+        </GridItem>
+        {/* <GridItem xs={12} sm={6} md={6}>
+          <Card>
+            <CardHeader color="success" stats icon>
+            <SalesChart/>
+            </CardHeader>
+            <CardBody>
+              <h4 className={classes.cardTitle}>Monthly Sales</h4>
               <p className={classes.cardCategory}>
                 <span className={classes.successText}>
                   <ArrowUpward className={classes.upArrowCardCategory} /> 55%
@@ -185,38 +207,8 @@ export default function Dashboard() {
               </div>
             </CardFooter>
           </Card>
-        </GridItem>
+        </GridItem> */}
       </GridContainer>
     </div>
   );
 }
-
-
-
-
-// <GridItem xs={12} sm={12} md={6}>
-//           <Card>
-//             <CardHeader color="primary">
-//               <h4 className={classes.cardTitleWhite}>Pharmacy Registration Requests</h4>
-//               <p className={classes.cardCategoryWhite}>
-//                 on July 2021
-//               </p>
-//             </CardHeader>
-//             <CardBody>
-//               <Table
-//                 tableHeaderColor="primary"
-//                 tableHead={["ID", "Name", "District", "Action"]}
-//                 tableData={[
-//                   ["1", "Micael Medcare", "Colombo",
-//                   <Link variant="h6" underline="none" href="pharmacyrequests/">
-//                     <Button color="primary" >View</Button>
-//                   </Link> ],
-//                   ["2", "Minerva Pharmacy", "Puttalam",
-//                   <Link variant="h6" underline="none" href="pharmacyrequests/">
-//                     <Button color="primary">View</Button>
-//                   </Link> ],
-//                 ]}
-//               />
-//             </CardBody>
-//           </Card>
-//         </GridItem>

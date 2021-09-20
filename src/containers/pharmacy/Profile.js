@@ -63,8 +63,8 @@ export default function UserProfile() {
   },[]);
   return (
     <div>
-      <GridContainer>
-      <GridItem xs={12} sm={12} md={4}>
+      <GridContainer justifyContent="center">
+      <GridItem xs={12} sm={10} md={4}>
           <Card profile>
             <CardAvatar profile>
               <a href="#pablo" onClick={(e) => e.preventDefault()}>
@@ -82,9 +82,9 @@ export default function UserProfile() {
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={8}>
+        <GridItem xs={12} sm={10} md={6}>
           <Card>
-            <CardHeader color="primary">
+            <CardHeader color="success">
               <h4 className={classes.cardTitleWhite}>Pharmacy Profile</h4>
               {/* <p className={classes.cardCategoryWhite}>Update your profile</p> */}
             </CardHeader>
@@ -95,9 +95,6 @@ export default function UserProfile() {
                     id="pharmacyname"
                     formControlProps={{
                       fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
                     }}
                     value={data.name}
                   />

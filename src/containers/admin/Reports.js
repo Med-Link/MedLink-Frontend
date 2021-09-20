@@ -86,11 +86,13 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function UpgradeToPro() {
+export default function Reports() {
   const classes = useStyles();
 
   // get monthly income from each pharmacy transactions
   const [data, setData] = useState([]);
+  const [totalIncome, setTotalIncome]= useState();
+
   const getdata =() =>{
     const token = window.localStorage.getItem('token');
       axios.get(`${backendUrl}/admin/viewmonthlyincome`,{
@@ -100,9 +102,13 @@ export default function UpgradeToPro() {
         })
       .then(res =>{
         const results =  res.data.result;
-            console.log(results);
-            setData(results);
-            getSumincome(data);
+        console.log(results);
+        setData(results);
+        let total=0;
+        for (var i = 0; i < (results.length); i++){
+          total=total+parseInt(results[i].sum);
+        }
+        setTotalIncome(total)
       })
   }
 
@@ -116,14 +122,6 @@ export default function UpgradeToPro() {
 
   const rows = data; 
   
-  const [totalIncome, setTotalIncome]= useState();
-  const getSumincome = (rows) => {
-    let total = 0
-    for (var i = 0; i < (rows.length); i++){
-      total=total+parseInt(rows[i].sum);
-    }
-    setTotalIncome(total)
-  } 
   const download=()=>
   {
     FileDownload(data, 'report.pdf');
@@ -157,9 +155,9 @@ export default function UpgradeToPro() {
                   </TableRow>
                 </TableHead>
                 <TableBody >
-                  {data.map((row) => {
+                  {data.map((row,id) => {
                     return(
-                    <TableRow>
+                    <TableRow key={id}>
                       <TableCell className={classes.center}>
                         {row.name}
                       </TableCell>

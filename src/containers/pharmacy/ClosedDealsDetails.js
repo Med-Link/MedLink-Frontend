@@ -177,9 +177,9 @@ export default function ClosedDealsDetails() {
                           </TableRow>
                         </TableHead>
                         <TableBody >
-                          {data.map((row) => {
+                          {data.map((row,id) => {
                             return (
-                              <TableRow>
+                              <TableRow key={id}>
                                 <TableCell align="left">
                                   {row.name}
                                 </TableCell>

@@ -42,8 +42,8 @@ export default function UserProfile() {
   },[]);
 
   return (
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={4}>
+      <GridContainer justifyContent="center">
+        <GridItem xs={12} sm={10} md={3}>
           <Card profile>
             <CardAvatar profile>
                 <img src={avatar} alt="..." />
@@ -54,7 +54,7 @@ export default function UserProfile() {
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={8}>
+        <GridItem xs={12} sm={10} md={6}>
           <Card>
             <CardHeader color="success">
               <h4 className={classes.cardTitleWhite}>User Profile</h4>
@@ -70,10 +70,6 @@ export default function UserProfile() {
                     formControlProps={{
                       fullWidth: true,
                     }}
-                    
-                    inputProps={{
-                      disabled: true,
-                    }}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
@@ -83,10 +79,6 @@ export default function UserProfile() {
                     value = {data.lastname}
                     formControlProps={{
                       fullWidth: true,
-                    }}
-                    
-                    inputProps={{
-                      disabled: true,
                     }}
                   />
                 </GridItem>
@@ -99,9 +91,6 @@ export default function UserProfile() {
                     value={data.email}
                     formControlProps={{
                       fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
                     }}
                   />
                 </GridItem>                

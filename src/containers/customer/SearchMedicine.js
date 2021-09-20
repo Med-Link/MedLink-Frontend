@@ -6,7 +6,6 @@ import TableScrollbar from 'react-table-scrollbar'
 
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid} from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -38,7 +37,6 @@ const fontStyle = {fontSize: '20px',color: '#126e82'};
 const titleStyle = {fontSize: '30px',color: '#126e82'};
 const cardStyle = {backgroundColor: '#a6c6ca'}
 const searchButton = {backgroundColor: '#126e82'}
-const ftStyle = {color: '#126e82',textAlign: 'left',fontSize: '20px'}
 const cdStyle = {backgroundColor: '#ffffff'}
 
 
@@ -132,7 +130,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <GridContainer item spacing={3}>
+      <GridContainer spacing={3}>
         <GridItem xs={12} sm={6} md={6}>
           <Card style={cardStyle}>
             <CardHeader color="info" stats icon>
@@ -157,7 +155,7 @@ export default function Dashboard() {
                   onChange={(event, value) => onSelectMedicine(event, value)}
                 />
               </div>
-              <Button style={searchButton} color="ffffff" aria-label="edit" justIcon round>
+              <Button color="primary" aria-label="edit" justIcon round disabled>
                 <Search style={searchButton}/>
               </Button>
               
@@ -186,7 +184,7 @@ export default function Dashboard() {
                 />
               </FormControl>
             </div>
-              <Button style={searchButton} color="ffffff" aria-label="edit" justIcon round>
+              <Button color="primary" aria-label="edit" justIcon round disabled>
                 <Search style={searchButton}/>
               </Button>
             </CardFooter>
@@ -208,7 +206,6 @@ export default function Dashboard() {
                     {columns.map((column) => (
                       <TableCell style={{color:'#213458',backgroundColor: "white"}}
                         key={column.id}
-                        align={column.align}
                       >
                         {column.label}
                       </TableCell>
@@ -223,9 +220,9 @@ export default function Dashboard() {
                     } else if (row.name.toLowerCase().includes(searchTerm.toLowerCase())){
                       return row
                     }
-                  }).map((row) => {
+                  }).map((row,id) => {
                     return(
-                    <TableRow>
+                    <TableRow key={id}>
                       <TableCell align="left">
                         {row.name}
                       </TableCell>
@@ -248,7 +245,7 @@ export default function Dashboard() {
 
               </Table>
             </TableScrollbar>
-            <Grid item xs={12}>
+            <GridItem>
               <Dialog open={openList} onClose={handleClose1} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">
                   Send Prescription
@@ -259,8 +256,7 @@ export default function Dashboard() {
                   </DialogContentText>
                 </DialogContent>
               </Dialog>
-              
-            </Grid>
+            </GridItem>
           </CardBody>
         </Card>
       </GridContainer>
