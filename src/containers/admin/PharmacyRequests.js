@@ -183,7 +183,7 @@ export default function PharmacyRequests() {
                               {row.contactnumber}
                             </TableCell>
                             <TableCell align="left">
-                              {row.location}
+                              {row.city}
                             </TableCell>
                             <TableCell align="left">
                             <Button size='sm' color="primary" onClick={()=>handleClickOpen(row.document1,row.document2,row.document3)}>View</Button>
