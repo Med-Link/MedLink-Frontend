@@ -11,7 +11,6 @@ import CardAvatar from "../../../components/Dashboard/Card/CardAvatar.js";
 import CardBody from "../../../components/Dashboard/Card/CardBody.js";
 import avatar from "../../../assets/images/admin.png";
 
-
 const styles = {
     cardCategoryWhite: {
         color: "rgba(255,255,255,.62)",
