@@ -77,11 +77,7 @@ const SignIn=(props)=>{
                     />
                 
                 <Button type='submit' onClick= {userLogin} variant="contained" style={buttonStyle} href="" fullWidth>Sign in</Button>
-                <Typography>
-                    <Link href="#">
-                        Forgot Password ?
-                    </Link>
-                </Typography>
+                
             </Paper>
             <Box mt={5}>
                 <Footer style={foot}/>
