@@ -103,11 +103,12 @@ export default function Form(props){
       const form = new FormData();
       form.append("description", description);
       form.append("pharmacyid", props.pharmacy);
-      // console.log(description)
+      console.log(prescription)
       for (let pic of prescription) {
         form.append("prescription", pic);
       }
         // if(checked){
+          console.log(form);
         axios.post(`${backendUrl}/order/create`, form,{headers: {
           'Authorization': token ? `Bearer ${token}` : ''
         },}).then((response)=>{
@@ -124,7 +125,8 @@ export default function Form(props){
      
     };
     const handlePrescriptionDocs = (e) => {
-      setPrescription([...prescription, e.target.files[0]]);
+     
+        setPrescription(e.target.files);
     };
     return(               
                 <Grid container spacing={2}> 
