@@ -22,6 +22,7 @@ import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 import OutOfStockTable from "../../components/pharmacy/OutOfStockTable.js";
 import IncomeGrowthChart from "../../components/pharmacy/IncomeGrowthChart.js";
+import OrderRequestsRateChart from "../../components/pharmacy/OrderRequestRate.js";
 
 const useStyles = makeStyles(styles);
 
@@ -29,6 +30,23 @@ const useStyles = makeStyles(styles);
 
 export default function Dashboard() {
   const classes = useStyles();
+
+  //calculate monthly income
+ const [monthlyIncome, setmonthlyIncome] = useState([]);
+
+ const getmonthlyIncome= () => {
+  const token = window.localStorage.getItem('token');
+  axios.get(`${backendUrl}/pharmacy/monthlyincome`, {
+    headers: {
+      Authorization: token ? `Bearer ${token}` : "",
+    },
+  }).then(res => {
+    const results = res.data.result[0];
+    console.log(results);
+   setmonthlyIncome(results);
+  })
+}
+
 
  //count order requests backend connection
  const [newOrders, setNewOrders] = useState([]);
@@ -78,9 +96,12 @@ const getCompleteOrders = () => {
 }
 
 React.useEffect(() => {
+  getmonthlyIncome();
   getNewOrders();
   getAcceptedOrders();
   getCompleteOrders();
+  
+
 }, []);
 
   return (
@@ -93,7 +114,7 @@ React.useEffect(() => {
                 <ReceiptIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Monthly Income</p>
-              <h3 className={classes.cardTitle}></h3>
+              <h3 className={classes.cardTitle}>{monthlyIncome.sum}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -170,6 +191,19 @@ React.useEffect(() => {
             <CardFooter chart>
             <h4 className={classes.cardTitle}>
             Transaction Growth during the Month {new Date().toLocaleString("en-US", { month: "long" })}</h4>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={4}>
+          <Card>
+            <CardHeader >
+            </CardHeader>
+            <CardBody>
+              <OrderRequestsRateChart/>
+            </CardBody>
+            <CardFooter chart>
+            <h4 className={classes.cardTitle}>
+            Order Request Rate Growth during the Month {new Date().toLocaleString("en-US", { month: "long" })}</h4>
             </CardFooter>
           </Card>
         </GridItem>

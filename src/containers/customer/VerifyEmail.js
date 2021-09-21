@@ -2,6 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { backendUrl } from '../../urlConfig';
+import { ToastContainer, toast } from 'react-toastify';
+import { Redirect } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
@@ -53,9 +55,20 @@ const VerifyEmail = () => {
   const iconStyle = { color: '#126e82', height: '50px', width: '50px' }
 
   const verifyemail = async () => {
+    const notify = () => toast.success(' Email Verified!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
     axios.post(`${backendUrl}/verifyemail`, {
       token
     }).then((response) => {
+      notify();
       console.log(response);
     }).catch((err) => {
       if (err.response && err.response.data) {
@@ -88,6 +101,18 @@ const VerifyEmail = () => {
       <Box mt={5}>
         <Copyright />
       </Box>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </Grid>
   )
 }

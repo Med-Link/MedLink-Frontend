@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
+
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
@@ -65,12 +66,11 @@ const ResetPassword=()=>{
     event.preventDefault();
   };
 
-    const paperStyle={padding :20,height:'500px',width:'340px', margin:"20px auto"}
-    const avatarStyle={backgroundColor: '#126e82'}
-    const gridStyle={padding: 20}
-    const buttonStyle={color: '#efe3e3',backgroundColor: '#126e82', margin: '30px 0', width: '100%', left:'50%'}
-    const headingStyle = {color: '#126e82'};
-    const inputStyle = {width: '700px'}
+  const paperStyle = { padding: 20, height: '500px', width: '400px', margin: "20px auto" }
+  const gridStyle = { padding: 20 }
+  const buttonStyle = { color: '#efe3e3', backgroundColor: '#126e82', margin: '30px 0', width: '100%', left: '50%' }
+  const headingStyle = { color: '#126e82' };
+  const inputStyle = { width: '700px' }
 
     return(
         
