@@ -134,7 +134,7 @@ const SignInPharmacy = () => {
                   <TextField value={password} onChange={(e) => setPassword(e.target.value)} id="password" label="Password" placeholder="Enter Password" type='password' variant="outlined" size="small" fullWidth required />
                 </Grid>
               </Grid>
-              <Grid container spacing={3}>
+              {/* <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={
@@ -146,7 +146,7 @@ const SignInPharmacy = () => {
                     label="Remember me"
                   />
                 </Grid>
-              </Grid>
+              </Grid> */}
               <Box xs={12} sm={12} md={12}
                 alignItems="center"
                 display="flex"

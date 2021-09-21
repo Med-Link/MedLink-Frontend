@@ -66,15 +66,7 @@ const SignIn=(props)=>{
                 </Grid>
                     <TextField value ={email} onChange={(e) => setEmail(e.target.value)} id="email" label="Email" placeholder="Enter Your Email" fullWidth required/>
                     <TextField value ={password} onChange={(e) => setPassword(e.target.value)} id="password" label="Password" placeholder="Enter Password" type='password' fullWidth required/>
-                    <FormControlLabel  
-                        control={
-                            <Checkbox 
-                            name="checkedB"
-                            color="Primary"
-                            />
-                        }
-                        label="Remember me"
-                    />
+                   
                 
                 <Button type='submit' onClick= {userLogin} variant="contained" style={buttonStyle} href="" fullWidth>Sign in</Button>
                 
