@@ -26,7 +26,7 @@ export default function OrderRequestsRateChart() {
   }, []);
   
     const Months = chartData.map(d=>d.month);
-    const Orders = chartData.map(d=>d.sum);
+    const Orders = chartData.map(d=>d.count);
 
     return (
         <div>
@@ -37,10 +37,10 @@ export default function OrderRequestsRateChart() {
                     label: "Oderes",
                     data: Orders,
                     backgroundColor: [
-                        'rgba(54, 162, 235)',
+                        'rgba(181, 150, 242)',
                     ],
                     borderColor: [
-                      'rgba(54, 162, 235)',
+                        'rgba(181, 150, 242)',
                     ],
                     borderWidth: 1,
                   },
@@ -50,3 +50,5 @@ export default function OrderRequestsRateChart() {
           </div>
     );
 }
+
+

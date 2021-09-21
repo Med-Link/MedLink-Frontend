@@ -31,6 +31,23 @@ const useStyles = makeStyles(styles);
 export default function Dashboard() {
   const classes = useStyles();
 
+  //calculate monthly income
+ const [monthlyIncome, setmonthlyIncome] = useState([]);
+
+ const getmonthlyIncome= () => {
+  const token = window.localStorage.getItem('token');
+  axios.get(`${backendUrl}/pharmacy/monthlyincome`, {
+    headers: {
+      Authorization: token ? `Bearer ${token}` : "",
+    },
+  }).then(res => {
+    const results = res.data.result[0];
+    console.log(results);
+   setmonthlyIncome(results);
+  })
+}
+
+
  //count order requests backend connection
  const [newOrders, setNewOrders] = useState([]);
 
@@ -79,9 +96,12 @@ const getCompleteOrders = () => {
 }
 
 React.useEffect(() => {
+  getmonthlyIncome();
   getNewOrders();
   getAcceptedOrders();
   getCompleteOrders();
+  
+
 }, []);
 
   return (
@@ -94,7 +114,7 @@ React.useEffect(() => {
                 <ReceiptIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Monthly Income</p>
-              <h3 className={classes.cardTitle}></h3>
+              <h3 className={classes.cardTitle}>{monthlyIncome.sum}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
