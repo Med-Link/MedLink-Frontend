@@ -22,6 +22,7 @@ import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 import OutOfStockTable from "../../components/pharmacy/OutOfStockTable.js";
 import IncomeGrowthChart from "../../components/pharmacy/IncomeGrowthChart.js";
+import OrderRequestsRateChart from "../../components/pharmacy/OrderRequestRate.js";
 
 const useStyles = makeStyles(styles);
 
@@ -170,6 +171,19 @@ React.useEffect(() => {
             <CardFooter chart>
             <h4 className={classes.cardTitle}>
             Transaction Growth during the Month {new Date().toLocaleString("en-US", { month: "long" })}</h4>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={4}>
+          <Card>
+            <CardHeader >
+            </CardHeader>
+            <CardBody>
+              <OrderRequestsRateChart/>
+            </CardBody>
+            <CardFooter chart>
+            <h4 className={classes.cardTitle}>
+            Order Request Rate Growth during the Month {new Date().toLocaleString("en-US", { month: "long" })}</h4>
             </CardFooter>
           </Card>
         </GridItem>

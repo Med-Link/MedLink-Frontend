@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { backendUrl } from '../../../urlConfig.js';
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Redirect } from 'react-router-dom';
@@ -74,10 +73,19 @@ const ForgotPassword=()=>{
 
   };
 
+  const paperStyle = { padding: 20, height: '500px', width: '340px', margin: "20px auto" }
+  const gridStyle = { padding: 20 }
+  const buttonStyle = { color: '#efe3e3', backgroundColor: '#126e82', margin: '10px 0', width: '340px' }
+  const headingStyle = { color: '#126e82', fontSize: '20px' };
+  const paragraphStyle = { color: '#126e82', margin: '50px 0 0 0' };
+  const paragraphStyle1 = { color: '#126e82' };
+  const grid2Style = { padding: 10 }
+  const iconStyle = { color: '#126e82', height: '50px', width: '50px' }
+  const textFeildStyle = { height: '50px' }
+
   return (
     
     <Grid style={gridStyle}>
-
       <Paper elevation={10} style={paperStyle}>
         <Grid align='center' style={gridStyle}>
           <VpnKeyIcon style={iconStyle} />
