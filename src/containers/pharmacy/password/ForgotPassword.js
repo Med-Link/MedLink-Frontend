@@ -67,7 +67,7 @@ const ForgotPassword = () => {
       },
     }).then((response) => {
       console.log(response);
-      return <Redirect to="/" />;
+      // return <Redirect to="/" />;
 
     }).catch((err) => {
       console.log(err);
