@@ -157,7 +157,7 @@ export default function Dashboard() {
               <CardIcon color="info">
                 <Store />
               </CardIcon>
-              <p className={classes.cardCategory}>Pharmacies</p>
+              <p className={classes.cardCategory}>Registered Pharmacies</p>
               <h3 className={classes.cardTitle}>{datapharm}</h3>
             </CardHeader>
             <CardFooter stats>
@@ -254,7 +254,7 @@ export default function Dashboard() {
                 <h3 className={classes.cardTitle}>{averageorders}</h3>
               </CardHeader>
               <CardFooter stats>
-                <div className={classes.stats}>Per day</div>
+                <div className={classes.stats}>Per Month</div>
               </CardFooter>
             </Card>
           </GridItem>
