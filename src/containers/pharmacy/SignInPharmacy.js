@@ -74,16 +74,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SignInPharmacy = () => {
 
-  const notify = () => toast.success(' Login Success!', {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
-
   const classes = useStyles();
 
   const [email, setEmail] = useState('');
@@ -113,7 +103,6 @@ const SignInPharmacy = () => {
   }
 
   if (auth.authenticate) {
-    notify();
     return <Redirect to={'/pharmacy'} />
     
   }

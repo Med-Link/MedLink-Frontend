@@ -104,6 +104,8 @@ export default function Checkout(props) {
   const [contactnumber, setContactnumber] = useAtom(contactnumberAtom);
 
   const handlePayherePayment = async () => {
+    props.setOpenCheckout(false);
+    console.log(props.setOpenCheckout)
     const address2 = window.sessionStorage.getItem("address");
     const address = addressline1 + address2;
     
@@ -138,7 +140,8 @@ export default function Checkout(props) {
   React.useEffect(() => {
     const init = () => {
       payhere.onCompleted = async function onCompleted() {
-        console.log("Payment completed. OrderID:" );       
+        console.log("Payment completed. OrderID:" ); 
+        props.getdata();      
         //Note: validate the payment and show success or failure page to the customer
         ``;
       };
@@ -298,5 +301,7 @@ const Completeorder = async () => {
 Checkout.propTypes = {
   products: PropTypes.any,
   costs:PropTypes.any,
+  setOpenCheckout:PropTypes.any,
+  getdata:PropTypes.any,
    
 };
