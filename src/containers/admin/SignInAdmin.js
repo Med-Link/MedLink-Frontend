@@ -1,4 +1,7 @@
 import React, {useEffect, useState} from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
@@ -57,7 +60,7 @@ const SignIn=(props)=>{
     const foot={position: 'absolute', bottom: 0}
 
     return(
-        
+        <div>
         <Grid style={gridStyle}>
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center' style={gridStyle}>
@@ -75,6 +78,17 @@ const SignIn=(props)=>{
                 <Footer style={foot}/>
             </Box>
         </Grid>
+        <ToastContainer position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      </div>
     )
 }
 
