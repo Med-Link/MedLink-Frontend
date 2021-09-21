@@ -67,22 +67,6 @@ export default function PharmacyNavbarLinks() {
 
   return (
     <div>
-      <div className={classes.searchWrapper}>
-        <CustomInput
-          formControlProps={{
-            className: classes.margin + " " + classes.search,
-          }}
-          inputProps={{
-            placeholder: "Search",
-            inputProps: {
-              "aria-label": "Search",
-            },
-          }}
-        />
-        <Button color="white" aria-label="edit" justIcon round>
-          <Search />
-        </Button>
-      </div>
       <Link href="/pharmacy" color="inherit">
       <Button
         color={window.innerWidth > 959 ? "transparent" : "white"}
