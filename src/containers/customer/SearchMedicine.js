@@ -168,8 +168,8 @@ export default function Dashboard() {
               <CardIcon color="info">
                 <StoreMallDirectoryIcon/>
               </CardIcon>
-              <p className={classes.cardCategory} style={fontStyle}>Search</p>
-              <h3 className={classes.cardTitle} style={titleStyle}>Pharmacy Name</h3>
+              <p className={classes.cardCategory} style={fontStyle}>Search by </p>
+              <h3 className={classes.cardTitle} style={titleStyle}>Pharmacy Name/ City</h3>
             </CardHeader>
             <CardFooter stats>
             <div>
@@ -217,7 +217,7 @@ export default function Dashboard() {
                   { (pharmacyData <=0 && toggle==false ? rows : pharmacyData).filter((row)=>{
                     if (searchTerm == "") {
                       return row
-                    } else if (row.name.toLowerCase().includes(searchTerm.toLowerCase())){
+                    } else if (row.name.toLowerCase().includes(searchTerm.toLowerCase()) || row.city.toLowerCase().includes(searchTerm.toLowerCase())){
                       return row
                     }
                   }).map((row,id) => {
