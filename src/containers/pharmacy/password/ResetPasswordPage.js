@@ -40,7 +40,7 @@ const ResetPassword = () => {
   const [newpassword, setNewpassword] = useState('');
 
   const resetPassword = async () => {
-    console.log(resetlink, newpassword)
+    // console.log(resetlink, newpassword)
     axios.post(`${backendUrl}/pharmacy/resetpassword`, {
       resetlink,
       newpassword,
