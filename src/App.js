@@ -53,7 +53,7 @@ function App() {
           <Route path="/pharmacysignin" component={SignInPharmacy} />
           <Route path="/VerifyEmailPharmacy/:token" component={VerifyEmailPharmacy} />
           <Route path="/ForgotPasswordPharmacy" component={ForgotPasswordPharmacy} />
-          <Route path="/PasswordResetPharmacy" component={PasswordResetPharmacy} />
+          <Route path="/ResetPasswordPharmacy/:resetlink" component={PasswordResetPharmacy} />
 
            
 
