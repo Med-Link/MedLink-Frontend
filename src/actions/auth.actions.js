@@ -1,15 +1,28 @@
 import axios from 'axios';
 import { authConstants } from './constants';
 import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 import { Redirect } from 'react-router-dom';
 import { backendUrl } from '../urlConfig';
 // import axios from "../helpers/axios";
 
 export const login = (user) => {
+  const notify = () => toast.error(' Signin Error!', {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
   // console.log("kkkkkkk");
 
   return async (dispatch) => {
     dispatch({ type: authConstants.LOGIN_REQUEST });
+    try{
     const res = await axios.post(`${backendUrl}/admin/signin`, {
       ...user,
     });
@@ -26,12 +39,19 @@ export const login = (user) => {
           token, userdet,
         },
       });
-    } else if (res.status === 400) {
-      dispatch({
-        type: authConstants.LOGIN_FAILURE,
-        payload: { error: res.data.error },
-      });
+      } else if (res.status === 400) {
+      // dispatch({
+      //   type: authConstants.LOGIN_FAILURE,
+      //   payload: { error: res.data.error },
+      // });
+     throw new Error("signin error"); 
+
     }
+  }catch(e){
+    console.log(e.message)
+
+    notify();
+  } 
   };
 };
 
