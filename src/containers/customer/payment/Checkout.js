@@ -1,14 +1,9 @@
 import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 
@@ -17,12 +12,10 @@ import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 import TotalBill from './TotalBill'
-import { Grid } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { backendUrl } from '../../../urlConfig';
 import { ngrokUrl } from '../../../urlConfig';
-import { getInitialGridColumnsState } from '@material-ui/data-grid';
 import { orderplaceSchema } from '../../../validations/orderplaceValidation';
 import { atom } from 'jotai'
 import { useAtom } from 'jotai'
@@ -84,8 +77,8 @@ const useStyles = makeStyles((theme) => ({
 const steps = ['Review your order', 'Total Bill','Delivery address','Payment form' ];
 
 
-function getStepContent(step,props,costdata,handlePayherePayment) {
 
+function getStepContent(step,props,costdata,handlePayherePayment) {
   switch (step) {
     case 0:
       return <Review products={props.products} />;
