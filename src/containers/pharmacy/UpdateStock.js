@@ -25,6 +25,9 @@ import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import Button from "../../components/Dashboard/CustomButtons/Button";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import AddNewMed from './forms/AddNewMed';
 import AddCsv from "./forms/AddCsv"
 
@@ -37,7 +40,15 @@ const useStyles = makeStyles(styles);
 export default function OrderProcess() {
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = useState(""); //for search function
-
+  const notify = () => toast.info('Medicine Batch Removed successfully !!', {
+    position: "bottom-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
 
   const [openAddMeds, setOpenAddMeds] = React.useState(false);
 
@@ -126,6 +137,7 @@ export default function OrderProcess() {
         },
     }).then((response)=>{
         getdata();
+        notify();
     }).catch((err)=>{
       console.log(err);
     });
@@ -306,6 +318,18 @@ export default function OrderProcess() {
           </Button>
         </DialogActions>
       </Dialog>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

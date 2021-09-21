@@ -7,21 +7,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 
-
-// const products = [
-//   // { name: 'Panadol', desc: '1 Card', price: 'Rs.20.00' },
-//   // { name: 'Citrazine', desc: '2 Cards', price: 'Rs.100.00' },
-//   // { name: 'Siddhalepa', desc: '1', price: 'Rs.150.00' },
-  
-// ];
-// const addresses = ['No: 2', 'Gall Road', 'Colombo'];
-//const payments = [
-  //{ name: 'Card type', detail: 'Visa' },
-  //{ name: 'Card holder', detail: 'Mr John Smith' },
-  //{ name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  //{ name: 'Expiry date', detail: '04/2024' },
-//];
-
 const useStyles = makeStyles((theme) => ({
   listItem: {
     padding: theme.spacing(1, 0),
@@ -36,10 +21,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function TotalBill(props) {
-  // console.log(props)
+   
   const classes = useStyles();
   const costs= props.costs;
-  // console.log(props);
 
   if(!costs){
     return<></>
@@ -50,12 +34,6 @@ export default function TotalBill(props) {
         Order summary
       </Typography>
       <List disablePadding>
-        {/* {products.map((product) => (
-          <ListItem className={classes.listItem} key={product.medname}>
-            <ListItemText primary={product.medname} secondary={product.quantity} />
-            <Typography variant="body2">{product.price}</Typography>
-          </ListItem>
-        ))} */}
 
         {<ListItem className={classes.listItem}>
           <ListItemText primary="Total Amount for Medicine (Rs.)" />
@@ -87,38 +65,12 @@ export default function TotalBill(props) {
           
         </ListItem>
       </List>
-      <Grid container spacing={2}>
-        {/*<Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom className={classes.title}>
-            Delivery to :
-          </Typography>
-          <Typography gutterBottom>Kamal Perera</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
-        </Grid>*/}
-        <Grid item container direction="column" xs={12} sm={6}>
-          {/*<Typography variant="h6" gutterBottom className={classes.title}>
-            Payment details
-          </Typography>
-          <Grid container>
-            {payments.map((payment) => (
-              <React.Fragment key={payment.name}>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.name}</Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.detail}</Typography>
-                </Grid>
-              </React.Fragment>
-            ))}
-            </Grid>*/}
-        </Grid>
-      </Grid>
+       
     </React.Fragment>
   );
   }
 }
 TotalBill.propTypes = {
   costs: PropTypes.any,
-  // children: PropTypes.node.isRequired,
-  // classes: PropTypes.object.isRequired,
+   
 };

@@ -236,7 +236,7 @@ setOrderbill(removemedlist);
     { id: 'brand', label: 'Brand Name'},
     { id: 'qty', label: 'Current Qty'},
     { id: 'unitprice', label: 'Unit Price(Rs.)'},
-    { id: 'price', label: 'Total Price'},
+    { id: 'price', label: 'Remove'},
     ];
   // const rows2=["001","he he"]
   

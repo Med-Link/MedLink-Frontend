@@ -6,7 +6,6 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
-
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
@@ -84,8 +83,6 @@ function getStepContent(step,props,costdata,handlePayherePayment) {
       return <Review products={props.products} />;
     case 1:
       return <TotalBill costs={costdata} />;
-      // console.log(props)
-      // // return 
     case 2:
       return <AddressForm />;
     case 3:
@@ -161,28 +158,13 @@ export default function Checkout(props) {
       "https://www.payhere.lk/lib/payhere.js",
       init
     );
-    // }S
-
-    // return () => {
-    //   setBtnsVisible(true);
-    //   setActiveStep(2);
-    // };
+     
   }, []);
 
 const [costdata, setCostdata] = useState([]);
 
-// const [addressline1, setAddressline1] = useState("");
-// const [contactno, setContactno] = useState("");
-
-
-// const [addressline1, setAddressline1] = useAtom(addressAtom);
-// const [contactnumber, setContactnumber] = useAtom(contactnumberAtom);
-
 const Completeorder = async () => {
   const token = window.localStorage.getItem('token');
-  
-  // console.log(costdata.t)
-  // e.preventDefault();
   const address2 = window.sessionStorage.getItem("address");
   const customer = JSON.parse(localStorage.getItem('user'));
   const firstname = customer[0].firstname;
@@ -194,8 +176,6 @@ const Completeorder = async () => {
   const deliverycost = costdata.deliverycost;
   const servicecost = costdata.servicecost;
 
-
-    // console.log(typeof(contactnumber))
     const form = {
       contactnumber,
     };
@@ -227,11 +207,8 @@ const Completeorder = async () => {
 };
   
   const calculatetotal = async() => {
-    // const { costs } = props;
-    // console.log(merchantID)
+     
     const token = window.localStorage.getItem('token');
-    
-    // console.log(token)
     const latitude = window.sessionStorage.getItem("latitude");
     const longitude = window.sessionStorage.getItem("longitude");
     
@@ -240,14 +217,12 @@ const Completeorder = async () => {
         'Authorization': token ? `Bearer ${token}` : ''
       },
     }).then((response)=>{
-      // console.log(response);
       setCostdata(response.data);
-      // costs();
 
     }).catch((err)=>{
       console.log(err);
     });
-    // console.log(token)
+     
   };
 
   const handleNext = () => {
@@ -257,7 +232,6 @@ const Completeorder = async () => {
       window.sessionStorage.removeItem('longitude');
     }
     if(activeStep==2){
-      // console.log("hhhhhh")
       Completeorder()
     }
     
@@ -324,6 +298,5 @@ const Completeorder = async () => {
 Checkout.propTypes = {
   products: PropTypes.any,
   costs:PropTypes.any,
-  // children: PropTypes.node.isRequired,
-  // classes: PropTypes.object.isRequired,
+   
 };
