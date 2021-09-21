@@ -175,7 +175,7 @@ export default function RespondOrders() {
           <DialogTitle id="form-dialog-title"></DialogTitle>
           <DialogContent>
             <DialogContentText>
-              <Checkout products={vieworderdata}/>
+              <Checkout products={vieworderdata} setOpenCheckout={setOpenCheckout}/>
             </DialogContentText>
           </DialogContent>
       </Dialog>

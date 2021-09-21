@@ -104,6 +104,8 @@ export default function Checkout(props) {
   const [contactnumber, setContactnumber] = useAtom(contactnumberAtom);
 
   const handlePayherePayment = async () => {
+    props.setOpenCheckout(false);
+    console.log(props.setOpenCheckout)
     const address2 = window.sessionStorage.getItem("address");
     const address = addressline1 + address2;
     
@@ -298,5 +300,6 @@ const Completeorder = async () => {
 Checkout.propTypes = {
   products: PropTypes.any,
   costs:PropTypes.any,
+  setOpenCheckout:PropTypes.any,
    
 };
