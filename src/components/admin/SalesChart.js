@@ -26,7 +26,7 @@ export default function SalesChart() {
     const PNames = chartData.map(d=>d.name);
     const Incomes = chartData.map(d=>d.sum);
 
-console.log(PNames);
+// console.log(PNames);
     return (
         <div>
             <Bar
