@@ -1,4 +1,7 @@
 import React, {useEffect, useState} from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { Grid } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Hidden from '@material-ui/core/Hidden';
@@ -78,6 +81,8 @@ function Copyright() {
   }
 
 const SignInCustomer=()=>{
+ 
+
   const classes = useStyles();
 
     const [email,setEmail] = useState ('');
@@ -190,7 +195,17 @@ const SignInCustomer=()=>{
         <Box xs={12} sm={12} md={12} >
           <Copyright />
         </Box>
-      </div>
+       <ToastContainer position="top-right"
+       autoClose={5000}
+       hideProgressBar={false}
+       newestOnTop={false}
+       closeOnClick
+       rtl={false}
+       pauseOnFocusLoss
+       draggable
+       pauseOnHover
+       />
+       </div>
     )
 }
 
