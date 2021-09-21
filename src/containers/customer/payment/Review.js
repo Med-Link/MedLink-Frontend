@@ -63,10 +63,10 @@ export default function Review(props) {
             <b>Move the marker to Pin Your Delivery Location (Compulsary for Calculating Delivery Charges ):</b>
           </Typography>
         </GridItem>
-        <GridItem xs={12} sm={12} md={12} style={{marginBottom:"30px"}}>
+        <GridItem xs={12} sm={12} md={12}>
           <Map
             center={{lat: 6.9271, lng: 79.8612}}
-            height='250px'
+            height='350px'
             width='100%'
             zoom={7} />
         </GridItem>

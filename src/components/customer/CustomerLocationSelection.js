@@ -247,7 +247,7 @@ class Map extends React.Component{
 					           defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
 					>
 						{/* For Auto complete Search Box */}
-						<Autocomplete
+						{/* <Autocomplete
 								style={{
 									width: '95%',
 									height: '40px',
@@ -256,7 +256,7 @@ class Map extends React.Component{
 								}}
 								onPlaceSelected={ this.onPlaceSelected }
 								types={['(regions)']}
-							/>
+							/> */}
 						{/* InfoWindow on top of marker */}
 						<InfoWindow
 							onClose={this.onInfoWindowClose}
