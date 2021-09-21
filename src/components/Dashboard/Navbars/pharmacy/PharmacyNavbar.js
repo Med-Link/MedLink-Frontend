@@ -15,7 +15,7 @@ import RTLNavbarLinks from "./RTLNavbarLinks.js";
 import Button from "../../CustomButtons/Button.js";
 //hooks
 // mimshel import { useRouteName } from "hooks";
-import { useRouteName } from "../../../../containers/admin/hooks/useRouteName";
+import { useRouteName } from "../../../../containers/pharmacy/hooks/useRouteName";
 import styles from "../../../../assets/jss/material-dashboard-react/components/headerStyle.js";
 
 

@@ -72,8 +72,7 @@ export default function UserProfile() {
             <CardBody profile>
               <h4 className={classes.cardTitle}>{data.name}</h4>
               <p className={classes.description}>
-              As Sri Lanka’s first premier multi-specialty pharmacy, 
-              ABCD was set up to mirror reputed hospitals in the region which offered advanced medical technology and expert medical care,
+              As Sri Lanka’s first premier multi-specialty pharmacy, {data.name} was set up to mirror reputed hospitals in the region which offered advanced medical technology and expert medical care,
                thus eliminating the need for people to travel out of Sri Lanka for specialized medical treatment.
               </p>
               

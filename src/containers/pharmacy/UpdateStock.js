@@ -12,7 +12,8 @@ import Dialog from '@material-ui/core/Dialog';
 import { DialogContent } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
 import DialogActions from '@material-ui/core/DialogActions';
-
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import CreateIcon from '@material-ui/icons/Create';
@@ -91,6 +92,7 @@ export default function OrderProcess() {
 
   //begining of  of update medicine details
   const [openEdit, setOpenEdit] = React.useState(false);
+  const [openDelete, setOpenDelete] = React.useState(false);
   const [batchId, setBatchId] = React.useState();
 
   const handleClickOpenEdit = (batchid) => {
@@ -99,6 +101,14 @@ export default function OrderProcess() {
   };
   const handleCloseEdit = () => {
     setOpenEdit(false);
+  };
+
+  const handleClickOpenDelete = (batchid) => {
+    setOpenDelete(true);
+    setBatchId(batchid);
+  };
+  const handleCloseDelete = () => {
+    setOpenDelete(false);
   };
 
   const [newQuantity, setNewQuantity ] = React.useState();
@@ -138,6 +148,7 @@ export default function OrderProcess() {
     }).then((response)=>{
         getdata();
         notify();
+        handleCloseDelete();
     }).catch((err)=>{
       console.log(err);
     });
@@ -229,7 +240,7 @@ export default function OrderProcess() {
                           <IconButton aria-label="update" onClick={()=>handleClickOpenEdit(row.batchid)} color="inherit"><CreateIcon /></IconButton>
                         </TableCell>
                         <TableCell align="left">
-                          <IconButton aria-label="delete" style={{color:"#ff0000"}} onClick={()=>deleterow(row.batchid)}><DeleteIcon/></IconButton>
+                          <IconButton aria-label="delete" style={{color:"#ff0000"}} onClick={()=>handleClickOpenDelete(row.batchid)}><DeleteIcon/></IconButton>
                         </TableCell>
                       </TableRow>
                       );
@@ -243,6 +254,25 @@ export default function OrderProcess() {
           </Card>
         </GridItem>
       </GridContainer>
+
+      {/* delete dialog box */}
+
+      <Dialog open={openDelete} onClose={handleCloseDelete} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+        <DialogTitle id="alert-dialog-title">{"Are you sure you want to delete this from your stock?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            If yes, the order will disappear from your order list.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={()=>deleterow(batchId)} color="primary">
+            Yes
+          </Button>
+          <Button onClick={handleCloseDelete} color="info" autoFocus>
+            No
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       {/*update medicine dialogbox*/}
 
