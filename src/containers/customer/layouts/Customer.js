@@ -3,18 +3,12 @@ import { Switch, Route, Redirect } from "react-router-dom";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
-// @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-// core components
 import Navbar from "../../../components/Dashboard/Navbars/CustomerNavbar.js";
 import Footer from "../../../components/Dashboard/Footer/Footer.js";
 import Sidebar from "../../../components/Dashboard/Sidebar/CustomerSidebar.js";
-//import FixedPlugin from "../../../components/Dashboard/FixedPlugin/FixedPlugin.js";
-
 import routes from "../../../containers/customer/routes/routes"
-
 import styles from "../../../assets/jss/material-dashboard-react/layouts/adminStyle.js";
-
 import bgImage from "../../../assets/images/customer-bg.jpg";
 import logo from "../../../assets/images/logo.jpg";
 
@@ -119,14 +113,7 @@ export default function Admin({ ...rest }) {
           <div className={classes.map}>{switchRoutes}</div>
         )}
         {getRoute() ? <Footer /> : null}
-        {/* <FixedPlugin
-          handleImageClick={handleImageClick}
-          handleColorClick={handleColorClick}
-          bgColor={color}
-          bgImage={image}
-          handleFixedClick={handleFixedClick}
-          fixedClasses={fixedClasses}
-        /> */}
+         
       </div>
     </div>
   );

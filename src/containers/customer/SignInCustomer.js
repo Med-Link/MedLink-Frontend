@@ -102,7 +102,7 @@ const SignInCustomer=()=>{
           const user ={
               email,password
             }
-            console.log(user);
+            // console.log(user);
             dispatch(login(user));
       }   
       

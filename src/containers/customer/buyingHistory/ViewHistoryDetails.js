@@ -48,103 +48,31 @@ export default function BuyingHistory(props){
     const headerStyle={color: '#126e82'}
 
     return(
-        
         <Grid style={gridStyle}>
-             
-            {/* <Paper elevation={10} style={paperStyle}> */}
-                <Grid align='center' style={gridStyle}>
-                     
-                    <h1 style={headerStyle}>Order History</h1>
-                </Grid>
-
-                <Grid container spacing={2}> 
-                    {/* <Grid item xs={12} sm={6}>
-                        <TextField
-                            id="fullName"
-                            label="Full Name"
-                            defaultValue="Kamal Perera"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                            variant="outlined"
-                        />
-                    </Grid>
-
-                     
-
-                    <Grid item xs={12}>
-                        <TextField
-                            id="email"
-                            label="Email"
-                            defaultValue="kamalperera@gmail.com"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                            variant="outlined"
-                            fullWidth
-                        />
-                         
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <TextField
-                            id="address"
-                            label="Address"
-                            defaultValue="No: 2, Galle Road, Colombo"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                            variant="outlined"
-                            fullWidth
-                        />
-                         
-                    </Grid> */}
-
-                    {/* <Grid item xs={12}>
-                        <TextField
-                            id="mobileNumber"
-                            label="Mobile Number"
-                            defaultValue="0711234567"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                            variant="outlined"
-                        />
-                    </Grid> */}
-
-                    <Grid item xs={12}>
-                        <Typography variant="h6" gutterBottom style={headerStyle}>
-                            Order summary
-                        </Typography>
-                        <List disablePadding>
-                            {props.products.map((product) => (
-                            <ListItem className={classes.listItem} key={product.medname}>
-                                <ListItemText primary={product.medname} secondary={product.quantity} />
+            <Grid align='center' style={gridStyle}>    
+                <h1 style={headerStyle}>Order History</h1>
+            </Grid>
+            <Grid container spacing={2}> 
+                <Grid item xs={12}>
+                    <Typography variant="h6" gutterBottom style={headerStyle}>
+                        Order summary
+                    </Typography>
+                    <List disablePadding>
+                        {props.products.map((product) => (
+                        <ListItem className={classes.listItem} key={product.medname}>
+                            <ListItemText primary={product.medname} secondary={product.quantity} />
                                 <Typography variant="body2">{product.price}</Typography>
                             </ListItem>
-                            ))}
-                             {/* {products.map((product) => ( */}
-                                {products.length>0 ? <ListItem className={classes.listItem} key={products[0].totalprice}>
-          <ListItemText primary="Total (Without Delivery Charges)" />
-          <Typography variant="subtitle1" className={classes.total}>
-            {products[0].totalprice}
-          </Typography>
-        </ListItem>:<></>}
-
-        {/* ))}  */}
-      </List>
-                    </Grid>
-                     
-                        <Button type='submit' variant="contained" style={buttonStyle} href="/customer/buyingHistory">Back</Button>
-                     
-                </Grid> 
-
-                 
-                
-            {/* </Paper> */}
-            <Box mt={5}>
-                <Copyright />
-            </Box>
+                        ))}
+                        {products.length>0 ? <ListItem className={classes.listItem} key={products[0].totalprice}>
+                            <ListItemText primary="Total (Without Delivery Charges)" />
+                            <Typography variant="subtitle1" className={classes.total}>
+                                {products[0].totalprice}
+                            </Typography>
+                            </ListItem>:<></>}
+                    </List>
+                </Grid>
+            </Grid>
         </Grid>
     )
 }

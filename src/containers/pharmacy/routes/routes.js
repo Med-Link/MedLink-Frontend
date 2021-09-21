@@ -5,6 +5,7 @@ import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import Notifications from "@material-ui/icons/Notifications";
 import Unarchive from "@material-ui/icons/Unarchive";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import DeliveryDiningRoundedIcon from '@mui/icons-material/DeliveryDiningRounded';
 // core components/views for Admin layout
 import DashboardPage from "../Dashboard.js";
@@ -36,39 +37,27 @@ const dashboardRoutes = [
   // {
   //   path: "/confirmedorders",
   //   name: "Confirmed Orders",
-  //   icon: CheckIcon,
-  //   component: ConfirmedOrders,
+  //   icon: CheckIcon Notifications,
+  //   component: ConfirmedOrders,  
   //   layout: "/pharmacy",
   // },
-  {
-    path: "/closeddeals",
-    name: "Closed Deals",
-    icon: Notifications,
-    component: ClosedDeals,
-    layout: "/pharmacy",
-  },
+  
 
   {
     path: "/sendtodelivery",
-    name: "Send To Delivery",
-    icon: DeliveryDiningRoundedIcon,
+    name: "Confirmed Orders",
+    icon: CheckBoxIcon,
     component: SentToCustomer,
     layout: "/pharmacy",
   },
-  {
-    path: "/updatestock",
-    name: "Update Stock",
-    icon: Unarchive,
-    component: UpdateStock,
+ 
+   {
+    path: "/closeddeals",
+    name: "Shipped Orders",
+    icon:  DeliveryDiningRoundedIcon,
+    component: ClosedDeals,
     layout: "/pharmacy",
   },
-  {
-    path: "/user",
-    name: "Profile",
-    icon: Person,
-    component: Profile,
-    layout: "/pharmacy",
-   },
   {
     path: "/ClosedDealsDetails",
     name: "Closed Deals Details",
@@ -85,6 +74,24 @@ const dashboardRoutes = [
     layout: "/pharmacy",
     display:false,
   },
+
+  {
+    path: "/updatestock",
+    name: "Update Stock",
+    icon: Unarchive,
+    component: UpdateStock,
+    layout: "/pharmacy",
+  },
+
+
+  {
+    path: "/user",
+    name: "Profile",
+    icon: Person,
+    component: Profile,
+    layout: "/pharmacy",
+   },
+
 ];
 
 export default dashboardRoutes;

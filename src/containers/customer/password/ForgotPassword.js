@@ -7,77 +7,48 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Redirect } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
-import Avatar from '@material-ui/core/Avatar';
 import GridItem from "../../../components/Dashboard/Grid/GridItem.js";
 import GridContainer from "../../../components/Dashboard/Grid/GridContainer.js";
-//import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
 import { TextField } from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="/">
-        Medlink
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+    return (
+      <Typography variant="body2" color="textSecondary" align="center">
+        {'Copyright © '}
+        <Link color="inherit" href="/">
+          Medlink
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  margin: {
-    margin: theme.spacing(1),
-  },
-  withoutLabel: {
-    marginTop: theme.spacing(3),
-  },
-  textField: {
-    width: '85%',
-  },
-}));
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    margin: {
+      margin: theme.spacing(1),
+    },
+    withoutLabel: {
+      marginTop: theme.spacing(3),
+    },
+    textField: {
+      width: '85%',
+    },
+  }));
 
-const ForgotPassword = () => {
+const ForgotPassword=()=>{
 
-  const notify = () => toast.sucess('Reset Link Sent To Your Email!', {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
-
-  const classes = useStyles();
-
-
-  const paperStyle = { padding: 20, height: '500px', width: '340px', margin: "20px auto" }
-  const gridStyle = { padding: 20 }
-  const buttonStyle = { color: '#efe3e3', backgroundColor: '#126e82', margin: '10px 0', width: '340px' }
-  const headingStyle = { color: '#126e82', fontSize: '20px' };
-  const paragraphStyle = { color: '#126e82', margin: '50px 0 0 0' };
-  const paragraphStyle1 = { color: '#126e82' };
-  const inputStyle = { width: '700px' }
-  const grid2Style = { padding: 10 }
-  const iconStyle = { color: '#126e82', height: '50px', width: '50px' }
-  const textFeildStyle = { height: '50px' }
+    const classes = useStyles();
 
   const [email, setEmail] = useState("");
 

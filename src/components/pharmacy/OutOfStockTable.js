@@ -42,9 +42,10 @@ export default function OutOfStockTable() {
   }, []);
 
   const columns = [
-    { id: 'orderid', label: 'Medicine ID'},
+    // { id: 'orderid', label: 'Medicine ID'},
     { id: 'name', label: 'Medicine Name'},
-    { id: 'quantity', label: 'Current Quantity'},];
+    // { id: 'quantity', label: 'Current Quantity'},
+  ];
   const rows = data; 
 
     return (
@@ -52,24 +53,10 @@ export default function OutOfStockTable() {
             <Card>
                 <CardHeader color="success">
                     <h4 className={classes.cardTitleWhite}>Out of Stock Items</h4>
-                    <p className={classes.cardCategoryWhite}>Need to Re-order</p>
                 </CardHeader>
                 <CardBody>
                   <TableScrollbar rows={10} style={{}}>
-                    <Table>
-                      <TableHead>
-                      <TableRow>
-                          {columns.map((column) => (
-                          <TableCell style={{color:'#213458',backgroundColor: "white"}}
-                              key={column.id}
-                              align={column.align}
-                          >
-                              {column.label}
-                          </TableCell>
-                          ))}
-                      </TableRow>
-                      </TableHead>
-                          
+                    <Table>                          
                       <TableBody >
                       {rows<=0 ? 
                         <TableRow>
@@ -81,13 +68,7 @@ export default function OutOfStockTable() {
                           return(
                           <TableRow>
                               <TableCell align="left">
-                                  {row.medid}
-                              </TableCell>
-                              <TableCell align="left">
-                                  {row.medname} {row.brand}
-                              </TableCell>
-                              <TableCell align="left">
-                                  {row.qty}
+                                  {row.medid} -- {row.medname} {row.brand} 
                               </TableCell>
                           </TableRow>
                           );

@@ -24,6 +24,7 @@ import CardIcon from "../../components/Dashboard/Card/CardIcon.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
 import SalesChart from "../../components/admin/SalesChart.js";
+import IncomeGrowthChart from "../../components/admin/IncomeGrowthChart.js";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
 const useStyles = makeStyles(styles);
@@ -156,7 +157,7 @@ export default function Dashboard() {
               <CardIcon color="info">
                 <Store />
               </CardIcon>
-              <p className={classes.cardCategory}>Pharmacies</p>
+              <p className={classes.cardCategory}>Registered Pharmacies</p>
               <h3 className={classes.cardTitle}>{datapharm}</h3>
             </CardHeader>
             <CardFooter stats>
@@ -206,33 +207,29 @@ export default function Dashboard() {
         <GridItem xs={12} sm={6} md={5}>
             <Card>
               <CardHeader>
-              <h4 className={classes.cardTitle}>Monthly Sales of Each Registered Pharmacy</h4>
-
               </CardHeader>
               <CardBody>
               <SalesChart/>
-
               </CardBody>
+              <CardFooter>
+                <h4 className={classes.cardTitle}>Monthly Sales of Each Registered Pharmacy</h4>
+              </CardFooter>
             </Card>
-          </GridItem>
-        {/* <GridItem xs={12} sm={6} md={4}>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={4}>
           <Card>
-            <CardHeader color="success" stats icon>
-            <SalesChart/>
+            <CardHeader >
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Monthly Sales</h4>
-              <p className={classes.cardCategory}>
-                <span className={classes.successText}>
-                  <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                </span>{" "}
-                increase in today sales.
-              </p>
+              <IncomeGrowthChart/>
             </CardBody>
-            <CardFooter chart>2
+            <CardFooter chart>
+            <h4 className={classes.cardTitle}>
+            MedLink Transaction Growth
+            </h4>
             </CardFooter>
           </Card>
-        </GridItem> */}
+        </GridItem>
         <GridItem xs={12} sm={12} md={3}>
           <GridItem sm={6} md={12}>
             <Card>
@@ -250,14 +247,14 @@ export default function Dashboard() {
           <GridItem sm={6} md={12}>
             <Card>
               <CardHeader color="primary" stats icon>
-                <CardIcon color="primary">
+                <CardIcon color="info">
                   <MonetizationOnIcon />
                 </CardIcon>
                 <p className={classes.cardCategory}>Average Orders  Through MedLink</p>
                 <h3 className={classes.cardTitle}>{averageorders}</h3>
               </CardHeader>
               <CardFooter stats>
-                <div className={classes.stats}>Per day</div>
+                <div className={classes.stats}>Per Month</div>
               </CardFooter>
             </Card>
           </GridItem>

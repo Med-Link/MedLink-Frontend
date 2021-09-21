@@ -3,7 +3,7 @@ import { authConstants } from './constants';
 import { backendUrl } from '../urlConfig';
 
 export const login = (user) => {
-  console.log(user);
+  // console.log(user);
 
   return async (dispatch) => {
     dispatch({ type: authConstants.LOGIN_REQUEST });

@@ -46,7 +46,6 @@ export default function Review(props) {
               </ListItem>
             ))}
 
-            {/* {products.map((product) => ( */}
             {products.length>0 ? <ListItem className={classes.listItem} key={products[0].totalprice}>
               <ListItemText primary={
                 <Typography variant="overline" gutterBottom="false">Total (Without Delivery Charges)</Typography> }/>
@@ -55,7 +54,6 @@ export default function Review(props) {
               </Typography>
             </ListItem>:<></>}
 
-            {/* ))}  */}
           </List>
         </GridItem>
         </GridContainer>
@@ -79,6 +77,5 @@ export default function Review(props) {
 
 Review.propTypes = {
   products: PropTypes.any,
-  // children: PropTypes.node.isRequired,
-  // classes: PropTypes.object.isRequired,
+   
 };

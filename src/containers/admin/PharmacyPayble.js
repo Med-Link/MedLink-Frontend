@@ -134,7 +134,7 @@ export default function PharmacyPayble() {
                       {rows.filter((row)=>{
                           if (searchTerm == "") {
                             return row
-                          } else if (row.pharmacyid.toString().toLowerCase().includes(searchTerm.toLowerCase())){
+                          } else if (row.pharmacyid.toString().toLowerCase().includes(searchTerm.toLowerCase()) || row.name.toLowerCase().includes(searchTerm.toLowerCase())){
                             return row
                           }
                         }).map((row,id) => {
