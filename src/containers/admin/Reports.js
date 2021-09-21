@@ -3,10 +3,11 @@ import React, {useState} from "react";
 import axios from 'axios';
 import { backendUrl } from "../../urlConfig.js";
 import TableScrollbar from 'react-table-scrollbar'
-import FileDownload from 'js-file-download'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import { Table,TableHead, TableBody, TableCell, TableRow } from "@material-ui/core";
+import { TextField } from '@material-ui/core';
+import DateRange from "@material-ui/icons/DateRange"
 
 // core components
 import GridItem from "../../components/Dashboard/Grid/GridItem.js";
@@ -16,6 +17,7 @@ import Card from "../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../components/Dashboard/Card/CardHeader.js";
 import CardBody from "../../components/Dashboard/Card/CardBody.js";
 import CardFooter from "../../components/Dashboard/Card/CardFooter.js";
+import CardIcon from "../../components/Dashboard/Card/CardIcon.js";
 
 const styles = {
   cardCategoryWhite: {
@@ -88,7 +90,8 @@ const useStyles = makeStyles(styles);
 
 export default function Reports() {
   const classes = useStyles();
-
+  
+  
   // get monthly income from each pharmacy transactions
   const [data, setData] = useState([]);
   const [totalIncome, setTotalIncome]= useState();
@@ -121,23 +124,102 @@ export default function Reports() {
     { id: 'income', label: 'Income (Rs.)'},];
 
   const rows = data; 
-  
-  const download=()=>
-  {
-    FileDownload(data, 'report.pdf');
+
+  // backend connection for pass date range and update the income list
+
+  const [fromdate, setFromDate] = React.useState();
+  const [todate, setToDate] = React.useState();
+  const [customincome, setCustomIncome] = React.useState([]);
+  const [totalCustomIncome, setTotalCustomIncome]= useState();
+  const [toggle, setToggle] = useState(false); // check whether the date range is given
+
+  const onSelectDateRange =(e)=>{
+    const token = window.localStorage.getItem('token');
+    axios.post(`${backendUrl}/admin/customedaterangeincome`, {
+        fromdate:fromdate,
+        todate:todate,
+      }, {headers: {
+          'Authorization': token ? `Bearer ${token}` : ''
+        },
+    }).then((res)=>{
+        const results =  res.data.result;
+        console.log(results);
+        setCustomIncome(results);
+        let total=0;
+        for (var i = 0; i < (results.length); i++){
+          total=total+parseInt(results[i].sum);
+        }
+        setTotalCustomIncome(total)
+        setToggle(true);
+    }).catch((err)=>{
+        console.log(err);
+    });
   }
 
   
   return (
     <GridContainer justifyContent="center">
+      <GridItem xs={12} sm={6} md={4}>
+          <Card>
+            <CardHeader color="primary" >
+              <CardIcon color="primary">
+              <DateRange />
+              </CardIcon>
+              <p className={classes.cardTitleWhite}>Select Custom Time Range</p>
+            </CardHeader>
+            <CardBody>
+            <GridContainer>
+              <GridItem xs={6} sm={6} md={6}>
+                  <TextField
+                      autoFocus
+                      type="date"
+                      margin="dense"
+                      variant="standard"
+                      id="from"
+                      label="From"
+                      fullWidth
+                      InputLabelProps={{
+                          shrink: true,
+                      }}
+                      size="small"
+                      required
+                      value={fromdate}
+                      onChange={(e) => setFromDate(e.target.value)}
+                  />
+              </GridItem>
+              <GridItem xs={6} sm={6} md={6}>
+                  <TextField
+                      autoFocus
+                      type="date"
+                      margin="dense"
+                      variant="standard"
+                      id="to"
+                      label="To"
+                      fullWidth
+                      InputLabelProps={{
+                          shrink: true,
+                      }}
+                      size="small"
+                      required
+                      value={todate}
+                      onChange={(e) => setToDate(e.target.value)}
+                  />
+              </GridItem>
+              </GridContainer>
+            </CardBody>
+            <CardFooter style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+              <Button color="info" onClick={(e)=>onSelectDateRange(e)}>Ok</Button>
+            </CardFooter>
+          </Card>
+        </GridItem>
       <GridItem xs={12} sm={12} md={8}>
         <Card>
           <CardHeader color="success">
             <h4 className={classes.cardTitleWhite}>
-              Monthly Income of MedLink
+              Service Charges Income of MedLink
             </h4>
             <p className={classes.cardCategoryWhite}>
-            {new Date().toLocaleString("en-US", { month: "long" })}
+              {toggle==false ? new Date().toLocaleString("en-US", { month: "long" }) :fromdate+"  -  "+todate}            
             </p>
           </CardHeader>
           <CardBody>
@@ -155,7 +237,8 @@ export default function Reports() {
                   </TableRow>
                 </TableHead>
                 <TableBody >
-                  {data.map((row,id) => {
+                  {(customincome <=0 && toggle==false ? rows : customincome)
+                  .map((row,id) => {
                     return(
                     <TableRow key={id}>
                       <TableCell className={classes.center}>
@@ -174,16 +257,13 @@ export default function Reports() {
                         <b>Total Income of the month</b>
                       </TableCell>
                       <TableCell className={classes.center}>
-                        {totalIncome}
+                        {(customincome <=0 && toggle==false ? totalIncome : totalCustomIncome)}
                       </TableCell>
                     </TableRow>
                   </TableBody> 
               </Table>
             </TableScrollbar>
           </CardBody>
-          <CardFooter style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-            <Button color="info" onClick={download}>Download</Button>
-          </CardFooter>
         </Card>
       </GridItem>
     </GridContainer>
