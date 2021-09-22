@@ -8,6 +8,7 @@ import Card from "../../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../../components/Dashboard/Card/CardHeader.js";
 import CardAvatar from "../../../components/Dashboard/Card/CardAvatar.js";
 import CardBody from "../../../components/Dashboard/Card/CardBody.js";
+import avatar from "../../../assets/images/admin.png"
                 
 const styles = {
     cardCategoryWhite: {
