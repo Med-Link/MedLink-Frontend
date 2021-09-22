@@ -8,8 +8,7 @@ import Card from "../../../components/Dashboard/Card/Card.js";
 import CardHeader from "../../../components/Dashboard/Card/CardHeader.js";
 import CardAvatar from "../../../components/Dashboard/Card/CardAvatar.js";
 import CardBody from "../../../components/Dashboard/Card/CardBody.js";
-import avatar from "../../../assets/images/admin.png";
-
+                
 const styles = {
     cardCategoryWhite: {
         color: "rgba(255,255,255,.62)",
@@ -57,7 +56,7 @@ const Profile = () => {
             <GridItem xs={12} sm={10} md={6}>
                 <Card>
                     <CardHeader color="success">
-                        <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
+                        <h4 className={classes.cardTitleWhite}>View Profile</h4>
                         <p className={classes.cardCategoryWhite}>Complete your profile</p>
                     </CardHeader>
                     <CardBody>
