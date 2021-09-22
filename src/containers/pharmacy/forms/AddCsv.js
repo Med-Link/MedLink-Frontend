@@ -127,7 +127,7 @@ const AddCsv = () => {
         <DialogTitle id="alert-dialog-title">{"Do you want to Save this to the stock"}</DialogTitle>
         <DialogActions>
           <Button onClick={handleCloseAccept} color="danger">
-            Cancle
+            Cancel
           </Button>
           <Button onClick={(() => {
             importCSV();
