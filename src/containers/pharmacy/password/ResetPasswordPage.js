@@ -45,7 +45,7 @@ const ResetPassword = () => {
       resetlink,
       newpassword,
     }).then((response) => {
-      console.log(response);
+      // console.log(response);
     }).catch((err) => {
       if (err.response && err.response.data) {
         console.log(err);// some reason error message
