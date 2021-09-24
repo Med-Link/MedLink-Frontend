@@ -16,7 +16,6 @@ export default function OrderRequestsRateChart() {
       },
     }).then(res => {
       const results = res.data.result;
-      console.log(results);
       setChartData(results);
     })
   }
