@@ -41,9 +41,11 @@ export default function Dashboard() {
       Authorization: token ? `Bearer ${token}` : "",
     },
   }).then(res => {
+    if(res.data.result>0){
     const results = res.data.result[0];
-    console.log(results);
-   setmonthlyIncome(results);
+    // console.log(results);
+    setmonthlyIncome(results);
+    }
   })
 }
 
