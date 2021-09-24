@@ -109,7 +109,7 @@ export default function ClosedDeals() {
       let array = [];
       results.forEach(element => {
         let arr = [];
-        arr.push(element.date, element.orderid, element.address, element.deliverycost, element.servicecost, element.totalcost, <Button variant="outlined" color="primary" onClick={() => handleClickOpen(element.medlistid)} round>View</Button>,<Button variant="outlined" color="Secondary" onClick={() => handlesend(element.orderid)}  round>Send</Button>);
+        arr.push(element.date, element.orderid, element.address, element.deliverycost, element.servicecost, element.totalcost, <Button variant="outlined" color="primary" onClick={() => handleClickOpen(element.medlistid)} round="true">View</Button>,<Button variant="outlined" color="Secondary" onClick={() => handlesend(element.orderid)}  round="true">Send</Button>);
         array.push(arr);
       })
       setData(array);
@@ -128,7 +128,6 @@ export default function ClosedDeals() {
         'Authorization': token ? `Bearer ${token}` : ''
       },
     }).then((response) => {
-      console.log(response);
       setVieworderdata(response.data.rows);
 
     }).catch((err) => {
