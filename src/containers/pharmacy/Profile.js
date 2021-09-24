@@ -93,7 +93,7 @@ export default function UserProfile() {
                     formControlProps={{
                       fullWidth: true,
                     }}
-                    value={data.name}
+                    value={data.name ||''}
                   />
                 </GridItem>
               </GridContainer>
@@ -104,7 +104,7 @@ export default function UserProfile() {
                     formControlProps={{
                       fullWidth: true,
                     }}
-                    value={data.email}
+                    value={data.email||''}
 
                   />
                 </GridItem>
@@ -114,7 +114,7 @@ export default function UserProfile() {
                     formControlProps={{
                       fullWidth: true,
                     }}
-                    value={data.contactnumber}
+                    value={JSON.stringify(data.contactnumber)||''}
                   />
                 </GridItem>
               </GridContainer>

@@ -63,7 +63,6 @@ const SignUpAdmin=()=>{
             email:email,
             password:password
         }).then((response)=>{
-            console.log(response);
             setSignedUp(true);
 
         }).catch((err)=>{

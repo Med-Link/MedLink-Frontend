@@ -105,7 +105,6 @@ export default function Reports() {
         })
       .then(res =>{
         const results =  res.data.result;
-        console.log(results);
         setData(results);
         let total=0;
         for (var i = 0; i < (results.length); i++){
@@ -143,7 +142,6 @@ export default function Reports() {
         },
     }).then((res)=>{
         const results =  res.data.result;
-        console.log(results);
         setCustomIncome(results);
         let total=0;
         for (var i = 0; i < (results.length); i++){
