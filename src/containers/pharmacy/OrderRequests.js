@@ -66,7 +66,6 @@ export default function OrderRequests() {
       },
     }).then(res => {
       const results = res.data.allOrders.rows;
-      console.log(results);
       setData(results);
     })
   }
@@ -130,7 +129,7 @@ export default function OrderRequests() {
                       </TableCell>
                       <TableCell align="left">
                         <Link variant="h6" underline="none" className={clsx(classes.rightLink)} href={`orderprocess/${row.id}`}>
-                          <Button id="view" color="primary" Button color="primary" size="sm" >View</Button>
+                          <Button id="view" color="primary" color="primary" size="sm" >View</Button>
                         </Link>
                       </TableCell>
                     </TableRow>

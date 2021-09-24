@@ -131,7 +131,7 @@ export default function Dashboard() {
   return (
     <div>
       <GridContainer spacing={3}>
-        <GridItem xs={12} sm={6} md={6}>
+        <GridItem item={true} xs={12} sm={6} md={6}>
           <Card style={cardStyle}>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
@@ -162,7 +162,7 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={6}>
+        <GridItem item={true} xs={12} sm={6} md={6}>
           <Card style={cardStyle}>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
@@ -192,7 +192,7 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
       
-      <GridContainer xs={12} sm={12} md={12}>
+      <GridContainer item={true} xs={12} sm={12} md={12}>
         <Card style={cdStyle}>  
         <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Results</h4>
