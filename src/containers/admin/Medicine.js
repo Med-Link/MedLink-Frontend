@@ -105,7 +105,6 @@ export default function Medicine() {
         })
       .then(res =>{
         const results =  res.data.result;
-            console.log(results);
             setData(results);
       })
   }

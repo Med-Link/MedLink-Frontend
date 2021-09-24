@@ -115,7 +115,6 @@ export default function ViewEmployees() {
           },
           }).then(res =>{
             const results =  res.data.result;
-            console.log(results);
             setData(results);
           })        
       }

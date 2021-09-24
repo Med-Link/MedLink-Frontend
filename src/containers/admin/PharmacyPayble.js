@@ -52,7 +52,6 @@ export default function PharmacyPayble() {
         'Authorization': token ? `Bearer ${token}` : ''
       },
     }).then((res)=>{
-          console.log(res);
           const results =  res.data.result;
           setData(results);
         }).catch((err)=>{
