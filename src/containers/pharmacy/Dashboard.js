@@ -41,7 +41,9 @@ export default function Dashboard() {
       Authorization: token ? `Bearer ${token}` : "",
     },
   }).then(res => {
-    if(res.data.result>0){
+    if(res.data.result==0){
+      setmonthlyIncome(0);
+  }else{
     const results = res.data.result[0];
     // console.log(results);
     setmonthlyIncome(results);
@@ -109,7 +111,7 @@ React.useEffect(() => {
   return (
     <div>
       <GridContainer>
-      <GridItem xs={12} sm={6} md={3}>
+      <GridItem item={true} xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="success" stats icon>
               <CardIcon color="warning">
@@ -126,7 +128,7 @@ React.useEffect(() => {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem item={true} xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="success" stats icon>
               <CardIcon color="danger">
@@ -143,7 +145,7 @@ React.useEffect(() => {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem item={true} xs={12} sm={6} md={3}>
         <Card>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
@@ -160,7 +162,7 @@ React.useEffect(() => {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem item={true} xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="info" stats icon>
               <CardIcon color="success">
@@ -180,10 +182,10 @@ React.useEffect(() => {
       </GridContainer>
 
       <GridContainer>
-        <GridItem xs={12} sm={3} md={3}>
+        <GridItem item={true} xs={12} sm={3} md={3}>
           <OutOfStockTable/>
         </GridItem>
-        <GridItem xs={12} sm={6} md={4}>
+        <GridItem item={true} xs={12} sm={6} md={4}>
           <Card>
             <CardHeader >
             </CardHeader>
@@ -196,7 +198,7 @@ React.useEffect(() => {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={4}>
+        <GridItem item={true} xs={12} sm={6} md={4}>
           <Card>
             <CardHeader >
             </CardHeader>
