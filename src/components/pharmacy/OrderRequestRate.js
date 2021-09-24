@@ -33,7 +33,7 @@ export default function OrderRequestsRateChart() {
               data={{labels:Months,
                 datasets: [
                   {
-                    label: "Oderes",
+                    label: "Orders",
                     data: Orders,
                     backgroundColor: [
                         'rgba(181, 150, 242)',
