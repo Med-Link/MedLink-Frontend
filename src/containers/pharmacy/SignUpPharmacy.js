@@ -328,8 +328,8 @@ const SignUpPharmacy = () => {
                 <FormControlLabel
                   onChange={(e) => setChecked(e.target.checked)}
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I agree to the Terms and Conditions"
-                />
+                /> I agree to the <Link href="/TermsAndConditions" color="primary" underline='none' target="_blank"> Terms and Conditions
+                </Link>
               </Grid>
             </Grid>
             <Box xs={12} sm={12} md={12}
