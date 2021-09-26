@@ -158,7 +158,8 @@ const SignInPharmacy = () => {
                   onClick={userLogin}
                   variant="contained" href=""
                   fullWidth
-                  className={classes.submit}>
+                  className={classes.submit}
+                  color="primary">
                   Sign in</Button>
               </Box>
               <Grid container justify="flex-end">
