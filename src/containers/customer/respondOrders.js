@@ -148,25 +148,6 @@ export default function RespondOrders() {
               tableHead={["Date","List number","Order Request","Total Price", "Pharmacy", "Accept/Reject"]}
               tableData={data}
             />
-
-            {/* <TableScrollbar rows={15}>
-              <Table
-              tableHeaderColor="primary"
-              >
-                <TableHead tableHead={["Date","List number","Order Request","Total Price", "Pharmacy", "Accept/Reject"]} />
-                  
-                <TableBody>
-                
-                 
-                    <TableRow tableData={data}/>
-                      
-                  
-                </TableBody> 
-                
-
-              </Table>
-            </TableScrollbar>
-             */}
           </CardBody>
         </Card>
       </GridItem>
