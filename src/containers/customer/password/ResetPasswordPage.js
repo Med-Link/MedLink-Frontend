@@ -114,7 +114,7 @@ const ResetPassword = () => {
               required
               fullWidth
               name="password"
-              label="Password"
+              // label="Password"
               type="password"
               id="password"
               size="small"
